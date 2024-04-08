@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+import { Header } from "./_components/header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +23,11 @@ export default async function RootLayout({
     <SessionProvider session={sessioin}>
     <html lang="en">
       <body className={inter.className}>
-        
-        {children}</body>
+        <div className="w-full p-6 bg-gray-50">
+          <Header />
+          {children}
+        </div>
+      </body>
     </html>
     </SessionProvider>
   );
