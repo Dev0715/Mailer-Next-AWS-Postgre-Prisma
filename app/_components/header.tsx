@@ -6,8 +6,8 @@ import { Navbar } from "./navbar";
 
 export const Header = () => {
   return (
-    <nav className="w-full flex justify-center z-10">
-      <div className="w-5/6 flex items-center justify-between pb-4 box-border border-b-[1px] ">
+    <nav className="w-full pb-2 flex justify-center box-border border-b-[1px] z-10">
+      <div className="w-5/6 flex items-end justify-between">
         <div className="flex">
           <Link href="/">
             <p className="text-4xl font-semibold text-black drop-shadow-md">
