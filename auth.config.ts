@@ -26,6 +26,23 @@ export default {
       clientId: process.env.APPLE_CLIENT_ID || "",
       clientSecret: process.env.APPLE_CLIENT_SECRET || ""
     }),
-
+    Credentials({
+      credentials: {
+        email: { type: "email" },
+        password: { type: "password" }
+      },
+      async authorize(credentials) {
+        console.log("__Credentials SignIn", credentials);
+        const { email, password } = credentials;
+        const user = await getUserByEmail(email as string);
+        if (!user || !user.password) return null;
+        const passwordsMatch = await bcrypt.compare(
+          password as string,
+          user.password
+        );
+        if (passwordsMatch) return user;
+        else return null; // You can also reject this callback for detailed error
+      }
+    })
   ]
 } satisfies NextAuthConfig;
