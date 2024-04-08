@@ -18,13 +18,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const sessioin = await auth();
+  const session = await auth();
 
   return (
-    <SessionProvider session={sessioin}>
+    <SessionProvider session={session}>
       <html lang="en">
         <body className={inter.className}>
-          <div className="w-full min-h-full px-6 pt-6 bg-gray-50 mb-[-48px] after:h-12">
+          <div className="w-full min-h-full px-6 pt-6 flex flex-col items-center bg-gray-50 mb-[-48px] after:h-12">
             <Header />
             {children}
           </div>
