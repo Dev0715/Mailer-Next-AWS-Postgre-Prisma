@@ -20,8 +20,7 @@ export const LoginButton = ({
   };
 
   if (mode === "modal") {
-    return (
-    );
+    return <div></div>;
   }
 
   return (
