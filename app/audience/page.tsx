@@ -5,6 +5,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import AreaChartPlot from "@/components/utils/areachart-plot";
 import { FaArrowUp } from "react-icons/fa";
 
+const Blue = ({ children }: { children: React.ReactNode }) => {
+  return <span className="text-blue-700">{children}</span>;
+};
+
+const Strong = ({ children }: { children: React.ReactNode }) => {
+  return <span className="font-semibold">{children}</span>;
+};
+
 const AudiencePage = () => {
   return (
     <main className="w-5/6 flex flex-col py-6">
@@ -12,7 +20,17 @@ const AudiencePage = () => {
         Audience Dashboard
       </p>
       <p className="text-2xl font-semibold pb-2">Hi, Malachi Uy!</p>
-      <p className="text-xl pb-6"></p>
+      <p className="text-xl pb-6">
+        Your audience has{" "}
+        <Blue>
+          <Strong>17</Strong>{" "}
+        </Blue>{" "}
+        contacts.{" "}
+        <Blue>
+          <Strong>15</Strong>
+        </Blue>{" "}
+        of these are subscribed.
+      </p>
 
       <div className="w-full flex gap-x-6 pb-6">
         <Card className="w-[400px] flex items-center justify-between px-8 py-4">
