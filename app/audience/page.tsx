@@ -76,9 +76,9 @@ const AudiencePage = () => {
           <CardTitle className="text-2xl">Recent Growth</CardTitle>
         </CardHeader>
         <CardContent>
-          {/* <div className="w-full h-[480px]"> */}
-          <AreaChartPlot />
-          {/* </div> */}
+          <div className="w-full h-[480px]">
+            <AreaChartPlot />
+          </div>
         </CardContent>
       </Card>
     </main>
