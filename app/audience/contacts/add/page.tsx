@@ -48,6 +48,28 @@ const ContactAdd = () => {
   const FILE = "file";
   const MANNUAL = "mannual";
 
+  const options = [
+    {
+      title: "Import from another service",
+      description: "Import contacts automatically from tools you already use.",
+      optionValue: SERVICE,
+      children: <FaCloudUploadAlt className="w-6 h-6 text-blue-700" />
+    },
+    {
+      title: "Upload a file",
+      description: "Import contacts from a CSV or tab-delimited TXT file.",
+      optionValue: FILE,
+      children: <FaFile className="w-6 h-6 text-blue-700" />
+    },
+    {
+      title: "Copy and paste",
+      description:
+        "Directly paste in new contacts from a spreadsheet or similar list.",
+      optionValue: MANNUAL,
+      children: <FaCopy className="w-6 h-6 text-blue-700" />
+    }
+  ];
+
   const [inputMode, setInputMode] = useState<string>(MANNUAL);
 
   return <main className="w-5/6 flex flex-col py-6"></main>;
