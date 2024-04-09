@@ -182,7 +182,97 @@ export const columns: ColumnDef<Customer>[] = [
     enableSorting: false,
     enableHiding: false
   },
-
+  {
+    accessorKey: "email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>
+  },
+  {
+    accessorKey: "firstName",
+    header: () => <div className="text-right">First Name</div>,
+    cell: ({ row }) => (
+      <div className="text-right font-medium">{row.getValue("firstName")}</div>
+    )
+  },
+  {
+    accessorKey: "lastName",
+    header: () => <div className="text-right">Last Name</div>,
+    cell: ({ row }) => (
+      <div className="text-right font-medium">{row.getValue("lastName")}</div>
+    )
+  },
+  {
+    accessorKey: "address",
+    header: () => <div className="text-right">Address</div>,
+    cell: ({ row }) => (
+      <div className="text-right font-medium">{row.getValue("address")}</div>
+    )
+  },
+  {
+    accessorKey: "phone",
+    header: () => <div className="text-right">Phone</div>,
+    cell: ({ row }) => (
+      <div className="text-right font-medium">{row.getValue("phone")}</div>
+    )
+  },
+  {
+    accessorKey: "birthday",
+    header: () => <div className="text-right">Birthday</div>,
+    cell: ({ row }) => (
+      <div className="text-right font-medium">{row.getValue("birthday")}</div>
+    )
+  },
+  {
+    accessorKey: "tags",
+    header: () => <div className="text-right">Tags</div>,
+    cell: ({ row }) => (
+      <div className="text-right font-medium">{row.getValue("tags")}</div>
+    )
+  },
+  {
+    accessorKey: "subscribed",
+    header: () => <div className="text-right">Subscribed</div>,
+    cell: ({ row }) => (
+      <div className="text-right font-medium">
+        {row.getValue("subscribed") ? "Subscribed" : null}
+      </div>
+    )
+  },
+  {
+    accessorKey: "contactRating",
+    header: () => <div className="text-right">Contact Rating</div>,
+    cell: ({ row }) => (
+      <div className="text-right font-medium">
+        {row.getValue("contactRating")}
+      </div>
+    )
+  },
+  {
+    accessorKey: "created",
+    header: () => <div className="text-right">Created Date</div>,
+    cell: ({ row }) => (
+      <div className="text-right font-medium">{row.getValue("created")}</div>
+    )
+  },
+  {
+    accessorKey: "lastChanged",
+    header: () => <div className="text-right">Last Changed</div>,
+    cell: ({ row }) => (
+      <div className="text-right font-medium">
+        {row.getValue("lastChanged")}
+      </div>
+    )
+  },
   {
     id: "actions",
     enableHiding: false,
