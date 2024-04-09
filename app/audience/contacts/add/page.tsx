@@ -72,7 +72,51 @@ const ContactAdd = () => {
 
   const [inputMode, setInputMode] = useState<string>(MANNUAL);
 
-  return <main className="w-5/6 flex flex-col py-6"></main>;
+  return (
+    <main className="w-5/6 flex flex-col py-6">
+      <p className="text-4xl font-semibold mb-6">
+        How would you like to add contacts?
+      </p>
+      <p className="text-xl mb-4">
+        Build your Mailchimp audience by adding or importing contacts you
+        already have permission to market to.
+      </p>
+      <Link
+        href="/"
+        className="underline underline-offset-2 mb-2 text-blue-500"
+      >
+        Learn how consent impacts email deliverability
+      </Link>
+      <Link
+        href="/"
+        className="underline underline-offset-2 mb-2 text-blue-500 mb-8"
+      >
+        Learn how to import SMS contacts
+      </Link>
+      <RadioGroup value={inputMode}>
+        <div className="w-full flex gap-x-6 mb-8">
+          {options.map((option) => (
+            <OptionCard
+              key={option.title}
+              selected={option.optionValue === inputMode}
+              title={option.title}
+              description={option.description}
+              optionValue={option.optionValue}
+              onClick={setInputMode}
+            >
+              {option.children}
+            </OptionCard>
+          ))}
+        </div>
+      </RadioGroup>
+      <Button asChild className="w-64 flex gap-x-2">
+        <Link href={`/audience/contacts/from-${inputMode}`}>
+          <FaArrowRight />
+          Continue
+        </Link>
+      </Button>
+    </main>
+  );
 };
 
 export default ContactAdd;
