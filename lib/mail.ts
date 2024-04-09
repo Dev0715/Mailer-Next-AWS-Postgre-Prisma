@@ -19,3 +19,29 @@ export const sendVerificationEmail = async (email: string, token: string) => {
   console.log("__sendVerificationEmail__RESPONSE", response);
   return response;
 };
+
+export const sendPasswordResetEmail = async (email: string, token: string) => {
+  const resetLink = `${domain}/auth/new-password?token=${token}`;
+
+  const response = await resend.emails.send({
+    from: fromEmail,
+    to: email,
+    subject: "Reset your password",
+    html: `<p>Click <a href="${resetLink}">here</a> to reset password.</p>`
+  });
+
+  console.log("__sendPasswordResetEmail__RESPONSE", response);
+  return response;
+};
+
+export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
+  const response = await resend.emails.send({
+    from: fromEmail,
+    to: email,
+    subject: "2FA Code",
+    html: `<p>Your 2FA code: ${token}</p>`
+  });
+
+  console.log("__sendTwoFactorTokenEmail__RESPONSE", response);
+  return response;
+};
