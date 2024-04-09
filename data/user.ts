@@ -1,0 +1,48 @@
+import { v4 as uuidv4 } from "uuid";
+
+import db from "@/lib/db";
+import {
+  GetCommand,
+  PutCommand,
+  UpdateCommand
+} from "@aws-sdk/lib-dynamodb";
+import { generateVerificationToken } from "@/lib/tokens";
+
+const TableName = process.env.AWS_DYNAMODB_TABLE_NAME;
+
+interface NewUser {
+  name?: string | null | undefined;
+  email: string;
+  password?: string;
+  id?: string;
+  image?: string | null | undefined;
+  emailVerified?: Date | string | null;
+}
+
+interface UserSetToken {
+  email: string;
+  verificationToken: string;
+  expires: Date;
+}
+
+interface UserSetPassword {
+  email: string;
+  password: string;
+  emailVerified: Date;
+}
+
+export const getUserByEmail = async (email: string) => {
+  const command = new GetCommand({
+    TableName,
+    Key: { email }
+  });
+
+  try {
+    const response = await db.send(command);
+    console.log("__getUserByEmail__GetCommand__RESPONSE", response);
+    return response.Item;
+  } catch (error) {
+    console.log("__getUserByEmail__GetCommand__ERROR", error);
+    return null;
+  }
+};
