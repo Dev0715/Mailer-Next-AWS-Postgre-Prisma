@@ -46,3 +46,29 @@ export const getUserByEmail = async (email: string) => {
     return null;
   }
 };
+
+export const createUser = async (data: NewUser) => {
+  if (data.emailVerified && data.emailVerified instanceof Date) {
+    data.emailVerified = data.emailVerified.toISOString();
+  }
+
+  const verificationToken = generateVerificationToken(data.email);
+
+  const command = new PutCommand({
+    TableName,
+    Item: {
+      verificationToken,
+      expires: new Date(new Date().getTime() + 3600 * 1000).toISOString(),
+      ...data
+    }
+  });
+
+  try {
+    const response = await db.send(command);
+    console.log("__createUser__PutCommand__RESPONSE", response);
+    return verificationToken;
+  } catch (error) {
+    console.log("__createUser__PutCommand__ERROR", error);
+    return null;
+  }
+};
