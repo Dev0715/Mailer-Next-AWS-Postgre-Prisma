@@ -11,28 +11,28 @@ const AreaChartPlot = () => {
   const data = [
     {
       month: "03",
-      sent: 400,
-      received: 250
+      Sent: 400,
+      Received: 250
     },
     {
       month: "04",
-      sent: 350,
-      received: 120
+      Sent: 350,
+      Received: 120
     },
     {
       month: "05",
-      sent: 400,
-      received: 370
+      Sent: 400,
+      Received: 370
     },
     {
       month: "06",
-      sent: 200,
-      received: 100
+      Sent: 200,
+      Received: 100
     },
     {
       month: "07",
-      sent: 350,
-      received: 250
+      Sent: 350,
+      Received: 250
     }
   ];
 
@@ -60,14 +60,14 @@ const AreaChartPlot = () => {
           <Tooltip />
           <Area
             type="monotone"
-            dataKey="sent"
+            dataKey="Sent"
             stroke="#8884d8"
             fillOpacity={1}
             fill="url(#colorUv)"
           />
           <Area
             type="monotone"
-            dataKey="received"
+            dataKey="Received"
             stroke="#82ca9d"
             fillOpacity={1}
             fill="url(#colorPv)"
