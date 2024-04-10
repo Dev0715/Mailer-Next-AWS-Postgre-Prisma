@@ -47,6 +47,11 @@ const NewSubscriber = () => {
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
+  const [tagVal, setTagVal] = useState<string>("");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  const onAddTag = () => {};
+
   const form = useForm<z.infer<typeof NewSubscriberSchema>>({
     resolver: zodResolver(NewSubscriberSchema),
     defaultValues: {
@@ -201,11 +206,16 @@ const NewSubscriber = () => {
                       </SelectContent>
                     </Select>
                     <div className="w-1/2 flex">
-                      <Input type="text" />
+                      <Input
+                        type="text"
+                        value={tagVal}
+                        onChange={(e) => setTagVal(e.target.value)}
+                      />
                       <Button
                         type="button"
                         variant="link"
                         className="flex gap-x-2 text-sm"
+                        onClick={onAddTag}
                       >
                         <FaPlus />
                         Add a new Tag
