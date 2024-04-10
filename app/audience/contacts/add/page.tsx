@@ -5,7 +5,13 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useRef, useState } from "react";
-import { FaArrowRight, FaCloudUploadAlt, FaCopy, FaFile } from "react-icons/fa";
+import {
+  FaArrowRight,
+  FaCloudUploadAlt,
+  FaCopy,
+  FaFile,
+  FaPlus
+} from "react-icons/fa";
 
 type OptionCardProps = {
   selected: boolean;
@@ -109,12 +115,23 @@ const ContactAdd = () => {
           ))}
         </div>
       </RadioGroup>
-      <Button asChild className="w-64 flex gap-x-2">
-        <Link href={`/audience/contacts/from-${inputMode}`}>
-          <FaArrowRight />
-          Continue
-        </Link>
-      </Button>
+      <div className="flex gap-x-16">
+        <Button asChild className="w-64 flex gap-x-2">
+          <Link href={`/audience/contacts/from-${inputMode}`}>
+            <FaArrowRight />
+            Continue
+          </Link>
+        </Button>
+        <Button
+          asChild
+          className="w-64 flex gap-x-2 bg-blue-700 hover:bg-blue-600"
+        >
+          <Link href={`/audience/contacts/new-subscriber`}>
+            <FaPlus />
+            Add a Subscriber
+          </Link>
+        </Button>
+      </div>
     </main>
   );
 };
