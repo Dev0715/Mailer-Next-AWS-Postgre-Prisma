@@ -33,6 +33,7 @@ import { NewSubscriberSchema } from "@/schemas/contacts";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle
@@ -176,34 +177,43 @@ const NewSubscriber = () => {
                 )}
               />
               <Card>
-                <FormLabel>Tags</FormLabel>
-                <div className="flex gap-x-4">
-                  <Select>
-                    <SelectTrigger className="w-1/3">
-                      <SelectValue placeholder="Select a Tag" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Tags</SelectLabel>
-                        <SelectItem value="apple">Custom 1</SelectItem>
-                        <SelectItem value="banana">Custom 2</SelectItem>
-                        <SelectItem value="blueberry">Custom 3</SelectItem>
-                        <SelectItem value="grapes">Custom 4</SelectItem>
-                        <SelectItem value="pineapple">Custom 5</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                  <Separator orientation="vertical" />
-                  <Input type="text" />
-                  <Button
-                    type="button"
-                    variant="link"
-                    className="flex gap-x-2 text-sm"
-                  >
-                    <FaPlus />
-                    Add a new Tag
-                  </Button>
-                </div>
+                <CardHeader>
+                  <CardTitle>Tags</CardTitle>
+                  <CardDescription>
+                    You select from your original tags or add new one
+                  </CardDescription>
+                  <div className="flex justify-between gap-x-4">
+                    <Select>
+                      <SelectTrigger className="w-1/3">
+                        <SelectValue placeholder="Select a Tag" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          {/* <SelectLabel>Tags</SelectLabel> */}
+                          <SelectItem value="apple">Custom 1</SelectItem>
+                          <SelectItem value="banana">Custom 2</SelectItem>
+                          <SelectItem value="blueberry">Custom 3</SelectItem>
+                          <SelectItem value="grapes">Custom 4</SelectItem>
+                          <SelectItem value="pineapple">Custom 5</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    <div className="w-1/2 flex">
+                      <Input type="text" />
+                      <Button
+                        type="button"
+                        variant="link"
+                        className="flex gap-x-2 text-sm"
+                      >
+                        <FaPlus />
+                        Add a new Tag
+                      </Button>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-y-2">
+                  <Separator />
+                </CardContent>
               </Card>
             </CardContent>
             <CardFooter className="self-end">
