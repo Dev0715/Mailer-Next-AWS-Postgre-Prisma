@@ -51,7 +51,10 @@ const NewSubscriber = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const onAddNewTag = () => {
-    setSelectedTags([...selectedTags, newTagVal]);
+    if (newTagVal !== "") {
+      setSelectedTags([...selectedTags, newTagVal]);
+      setNewTagVal("");
+    }
   };
 
   const onDeleteTag = (index: number) => {
@@ -60,7 +63,7 @@ const NewSubscriber = () => {
     setSelectedTags(newTags);
   };
 
-  const onTagSelectChange = (value) => {
+  const onTagSelectChange = (value: string) => {
     console.log(value);
   };
 
