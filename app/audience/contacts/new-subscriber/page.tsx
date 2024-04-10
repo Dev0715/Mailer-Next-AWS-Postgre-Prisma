@@ -20,6 +20,15 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
 import { NewSubscriberSchema } from "@/schemas/contacts";
 import {
   Card,
@@ -165,6 +174,21 @@ const NewSubscriber = () => {
                   </FormItem>
                 )}
               />
+              <Select>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Select a Tag" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Tags</SelectLabel>
+                    <SelectItem value="apple">Custom 1</SelectItem>
+                    <SelectItem value="banana">Custom 2</SelectItem>
+                    <SelectItem value="blueberry">Custom 3</SelectItem>
+                    <SelectItem value="grapes">Custom 4</SelectItem>
+                    <SelectItem value="pineapple">Custom 5</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </CardContent>
             <CardFooter className="self-end">
               <Button type="submit" className="w-64 flex gap-x-2">
