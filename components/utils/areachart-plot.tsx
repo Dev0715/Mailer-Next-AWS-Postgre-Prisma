@@ -12,27 +12,27 @@ const AreaChartPlot = () => {
     {
       month: "03",
       sent: 400,
-      received: 2400
+      received: 250
     },
     {
       month: "04",
-      sent: 4000,
-      received: 2400
+      sent: 350,
+      received: 120
     },
     {
       month: "05",
-      sent: 4000,
-      received: 2400
+      sent: 400,
+      received: 370
     },
     {
       month: "06",
-      sent: 4000,
-      received: 2400
+      sent: 200,
+      received: 100
     },
     {
       month: "07",
-      sent: 4000,
-      received: 2400
+      sent: 350,
+      received: 250
     }
   ];
 
