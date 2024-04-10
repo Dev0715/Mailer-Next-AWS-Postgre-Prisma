@@ -200,37 +200,37 @@ export const columns: ColumnDef<Customer>[] = [
   },
   {
     accessorKey: "firstName",
-    header: () => <div className="text-right">First Name</div>,
+    header: () => <div className="text-center">First Name</div>,
     cell: ({ row }) => (
-      <div className="text-right font-medium">{row.getValue("firstName")}</div>
+      <div className="text-center font-medium">{row.getValue("firstName")}</div>
     )
   },
   {
     accessorKey: "lastName",
-    header: () => <div className="text-right">Last Name</div>,
+    header: () => <div className="text-center">Last Name</div>,
     cell: ({ row }) => (
-      <div className="text-right font-medium">{row.getValue("lastName")}</div>
+      <div className="text-center font-medium">{row.getValue("lastName")}</div>
     )
   },
   {
     accessorKey: "address",
-    header: () => <div className="text-right">Address</div>,
+    header: () => <div className="text-center">Address</div>,
     cell: ({ row }) => (
-      <div className="text-right font-medium">{row.getValue("address")}</div>
+      <div className="text-center font-medium">{row.getValue("address")}</div>
     )
   },
   {
     accessorKey: "phone",
-    header: () => <div className="text-right">Phone</div>,
+    header: () => <div className="text-center">Phone</div>,
     cell: ({ row }) => (
-      <div className="text-right font-medium">{row.getValue("phone")}</div>
+      <div className="text-center font-medium">{row.getValue("phone")}</div>
     )
   },
   {
     accessorKey: "birthday",
-    header: () => <div className="text-right">Birthday</div>,
+    header: () => <div className="text-center">Birthday</div>,
     cell: ({ row }) => (
-      <div className="text-right font-medium">{row.getValue("birthday")}</div>
+      <div className="text-center font-medium">{row.getValue("birthday")}</div>
     )
   },
   {
@@ -251,34 +251,39 @@ export const columns: ColumnDef<Customer>[] = [
   },
   {
     accessorKey: "subscribed",
-    header: () => <div className="text-right">Subscribed</div>,
-    cell: ({ row }) => (
-      <div className="text-right font-medium">
-        {row.getValue("subscribed") ? "Subscribed" : null}
-      </div>
-    )
+    header: () => <div className="text-center">Subscribed</div>,
+    cell: ({ row }) => {
+      const subscribed: boolean = row.getValue("subscribed");
+      return (
+        <div className="flex justify-center">
+          <Badge className={`font-medium ${"bg-green-700"}`}>
+            {row.getValue("subscribed") ? "Subscribed" : null}
+          </Badge>
+        </div>
+      );
+    }
   },
   {
     accessorKey: "contactRating",
-    header: () => <div className="text-right">Contact Rating</div>,
+    header: () => <div className="text-center">Contact Rating</div>,
     cell: ({ row }) => (
-      <div className="text-right font-medium">
+      <div className="text-center font-medium">
         {row.getValue("contactRating")}
       </div>
     )
   },
   {
     accessorKey: "created",
-    header: () => <div className="text-right">Created Date</div>,
+    header: () => <div className="text-center">Created Date</div>,
     cell: ({ row }) => (
-      <div className="text-right font-medium">{row.getValue("created")}</div>
+      <div className="text-center font-medium">{row.getValue("created")}</div>
     )
   },
   {
     accessorKey: "lastChanged",
-    header: () => <div className="text-right">Last Changed</div>,
+    header: () => <div className="text-center">Last Changed</div>,
     cell: ({ row }) => (
-      <div className="text-right font-medium">
+      <div className="text-center font-medium">
         {row.getValue("lastChanged")}
       </div>
     )
