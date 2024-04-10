@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/table";
 import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 export type Customer = {
   email: string;
@@ -240,7 +241,7 @@ export const columns: ColumnDef<Customer>[] = [
       return (
         <div className="text-right font-medium">
           {tags.map((tag) => (
-            <p key={tag}>{tag}</p>
+            <Badge key={tag}>{tag}</Badge>
           ))}
         </div>
       );
