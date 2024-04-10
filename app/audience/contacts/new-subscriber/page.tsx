@@ -49,6 +49,7 @@ const NewSubscriber = () => {
   return (
     <main className="w-5/6 flex flex-col py-6">
       <p className="text-4xl font-semibold mb-6">Add a subscriber.</p>
+
       <div className="flex items-end gap-x-4 mb-8">
         <p className="text-xl">
           Want to subscribe more than one person at a time?
@@ -60,31 +61,51 @@ const NewSubscriber = () => {
           Import an audience
         </Link>
       </div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          <Card>
+
+      <Card className="w-1/2 mb-8">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <CardContent>
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="John Doe"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <div className="flex gap-x-4">
+                <FormField
+                  control={form.control}
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                      <FormLabel>First Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          placeholder="John"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                      <FormLabel>Last Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          placeholder="John"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </CardContent>
-          </Card>
-        </form>
-      </Form>
+          </form>
+        </Form>
+      </Card>
       <Button asChild className="w-64 flex gap-x-2">
         <Link href={`/audience/contacts/add`}>
           <FaArrowLeft />
