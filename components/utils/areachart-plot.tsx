@@ -10,7 +10,27 @@ import {
 const AreaChartPlot = () => {
   const data = [
     {
-      month: "2016",
+      month: "03",
+      sent: 400,
+      received: 2400
+    },
+    {
+      month: "04",
+      sent: 4000,
+      received: 2400
+    },
+    {
+      month: "05",
+      sent: 4000,
+      received: 2400
+    },
+    {
+      month: "06",
+      sent: 4000,
+      received: 2400
+    },
+    {
+      month: "07",
       sent: 4000,
       received: 2400
     }
@@ -35,19 +55,19 @@ const AreaChartPlot = () => {
               <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <XAxis dataKey="year" />
+          <XAxis dataKey="month" />
           <YAxis />
           <Tooltip />
           <Area
             type="monotone"
-            dataKey="Iphone"
+            dataKey="sent"
             stroke="#8884d8"
             fillOpacity={1}
             fill="url(#colorUv)"
           />
           <Area
             type="monotone"
-            dataKey="Samsung"
+            dataKey="received"
             stroke="#82ca9d"
             fillOpacity={1}
             fill="url(#colorPv)"
