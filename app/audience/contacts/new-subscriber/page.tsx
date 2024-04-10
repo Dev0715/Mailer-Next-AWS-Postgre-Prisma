@@ -40,6 +40,7 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { MdClose } from "react-icons/md";
 
 const NewSubscriber = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -213,8 +214,9 @@ const NewSubscriber = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="flex flex-col">
-                  <Badge className="w-fit h-8 px-4 rounded-full">
-                    Customer1
+                  <Badge className="w-fit h-8 flex gap-x-2 px-4 rounded-full">
+                    <p>Customer1</p>
+                    <MdClose />
                   </Badge>
                 </CardContent>
               </Card>
