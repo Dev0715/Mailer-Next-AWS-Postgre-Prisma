@@ -235,11 +235,11 @@ export const columns: ColumnDef<Customer>[] = [
   },
   {
     accessorKey: "tags",
-    header: () => <div className="text-right">Tags</div>,
+    header: () => <div className="text-center">Tags</div>,
     cell: ({ row }) => {
       const tags: string[] = row.getValue("tags");
       return (
-        <div className="text-right font-medium">
+        <div className="font-medium flex flex-wrap gap-1">
           {tags.map((tag) => (
             <Badge key={tag}>{tag}</Badge>
           ))}
