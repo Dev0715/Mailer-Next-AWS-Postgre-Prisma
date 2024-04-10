@@ -216,7 +216,13 @@ const NewSubscriber = () => {
                 <CardContent className="flex flex-col">
                   <Badge className="w-fit h-8 flex gap-x-2 px-4 rounded-full">
                     <p>Customer1</p>
-                    <MdClose />
+                    <Button
+                      asChild
+                      variant="link"
+                      className="p-0 text-base text-black cursor-pointer"
+                    >
+                      <MdClose />
+                    </Button>
                   </Badge>
                 </CardContent>
               </Card>
