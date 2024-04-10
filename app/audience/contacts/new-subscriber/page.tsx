@@ -39,6 +39,7 @@ import {
   CardTitle
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 
 const NewSubscriber = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -182,7 +183,7 @@ const NewSubscriber = () => {
                   <CardDescription>
                     You select from your original tags or add new one
                   </CardDescription>
-                  <div className="flex justify-between gap-x-4">
+                  <div className="flex justify-between gap-x-4 pt-2">
                     <Select>
                       <SelectTrigger className="w-1/3">
                         <SelectValue placeholder="Select a Tag" />
@@ -211,8 +212,10 @@ const NewSubscriber = () => {
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent className="flex flex-col gap-y-2">
-                  <Separator />
+                <CardContent className="flex flex-col">
+                  <Badge className="w-fit h-8 px-4 rounded-full">
+                    Customer1
+                  </Badge>
                 </CardContent>
               </Card>
             </CardContent>
