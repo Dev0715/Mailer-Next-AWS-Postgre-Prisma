@@ -237,11 +237,10 @@ export const columns: ColumnDef<Customer>[] = [
     header: () => <div className="text-right">Tags</div>,
     cell: ({ row }) => {
       const tags: string[] = row.getValue("tags");
-      console.log("table row", tags);
       return (
         <div className="text-right font-medium">
           {tags.map((tag) => (
-            <p>tag</p>
+            <p key={tag}>{tag}</p>
           ))}
         </div>
       );
