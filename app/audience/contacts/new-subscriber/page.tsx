@@ -50,8 +50,14 @@ const NewSubscriber = () => {
   const [newTagVal, setNewTagVal] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const onAddTag = () => {
-    selectedTags.push(newTagVal);
+  const onAddNewTag = () => {
+    setSelectedTags([...selectedTags, newTagVal]);
+  };
+
+  const onDeleteTag = (index: number) => {
+    const newTags = [...selectedTags];
+    newTags.splice(index, 1);
+    setSelectedTags(newTags);
   };
 
   const form = useForm<z.infer<typeof NewSubscriberSchema>>({
@@ -217,7 +223,7 @@ const NewSubscriber = () => {
                         type="button"
                         variant="link"
                         className="flex gap-x-2 text-sm"
-                        onClick={onAddTag}
+                        onClick={onAddNewTag}
                       >
                         <FaPlus />
                         Add a new Tag
@@ -226,7 +232,7 @@ const NewSubscriber = () => {
                   </div>
                 </CardHeader>
                 <CardContent className="flex flex-wrap gap-4">
-                  {selectedTags.map((tag) => (
+                  {selectedTags.map((tag, index) => (
                     <Badge
                       key={tag}
                       className="h-8 flex gap-x-2 px-4 rounded-full"
@@ -236,6 +242,7 @@ const NewSubscriber = () => {
                         asChild
                         variant="link"
                         className="p-0 text-base text-black cursor-pointer"
+                        onClick={() => onDeleteTag(index)}
                       >
                         <MdClose />
                       </Button>
