@@ -21,6 +21,7 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { NewSubscriberSchema } from "@/schemas/contacts";
+import { Card, CardContent } from "@/components/ui/card";
 
 const NewSubscriber = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -60,10 +61,29 @@ const NewSubscriber = () => {
         </Link>
       </div>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-4"
-        ></form>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <Card>
+            <CardContent>
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="John Doe"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </CardContent>
+          </Card>
+        </form>
       </Form>
       <Button asChild className="w-64 flex gap-x-2">
         <Link href={`/audience/contacts/add`}>
