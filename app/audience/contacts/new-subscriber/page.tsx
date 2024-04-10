@@ -21,7 +21,7 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { NewSubscriberSchema } from "@/schemas/contacts";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const NewSubscriber = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -65,6 +65,12 @@ const NewSubscriber = () => {
       <Card className="w-1/2 mb-8">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
+            <CardHeader>
+              <CardTitle>
+                The customer you input will be registered as subscriber
+                automatically
+              </CardTitle>
+            </CardHeader>
             <CardContent className="space-y-4">
               <FormField
                 control={form.control}
@@ -112,7 +118,7 @@ const NewSubscriber = () => {
                         <Input
                           {...field}
                           disabled={isPending}
-                          placeholder="John"
+                          placeholder="Doe"
                         />
                       </FormControl>
                       <FormMessage />
@@ -120,6 +126,23 @@ const NewSubscriber = () => {
                   )}
                 />
               </div>
+              <FormField
+                control={form.control}
+                name="address"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Address</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="Street, City, State, Country"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </CardContent>
           </form>
         </Form>
