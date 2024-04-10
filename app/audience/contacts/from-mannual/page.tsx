@@ -28,9 +28,10 @@ const FromMannual = () => {
         <p>There should be one contact per line.</p>
       </div>
       <Textarea
-        className="h-64 mb-8"
+        className="h-64 border-green-500 mb-8"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
+        placeholder="Email, First Name, Last Name, Address"
       />
       <div className="flex justify-between">
         <Button
