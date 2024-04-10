@@ -239,10 +239,12 @@ export const columns: ColumnDef<Customer>[] = [
     cell: ({ row }) => {
       const tags: string[] = row.getValue("tags");
       return (
-        <div className="font-medium flex flex-wrap gap-1">
-          {tags.map((tag) => (
-            <Badge key={tag}>{tag}</Badge>
-          ))}
+        <div className="flex justify-center">
+          <div className="font-medium flex flex-wrap gap-1">
+            {tags.map((tag) => (
+              <Badge key={tag}>{tag}</Badge>
+            ))}
+          </div>
         </div>
       );
     }
