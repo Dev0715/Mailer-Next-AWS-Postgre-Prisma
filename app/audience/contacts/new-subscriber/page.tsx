@@ -1,6 +1,6 @@
 "use client";
 
-import { FaArrowLeft, FaFileUpload } from "react-icons/fa";
+import { FaArrowLeft, FaFileUpload, FaPlus } from "react-icons/fa";
 import Link from "next/link";
 
 import * as z from "zod";
@@ -21,7 +21,13 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { NewSubscriberSchema } from "@/schemas/contacts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
 
 const NewSubscriber = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -64,7 +70,10 @@ const NewSubscriber = () => {
 
       <Card className="w-1/2 mb-8">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col"
+          >
             <CardHeader>
               <CardTitle>
                 The customer you input will be registered as subscriber
@@ -143,11 +152,34 @@ const NewSubscriber = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Phone Number</FormLabel>
+                    <FormControl>
+                      <Input {...field} disabled={isPending} placeholder="+" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </CardContent>
+            <CardFooter className="self-end">
+              <Button type="submit" className="w-64 flex gap-x-2">
+                <FaPlus />
+                Register
+              </Button>
+            </CardFooter>
           </form>
         </Form>
       </Card>
-      <Button asChild className="w-64 flex gap-x-2">
+      <Button
+        asChild
+        variant="outline"
+        className="w-64 flex gap-x-2 border border-red-500"
+      >
         <Link href={`/audience/contacts/add`}>
           <FaArrowLeft />
           Back
