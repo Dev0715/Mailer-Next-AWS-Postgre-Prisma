@@ -47,10 +47,12 @@ const NewSubscriber = () => {
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
-  const [tagVal, setTagVal] = useState<string>("");
+  const [newTagVal, setNewTagVal] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const onAddTag = () => {};
+  const onAddTag = () => {
+    selectedTags.push(newTagVal);
+  };
 
   const form = useForm<z.infer<typeof NewSubscriberSchema>>({
     resolver: zodResolver(NewSubscriberSchema),
@@ -208,8 +210,8 @@ const NewSubscriber = () => {
                     <div className="w-1/2 flex">
                       <Input
                         type="text"
-                        value={tagVal}
-                        onChange={(e) => setTagVal(e.target.value)}
+                        value={newTagVal}
+                        onChange={(e) => setNewTagVal(e.target.value)}
                       />
                       <Button
                         type="button"
@@ -223,17 +225,22 @@ const NewSubscriber = () => {
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent className="flex flex-col">
-                  <Badge className="w-fit h-8 flex gap-x-2 px-4 rounded-full">
-                    <p>Customer1</p>
-                    <Button
-                      asChild
-                      variant="link"
-                      className="p-0 text-base text-black cursor-pointer"
+                <CardContent className="flex flex-wrap gap-4">
+                  {selectedTags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      className="h-8 flex gap-x-2 px-4 rounded-full"
                     >
-                      <MdClose />
-                    </Button>
-                  </Badge>
+                      <p>{tag}</p>
+                      <Button
+                        asChild
+                        variant="link"
+                        className="p-0 text-base text-black cursor-pointer"
+                      >
+                        <MdClose />
+                      </Button>
+                    </Badge>
+                  ))}
                 </CardContent>
               </Card>
             </CardContent>
