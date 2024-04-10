@@ -236,7 +236,7 @@ export const columns: ColumnDef<Customer>[] = [
     accessorKey: "tags",
     header: () => <div className="text-right">Tags</div>,
     cell: ({ row }) => {
-      console.log("table row", row);
+      console.log("table row", row.getValue("tags"));
       return (
         <div className="text-right font-medium">
           {row.getUniqueValues("tags")}
