@@ -37,6 +37,7 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const NewSubscriber = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -174,21 +175,36 @@ const NewSubscriber = () => {
                   </FormItem>
                 )}
               />
-              <Select>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select a Tag" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Tags</SelectLabel>
-                    <SelectItem value="apple">Custom 1</SelectItem>
-                    <SelectItem value="banana">Custom 2</SelectItem>
-                    <SelectItem value="blueberry">Custom 3</SelectItem>
-                    <SelectItem value="grapes">Custom 4</SelectItem>
-                    <SelectItem value="pineapple">Custom 5</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              <Card>
+                <FormLabel>Tags</FormLabel>
+                <div className="flex gap-x-4">
+                  <Select>
+                    <SelectTrigger className="w-1/3">
+                      <SelectValue placeholder="Select a Tag" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Tags</SelectLabel>
+                        <SelectItem value="apple">Custom 1</SelectItem>
+                        <SelectItem value="banana">Custom 2</SelectItem>
+                        <SelectItem value="blueberry">Custom 3</SelectItem>
+                        <SelectItem value="grapes">Custom 4</SelectItem>
+                        <SelectItem value="pineapple">Custom 5</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                  <Separator orientation="vertical" />
+                  <Input type="text" />
+                  <Button
+                    type="button"
+                    variant="link"
+                    className="flex gap-x-2 text-sm"
+                  >
+                    <FaPlus />
+                    Add a new Tag
+                  </Button>
+                </div>
+              </Card>
             </CardContent>
             <CardFooter className="self-end">
               <Button type="submit" className="w-64 flex gap-x-2">
