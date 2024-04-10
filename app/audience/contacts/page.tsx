@@ -88,7 +88,7 @@ const data: Customer[] = [
     phone: "1215646785",
     birthday: "07/05/1994",
     tags: ["Customer1"],
-    subscribed: true,
+    subscribed: false,
     contactRating: 2,
     created: "06/05/2024",
     lastChanged: "06/05/2024"
@@ -140,7 +140,7 @@ const data: Customer[] = [
     phone: "1215646785",
     birthday: "07/05/1994",
     tags: ["Customer1"],
-    subscribed: true,
+    subscribed: false,
     contactRating: 2,
     created: "06/05/2024",
     lastChanged: "06/05/2024"
@@ -153,7 +153,7 @@ const data: Customer[] = [
     phone: "1215646785",
     birthday: "07/05/1994",
     tags: ["Customer1"],
-    subscribed: true,
+    subscribed: false,
     contactRating: 2,
     created: "06/05/2024",
     lastChanged: "06/05/2024"
@@ -256,8 +256,10 @@ export const columns: ColumnDef<Customer>[] = [
       const subscribed: boolean = row.getValue("subscribed");
       return (
         <div className="flex justify-center">
-          <Badge className={`font-medium ${"bg-green-700"}`}>
-            {row.getValue("subscribed") ? "Subscribed" : null}
+          <Badge
+            className={`font-medium ${subscribed ? "bg-green-700" : "bg-red-700"}`}
+          >
+            {subscribed ? "Subscribed" : "Unsubscribed"}
           </Badge>
         </div>
       );
