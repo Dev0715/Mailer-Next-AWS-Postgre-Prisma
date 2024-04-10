@@ -235,13 +235,14 @@ export const columns: ColumnDef<Customer>[] = [
   {
     accessorKey: "tags",
     header: () => <div className="text-right">Tags</div>,
-    cell: ({ row }) => (
-      <div className="text-right font-medium">
-        {row.getUniqueValues("tags").map((item: string) => (
-          <p>{item}</p>
-        ))}
-      </div>
-    )
+    cell: ({ row }) => {
+      console.log("table row", row);
+      return (
+        <div className="text-right font-medium">
+          {row.getUniqueValues("tags")}
+        </div>
+      );
+    }
   },
   {
     accessorKey: "subscribed",
