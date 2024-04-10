@@ -7,27 +7,18 @@ import Link from "next/link";
 const NewSubscriber = () => {
   return (
     <main className="w-5/6 flex flex-col py-6">
-      <p className="text-4xl font-semibold mb-6">Upload a File.</p>
-      <p className="text-xl mb-8">Not sure how to format your file?</p>
-      <Link
-        href="/"
-        className="underline underline-offset-2 mb-2 text-blue-500"
-      >
-        Help me format my CSV
-      </Link>
-      <Link
-        href="/"
-        className="underline underline-offset-2 mb-2 text-blue-500 mb-8"
-      >
-        Watch a tutorial
-      </Link>
-      <Button
-        variant="outline"
-        className="w-96 h-32 flex gap-x-2 border-green-700 mb-8"
-      >
-        <FaFileUpload />
-        Browse
-      </Button>
+      <p className="text-4xl font-semibold mb-6">Add a subscriber.</p>
+      <div className="flex items-end gap-x-4 mb-8">
+        <p className="text-xl">
+          Want to subscribe more than one person at a time?
+        </p>
+        <Link
+          href="/contacts/add"
+          className="underline underline-offset-2 text-blue-500"
+        >
+          Import an audience
+        </Link>
+      </div>
       <Button asChild className="w-64 flex gap-x-2">
         <Link href={`/audience/contacts/add`}>
           <FaArrowLeft />
