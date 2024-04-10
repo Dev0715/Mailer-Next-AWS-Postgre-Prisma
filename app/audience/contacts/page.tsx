@@ -237,9 +237,10 @@ export const columns: ColumnDef<Customer>[] = [
     header: () => <div className="text-right">Tags</div>,
     cell: ({ row }) => (
       <div className="text-right font-medium">
-        {row.getUniqueValues("tags").map((item: string) => (
+        {row.getUniqueValues("tags")}
+        {/* .map((item: string) => (
           <p>{item}</p>
-        ))}
+        ))} */}
       </div>
     )
   },
