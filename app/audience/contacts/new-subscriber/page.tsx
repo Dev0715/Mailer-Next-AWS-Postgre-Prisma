@@ -60,6 +60,10 @@ const NewSubscriber = () => {
     setSelectedTags(newTags);
   };
 
+  const onTagSelectChange = (value) => {
+    console.log(value);
+  };
+
   const form = useForm<z.infer<typeof NewSubscriberSchema>>({
     resolver: zodResolver(NewSubscriberSchema),
     defaultValues: {
@@ -198,7 +202,7 @@ const NewSubscriber = () => {
                     You select from your original tags or add new one
                   </CardDescription>
                   <div className="flex justify-between gap-x-4 pt-2">
-                    <Select>
+                    <Select onValueChange={onTagSelectChange}>
                       <SelectTrigger className="w-1/3">
                         <SelectValue placeholder="Select a Tag" />
                       </SelectTrigger>
