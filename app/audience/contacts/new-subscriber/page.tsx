@@ -73,6 +73,9 @@ const NewSubscriber = () => {
     } else {
       setSelectedTags([...selectedTags, newTagVal]);
       setNewTagVal("");
+      if (!storedTags.find((tag) => tag === newTagVal)) {
+        setStoredTags([...storedTags, newTagVal]);
+      }
     }
   };
 
@@ -90,9 +93,6 @@ const NewSubscriber = () => {
       setAlertDescription("You have already selected that tag!");
     } else {
       setSelectedTags([...selectedTags, value]);
-      if (!storedTags.find((tag) => tag === value)) {
-        setStoredTags([...storedTags, value]);
-      }
     }
   };
 
