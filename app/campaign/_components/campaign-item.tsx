@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { FaEdit, FaMailBulk, FaMailchimp, FaVoicemail } from "react-icons/fa";
+import { FaEdit, FaMailBulk } from "react-icons/fa";
 
 const CampaignItem = () => {
   return (
