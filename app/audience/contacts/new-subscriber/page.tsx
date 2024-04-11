@@ -303,20 +303,20 @@ const NewSubscriber = () => {
                 <FaPlus />
                 Register
               </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="w-64 flex gap-x-2 border border-red-500"
+              >
+                <Link href={`/audience/contacts/add`}>
+                  <FaArrowLeft />
+                  Back
+                </Link>
+              </Button>
             </CardFooter>
           </form>
         </Form>
       </Card>
-      <Button
-        asChild
-        variant="outline"
-        className="w-64 flex gap-x-2 border border-red-500"
-      >
-        <Link href={`/audience/contacts/add`}>
-          <FaArrowLeft />
-          Back
-        </Link>
-      </Button>
     </main>
   );
 };
