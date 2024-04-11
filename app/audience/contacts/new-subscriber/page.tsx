@@ -140,6 +140,17 @@ const NewSubscriber = () => {
         </Link>
       </div>
 
+      <Button
+        asChild
+        variant="outline"
+        className="w-64 flex gap-x-2 border border-red-500"
+      >
+        <Link href={`/audience/contacts/add`}>
+          <FaArrowLeft />
+          Back
+        </Link>
+      </Button>
+
       <Card className="w-1/2 mb-8">
         <Form {...form}>
           <form
@@ -302,16 +313,6 @@ const NewSubscriber = () => {
               <Button type="submit" className="w-64 flex gap-x-2">
                 <FaPlus />
                 Register
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="w-64 flex gap-x-2 border border-red-500"
-              >
-                <Link href={`/audience/contacts/add`}>
-                  <FaArrowLeft />
-                  Back
-                </Link>
               </Button>
             </CardFooter>
           </form>
