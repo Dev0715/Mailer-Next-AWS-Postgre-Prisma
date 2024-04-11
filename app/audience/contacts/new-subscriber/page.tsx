@@ -38,20 +38,9 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger
-} from "@/components/ui/alert-dialog";
-import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { MdClose } from "react-icons/md";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
 const NewSubscriber = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -62,14 +51,24 @@ const NewSubscriber = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [storedTags, setStoredTags] = useState<string[]>([]);
 
+  const [alertOpen, setAlertOpen] = useState<boolean>(false);
+  const [alertTile, setAlertTitle] = useState<string>("");
+  const [alertDescription, setAlertDescription] = useState<string>("");
+
   useEffect(() => {
     // Fetch tags from API
     setStoredTags(["tag1", "tag2", "tag3", "tag4", "tag5"]);
   }, []);
 
   const onAddNewTag = () => {
-    if (newTagVal !== "") {
+    if (newTagVal === "") {
+      setAlertOpen(true);
+      setAlertTitle("Empty Tag");
+      setAlertDescription("You can't add empty tag name!");
     } else if (storedTags.find((tag) => tag === newTagVal)) {
+      setAlertOpen(true);
+      setAlertTitle("Duplication Error");
+      setAlertDescription("Same named Tag already exists!");
     } else {
       setSelectedTags([...selectedTags, newTagVal]);
       setNewTagVal("");
@@ -86,8 +85,9 @@ const NewSubscriber = () => {
     console.log(value);
   };
 
-  const onAlertDialogChange = (open: boolean) => {
-    console.log(open);
+  const onAlertDialogClosed = (open: boolean) => {
+    setAlertOpen(open);
+    setNewTagVal("");
   };
 
   const form = useForm<z.infer<typeof NewSubscriberSchema>>({
@@ -110,8 +110,13 @@ const NewSubscriber = () => {
 
   return (
     <main className="w-5/6 flex flex-col py-6">
+      <ConfirmAlert
+        open={alertOpen}
+        title={alertTile}
+        description={alertDescription}
+        onAlertDialogClosed={onAlertDialogClosed}
+      />
       <p className="text-4xl font-semibold mb-6">Add a subscriber.</p>
-
       <div className="flex items-end gap-x-4 mb-8">
         <p className="text-xl">
           Want to subscribe more than one person at a time?
@@ -300,24 +305,6 @@ const NewSubscriber = () => {
           Back
         </Link>
       </Button>
-      <AlertDialog open onOpenChange={onAlertDialogChange}>
-        <AlertDialogTrigger asChild>
-          <Button variant="outline">Show Dialog</Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Continue</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </main>
   );
 };
