@@ -61,7 +61,7 @@ export const Navbar = () => {
     },
     {
       title: "Campaign",
-      href: "/"
+      href: "/campaign"
     },
     {
       title: "Audience",
