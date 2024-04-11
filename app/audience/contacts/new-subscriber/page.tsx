@@ -328,11 +328,11 @@ const NewSubscriber = () => {
                           onCheckedChange={field.onChange}
                         />
                       </FormControl>
-                      <div className="space-y-1 leading-none">
+                      <div className="space-y-2 leading-none">
                         <FormLabel>
                           This person gave me permission to email them
                         </FormLabel>
-                        <FormDescription>
+                        <FormDescription className="leading-4">
                           This person will not receive a confirmation email from
                           MailManJS. Since you're adding this recipient
                           manually, they won't have an opt-in IP address or date
@@ -356,13 +356,10 @@ const NewSubscriber = () => {
                       </FormControl>
                       <div className="space-y-1 leading-none">
                         <FormLabel>
-                          Use different settings for my mobile devices
+                          If this person is already in my audience, update their
+                          profile
                         </FormLabel>
-                        <FormDescription>
-                          You can manage your mobile notifications in the{" "}
-                          <Link href="/examples/forms">mobile settings</Link>{" "}
-                          page.
-                        </FormDescription>
+                        <FormDescription></FormDescription>
                       </div>
                     </FormItem>
                   )}
