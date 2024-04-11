@@ -15,6 +15,7 @@ import { FormSuccess } from "@/components/utils/form-success";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -41,6 +42,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { MdClose } from "react-icons/md";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const NewSubscriber = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -308,6 +310,54 @@ const NewSubscriber = () => {
                   ))}
                 </CardContent>
               </Card>
+              <FormField
+                control={form.control}
+                name="consent"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel>
+                        Use different settings for my mobile devices
+                      </FormLabel>
+                      <FormDescription>
+                        You can manage your mobile notifications in the{" "}
+                        <Link href="/examples/forms">mobile settings</Link>{" "}
+                        page.
+                      </FormDescription>
+                    </div>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="update"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel>
+                        Use different settings for my mobile devices
+                      </FormLabel>
+                      <FormDescription>
+                        You can manage your mobile notifications in the{" "}
+                        <Link href="/examples/forms">mobile settings</Link>{" "}
+                        page.
+                      </FormDescription>
+                    </div>
+                  </FormItem>
+                )}
+              />
             </CardContent>
             <CardFooter className="self-end">
               <Button type="submit" className="w-64 flex gap-x-2">
