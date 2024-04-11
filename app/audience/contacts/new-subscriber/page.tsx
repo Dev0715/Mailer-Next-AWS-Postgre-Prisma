@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Input } from "@/components/ui/input";
@@ -38,6 +38,17 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from "@/components/ui/alert-dialog";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { MdClose } from "react-icons/md";
@@ -49,9 +60,17 @@ const NewSubscriber = () => {
 
   const [newTagVal, setNewTagVal] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [storedTags, setStoredTags] = useState<string[]>([]);
+
+  useEffect(() => {
+    // Fetch tags from API
+    setStoredTags(["tag1", "tag2", "tag3", "tag4", "tag5"]);
+  }, []);
 
   const onAddNewTag = () => {
     if (newTagVal !== "") {
+    } else if (storedTags.find((tag) => tag === newTagVal)) {
+    } else {
       setSelectedTags([...selectedTags, newTagVal]);
       setNewTagVal("");
     }
@@ -65,6 +84,10 @@ const NewSubscriber = () => {
 
   const onTagSelectChange = (value: string) => {
     console.log(value);
+  };
+
+  const onAlertDialogChange = (open: boolean) => {
+    console.log(open);
   };
 
   const form = useForm<z.infer<typeof NewSubscriberSchema>>({
@@ -277,6 +300,24 @@ const NewSubscriber = () => {
           Back
         </Link>
       </Button>
+      <AlertDialog open onOpenChange={onAlertDialogChange}>
+        <AlertDialogTrigger asChild>
+          <Button variant="outline">Show Dialog</Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete your
+              account and remove your data from our servers.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction>Continue</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </main>
   );
 };
