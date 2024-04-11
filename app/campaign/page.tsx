@@ -15,17 +15,20 @@ const CampaignPage = () => {
         Campaign Dashboard
       </p>
       <p className="text-2xl font-semibold pb-2">Hi, Malachi Uy!</p>
-      <p className="text-xl pb-6">
-        Your audience has{" "}
-        <Blue>
-          <Strong>17</Strong>{" "}
-        </Blue>{" "}
-        contacts.{" "}
-        <Blue>
-          <Strong>15</Strong>
-        </Blue>{" "}
-        of these are subscribed.
-      </p>
+      <div className="flex justify-between">
+        <p className="text-xl pb-6">
+          Your audience has{" "}
+          <Blue>
+            <Strong>17</Strong>{" "}
+          </Blue>{" "}
+          contacts.{" "}
+          <Blue>
+            <Strong>15</Strong>
+          </Blue>{" "}
+          of these are subscribed.
+        </p>
+        <Button variant="default">Create New</Button>
+      </div>
     </main>
   );
 };
