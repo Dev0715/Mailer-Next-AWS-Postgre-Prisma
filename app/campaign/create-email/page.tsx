@@ -13,6 +13,14 @@ const NewEmail = () => {
         Create a new Email
       </p>
       <p className="text-xl text-gray-500 mb-12">Name: Email Title</p>
+      <p className="text-xl text-gray-500 mb-6">To: Select your Customers</p>
+      <p className="text-xl text-gray-500 mb-6">From: Email Name</p>
+      <p className="text-xl text-gray-500 mb-6">
+        Subject: Subject Line for email
+      </p>
+      <p className="text-xl text-gray-500 mb-6">
+        Send Time: When should we send this email
+      </p>
     </main>
   );
 };
