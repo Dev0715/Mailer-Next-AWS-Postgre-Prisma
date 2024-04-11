@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
+import CampaignItem from "./_components/campaign-item";
 
 const Blue = ({ children }: { children: React.ReactNode }) => {
   return <span className="text-blue-700">{children}</span>;
@@ -35,7 +36,9 @@ const CampaignPage = () => {
           Create New
         </Button>
       </div>
-      <div></div>
+      <div className="flex flex-col">
+        <CampaignItem />
+      </div>
     </main>
   );
 };
