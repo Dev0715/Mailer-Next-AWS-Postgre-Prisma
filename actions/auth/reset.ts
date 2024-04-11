@@ -1,7 +1,6 @@
 "use server";
 
 import * as z from "zod";
-import { v4 as uuidv4 } from "uuid";
 
 import { ResetSchema } from "@/schemas/auth";
 import { getUserByEmail, updateUserToken } from "@/data/user";
@@ -33,7 +32,6 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
     return { error: "Server Error" };
   }
 
-  // const passwordResetToken = await generatePasswordResetToken(email);
   const response = await sendPasswordResetEmail(
     updatedUser.email,
     updatedUser.verificationToken
