@@ -6,12 +6,7 @@ import { AuthError } from "next-auth";
 import { LoginSchema } from "@/schemas/auth";
 import { getUserByEmail, updateUserToken } from "@/data/user";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import {
-  sendVerificationEmail
-  // sendTwoFactorTokenEmail
-} from "@/lib/mail";
-// import { getTwoFactorTokenByEmail } from "@/data/two-factor-token";
-// import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
+import { sendVerificationEmail } from "@/lib/mail";
 import { signIn } from "@/auth";
 import { generateVerificationToken } from "@/lib/tokens";
 
