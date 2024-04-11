@@ -312,8 +312,8 @@ export const columns: ColumnDef<Customer>[] = [
               Copy Customer Email
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View customer details</DropdownMenuItem>
+            <DropdownMenuItem>Delete Customer</DropdownMenuItem>
+            <DropdownMenuItem>Edit Customer</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
