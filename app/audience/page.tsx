@@ -36,8 +36,8 @@ const AudiencePage = () => {
         <Card className="w-[400px] flex items-center justify-between px-8 py-4">
           <div className="flex flex-col gap-y-2">
             <p className="text-xl font-semibold">Subscribers</p>
-            <p className="text-lg font-semibold">0</p>
-            <p className="text-base text-gray-700">from 0 (last 4 weeks)</p>
+            <p className="text-lg font-semibold">170</p>
+            <p className="text-base text-gray-700">from 50 (last 4 weeks)</p>
           </div>
           <Badge variant="default" className="flex gap-x-1 py-1 rounded-full">
             <FaArrowUp /> 100%
@@ -46,7 +46,7 @@ const AudiencePage = () => {
         <Card className="w-[400px] flex items-center justify-between px-8 py-4">
           <div className="flex flex-col gap-y-2">
             <p className="text-xl font-semibold">Open Rate</p>
-            <p className="text-lg font-semibold">0</p>
+            <p className="text-lg font-semibold">10</p>
             <p className="text-base text-gray-700">from 0 (last 4 weeks)</p>
           </div>
           <Badge
@@ -59,7 +59,7 @@ const AudiencePage = () => {
         <Card className="w-[400px] flex items-center justify-between px-8 py-4">
           <div className="flex flex-col gap-y-2">
             <p className="text-xl font-semibold">Click Rate</p>
-            <p className="text-lg font-semibold">0</p>
+            <p className="text-lg font-semibold">30</p>
             <p className="text-base text-gray-700">from 0 (last 4 weeks)</p>
           </div>
           <Badge
