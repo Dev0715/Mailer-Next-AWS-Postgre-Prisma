@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
 import CampaignItem from "./_components/campaign-item";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 const Blue = ({ children }: { children: React.ReactNode }) => {
   return <span className="text-blue-700">{children}</span>;
@@ -32,9 +33,11 @@ const CampaignPage = () => {
           </Blue>{" "}
           of these are subscribed.
         </p>
-        <Button variant="default" className="flex gap-x-2">
-          <FaPlus />
-          Create New
+        <Button asChild variant="default" className="flex gap-x-2">
+          <Link href="/campaign/create-campaign">
+            <FaPlus />
+            Create New
+          </Link>
         </Button>
       </div>
       <div className="flex flex-col gap-y-4">
