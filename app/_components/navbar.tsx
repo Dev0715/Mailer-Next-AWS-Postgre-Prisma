@@ -6,10 +6,8 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle
+  NavigationMenuTrigger
 } from "@/components/ui/navigation-menu";
 import React from "react";
 import { ListItem } from "@/components/utils/list-item";
