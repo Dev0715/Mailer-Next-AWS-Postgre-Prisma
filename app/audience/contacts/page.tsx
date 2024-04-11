@@ -747,14 +747,14 @@ export default function Contacts() {
             }
             className="max-w-sm"
           />
-          <Input
+          {/* <Input
             placeholder="Filter customers..."
             value={(table.getColumn("tags")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
               table.getColumn("tags")?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
-          />
+          /> */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
