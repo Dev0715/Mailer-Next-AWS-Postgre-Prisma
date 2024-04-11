@@ -57,7 +57,7 @@ const NewSubscriber = () => {
 
   useEffect(() => {
     // Fetch tags from API
-    setStoredTags(["tag1", "tag2", "tag3", "tag4", "tag5"]);
+    setStoredTags(["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"]);
   }, []);
 
   const onAddNewTag = () => {
@@ -240,11 +240,9 @@ const NewSubscriber = () => {
                       <SelectContent>
                         <SelectGroup>
                           {/* <SelectLabel>Tags</SelectLabel> */}
-                          <SelectItem value="apple">Custom 1</SelectItem>
-                          <SelectItem value="banana">Custom 2</SelectItem>
-                          <SelectItem value="blueberry">Custom 3</SelectItem>
-                          <SelectItem value="grapes">Custom 4</SelectItem>
-                          <SelectItem value="pineapple">Custom 5</SelectItem>
+                          {storedTags.map((tag) => (
+                            <SelectItem value={tag}>{tag}</SelectItem>
+                          ))}
                         </SelectGroup>
                       </SelectContent>
                     </Select>
