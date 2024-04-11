@@ -128,29 +128,29 @@ const NewSubscriber = () => {
         onAlertDialogClosed={onAlertDialogClosed}
       />
       <p className="text-4xl font-semibold mb-6">Add a subscriber.</p>
-      <div className="flex items-end gap-x-4 mb-8">
-        <p className="text-xl">
-          Want to subscribe more than one person at a time?
-        </p>
-        <Link
-          href="/contacts/add"
-          className="underline underline-offset-2 text-blue-500"
+      <div className="flex justify-between mb-8">
+        <div className="flex items-end gap-x-4">
+          <p className="text-xl">
+            Want to subscribe more than one person at a time?
+          </p>
+          <Link
+            href="/contacts/add"
+            className="underline underline-offset-2 text-blue-500"
+          >
+            Import an audience
+          </Link>
+        </div>
+        <Button
+          asChild
+          variant="outline"
+          className="w-64 flex gap-x-2 border border-red-500"
         >
-          Import an audience
-        </Link>
+          <Link href={`/audience/contacts/add`}>
+            <FaArrowLeft />
+            Back
+          </Link>
+        </Button>
       </div>
-
-      <Button
-        asChild
-        variant="outline"
-        className="w-64 flex gap-x-2 border border-red-500"
-      >
-        <Link href={`/audience/contacts/add`}>
-          <FaArrowLeft />
-          Back
-        </Link>
-      </Button>
-
       <Card className="w-1/2 mb-8">
         <Form {...form}>
           <form
