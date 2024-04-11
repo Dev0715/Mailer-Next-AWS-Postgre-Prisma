@@ -153,7 +153,7 @@ const NewSubscriber = () => {
           </Link>
         </Button>
       </div>
-      <Card className="w-1/2 mb-8">
+      <Card className="w-full mb-8">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -165,37 +165,73 @@ const NewSubscriber = () => {
                 automatically
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="username@myemail.com"
-                        type="email"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div className="flex gap-x-4">
+            <CardContent className="flex gap-x-12">
+              <div className="w-1/2 flex flex-col gap-y-4">
                 <FormField
                   control={form.control}
-                  name="firstName"
+                  name="email"
                   render={({ field }) => (
-                    <FormItem className="w-1/2">
-                      <FormLabel>First Name</FormLabel>
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           disabled={isPending}
-                          placeholder="John"
+                          placeholder="username@myemail.com"
+                          type="email"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="flex gap-x-4">
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem className="w-1/2">
+                        <FormLabel>First Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            disabled={isPending}
+                            placeholder="John"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem className="w-1/2">
+                        <FormLabel>Last Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            disabled={isPending}
+                            placeholder="Doe"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={form.control}
+                  name="address"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Address</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          disabled={isPending}
+                          placeholder="Street, City, State, Country"
                         />
                       </FormControl>
                       <FormMessage />
@@ -204,15 +240,15 @@ const NewSubscriber = () => {
                 />
                 <FormField
                   control={form.control}
-                  name="lastName"
+                  name="phoneNumber"
                   render={({ field }) => (
-                    <FormItem className="w-1/2">
-                      <FormLabel>Last Name</FormLabel>
+                    <FormItem>
+                      <FormLabel>Phone Number</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           disabled={isPending}
-                          placeholder="Doe"
+                          placeholder="+"
                         />
                       </FormControl>
                       <FormMessage />
@@ -220,144 +256,118 @@ const NewSubscriber = () => {
                   )}
                 />
               </div>
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Address</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="Street, City, State, Country"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phoneNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
-                    <FormControl>
-                      <Input {...field} disabled={isPending} placeholder="+" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Card>
-                <CardHeader>
-                  <CardTitle>Tags</CardTitle>
-                  <CardDescription>
-                    You select from your original tags or add new one
-                  </CardDescription>
-                  <div className="flex justify-between gap-x-4 pt-2">
-                    <Select
-                      value={tagSelected}
-                      onValueChange={onTagSelectChange}
-                    >
-                      <SelectTrigger className="w-1/3">
-                        <SelectValue placeholder="Select a Tag" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          {/* <SelectLabel>Tags</SelectLabel> */}
-                          {storedTags.map((tag) => (
-                            <SelectItem value={tag}>{tag}</SelectItem>
-                          ))}
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                    <div className="w-1/2 flex">
-                      <Input
-                        type="text"
-                        value={newTagVal}
-                        onChange={(e) => setNewTagVal(e.target.value)}
-                      />
-                      <Button
-                        type="button"
-                        variant="link"
-                        className="flex gap-x-2 text-sm"
-                        onClick={onAddNewTag}
+              <div className="w-1/2 flex flex-col gap-y-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Tags</CardTitle>
+                    <CardDescription>
+                      You select from your original tags or add new one
+                    </CardDescription>
+                    <div className="flex justify-between gap-x-4 pt-2">
+                      <Select
+                        value={tagSelected}
+                        onValueChange={onTagSelectChange}
                       >
-                        <FaPlus />
-                        Add a new Tag
-                      </Button>
+                        <SelectTrigger className="w-1/3">
+                          <SelectValue placeholder="Select a Tag" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            {/* <SelectLabel>Tags</SelectLabel> */}
+                            {storedTags.map((tag) => (
+                              <SelectItem value={tag}>{tag}</SelectItem>
+                            ))}
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                      <div className="w-1/2 flex">
+                        <Input
+                          type="text"
+                          value={newTagVal}
+                          onChange={(e) => setNewTagVal(e.target.value)}
+                        />
+                        <Button
+                          type="button"
+                          variant="link"
+                          className="flex gap-x-2 text-sm"
+                          onClick={onAddNewTag}
+                        >
+                          <FaPlus />
+                          Add a new Tag
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="flex flex-wrap gap-4">
-                  {selectedTags.map((tag, index) => (
-                    <Badge
-                      key={tag}
-                      className="h-8 flex gap-x-2 px-4 rounded-full"
-                    >
-                      <p>{tag}</p>
-                      <Button
-                        asChild
-                        variant="link"
-                        className="p-0 text-base text-black cursor-pointer"
-                        onClick={() => onDeleteTag(index)}
+                  </CardHeader>
+                  <CardContent className="flex flex-wrap gap-4">
+                    {selectedTags.map((tag, index) => (
+                      <Badge
+                        key={tag}
+                        className="h-8 flex gap-x-2 px-4 rounded-full"
                       >
-                        <MdClose />
-                      </Button>
-                    </Badge>
-                  ))}
-                </CardContent>
-              </Card>
-              <FormField
-                control={form.control}
-                name="consent"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel>
-                        Use different settings for my mobile devices
-                      </FormLabel>
-                      <FormDescription>
-                        You can manage your mobile notifications in the{" "}
-                        <Link href="/examples/forms">mobile settings</Link>{" "}
-                        page.
-                      </FormDescription>
-                    </div>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="update"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel>
-                        Use different settings for my mobile devices
-                      </FormLabel>
-                      <FormDescription>
-                        You can manage your mobile notifications in the{" "}
-                        <Link href="/examples/forms">mobile settings</Link>{" "}
-                        page.
-                      </FormDescription>
-                    </div>
-                  </FormItem>
-                )}
-              />
+                        <p>{tag}</p>
+                        <Button
+                          asChild
+                          variant="link"
+                          className="p-0 text-base text-black cursor-pointer"
+                          onClick={() => onDeleteTag(index)}
+                        >
+                          <MdClose />
+                        </Button>
+                      </Badge>
+                    ))}
+                  </CardContent>
+                </Card>
+                <FormField
+                  control={form.control}
+                  name="consent"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>
+                          This person gave me permission to email them
+                        </FormLabel>
+                        <FormDescription>
+                          This person will not receive a confirmation email from
+                          MailManJS. Since you're adding this recipient
+                          manually, they won't have an opt-in IP address or date
+                          in your records, so be extra sure you have permission
+                          first.
+                        </FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="update"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>
+                          Use different settings for my mobile devices
+                        </FormLabel>
+                        <FormDescription>
+                          You can manage your mobile notifications in the{" "}
+                          <Link href="/examples/forms">mobile settings</Link>{" "}
+                          page.
+                        </FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              </div>
             </CardContent>
             <CardFooter className="self-end">
               <Button type="submit" className="w-64 flex gap-x-2">
