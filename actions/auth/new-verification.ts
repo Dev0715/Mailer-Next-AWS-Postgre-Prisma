@@ -2,7 +2,6 @@
 
 import { getUserByEmail, updateUserVerification } from "@/data/user";
 import { getEmailFromToken } from "@/lib/tokens";
-// import { getVerificationTokenByToken } from "@/data/verificiation-token";
 
 export const newVerification = async (token: string) => {
   if (!token || token.length <= 36) {
