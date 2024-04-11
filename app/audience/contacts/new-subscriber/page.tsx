@@ -48,6 +48,7 @@ const NewSubscriber = () => {
   const [isPending, startTransition] = useTransition();
 
   const [newTagVal, setNewTagVal] = useState<string>("");
+  const [tagSelected, setTagSelected] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [storedTags, setStoredTags] = useState<string[]>([]);
 
@@ -82,7 +83,17 @@ const NewSubscriber = () => {
   };
 
   const onTagSelectChange = (value: string) => {
-    console.log(value);
+    setTagSelected("");
+    if (selectedTags.find((tag) => tag === value)) {
+      setAlertOpen(true);
+      setAlertTitle("Duplication Error");
+      setAlertDescription("You have already selected that tag!");
+    } else {
+      setSelectedTags([...selectedTags, value]);
+      if (!storedTags.find((tag) => tag === value)) {
+        setStoredTags([...storedTags, value]);
+      }
+    }
   };
 
   const onAlertDialogClosed = (open: boolean) => {
@@ -233,7 +244,10 @@ const NewSubscriber = () => {
                     You select from your original tags or add new one
                   </CardDescription>
                   <div className="flex justify-between gap-x-4 pt-2">
-                    <Select onValueChange={onTagSelectChange}>
+                    <Select
+                      value={tagSelected}
+                      onValueChange={onTagSelectChange}
+                    >
                       <SelectTrigger className="w-1/3">
                         <SelectValue placeholder="Select a Tag" />
                       </SelectTrigger>
