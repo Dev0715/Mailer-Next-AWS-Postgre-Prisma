@@ -1,11 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { FaArrowRight, FaPlus } from "react-icons/fa";
-import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
-import { Input } from "@/components/ui/input";
-
 const NewEmail = () => {
   return (
     <main className="w-5/6 flex flex-col py-6">
