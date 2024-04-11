@@ -37,8 +37,12 @@ const CampaignPage = () => {
           Create New
         </Button>
       </div>
-      <div className="flex flex-col gap-y-2">
+      <div className="flex flex-col gap-y-4">
         <p className="text-xl text-gray-500">April, 2024 (2)</p>
+        <Separator />
+        <CampaignItem />
+        <Separator />
+        <CampaignItem />
         <Separator />
         <CampaignItem />
       </div>
