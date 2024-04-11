@@ -738,12 +738,20 @@ export default function Contacts() {
         </Button>
       </div>
       <div className="w-full flex flex-col gap-y-4">
-        <div className="flex items-center">
+        <div className="flex items-center gap-x-4">
           <Input
             placeholder="Filter emails..."
             value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
               table.getColumn("email")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+          <Input
+            placeholder="Filter customers..."
+            value={(table.getColumn("tags")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("tags")?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
           />
