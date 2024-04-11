@@ -10,8 +10,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   //   error: "/auth/error"
   // },
   events: {
-    async linkAccount({ user }) {
-    }
+    async linkAccount({ user }) {}
   },
   callbacks: {
     async signIn({ user, account }) {
@@ -24,14 +23,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.id = token.sub;
       }
 
-      if (token.role && session.user) {
-        session.user.role = token.role;
-      }
-
       if (session.user) {
         session.user.name = token.name;
         session.user.email = token.email as string;
-        session.user.isOAuth = token.isOAuth as boolean;
       }
 
       return session;
