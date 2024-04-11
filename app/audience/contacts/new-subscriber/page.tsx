@@ -98,7 +98,7 @@ const NewSubscriber = () => {
 
   const onAlertDialogClosed = (open: boolean) => {
     setAlertOpen(open);
-    setNewTagVal("");
+    // setNewTagVal("");
   };
 
   const form = useForm<z.infer<typeof NewSubscriberSchema>>({
