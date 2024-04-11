@@ -41,7 +41,7 @@ export default {
           user.password
         );
         if (passwordsMatch) return user;
-        else return null; // You can also reject this callback for detailed error
+        else return null;
       }
     })
   ]
