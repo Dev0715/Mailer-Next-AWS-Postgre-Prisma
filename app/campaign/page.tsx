@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+
 const Blue = ({ children }: { children: React.ReactNode }) => {
   return <span className="text-blue-700">{children}</span>;
 };
@@ -15,8 +17,8 @@ const CampaignPage = () => {
         Campaign Dashboard
       </p>
       <p className="text-2xl font-semibold pb-2">Hi, Malachi Uy!</p>
-      <div className="flex justify-between">
-        <p className="text-xl pb-6">
+      <div className="flex items-end justify-between pb-6">
+        <p className="text-xl">
           Your audience has{" "}
           <Blue>
             <Strong>17</Strong>{" "}
@@ -29,6 +31,7 @@ const CampaignPage = () => {
         </p>
         <Button variant="default">Create New</Button>
       </div>
+      <div></div>
     </main>
   );
 };
