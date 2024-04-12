@@ -1,6 +1,6 @@
 "use server";
 
-import { getUserByEmail, updateUserVerification } from "@/data/user";
+import { getUserByEmail, updateUserVerification } from "@/data/user/user";
 import { getEmailFromToken } from "@/lib/tokens";
 
 export const newVerification = async (token: string) => {
