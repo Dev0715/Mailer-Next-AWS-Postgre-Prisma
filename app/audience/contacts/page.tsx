@@ -203,7 +203,9 @@ export const columns: ColumnDef<Customer>[] = [
         <div className="flex justify-center">
           <div className="font-medium flex flex-wrap gap-1">
             {tags.map((tag) => (
-              <Badge key={tag}>{tag}</Badge>
+              <Badge className="cursor-pointer" key={tag}>
+                {tag}
+              </Badge>
             ))}
           </div>
         </div>
@@ -314,10 +316,6 @@ export default function Contacts() {
       rowSelection
     }
   });
-
-  useEffect(() => {
-    console.log("__rowSelection", rowSelection);
-  }, [rowSelection]);
 
   return (
     <main className="w-full flex flex-col py-6">
