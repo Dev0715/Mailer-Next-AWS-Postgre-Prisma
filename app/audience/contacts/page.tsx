@@ -209,7 +209,10 @@ export const columns: ColumnDef<Customer>[] = [
         </div>
       );
     },
-    filterFn: (rows, id, filterValue) => {
+    filterFn: (row, id, filterValue) => {
+      console.log(row, id, filterValue);
+      const tags: string[] = row.getValue("tags");
+      console.log(tags);
       return true;
     }
   },
