@@ -208,6 +208,9 @@ export const columns: ColumnDef<Customer>[] = [
           </div>
         </div>
       );
+    },
+    filterFn: (rows, id, filterValue) => {
+      return true;
     }
   },
   {
