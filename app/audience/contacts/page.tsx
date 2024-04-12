@@ -210,9 +210,11 @@ export const columns: ColumnDef<Customer>[] = [
       );
     },
     filterFn: (row, id, filterValue) => {
-      console.log(row, id, filterValue);
+      console.log("1____ROW", row);
+      console.log("1____ID", id);
+      console.log("1____FILTERVALUE", filterValue);
       const tags: string[] = row.getValue("tags");
-      console.log(tags);
+      console.log("1____TAGS", tags);
       return true;
     }
   },
@@ -224,7 +226,7 @@ export const columns: ColumnDef<Customer>[] = [
       return (
         <div className="flex justify-center">
           <Badge
-            className={`font-medium ${subscribed ? "bg-green-700" : "bg-red-700"}`}
+            className={`font-medium ${subscribed ? "bg-green-700" : "bg-red-700 hover:bg-red-600"}`}
           >
             {subscribed ? "Subscribed" : "Unsubscribed"}
           </Badge>
