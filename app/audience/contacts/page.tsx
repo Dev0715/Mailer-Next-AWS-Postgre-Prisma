@@ -87,7 +87,7 @@ const data: Customer[] = [
     address: "address1 address2 address3",
     phone: "1215646785",
     birthday: "07/05/1994",
-    tags: ["Customer1"],
+    tags: ["Customer2"],
     subscribed: false,
     contactRating: 2,
     created: "06/05/2024",
@@ -100,7 +100,7 @@ const data: Customer[] = [
     address: "address1 address2 address3",
     phone: "1215646785",
     birthday: "07/05/1994",
-    tags: ["Customer1"],
+    tags: ["Customer3"],
     subscribed: true,
     contactRating: 2,
     created: "06/05/2024",
@@ -209,13 +209,13 @@ export const columns: ColumnDef<Customer>[] = [
         </div>
       );
     },
+    // Customized Filter Function
     filterFn: (row, id, filterValue) => {
-      console.log("1____ROW", row);
-      console.log("1____ID", id);
-      console.log("1____FILTERVALUE", filterValue);
       const tags: string[] = row.getValue("tags");
-      console.log("1____TAGS", tags);
-      return true;
+      console.log(tags, filterValue);
+      if (tags.find((tag) => tag.toLowerCase().includes(filterValue)))
+        return true;
+      else return false;
     }
   },
   {
