@@ -214,7 +214,6 @@ export const columns: ColumnDef<Customer>[] = [
     // Customized Filter Function
     filterFn: (row, id, filterValue) => {
       const tags: string[] = row.getValue("tags");
-      console.log(tags, filterValue);
       if (tags.find((tag) => tag.toLowerCase().includes(filterValue)))
         return true;
       else return false;
@@ -336,7 +335,7 @@ export default function Contacts() {
             onChange={(event) =>
               table.getColumn("email")?.setFilterValue(event.target.value)
             }
-            className="max-w-sm"
+            className="max-w-xs"
           />
           <Input
             placeholder="Filter Tags..."
@@ -344,7 +343,7 @@ export default function Contacts() {
             onChange={(event) =>
               table.getColumn("tags")?.setFilterValue(event.target.value)
             }
-            className="max-w-sm"
+            className="max-w-xs"
           />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
