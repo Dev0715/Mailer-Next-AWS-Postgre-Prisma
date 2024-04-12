@@ -1,16 +1,6 @@
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable
-} from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -22,10 +12,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Customer } from "../../../shared/customer-type";
+import { Input } from "@/components/ui/input";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from "@/components/ui/table";
+import { FaPlus } from "react-icons/fa";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Customer } from "@/shared/customer-type";
+import { getAllCustomersByEmail } from "@/data/audience/all-customers";
 
-export const getColumnsForContactsTable : () => ColumnDef<Customer>[] = () => {
-  return [
+export const getColumnsForContactsTable = () => {
+  const columns: ColumnDef<Customer>[] = [
     {
       id: "select",
       header: ({ table }) => (
@@ -201,4 +204,6 @@ export const getColumnsForContactsTable : () => ColumnDef<Customer>[] = () => {
       }
     }
   ];
-}
+
+  return columns;
+};
