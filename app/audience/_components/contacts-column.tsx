@@ -208,9 +208,9 @@ export const getColumnsForContactsTable = ({
               <DropdownMenuItem onClick={() => onCustomerDelete(customer)}>
                 Delete Customer
               </DropdownMenuItem>
-              <EditCustomerButton>
-                <DropdownMenuItem>Edit Customer</DropdownMenuItem>
-              </EditCustomerButton>
+              <DropdownMenuItem onClick={() => onCustomerEdit(customer)}>
+                Edit Customer
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         );
