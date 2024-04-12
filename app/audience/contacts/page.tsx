@@ -57,7 +57,8 @@ export default function Contacts() {
   }, []);
 
   const onCustomerDelete = (customer: Customer) => {
-    console.log("Deletion requested", customer);
+    const newList = customers.filter((item) => item.email !== customer.email);
+    setCustomers(newList);
   };
 
   const columns = getColumnsForContactsTable({
