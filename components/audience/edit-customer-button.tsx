@@ -10,7 +10,7 @@ export const EditCustomerButton = ({
 }) => {
   return (
     <Dialog>
-      <DialogTrigger>{children}</DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <NewSubscriber />
       </DialogContent>
