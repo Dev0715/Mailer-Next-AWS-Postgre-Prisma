@@ -26,6 +26,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Customer } from "@/shared/customer-type";
 import { getAllCustomersByEmail } from "@/data/audience/all-customers";
+import { EditCustomerButton } from "@/components/audience/edit-customer-button";
 
 type PropsType = {
   onCustomerDelete: (customer: Customer) => void;
@@ -207,9 +208,9 @@ export const getColumnsForContactsTable = ({
               <DropdownMenuItem onClick={() => onCustomerDelete(customer)}>
                 Delete Customer
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onCustomerEdit(customer)}>
-                Edit Customer
-              </DropdownMenuItem>
+              <EditCustomerButton>
+                <DropdownMenuItem>Edit Customer</DropdownMenuItem>
+              </EditCustomerButton>
             </DropdownMenuContent>
           </DropdownMenu>
         );
