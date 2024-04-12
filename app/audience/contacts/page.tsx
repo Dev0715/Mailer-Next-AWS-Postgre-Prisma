@@ -723,6 +723,10 @@ export default function Contacts() {
     }
   });
 
+  useEffect(() => {
+    console.log("__rowSelection", rowSelection);
+  }, [rowSelection]);
+
   return (
     <main className="w-full flex flex-col py-6">
       <div className="w-full flex items-end justify-between pb-6">
