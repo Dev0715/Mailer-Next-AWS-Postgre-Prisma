@@ -228,7 +228,7 @@ export const columns: ColumnDef<Customer>[] = [
       return (
         <div className="flex justify-center">
           <Badge
-            className={`font-medium ${subscribed ? "bg-green-700" : "bg-red-700 hover:bg-red-600"}`}
+            className={`font-medium cursor-pointer ${subscribed ? "bg-green-700" : "bg-red-700 hover:bg-red-600"}`}
           >
             {subscribed ? "Subscribed" : "Unsubscribed"}
           </Badge>
