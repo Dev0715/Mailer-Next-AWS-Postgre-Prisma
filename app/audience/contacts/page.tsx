@@ -61,8 +61,13 @@ export default function Contacts() {
     setCustomers(newList);
   };
 
+  const onCustomerEdit = (customer: Customer) => {
+    console.log("Selected Customer", customer);
+  };
+
   const columns = getColumnsForContactsTable({
-    onCustomerDelete
+    onCustomerDelete,
+    onCustomerEdit
   });
 
   const table = useReactTable({

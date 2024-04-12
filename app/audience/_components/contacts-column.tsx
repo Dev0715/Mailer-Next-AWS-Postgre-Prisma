@@ -29,9 +29,13 @@ import { getAllCustomersByEmail } from "@/data/audience/all-customers";
 
 type PropsType = {
   onCustomerDelete: (customer: Customer) => void;
+  onCustomerEdit: (customer: Customer) => void;
 };
 
-export const getColumnsForContactsTable = ({ onCustomerDelete }: PropsType) => {
+export const getColumnsForContactsTable = ({
+  onCustomerDelete,
+  onCustomerEdit
+}: PropsType) => {
   const columns: ColumnDef<Customer>[] = [
     {
       id: "select",
@@ -203,7 +207,9 @@ export const getColumnsForContactsTable = ({ onCustomerDelete }: PropsType) => {
               <DropdownMenuItem onClick={() => onCustomerDelete(customer)}>
                 Delete Customer
               </DropdownMenuItem>
-              <DropdownMenuItem>Edit Customer</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onCustomerEdit(customer)}>
+                Edit Customer
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         );
