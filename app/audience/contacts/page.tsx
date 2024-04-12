@@ -41,6 +41,9 @@ import { Badge } from "@/components/ui/badge";
 import { Customer } from "@/shared/customer-type";
 import { getAllCustomersByEmail } from "@/data/audience/all-customers";
 import { getColumnsForContactsTable } from "../_components/contacts-column";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import NewSubscriber from "./new-subscriber/page";
+import { EditCustomer } from "@/components/audience/edit-customer";
 
 export default function Contacts() {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -91,6 +94,11 @@ export default function Contacts() {
 
   return (
     <main className="w-full flex flex-col py-6">
+      <Dialog open>
+        <DialogContent className="max-w-full w-1/2">
+          <EditCustomer />
+        </DialogContent>
+      </Dialog>
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-5xl text-green-700 font-semibold">All Contacts</p>
         <Button variant="default" asChild className="w-64 flex gap-x-4">
