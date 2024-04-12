@@ -66,6 +66,32 @@ export const getAllCustomersByEmail = async (email: string) => {
       contactRating: 2,
       created: "06/05/2024",
       lastChanged: "06/05/2024"
+    },
+    {
+      email: "Abe455@gmail.com",
+      firstName: "success",
+      lastName: "Last",
+      address: "address1 address2 address3",
+      phone: "1215646785",
+      birthday: "07/05/1994",
+      tags: ["Customer1"],
+      subscribed: true,
+      contactRating: 2,
+      created: "06/05/2024",
+      lastChanged: "06/05/2024"
+    },
+    {
+      email: "Abe451@gmail.com",
+      firstName: "success",
+      lastName: "Last",
+      address: "address1 address2 address3",
+      phone: "1215646785",
+      birthday: "07/05/1994",
+      tags: ["Customer1"],
+      subscribed: true,
+      contactRating: 2,
+      created: "06/05/2024",
+      lastChanged: "06/05/2024"
     }
   ];
 };
