@@ -27,7 +27,11 @@ import { Badge } from "@/components/ui/badge";
 import { Customer } from "@/shared/customer-type";
 import { getAllCustomersByEmail } from "@/data/audience/all-customers";
 
-export const getColumnsForContactsTable = () => {
+type PropsType = {
+  onCustomerDelete: (customer: Customer) => void;
+};
+
+export const getColumnsForContactsTable = ({ onCustomerDelete }: PropsType) => {
   const columns: ColumnDef<Customer>[] = [
     {
       id: "select",
@@ -196,7 +200,9 @@ export const getColumnsForContactsTable = () => {
                 Copy Customer Email
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Delete Customer</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onCustomerDelete(customer)}>
+                Delete Customer
+              </DropdownMenuItem>
               <DropdownMenuItem>Edit Customer</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

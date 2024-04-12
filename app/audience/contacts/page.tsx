@@ -49,15 +49,20 @@ export default function Contacts() {
   const [rowSelection, setRowSelection] = useState({});
 
   const [customers, setCustomers] = useState<Customer[]>([]);
-  const columns = getColumnsForContactsTable({
-    onCustomerDelete
-  });
 
   useEffect(() => {
     getAllCustomersByEmail("").then((customers) => {
       setCustomers(customers);
     });
   }, []);
+
+  const onCustomerDelete = (customer: Customer) => {
+    console.log("Deletion requested", customer);
+  };
+
+  const columns = getColumnsForContactsTable({
+    onCustomerDelete
+  });
 
   const table = useReactTable({
     data: customers,
@@ -77,10 +82,6 @@ export default function Contacts() {
       rowSelection
     }
   });
-
-  const onCustomerDelete = (customer: Customer) => {
-    console.log("Deletion requested", customer);
-  };
 
   return (
     <main className="w-full flex flex-col py-6">
