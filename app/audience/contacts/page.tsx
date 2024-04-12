@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState, useEffect } from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -699,13 +699,10 @@ export const columns: ColumnDef<Customer>[] = [
 ];
 
 export default function Contacts() {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
     data,
@@ -747,14 +744,6 @@ export default function Contacts() {
             }
             className="max-w-sm"
           />
-          {/* <Input
-            placeholder="Filter customers..."
-            value={(table.getColumn("tags")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("tags")?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          /> */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
