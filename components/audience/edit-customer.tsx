@@ -64,7 +64,8 @@ export const EditCustomer = () => {
       firstName: "",
       lastName: "",
       address: "",
-      phoneNumber: ""
+      phoneNumber: "",
+      subscribed: "subscribed"
     }
   });
 
@@ -281,8 +282,8 @@ export const EditCustomer = () => {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="Subscribed">Subscribed</SelectItem>
-                          <SelectItem value="Unsubscribed">
+                          <SelectItem value="subscribed">Subscribed</SelectItem>
+                          <SelectItem value="unsubscribed">
                             Unsubscribed
                           </SelectItem>
                         </SelectGroup>
