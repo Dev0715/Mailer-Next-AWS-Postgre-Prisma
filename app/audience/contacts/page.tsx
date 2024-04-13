@@ -52,6 +52,7 @@ export default function Contacts() {
   const [rowSelection, setRowSelection] = useState({});
 
   const [customers, setCustomers] = useState<Customer[]>([]);
+  const [isEditing, setEditing] = useState<boolean>(false);
 
   useEffect(() => {
     getAllCustomersByEmail("").then((customers) => {
@@ -65,7 +66,7 @@ export default function Contacts() {
   };
 
   const onCustomerEdit = (customer: Customer) => {
-    console.log("Selected Customer", customer);
+    setEditing(true);
   };
 
   const columns = getColumnsForContactsTable({
@@ -94,7 +95,7 @@ export default function Contacts() {
 
   return (
     <main className="w-full flex flex-col py-6">
-      <Dialog open>
+      <Dialog open={isEditing} onOpenChange={(isOpen) => setEditing(isOpen)}>
         <DialogContent className="max-w-full w-1/2">
           <EditCustomer />
         </DialogContent>
