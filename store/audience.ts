@@ -1,5 +1,5 @@
 import { Customer } from "@/shared/customer-type";
-import { atom } from "jotai";
+import { atom, createStore } from "jotai";
 
 const customersAtom = atom<Customer[]>([]);
 
@@ -14,4 +14,7 @@ const readWriteCustomerAtom = atom(
   }
 );
 
-export { customersAtom };
+const myStore = createStore();
+myStore.set(customersAtom, []);
+
+export { customersAtom, myStore };
