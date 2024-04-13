@@ -211,6 +211,19 @@ export const EditCustomer = () => {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="phoneNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number</FormLabel>
+                  <FormControl>
+                    <Input {...field} disabled={isPending} placeholder="+" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <Card>
               <CardHeader>
                 <CardTitle>Tags</CardTitle>
