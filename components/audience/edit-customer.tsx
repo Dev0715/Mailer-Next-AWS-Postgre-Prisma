@@ -211,19 +211,6 @@ export const EditCustomer = () => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="phoneNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
-                  <FormControl>
-                    <Input {...field} disabled={isPending} placeholder="+" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <Card>
               <CardHeader>
                 <CardTitle>Tags</CardTitle>
@@ -281,6 +268,36 @@ export const EditCustomer = () => {
                 ))}
               </CardContent>
             </Card>
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address</FormLabel>
+                  <FormControl>
+                    <Select {...field} disabled={isPending}>
+                      <SelectTrigger className="w-1/3">
+                        <SelectValue placeholder="Select a Tag" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="Subscribed">Subscribed</SelectItem>
+                          <SelectItem value="Unsubscribed">
+                            Unsubscribed
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="Street, City, State, Country"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <Button type="submit" className="w-64 flex gap-x-2">
               <FaSave />
               Update
