@@ -277,7 +277,11 @@ export const EditCustomer = () => {
                   <FormItem className="w-1/3">
                     <FormLabel>Subscribed</FormLabel>
                     <FormControl>
-                      <Select {...field} disabled={isPending}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                        disabled={isPending}
+                      >
                         <SelectTrigger>
                           <SelectValue placeholder="Select a Tag" />
                         </SelectTrigger>
