@@ -269,35 +269,39 @@ export const EditCustomer = () => {
                 ))}
               </CardContent>
             </Card>
-            <FormField
-              control={form.control}
-              name="subscribed"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Subscribed</FormLabel>
-                  <FormControl>
-                    <Select {...field} disabled={isPending}>
-                      <SelectTrigger className="w-1/3">
-                        <SelectValue placeholder="Select a Tag" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="subscribed">Subscribed</SelectItem>
-                          <SelectItem value="unsubscribed">
-                            Unsubscribed
-                          </SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-64 flex gap-x-2">
-              <FaSave />
-              Update
-            </Button>
+            <div className="w-full flex items-end justify-between">
+              <FormField
+                control={form.control}
+                name="subscribed"
+                render={({ field }) => (
+                  <FormItem className="w-1/3">
+                    <FormLabel>Subscribed</FormLabel>
+                    <FormControl>
+                      <Select {...field} disabled={isPending}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a Tag" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="subscribed">
+                              Subscribed
+                            </SelectItem>
+                            <SelectItem value="unsubscribed">
+                              Unsubscribed
+                            </SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-64 flex gap-x-2">
+                <FaSave />
+                Update
+              </Button>
+            </div>
           </div>
         </form>
       </Form>
