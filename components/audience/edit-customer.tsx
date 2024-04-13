@@ -126,7 +126,7 @@ export const EditCustomer = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
           <div className="flex flex-col gap-y-4">
-            <p className="text-2xl">Edit Customer</p>
+            <p className="text-2xl font-semibold">Edit Customer</p>
             <FormField
               control={form.control}
               name="email"
