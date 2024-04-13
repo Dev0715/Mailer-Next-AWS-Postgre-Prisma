@@ -24,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { NewSubscriberSchema } from "@/schemas/contacts";
+import { EditContactSchema } from "@/schemas/contacts";
 import {
   Card,
   CardContent,
@@ -57,8 +57,8 @@ export const EditCustomer = () => {
     setStoredTags(["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"]);
   }, []);
 
-  const form = useForm<z.infer<typeof NewSubscriberSchema>>({
-    resolver: zodResolver(NewSubscriberSchema),
+  const form = useForm<z.infer<typeof EditContactSchema>>({
+    resolver: zodResolver(EditContactSchema),
     defaultValues: {
       email: "",
       firstName: "",
@@ -68,7 +68,7 @@ export const EditCustomer = () => {
     }
   });
 
-  const onSubmit = (values: z.infer<typeof NewSubscriberSchema>) => {
+  const onSubmit = (values: z.infer<typeof EditContactSchema>) => {
     setError("");
     setSuccess("");
 
@@ -270,10 +270,10 @@ export const EditCustomer = () => {
             </Card>
             <FormField
               control={form.control}
-              name="address"
+              name="subscribed"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Address</FormLabel>
+                  <FormLabel>Subscribed</FormLabel>
                   <FormControl>
                     <Select {...field} disabled={isPending}>
                       <SelectTrigger className="w-1/3">
@@ -288,11 +288,6 @@ export const EditCustomer = () => {
                         </SelectGroup>
                       </SelectContent>
                     </Select>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="Street, City, State, Country"
-                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
