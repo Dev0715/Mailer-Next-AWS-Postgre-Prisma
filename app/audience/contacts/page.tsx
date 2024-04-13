@@ -42,6 +42,8 @@ import { getAllCustomersByEmail } from "@/data/audience/all-customers";
 import { getColumnsForContactsTable } from "../_components/contacts-column";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { EditCustomer } from "@/components/audience/edit-customer";
+import { useAtom } from "jotai";
+import { customersAtom } from "@/store/audience";
 
 export default function Contacts() {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -51,6 +53,8 @@ export default function Contacts() {
 
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [isEditing, setEditing] = useState<boolean>(false);
+
+  const [readCustomer] = useAtom(customersAtom);
 
   useEffect(() => {
     getAllCustomersByEmail("").then((customers) => {
