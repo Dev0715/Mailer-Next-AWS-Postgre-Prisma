@@ -12,21 +12,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "@/components/ui/table";
-import { FaPlus } from "react-icons/fa";
-import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Customer } from "@/shared/customer-type";
-import { getAllCustomersByEmail } from "@/data/audience/all-customers";
-import { EditCustomerButton } from "@/components/audience/edit-customer-button";
 
 type PropsType = {
   onCustomerDelete: (customer: Customer) => void;
