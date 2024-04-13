@@ -126,10 +126,7 @@ export const EditCustomer = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
           <div className="flex flex-col gap-y-4">
-            <p>
-              The customer you input will be registered as subscriber
-              automatically
-            </p>
+            <p className="text-2xl">Edit Customer</p>
             <FormField
               control={form.control}
               name="email"
