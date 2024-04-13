@@ -37,12 +37,10 @@ import {
 } from "@/components/ui/table";
 import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
 import { Customer } from "@/shared/customer-type";
 import { getAllCustomersByEmail } from "@/data/audience/all-customers";
 import { getColumnsForContactsTable } from "../_components/contacts-column";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import NewSubscriber from "./new-subscriber/page";
 import { EditCustomer } from "@/components/audience/edit-customer";
 
 export default function Contacts() {
