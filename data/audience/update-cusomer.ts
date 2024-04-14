@@ -10,7 +10,16 @@ export const updateCustomer = async (data: Customer) => {
     Key: { ownerEmail: data.ownerEmail, customerEmail: data.customerEmail },
     UpdateExpression:
       "SET firstName = :firstName, lastName = :lastName, address = :address, phoneNumber = :phoneNumber, birthday = :birthday, tags = :tags, subscribed = :subscribed, lastChanged = :lastChanged",
-
+    ExpressionAttributeValues: {
+      ":firstName": data.firstName,
+      ":lastName": data.lastName,
+      ":address": data.address,
+      ":phoneNumber": data.phoneNumber,
+      ":birthday": data.birthday,
+      ":tags": data.tags,
+      ":subscribed": data.subscribed,
+      ":lastChanged": data.lastChanged
+    },
     ReturnValues: "ALL_NEW"
   });
 
