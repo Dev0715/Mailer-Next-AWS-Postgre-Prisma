@@ -116,7 +116,13 @@ export default function Contacts() {
         description={`Are you sure to delete ${deletedEmail} from your mailing list?`}
         onAlertDialogClosed={onDeleteDlgClosed}
         onContinue={onCustomerDeleteConfirmed}
-      />
+      >
+        <p>
+          Are you sure to delete{" "}
+          <span className="font-bold text-red-700">{deletedEmail}</span> from
+          your mailing list?
+        </p>
+      </QuestionAlert>
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-5xl text-green-700 font-semibold">All Contacts</p>
         <Button variant="default" asChild className="w-64 flex gap-x-4">
