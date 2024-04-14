@@ -17,9 +17,7 @@ export const NewSubscriberSchema = z.object({
   phoneNumber: z
     .string()
     .min(6, "Phone number must be at least 6 characters long")
-    .max(12, "Phone number must be a maximum of 12 characters"),
-  consent: z.boolean(),
-  update: z.boolean()
+    .max(12, "Phone number must be a maximum of 12 characters")
 });
 
 export const EditContactSchema = z.object({
