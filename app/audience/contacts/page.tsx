@@ -40,6 +40,7 @@ import { EditCustomer } from "@/components/audience/edit-customer";
 import { useAtom } from "jotai";
 import { customersAtom } from "@/app/store/atoms";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { QuestionAlert } from "@/components/utils/question-alert";
 
 export default function Contacts() {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -51,6 +52,7 @@ export default function Contacts() {
   const [customers, setCustomers] = useAtom(customersAtom);
   const [isEditing, setEditing] = useState<boolean>(false);
   const [isDeleting, setDeleting] = useState<boolean>(false);
+  const [deletedEmail, setDeletedEmail] = useState<string>("");
 
   useEffect(() => {
     getAllCustomersByEmail("").then((customers) => {
@@ -59,6 +61,7 @@ export default function Contacts() {
   }, []);
 
   const onCustomerDelete = (customer: Customer) => {
+    setDeletedEmail(customer.email);
     setDeleting(true);
     // const newList = customers.filter((item) => item.email !== customer.email);
     // setCustomers(newList);
@@ -68,7 +71,13 @@ export default function Contacts() {
     setEditing(true);
   };
 
-  const onCustomerDeleteConfirmed = (open: boolean) => {};
+  const onDeleteDlgClosed = (isOpen: boolean) => {
+    setDeleting(isOpen);
+  };
+
+  const onCustomerDeleteConfirmed = () => {
+    console.log("Confirmed");
+  };
 
   const columns = getColumnsForContactsTable({
     onCustomerDelete,
@@ -101,11 +110,12 @@ export default function Contacts() {
           <EditCustomer />
         </DialogContent>
       </Dialog>
-      <ConfirmAlert
+      <QuestionAlert
         open={isDeleting}
         title="Delete Customer"
-        description="Are you sure to delete this customer from your mailing list?"
-        onAlertDialogClosed={onCustomerDeleteConfirmed}
+        description={`Are you sure to delete ${deletedEmail} from your mailing list?`}
+        onAlertDialogClosed={onDeleteDlgClosed}
+        onContinue={onCustomerDeleteConfirmed}
       />
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-5xl text-green-700 font-semibold">All Contacts</p>
