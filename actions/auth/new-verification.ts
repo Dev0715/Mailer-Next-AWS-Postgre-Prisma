@@ -1,5 +1,6 @@
 "use server";
 
+import { updateUserVerification } from "@/data/user/update-verification";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { getEmailFromToken } from "@/lib/tokens";
 
