@@ -41,9 +41,12 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
-import { createNewSubscriber } from "@/actions/audience/create-subscriber";
+import { newSubscriber } from "@/actions/audience/new-subscriber";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const NewSubscriber = () => {
+  const user = useCurrentUser();
+
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -121,7 +124,17 @@ const NewSubscriber = () => {
     setSuccess("");
 
     startTransition(() => {
-      createNewSubscriber(values).then((data) => {
+      newSubscriber({
+        ownerEmail: user?.email as string,
+        customerEmail: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        address: values.lastName,
+        phoneNumber: values.phoneNumber,
+        birthday: "",
+        tags: selectedTags,
+        subscribed: true
+      }).then((data) => {
         setError(data.error);
         setError(data.success);
       });
