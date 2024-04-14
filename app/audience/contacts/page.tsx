@@ -39,6 +39,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { EditCustomer } from "@/components/audience/edit-customer";
 import { useAtom } from "jotai";
 import { customersAtom } from "@/app/store/atoms";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
 export default function Contacts() {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -49,6 +50,7 @@ export default function Contacts() {
   // const [customers, setCustomers] = useState<Customer[]>([]);
   const [customers, setCustomers] = useAtom(customersAtom);
   const [isEditing, setEditing] = useState<boolean>(false);
+  const [isDeleting, setDeleting] = useState<boolean>(false);
 
   useEffect(() => {
     getAllCustomersByEmail("").then((customers) => {
@@ -64,6 +66,8 @@ export default function Contacts() {
   const onCustomerEdit = (customer: Customer) => {
     setEditing(true);
   };
+
+  const onCustomerDeleteConfirmed = (open: boolean) => {};
 
   const columns = getColumnsForContactsTable({
     onCustomerDelete,
@@ -96,6 +100,12 @@ export default function Contacts() {
           <EditCustomer />
         </DialogContent>
       </Dialog>
+      <ConfirmAlert
+        open={isDeleting}
+        title="Delete Customer"
+        description="Are you sure to delete this customer from your mailing list?"
+        onAlertDialogClosed={onCustomerDeleteConfirmed}
+      />
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-5xl text-green-700 font-semibold">All Contacts</p>
         <Button variant="default" asChild className="w-64 flex gap-x-4">
