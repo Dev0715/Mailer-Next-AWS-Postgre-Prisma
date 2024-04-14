@@ -16,9 +16,9 @@ export const createSubscriber = async (data: NewSubscriber) => {
   try {
     const response = await db.send(command);
     console.log("__createSubscriber__PutCommand__RESPONSE", response);
-    return response;
+    return { success: true, response };
   } catch (error) {
     console.log("__createSubscriber__PutCommand__ERROR", error);
-    return null;
+    return { error };
   }
 };
