@@ -158,7 +158,17 @@ export const getColumnsForContactsTable = ({
         </div>
       )
     },
-
+    {
+      accessorKey: "created",
+      header: () => <div className="text-center">Created Date</div>,
+      cell: ({ row }) => {
+        const created = row.getValue("created");
+        const cellValue = created
+          ? new Date(created as string).toDateString()
+          : "";
+        return <div className="text-center font-medium">{cellValue}</div>;
+      }
+    },
     {
       id: "actions",
       enableHiding: false,
