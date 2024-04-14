@@ -41,6 +41,7 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
+import { createNewSubscriber } from "@/actions/audience/create-subscriber";
 
 const NewSubscriber = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -119,7 +120,12 @@ const NewSubscriber = () => {
     setError("");
     setSuccess("");
 
-    startTransition(() => {});
+    startTransition(() => {
+      createNewSubscriber(values).then((data) => {
+        setError(data.error);
+        setError(data.success);
+      });
+    });
   };
 
   return (
