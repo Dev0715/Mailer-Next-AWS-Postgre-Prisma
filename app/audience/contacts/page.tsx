@@ -38,7 +38,7 @@ import { getColumnsForContactsTable } from "../_components/contacts-column";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { EditCustomer } from "@/components/audience/edit-customer";
 import { useAtom } from "jotai";
-import { customersAtom } from "@/app/store/audience";
+import { customersAtom } from "@/app/store/atoms";
 
 export default function Contacts() {
   const [sorting, setSorting] = useState<SortingState>([]);
