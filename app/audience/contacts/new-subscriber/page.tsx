@@ -45,6 +45,9 @@ const NewSubscriber = () => {
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
+  const [updateChecked, setUpdateChecked] = useState<boolean>(false);
+  const [consentChecked, setConsentChecked] = useState<boolean>(false);
+
   const [newTagVal, setNewTagVal] = useState<string>("");
   const [tagSelected, setTagSelected] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -317,8 +320,10 @@ const NewSubscriber = () => {
                 <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                   <FormControl>
                     <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
+                      checked={consentChecked}
+                      onCheckedChange={(checked) =>
+                        setConsentChecked(checked as boolean)
+                      }
                     />
                   </FormControl>
                   <div className="space-y-2 leading-none">
@@ -336,8 +341,10 @@ const NewSubscriber = () => {
                 <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                   <FormControl>
                     <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
+                      checked={updateChecked}
+                      onCheckedChange={(checked) =>
+                        setUpdateChecked(checked as boolean)
+                      }
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
