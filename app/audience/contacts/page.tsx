@@ -47,9 +47,8 @@ export default function Contacts() {
   const [rowSelection, setRowSelection] = useState({});
 
   // const [customers, setCustomers] = useState<Customer[]>([]);
-  const [isEditing, setEditing] = useState<boolean>(false);
-
   const [customers, setCustomers] = useAtom(customersAtom);
+  const [isEditing, setEditing] = useState<boolean>(false);
 
   useEffect(() => {
     getAllCustomersByEmail("").then((customers) => {
