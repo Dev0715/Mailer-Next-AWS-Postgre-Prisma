@@ -4,7 +4,7 @@ import { z } from "zod";
 import { AuthError } from "next-auth";
 
 import { LoginSchema } from "@/schemas/auth";
-import { getUserByEmail, updateUserToken } from "@/data/user/user";
+import { getUserByEmail } from "@/data/user/user-by-email";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { sendVerificationEmail } from "@/lib/mail";
 import { signIn } from "@/auth";

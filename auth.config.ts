@@ -6,7 +6,7 @@ import Apple from "next-auth/providers/apple";
 import bcrypt from "bcryptjs";
 
 import type { NextAuthConfig } from "next-auth";
-import { getUserByEmail } from "@/data/user/user";
+import { getUserByEmail } from "@/data/user/user-by-email";
 
 export default {
   providers: [

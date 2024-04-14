@@ -4,7 +4,7 @@ import * as z from "zod";
 import bcrypt from "bcryptjs";
 
 import { NewPasswordSchema } from "@/schemas/auth";
-import { getUserByEmail, updateUserPassword } from "@/data/user/user";
+import { getUserByEmail } from "@/data/user/user-by-email";
 import { getEmailFromToken } from "@/lib/tokens";
 
 export const newPassword = async (
