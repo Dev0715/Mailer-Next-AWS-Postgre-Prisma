@@ -4,7 +4,7 @@ import { generateVerificationToken } from "@/lib/tokens";
 
 const TableName = process.env.AWS_DYNAMODB_MAILING_LIST_TABLE_NAME;
 
-interface NewUser {
+interface NewSubscriber {
   ownerEmail: string;
   customerEmail: string;
   firstName: string;
@@ -19,28 +19,19 @@ interface NewUser {
   lastChanged: string;
 }
 
-export const createSubscriber = async (data: NewUser) => {
-  if (data.emailVerified && data.emailVerified instanceof Date) {
-    data.emailVerified = data.emailVerified.toISOString();
-  }
-
-  const verificationToken = generateVerificationToken(data.email);
-
+export const createSubscriber = async (data: NewSubscriber) => {
   const command = new PutCommand({
     TableName,
     Item: {
-      verificationToken,
-      expires: new Date(new Date().getTime() + 3600 * 1000).toISOString(),
       ...data
     }
   });
 
   try {
     const response = await db.send(command);
-    console.log("__createUser__PutCommand__RESPONSE", response);
-    return verificationToken;
+    console.log("__createSubscriber__PutCommand__RESPONSE", response);
   } catch (error) {
-    console.log("__createUser__PutCommand__ERROR", error);
+    console.log("__createSubscriber__PutCommand__ERROR", error);
     return null;
   }
 };
