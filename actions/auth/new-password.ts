@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 import { NewPasswordSchema } from "@/schemas/auth";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { getEmailFromToken } from "@/lib/tokens";
+import { updateUserPassword } from "@/data/user/update-password";
 
 export const newPassword = async (
   values: z.infer<typeof NewPasswordSchema>,
