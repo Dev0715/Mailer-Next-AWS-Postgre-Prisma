@@ -136,7 +136,7 @@ const NewSubscriber = () => {
         subscribed: true
       }).then((data) => {
         setError(data.error);
-        setError(data.success);
+        setSuccess(data.success);
       });
     });
   };
@@ -381,7 +381,11 @@ const NewSubscriber = () => {
               </div>
             </CardContent>
             <CardFooter className="self-end">
-              <Button type="submit" className="w-64 flex gap-x-2">
+              <Button
+                disabled={isPending}
+                type="submit"
+                className="w-64 flex gap-x-2"
+              >
                 <FaPlus />
                 Register
               </Button>
