@@ -43,6 +43,15 @@ import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
 import { newSubscriber } from "@/actions/audience/new-subscriber";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
 
 const NewSubscriber = () => {
   const user = useCurrentUser();
@@ -123,20 +132,30 @@ const NewSubscriber = () => {
     setError("");
     setSuccess("");
 
+    if (!consentChecked) {
+      setAlertOpen(true);
+      setAlertTitle("Warning");
+      setAlertDescription("You should have permission to email to them");
+      return;
+    }
+
     startTransition(() => {
-      newSubscriber({
-        ownerEmail: user?.email as string,
-        customerEmail: values.email,
-        firstName: values.firstName,
-        lastName: values.lastName,
-        address: values.lastName,
-        phoneNumber: values.phoneNumber,
-        birthday: "",
-        tags: selectedTags,
-        subscribed: true
-      }).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
+      newSubscriber(
+        {
+          ownerEmail: user?.email as string,
+          customerEmail: values.email,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          address: values.address,
+          phoneNumber: values.phoneNumber,
+          birthday: values.birthday.toISOString(),
+          tags: selectedTags,
+          subscribed: true
+        },
+        updateChecked
+      ).then((data) => {
+        setError(data.error as string);
+        setSuccess(data?.success);
       });
     });
   };
@@ -275,6 +294,7 @@ const NewSubscriber = () => {
                     </FormItem>
                   )}
                 />
+
                 <FormError message={error} />
                 <FormSuccess message={success} />
               </div>
