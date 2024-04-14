@@ -313,53 +313,41 @@ const NewSubscriber = () => {
                     ))}
                   </CardContent>
                 </Card>
-                <FormField
-                  control={form.control}
-                  name="consent"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-2 leading-none">
-                        <FormLabel>
-                          This person gave me permission to email them
-                        </FormLabel>
-                        <FormDescription className="leading-4">
-                          This person will not receive a confirmation email from
-                          MailManJS. Since you're adding this recipient
-                          manually, they won't have an opt-in IP address or date
-                          in your records, so be extra sure you have permission
-                          first.
-                        </FormDescription>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="update"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel>
-                          If this person is already in my audience, update their
-                          profile
-                        </FormLabel>
-                        <FormDescription></FormDescription>
-                      </div>
-                    </FormItem>
-                  )}
-                />
+
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-2 leading-none">
+                    <FormLabel>
+                      This person gave me permission to email them
+                    </FormLabel>
+                    <FormDescription className="leading-4">
+                      This person will not receive a confirmation email from
+                      MailManJS. Since you're adding this recipient manually,
+                      they won't have an opt-in IP address or date in your
+                      records, so be extra sure you have permission first.
+                    </FormDescription>
+                  </div>
+                </FormItem>
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>
+                      If this person is already in my audience, update their
+                      profile
+                    </FormLabel>
+                    <FormDescription></FormDescription>
+                  </div>
+                </FormItem>
               </div>
             </CardContent>
             <CardFooter className="self-end">
