@@ -39,6 +39,8 @@ import { Badge } from "@/components/ui/badge";
 import { MdClose } from "react-icons/md";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Checkbox } from "@/components/ui/checkbox";
+import { FormError } from "@/components/utils/form-error";
+import { FormSuccess } from "@/components/utils/form-success";
 
 const NewSubscriber = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -254,6 +256,8 @@ const NewSubscriber = () => {
                     </FormItem>
                   )}
                 />
+                <FormError message={error} />
+                <FormSuccess message={success} />
               </div>
               <div className="w-1/2 flex flex-col gap-y-4">
                 <Card>
