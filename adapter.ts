@@ -7,6 +7,7 @@ import type {
   AdapterSession
 } from "next-auth/adapters";
 import { getUserByEmail } from "@/data/user/user-by-email";
+import { createUser } from "@/data/user/create-user";
 
 export default {
   async getUserByAccount(

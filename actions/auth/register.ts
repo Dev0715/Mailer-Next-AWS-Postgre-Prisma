@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs";
 import { RegisterSchema } from "@/schemas/auth";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { sendVerificationEmail } from "@/lib/mail";
+import { createUser } from "@/data/user/create-user";
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const validateFields = RegisterSchema.safeParse(values);
