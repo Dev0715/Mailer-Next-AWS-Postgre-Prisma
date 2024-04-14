@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
@@ -48,7 +47,7 @@ export const getColumnsForContactsTable = ({
       enableHiding: false
     },
     {
-      accessorKey: "email",
+      accessorKey: "customerEmail",
       header: ({ column }) => {
         return (
           <Button
@@ -61,7 +60,7 @@ export const getColumnsForContactsTable = ({
         );
       },
       cell: ({ row }) => (
-        <div className="lowercase">{row.getValue("email")}</div>
+        <div className="lowercase">{row.getValue("customerEmail")}</div>
       )
     },
     {
@@ -90,20 +89,24 @@ export const getColumnsForContactsTable = ({
       )
     },
     {
-      accessorKey: "phone",
+      accessorKey: "phoneNumber",
       header: () => <div className="text-center">Phone</div>,
       cell: ({ row }) => (
-        <div className="text-center font-medium">{row.getValue("phone")}</div>
+        <div className="text-center font-medium">
+          {row.getValue("phoneNumber")}
+        </div>
       )
     },
     {
       accessorKey: "birthday",
       header: () => <div className="text-center">Birthday</div>,
-      cell: ({ row }) => (
-        <div className="text-center font-medium">
-          {row.getValue("birthday")}
-        </div>
-      )
+      cell: ({ row }) => {
+        const birthday = row.getValue("birthday");
+        const cellValue = birthday
+          ? new Date(birthday as string).toDateString()
+          : "";
+        return <div className="text-center font-medium">{cellValue}</div>;
+      }
     },
     {
       accessorKey: "tags",
@@ -155,22 +158,7 @@ export const getColumnsForContactsTable = ({
         </div>
       )
     },
-    {
-      accessorKey: "created",
-      header: () => <div className="text-center">Created Date</div>,
-      cell: ({ row }) => (
-        <div className="text-center font-medium">{row.getValue("created")}</div>
-      )
-    },
-    {
-      accessorKey: "lastChanged",
-      header: () => <div className="text-center">Last Changed</div>,
-      cell: ({ row }) => (
-        <div className="text-center font-medium">
-          {row.getValue("lastChanged")}
-        </div>
-      )
-    },
+
     {
       id: "actions",
       enableHiding: false,
@@ -187,7 +175,9 @@ export const getColumnsForContactsTable = ({
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(customer.email)}
+                onClick={() =>
+                  navigator.clipboard.writeText(customer.customerEmail)
+                }
               >
                 Copy Customer Email
               </DropdownMenuItem>
