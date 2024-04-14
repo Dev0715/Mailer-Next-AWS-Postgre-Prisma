@@ -2,7 +2,7 @@ import db from "@/lib/db";
 import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import { generateVerificationToken } from "@/lib/tokens";
 
-const TableName = process.env.AWS_DYNAMODB_TABLE_NAME;
+const TableName = process.env.AWS_DYNAMODB_USER_TABLE_NAME;
 
 interface UserSetToken {
   email: string;
