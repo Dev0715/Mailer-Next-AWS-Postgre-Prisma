@@ -1,97 +1,25 @@
 "use server";
 
-export const getAllCustomersByEmail = async (email: string) => {
-  return [
-    {
-      email: "ken991@yahoo.com",
-      firstName: "success",
-      lastName: "Last",
-      address: "address1 address2 address3",
-      phone: "1215646785",
-      birthday: "07/05/1994",
-      tags: ["Customer1", "Customer2"],
-      subscribed: true,
-      contactRating: 2,
-      created: "06/05/2024",
-      lastChanged: "06/05/2024"
-    },
-    {
-      email: "ken992@yahoo.com",
-      firstName: "success",
-      lastName: "Last",
-      address: "address1 address2 address3",
-      phone: "1215646785",
-      birthday: "07/05/1994",
-      tags: ["Customer1", "Customer3"],
-      subscribed: true,
-      contactRating: 2,
-      created: "06/05/2024",
-      lastChanged: "06/05/2024"
-    },
-    {
-      email: "ken993@yahoo.com",
-      firstName: "success",
-      lastName: "Last",
-      address: "address1 address2 address3",
-      phone: "1215646785",
-      birthday: "07/05/1994",
-      tags: ["Customer2"],
-      subscribed: false,
-      contactRating: 2,
-      created: "06/05/2024",
-      lastChanged: "06/05/2024"
-    },
-    {
-      email: "ken995@yahoo.com",
-      firstName: "success",
-      lastName: "Last",
-      address: "address1 address2 address3",
-      phone: "1215646785",
-      birthday: "07/05/1994",
-      tags: ["Customer3"],
-      subscribed: true,
-      contactRating: 2,
-      created: "06/05/2024",
-      lastChanged: "06/05/2024"
-    },
-    {
-      email: "Abe45@gmail.com",
-      firstName: "success",
-      lastName: "Last",
-      address: "address1 address2 address3",
-      phone: "1215646785",
-      birthday: "07/05/1994",
-      tags: ["Customer1"],
-      subscribed: true,
-      contactRating: 2,
-      created: "06/05/2024",
-      lastChanged: "06/05/2024"
-    },
-    {
-      email: "Abe455@gmail.com",
-      firstName: "success",
-      lastName: "Last",
-      address: "address1 address2 address3",
-      phone: "1215646785",
-      birthday: "07/05/1994",
-      tags: ["Customer1"],
-      subscribed: true,
-      contactRating: 2,
-      created: "06/05/2024",
-      lastChanged: "06/05/2024"
-    },
-    {
-      email: "Abe451@gmail.com",
-      firstName: "success",
-      lastName: "Last",
-      address: "address1 address2 address3",
-      phone: "1215646785",
-      birthday: "07/05/1994",
-      tags: ["Customer1"],
-      subscribed: true,
-      contactRating: 2,
-      created: "06/05/2024",
-      lastChanged: "06/05/2024"
+import db from "@/lib/db";
+import { QueryCommand } from "@aws-sdk/lib-dynamodb";
+
+const TableName = process.env.AWS_DYNAMODB_MAILING_LIST_TABLE_NAME;
+
+export const getAllCustomersByEmail = async (ownerEmail: string) => {
+  const command = new QueryCommand({
+    TableName,
+    KeyConditionExpression: "ownerEmail = :ownerEmail",
+    ExpressionAttributeValues: {
+      ":ownerEmail": ownerEmail
     }
-  ];
+  });
+
+  try {
+    const response = await db.send(command);
+    console.log("__getAllCustomersByEmail__GetCommand__RESPONSE", response);
+    return response.Items;
+  } catch (error) {
+    console.log("__getAllCustomersByEmail__GetCommand__ERROR", error);
+    return null;
+  }
 };
