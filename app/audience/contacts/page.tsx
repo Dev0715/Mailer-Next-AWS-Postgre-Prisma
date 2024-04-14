@@ -39,10 +39,12 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { EditCustomer } from "@/components/audience/edit-customer";
 import { useAtom } from "jotai";
 import { customersAtom } from "@/app/store/atoms";
-import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { QuestionAlert } from "@/components/utils/question-alert";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 export default function Contacts() {
+  const user = useCurrentUser();
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -55,16 +57,16 @@ export default function Contacts() {
   const [deletedEmail, setDeletedEmail] = useState<string>("");
 
   useEffect(() => {
-    getAllCustomersByEmail("").then((customers) => {
-      setCustomers(customers);
+    getAllCustomersByEmail(user?.email as string).then((customers: any) => {
+      if (customers) {
+        setCustomers(customers);
+      }
     });
   }, []);
 
   const onCustomerDelete = (customer: Customer) => {
-    setDeletedEmail(customer.email);
+    setDeletedEmail(customer.customerEmail);
     setDeleting(true);
-    const newList = customers.filter((item) => item.email !== customer.email);
-    setCustomers(newList);
   };
 
   const onCustomerEdit = (customer: Customer) => {
@@ -76,7 +78,10 @@ export default function Contacts() {
   };
 
   const onCustomerDeleteConfirmed = () => {
-    console.log("Confirmed");
+    const newList = customers.filter(
+      (item) => item.customerEmail !== deletedEmail
+    );
+    setCustomers(newList);
   };
 
   const columns = getColumnsForContactsTable({
@@ -124,7 +129,7 @@ export default function Contacts() {
         </p>
       </QuestionAlert>
       <div className="w-full flex items-end justify-between pb-6">
-        <p className="text-5xl text-green-700 font-semibold">All Contacts</p>
+        <p className="text-4xl text-green-700 font-semibold">All Contacts</p>
         <Button variant="default" asChild className="w-64 flex gap-x-4">
           <Link href="/audience/contacts/add">
             <FaPlus />
@@ -136,9 +141,14 @@ export default function Contacts() {
         <div className="flex items-center gap-x-4">
           <Input
             placeholder="Filter emails..."
-            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+            value={
+              (table.getColumn("customerEmail")?.getFilterValue() as string) ??
+              ""
+            }
             onChange={(event) =>
-              table.getColumn("email")?.setFilterValue(event.target.value)
+              table
+                .getColumn("customerEmail")
+                ?.setFilterValue(event.target.value)
             }
             className="max-w-xs"
           />
