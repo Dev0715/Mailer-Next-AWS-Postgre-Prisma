@@ -1,6 +1,7 @@
 import {
   AlertDialog,
   AlertDialogAction,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -13,13 +14,15 @@ type PropsParams = {
   title: string;
   description: string;
   onAlertDialogClosed: (open: boolean) => void;
+  onContinue: () => void;
 };
 
 export const QuestionAlert = ({
   open,
   title,
   description,
-  onAlertDialogClosed
+  onAlertDialogClosed,
+  onContinue
 }: PropsParams) => {
   return (
     <AlertDialog open={open} onOpenChange={onAlertDialogClosed}>
@@ -29,7 +32,10 @@ export const QuestionAlert = ({
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction className="w-24">OK</AlertDialogAction>
+          <AlertDialogCancel className="w-24">Cancel</AlertDialogCancel>
+          <AlertDialogAction className="w-24" onClick={onContinue}>
+            OK
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
