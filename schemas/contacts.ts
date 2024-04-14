@@ -8,7 +8,7 @@ export const NewSubscriberSchema = z.object({
     .max(32, "First name must be a maximum of 32 characters"),
   lastName: z
     .string()
-    .min(6, "Last name must be at least 6 characters long")
+    .min(2, "Last name must be at least 2 characters long")
     .max(32, "Last name must be a maximum of 32 characters"),
   address: z
     .string()
