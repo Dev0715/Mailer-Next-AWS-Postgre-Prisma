@@ -63,8 +63,8 @@ export default function Contacts() {
   const onCustomerDelete = (customer: Customer) => {
     setDeletedEmail(customer.email);
     setDeleting(true);
-    // const newList = customers.filter((item) => item.email !== customer.email);
-    // setCustomers(newList);
+    const newList = customers.filter((item) => item.email !== customer.email);
+    setCustomers(newList);
   };
 
   const onCustomerEdit = (customer: Customer) => {
