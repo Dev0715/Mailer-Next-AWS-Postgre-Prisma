@@ -1,11 +1,11 @@
 import db from "@/lib/db";
 import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import { generateVerificationToken } from "@/lib/tokens";
-import { NewSubscriber } from "@/shared/customer-type";
+import { Customer } from "@/shared/customer-type";
 
 const TableName = process.env.AWS_DYNAMODB_MAILING_LIST_TABLE_NAME;
 
-export const createSubscriber = async (data: NewSubscriber) => {
+export const createSubscriber = async (data: Customer) => {
   const command = new PutCommand({
     TableName,
     Item: {
