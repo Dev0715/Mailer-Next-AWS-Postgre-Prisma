@@ -46,10 +46,10 @@ export default function Contacts() {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  const [customers, setCustomers] = useState<Customer[]>([]);
+  // const [customers, setCustomers] = useState<Customer[]>([]);
   const [isEditing, setEditing] = useState<boolean>(false);
 
-  const [readCustomer] = useAtom(customersAtom);
+  const [customers, setCustomers] = useAtom(customersAtom);
 
   useEffect(() => {
     getAllCustomersByEmail("").then((customers) => {
