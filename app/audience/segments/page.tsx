@@ -3,15 +3,32 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
+import { getColumnsForSegmentsTable } from "../_components/segments-column";
+import { Segment } from "@/shared/segment-type";
+import { useState } from "react";
+import {
+  ColumnFiltersState,
+  SortingState,
+  VisibilityState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable
+} from "@tanstack/react-table";
 
 const Segments = () => {
-  const columns = getColumnsForContactsTable({
-    onCustomerDelete,
-    onCustomerEdit
-  });
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
+
+  const columns = getColumnsForSegmentsTable({});
+  const [segments, setSegments] = useState<Segment[]>([]);
 
   const table = useReactTable({
-    data: customers,
+    data: segments,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
