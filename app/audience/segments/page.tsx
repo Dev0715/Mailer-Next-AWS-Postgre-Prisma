@@ -1,4 +1,6 @@
+import CampaignItem from "@/app/campaign/_components/campaign-item";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 
@@ -13,6 +15,15 @@ const Segments = () => {
             Add Segment
           </Link>
         </Button>
+      </div>
+      <div className="flex flex-col gap-y-4">
+        <p className="text-xl text-gray-500">April, 2024 (2)</p>
+        <Separator />
+        <CampaignItem />
+        <Separator />
+        <CampaignItem />
+        <Separator />
+        <CampaignItem />
       </div>
     </main>
   );
