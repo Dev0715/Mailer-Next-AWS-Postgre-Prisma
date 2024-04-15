@@ -41,6 +41,7 @@ import { Customer } from "@/shared/customer-type";
 import { updateUserTags } from "@/data/user/update-tags";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getUserByEmail } from "@/data/user/user-by-email";
+import { updateCustomer } from "@/data/audience/update-cusomer";
 
 export const EditCustomer = ({
   customer
@@ -97,6 +98,24 @@ export const EditCustomer = ({
           console.log(res);
         });
       }
+      updateCustomer({
+        ownerEmail: user?.email as string,
+        customerEmail: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        address: values.address,
+        phoneNumber: values.phoneNumber,
+        birthday: values.birthday.toISOString(),
+        subscribed: values.subscribed === "subscribed",
+        tags: selectedTags,
+        lastChanged: new Date().toISOString()
+      }).then((res) => {
+        if (res.success) {
+          setSuccess("Customer updated successfully!");
+        } else {
+          setError("Failed to update customer!");
+        }
+      });
     });
   };
 
