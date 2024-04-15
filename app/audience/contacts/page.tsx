@@ -118,13 +118,12 @@ export default function Contacts() {
 
   return (
     <main className="w-full flex flex-col py-6">
-      <Dialog
-        open={isEditing}
-        onCustomerUpdate={onCustomerUpdate}
-        onOpenChange={(isOpen) => setEditing(isOpen)}
-      >
+      <Dialog open={isEditing} onOpenChange={(isOpen) => setEditing(isOpen)}>
         <DialogContent className="max-w-full w-1/2">
-          <EditCustomer customer={editedCustomer} />
+          <EditCustomer
+            customer={editedCustomer}
+            onCustomerUpdate={onCustomerUpdate}
+          />
         </DialogContent>
       </Dialog>
       <QuestionAlert
