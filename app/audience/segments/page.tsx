@@ -19,6 +19,22 @@ import {
   getSortedRowModel,
   useReactTable
 } from "@tanstack/react-table";
+import { ChevronDown } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from "@/components/ui/table";
 
 const Segments = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
