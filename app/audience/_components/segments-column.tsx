@@ -11,12 +11,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Customer } from "@/shared/customer-type";
+import { Segment } from "@/shared/segment-type";
 
 type PropsType = {};
 
 export const getColumnsForSegmentsTable = ({}: PropsType) => {
-  const columns: ColumnDef<Customer>[] = [
+  const columns: ColumnDef<Segment>[] = [
     {
       id: "select",
       header: ({ table }) => (
@@ -61,7 +61,7 @@ export const getColumnsForSegmentsTable = ({}: PropsType) => {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
-        const customer = row.original;
+        const segment = row.original;
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -72,16 +72,10 @@ export const getColumnsForSegmentsTable = ({}: PropsType) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() =>
-                  navigator.clipboard.writeText(customer.customerEmail)
-                }
-              >
-                Copy Customer Email
-              </DropdownMenuItem>
+              <DropdownMenuItem>Copy Segment Info</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Delete Customer</DropdownMenuItem>
-              <DropdownMenuItem>Edit Customer</DropdownMenuItem>
+              <DropdownMenuItem>Delete Segment</DropdownMenuItem>
+              <DropdownMenuItem>Edit Segment</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         );
