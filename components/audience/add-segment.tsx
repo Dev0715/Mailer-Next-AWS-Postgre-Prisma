@@ -1,4 +1,6 @@
-import { FaFilter } from "react-icons/fa";
+import { FaFilter, FaPlus } from "react-icons/fa";
+import { Button } from "../ui/button";
+import { FilterBar } from "./filter-bar";
 
 const AddSement = () => {
   return (
@@ -8,6 +10,11 @@ const AddSement = () => {
         <FaFilter />
         Segment Filters
       </div>
+      <FilterBar />
+      <Button className="flex items-center gap-2">
+        <FaPlus />
+        Add Filter
+      </Button>
     </main>
   );
 };
