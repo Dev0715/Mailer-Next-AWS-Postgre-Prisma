@@ -274,6 +274,7 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
                               "w-full pl-3 text-left font-normal",
                               !field.value && "text-muted-foreground"
                             )}
+                            disabled={isPending}
                           >
                             {field.value ? (
                               format(field.value, "PPP")
@@ -308,7 +309,11 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
                   You select from your original tags or add new one
                 </CardDescription>
                 <div className="flex justify-between gap-x-4 pt-2">
-                  <Select value={tagSelected} onValueChange={onTagSelectChange}>
+                  <Select
+                    disabled={isPending}
+                    value={tagSelected}
+                    onValueChange={onTagSelectChange}
+                  >
                     <SelectTrigger className="w-1/3">
                       <SelectValue placeholder="Select a Tag" />
                     </SelectTrigger>
