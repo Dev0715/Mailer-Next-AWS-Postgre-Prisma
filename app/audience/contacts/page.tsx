@@ -70,7 +70,11 @@ export default function Contacts() {
     setEditing(true);
   };
 
-  const onCustomerUpdate = () => {};
+  const onCustomerUpdate = (res: { error?: unknown; success?: boolean }) => {
+    if (res.success) {
+    } else {
+    }
+  };
 
   const onCustomerDelete = (customer: Customer) => {
     setDeletedEmail(customer.customerEmail);
