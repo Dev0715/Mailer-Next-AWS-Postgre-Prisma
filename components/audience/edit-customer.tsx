@@ -60,6 +60,7 @@ export const EditCustomer = ({
   useEffect(() => {
     // Fetch tags from API
     setStoredTags(["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"]);
+    setSelectedTags(customer?.tags);
   }, []);
 
   const form = useForm<z.infer<typeof EditContactSchema>>({
