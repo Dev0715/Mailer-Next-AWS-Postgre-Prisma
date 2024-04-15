@@ -183,7 +183,8 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
                   <FormControl>
                     <Input
                       {...field}
-                      disabled={isPending}
+                      // disabled={isPending}
+                      disabled
                       placeholder="username@myemail.com"
                       type="email"
                     />
