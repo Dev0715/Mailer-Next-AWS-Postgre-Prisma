@@ -1,5 +1,4 @@
-import { FaArrowLeft, FaPlus, FaSave } from "react-icons/fa";
-import Link from "next/link";
+import { FaPlus, FaSave } from "react-icons/fa";
 
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -29,14 +27,12 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MdClose } from "react-icons/md";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Customer } from "@/shared/customer-type";
 import { updateUserTags } from "@/data/user/update-tags";
 import { useCurrentUser } from "@/hooks/use-current-user";
@@ -52,13 +48,12 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 
-export const EditCustomer = ({
-  customer,
-  onCustomerUpdate
-}: {
+type PropsParams = {
   customer: Customer | undefined;
-  onCustomerUpdate: () => void;
-}) => {
+  onCustomerUpdate: (data: { error?: unknown; success?: boolean }) => void;
+};
+
+export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
   const user = useCurrentUser();
   const [isPending, startTransition] = useTransition();
 
@@ -116,11 +111,7 @@ export const EditCustomer = ({
         tags: selectedTags,
         lastChanged: new Date().toISOString()
       }).then((res) => {
-        if (res.success) {
-          onCustomerUpdate();
-        } else {
-          onCustomerUpdate();
-        }
+        onCustomerUpdate(res);
       });
     });
   };
