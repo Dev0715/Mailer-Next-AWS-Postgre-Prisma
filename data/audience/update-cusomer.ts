@@ -24,11 +24,9 @@ export const updateCustomer = async (data: Customer) => {
   });
 
   try {
-    const response = await db.send(command);
-    console.log("__updateUserToken__UpdateCommand__RESPONSE", response);
+    await db.send(command);
     return { success: true };
   } catch (error) {
-    console.log("__updateUserToken__UpdateCommand__ERROR", error);
     return { error };
   }
 };
