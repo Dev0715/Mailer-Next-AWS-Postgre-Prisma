@@ -1,3 +1,5 @@
+"use client";
+
 import CampaignItem from "@/app/campaign/_components/campaign-item";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
