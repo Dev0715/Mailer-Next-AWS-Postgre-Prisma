@@ -43,7 +43,20 @@ const Segments = () => {
   const [rowSelection, setRowSelection] = useState({});
 
   const columns = getColumnsForSegmentsTable({});
-  const [segments, setSegments] = useState<Segment[]>([]);
+  const [segments, setSegments] = useState<Segment[]>([
+    {
+      title: "Segment 1",
+      created: "2021-09-01"
+    },
+    {
+      title: "Segment 2",
+      created: "2021-09-02"
+    },
+    {
+      title: "Segment 3",
+      created: "2021-09-03"
+    }
+  ]);
 
   const table = useReactTable({
     data: segments,
