@@ -5,6 +5,30 @@ import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 
 const Segments = () => {
+  const columns = getColumnsForContactsTable({
+    onCustomerDelete,
+    onCustomerEdit
+  });
+
+  const table = useReactTable({
+    data: customers,
+    columns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection
+    }
+  });
+
   return (
     <main className="w-5/6 flex flex-col py-6">
       <div className="w-full flex items-end justify-between pb-6">
