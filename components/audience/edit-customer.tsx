@@ -328,11 +328,13 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
                   </Select>
                   <div className="w-1/2 flex">
                     <Input
+                      disabled={isPending}
                       type="text"
                       value={newTagVal}
                       onChange={(e) => setNewTagVal(e.target.value)}
                     />
                     <Button
+                      disabled={isPending}
                       type="button"
                       variant="link"
                       className="flex gap-x-2 text-sm"
@@ -395,7 +397,11 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-64 flex gap-x-2">
+              <Button
+                disabled={isPending}
+                type="submit"
+                className="w-64 flex gap-x-2"
+              >
                 <FaSave />
                 Update
               </Button>
