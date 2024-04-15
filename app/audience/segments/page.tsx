@@ -90,7 +90,7 @@ const Segments = () => {
               Add Segment
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent className="max-w-full w-3/4">
             <AddSement />
           </DialogContent>
         </Dialog>
