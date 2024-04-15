@@ -69,8 +69,13 @@ export default function Contacts() {
     setEditing(true);
   };
 
-  const onCustomerUpdate = (res: { error?: unknown; success?: boolean }) => {
+  const onCustomerUpdate = (
+    res: { error?: unknown; success?: boolean },
+    updatedCustomer: Customer
+  ) => {
     if (res.success) {
+      const newCustomers = [...customers];
+      newCustomers[]
     } else {
     }
   };
