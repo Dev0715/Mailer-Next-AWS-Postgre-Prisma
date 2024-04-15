@@ -40,6 +40,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Customer } from "@/shared/customer-type";
 import { updateUserTags } from "@/data/user/update-tags";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { getUserByEmail } from "@/data/user/user-by-email";
 
 export const EditCustomer = ({
   customer
@@ -62,8 +63,11 @@ export const EditCustomer = ({
   const [alertDescription, setAlertDescription] = useState<string>("");
 
   useEffect(() => {
-    // Fetch tags from API
-    setStoredTags(["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"]);
+    getUserByEmail(user?.email as string).then((res) => {
+      if (res && res.tags) {
+        setStoredTags(res.tags);
+      }
+    });
     if (customer?.tags) setSelectedTags(customer.tags);
   }, []);
 
