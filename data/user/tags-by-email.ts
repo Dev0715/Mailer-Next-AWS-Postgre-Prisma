@@ -1,6 +1,5 @@
 import db from "@/lib/db";
-import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
-import { generateVerificationToken } from "@/lib/tokens";
+import { GetCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_USER_TABLE_NAME;
 
