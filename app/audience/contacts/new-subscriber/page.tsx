@@ -52,6 +52,7 @@ import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
+import { getUserByEmail } from "@/data/user/user-by-email";
 
 const NewSubscriber = () => {
   const user = useCurrentUser();
@@ -73,8 +74,11 @@ const NewSubscriber = () => {
   const [alertDescription, setAlertDescription] = useState<string>("");
 
   useEffect(() => {
-    // Fetch tags from API
-    setStoredTags(["Tag1", "Tag2", "Tag3", "Tag4", "Tag5"]);
+    getUserByEmail(user?.email as string).then((res) => {
+      if (res && res.tags) {
+        setStoredTags(res.tags);
+      }
+    });
   }, []);
 
   const onAddNewTag = () => {
