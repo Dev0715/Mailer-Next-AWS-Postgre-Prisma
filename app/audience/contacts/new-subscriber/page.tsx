@@ -53,6 +53,7 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { getUserByEmail } from "@/data/user/user-by-email";
+import { updateUserTags } from "@/data/user/update-tags";
 
 const NewSubscriber = () => {
   const user = useCurrentUser();
@@ -96,6 +97,7 @@ const NewSubscriber = () => {
       setNewTagVal("");
       if (!storedTags.find((tag) => tag === newTagVal)) {
         setStoredTags([...storedTags, newTagVal]);
+        setStoredTagsUpdated(true);
       }
     }
   };
@@ -145,6 +147,14 @@ const NewSubscriber = () => {
     }
 
     startTransition(() => {
+      if (isStoredTagsUpdated) {
+        updateUserTags({
+          email: user?.email as string,
+          tags: storedTags
+        }).then((res) => {
+          console.log(res);
+        });
+      }
       newSubscriber(
         {
           ownerEmail: user?.email as string,
