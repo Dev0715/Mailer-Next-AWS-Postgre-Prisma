@@ -35,6 +35,8 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import AddSement from "@/components/audience/add-segment";
 
 const Segments = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -81,12 +83,17 @@ const Segments = () => {
     <main className="w-5/6 flex flex-col py-6">
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-4xl text-green-700 font-semibold">All Segments</p>
-        <Button variant="default" asChild className="w-64 flex gap-x-4">
-          <Link href="/audience/segments/add">
-            <FaPlus />
-            Add Segment
-          </Link>
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="default" className="w-64 flex gap-x-4">
+              <FaPlus />
+              Add Segment
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <AddSement />
+          </DialogContent>
+        </Dialog>
       </div>
       <div className="w-full flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
