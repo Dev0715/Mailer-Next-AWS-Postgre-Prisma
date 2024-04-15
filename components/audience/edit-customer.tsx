@@ -53,9 +53,11 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 
 export const EditCustomer = ({
-  customer
+  customer,
+  onCustomerUpdate
 }: {
   customer: Customer | undefined;
+  onCustomerUpdate: () => void;
 }) => {
   const user = useCurrentUser();
   const [isPending, startTransition] = useTransition();
@@ -115,9 +117,9 @@ export const EditCustomer = ({
         lastChanged: new Date().toISOString()
       }).then((res) => {
         if (res.success) {
-          setSuccess("Customer updated successfully!");
+          onCustomerUpdate();
         } else {
-          setError("Failed to update customer!");
+          onCustomerUpdate();
         }
       });
     });
