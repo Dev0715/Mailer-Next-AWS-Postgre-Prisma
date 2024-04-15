@@ -58,9 +58,6 @@ export const EditCustomer = ({
   customer: Customer | undefined;
 }) => {
   const user = useCurrentUser();
-
-  const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
   const [newTagVal, setNewTagVal] = useState<string>("");
@@ -96,9 +93,6 @@ export const EditCustomer = ({
   });
 
   const onSubmit = (values: z.infer<typeof EditContactSchema>) => {
-    setError("");
-    setSuccess("");
-
     startTransition(() => {
       if (isStoredTagsUpdated) {
         updateUserTags({
