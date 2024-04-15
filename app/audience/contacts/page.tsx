@@ -74,9 +74,12 @@ export default function Contacts() {
     updatedCustomer: Customer
   ) => {
     if (res.success) {
-      const newCustomers = [...customers];
-      newCustomers[]
-    } else {
+      const newCustomers = customers.map((customer) =>
+        customer.customerEmail === updatedCustomer.customerEmail
+          ? updatedCustomer
+          : customer
+      );
+      setCustomers(newCustomers);
     }
   };
 
