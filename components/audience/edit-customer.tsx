@@ -57,6 +57,7 @@ export const EditCustomer = ({
   const [tagSelected, setTagSelected] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [storedTags, setStoredTags] = useState<string[]>([]);
+  const [isStoredTagsUpdated, setStoredTagsUpdated] = useState<boolean>(false);
 
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [alertTile, setAlertTitle] = useState<string>("");
@@ -88,12 +89,14 @@ export const EditCustomer = ({
     setSuccess("");
 
     startTransition(() => {
-      updateUserTags({
-        email: user?.email as string,
-        tags: storedTags
-      }).then((res) => {
-        console.log(res);
-      });
+      if (isStoredTagsUpdated) {
+        updateUserTags({
+          email: user?.email as string,
+          tags: storedTags
+        }).then((res) => {
+          console.log(res);
+        });
+      }
     });
   };
 
@@ -111,6 +114,7 @@ export const EditCustomer = ({
       setNewTagVal("");
       if (!storedTags.find((tag) => tag === newTagVal)) {
         setStoredTags([...storedTags, newTagVal]);
+        setStoredTagsUpdated(true);
       }
     }
   };
