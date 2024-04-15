@@ -11,12 +11,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
 import { Customer } from "@/shared/customer-type";
 
 type PropsType = {};
 
-export const getColumnsForContactsTable = ({}: PropsType) => {
+export const getColumnsForSegmentsTable = ({}: PropsType) => {
   const columns: ColumnDef<Customer>[] = [
     {
       id: "select",
@@ -41,21 +40,19 @@ export const getColumnsForContactsTable = ({}: PropsType) => {
       enableHiding: false
     },
     {
-      accessorKey: "firstName",
-      header: () => <div className="text-center">First Name</div>,
+      accessorKey: "title",
+      header: () => <div className="text-center">Title</div>,
       cell: ({ row }) => (
-        <div className="text-center font-medium">
-          {row.getValue("firstName")}
-        </div>
+        <div className="text-center font-medium">{row.getValue("title")}</div>
       )
     },
     {
-      accessorKey: "birthday",
-      header: () => <div className="text-center">Birthday</div>,
+      accessorKey: "created",
+      header: () => <div className="text-center">Created Date</div>,
       cell: ({ row }) => {
-        const birthday = row.getValue("birthday");
-        const cellValue = birthday
-          ? new Date(birthday as string).toDateString()
+        const created = row.getValue("created");
+        const cellValue = created
+          ? new Date(created as string).toDateString()
           : "";
         return <div className="text-center font-medium">{cellValue}</div>;
       }
@@ -83,12 +80,8 @@ export const getColumnsForContactsTable = ({}: PropsType) => {
                 Copy Customer Email
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => onCustomerDelete(customer)}>
-                Delete Customer
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onCustomerEdit(customer)}>
-                Edit Customer
-              </DropdownMenuItem>
+              <DropdownMenuItem>Delete Customer</DropdownMenuItem>
+              <DropdownMenuItem>Edit Customer</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         );
