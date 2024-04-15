@@ -50,7 +50,13 @@ import { format } from "date-fns";
 
 type PropsParams = {
   customer: Customer | undefined;
-  onCustomerUpdate: (data: { error?: unknown; success?: boolean }) => void;
+  onCustomerUpdate: (
+    data: {
+      error?: unknown;
+      success?: boolean;
+    },
+    updatedCustomer?: Customer
+  ) => void;
 };
 
 export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
@@ -99,7 +105,7 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
           console.log(res);
         });
       }
-      updateCustomer({
+      const newCustomer: Customer = {
         ownerEmail: user?.email as string,
         customerEmail: values.email,
         firstName: values.firstName,
@@ -110,8 +116,9 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
         subscribed: values.subscribed === "subscribed",
         tags: selectedTags,
         lastChanged: new Date().toISOString()
-      }).then((res) => {
-        onCustomerUpdate(res);
+      };
+      updateCustomer(newCustomer).then((res) => {
+        onCustomerUpdate(res, newCustomer);
       });
     });
   };
