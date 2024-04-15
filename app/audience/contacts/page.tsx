@@ -53,6 +53,7 @@ export default function Contacts() {
   // const [customers, setCustomers] = useState<Customer[]>([]);
   const [customers, setCustomers] = useAtom(customersAtom);
   const [isEditing, setEditing] = useState<boolean>(false);
+  const [editedCustomer, setEditedCustomer] = useState<Customer>();
   const [isDeleting, setDeleting] = useState<boolean>(false);
   const [deletedEmail, setDeletedEmail] = useState<string>("");
 
@@ -70,6 +71,7 @@ export default function Contacts() {
   };
 
   const onCustomerEdit = (customer: Customer) => {
+    setEditedCustomer(customer)
     setEditing(true);
   };
 
@@ -112,7 +114,7 @@ export default function Contacts() {
     <main className="w-full flex flex-col py-6">
       <Dialog open={isEditing} onOpenChange={(isOpen) => setEditing(isOpen)}>
         <DialogContent className="max-w-full w-1/2">
-          <EditCustomer />
+          <EditCustomer customer={editedCustomer} />
         </DialogContent>
       </Dialog>
       <QuestionAlert
