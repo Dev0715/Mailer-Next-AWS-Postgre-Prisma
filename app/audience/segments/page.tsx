@@ -18,12 +18,6 @@ const Segments = () => {
       </div>
       <div className="flex flex-col gap-y-4">
         <p className="text-xl text-gray-500">April, 2024 (2)</p>
-        <Separator />
-        <CampaignItem />
-        <Separator />
-        <CampaignItem />
-        <Separator />
-        <CampaignItem />
       </div>
     </main>
   );
