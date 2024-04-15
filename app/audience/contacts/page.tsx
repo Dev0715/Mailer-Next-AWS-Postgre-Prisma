@@ -65,14 +65,16 @@ export default function Contacts() {
     });
   }, []);
 
+  const onCustomerEdit = (customer: Customer) => {
+    setEditedCustomer(customer);
+    setEditing(true);
+  };
+
+  const onCustomerUpdate = () => {};
+
   const onCustomerDelete = (customer: Customer) => {
     setDeletedEmail(customer.customerEmail);
     setDeleting(true);
-  };
-
-  const onCustomerEdit = (customer: Customer) => {
-    setEditedCustomer(customer)
-    setEditing(true);
   };
 
   const onDeleteDlgClosed = (isOpen: boolean) => {
@@ -112,7 +114,11 @@ export default function Contacts() {
 
   return (
     <main className="w-full flex flex-col py-6">
-      <Dialog open={isEditing} onOpenChange={(isOpen) => setEditing(isOpen)}>
+      <Dialog
+        open={isEditing}
+        onCustomerUpdate={onCustomerUpdate}
+        onOpenChange={(isOpen) => setEditing(isOpen)}
+      >
         <DialogContent className="max-w-full w-1/2">
           <EditCustomer customer={editedCustomer} />
         </DialogContent>
