@@ -1,5 +1,6 @@
 const AddSement = () => {
-  return <main className="w-full">Add Segment</main>;
+  return;
+  <main className="w-full">Regular Segment Creation</main>;
 };
 
 export default AddSement;
