@@ -1,3 +1,5 @@
+"use server";
+
 import db from "@/lib/db";
 import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import { generateVerificationToken } from "@/lib/tokens";
@@ -6,19 +8,16 @@ const TableName = process.env.AWS_DYNAMODB_USER_TABLE_NAME;
 
 interface UserSetToken {
   email: string;
-  verificationToken: string;
-  expires: Date;
+  tags: string[];
 }
 
 export const updateUserTags = async (data: UserSetToken) => {
   const command = new UpdateCommand({
     TableName,
     Key: { email: data.email },
-    UpdateExpression:
-      "SET verificationToken = :verificationToken, expires = :expires",
+    UpdateExpression: "SET tags = :tags",
     ExpressionAttributeValues: {
-      ":verificationToken": data.verificationToken,
-      ":expires": data.expires.toISOString()
+      ":tags": data.tags
     },
     ReturnValues: "ALL_NEW"
   });
