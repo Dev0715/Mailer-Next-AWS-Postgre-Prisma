@@ -68,6 +68,7 @@ const NewSubscriber = () => {
   const [tagSelected, setTagSelected] = useState<string>("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [storedTags, setStoredTags] = useState<string[]>([]);
+  const [isStoredTagsUpdated, setStoredTagsUpdated] = useState<boolean>(false);
 
   const [alertOpen, setAlertOpen] = useState<boolean>(false);
   const [alertTile, setAlertTitle] = useState<string>("");
