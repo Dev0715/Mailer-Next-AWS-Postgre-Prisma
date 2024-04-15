@@ -61,12 +61,12 @@ export const EditCustomer = ({ customer }: { customer: Customer }) => {
   const form = useForm<z.infer<typeof EditContactSchema>>({
     resolver: zodResolver(EditContactSchema),
     defaultValues: {
-      email: "",
-      firstName: "",
-      lastName: "",
-      address: "",
-      phoneNumber: "",
-      subscribed: "subscribed"
+      email: customer.customerEmail,
+      firstName: customer.firstName,
+      lastName: customer.lastName,
+      address: customer.address,
+      phoneNumber: customer.phoneNumber,
+      subscribed: customer.subscribed ? "subscribed" : "unsubscribed"
     }
   });
 
