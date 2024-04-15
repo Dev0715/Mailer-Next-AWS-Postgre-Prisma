@@ -69,13 +69,10 @@ export default function Contacts() {
     setEditing(true);
   };
 
-  const onCustomerUpdate = (
-    res: { error?: unknown; success?: boolean },
-    updatedCustomer: Customer
-  ) => {
-    if (res.success) {
+  const onCustomerUpdate = (success: boolean, updatedCustomer?: Customer) => {
+    if (success) {
       const newCustomers = customers.map((customer) =>
-        customer.customerEmail === updatedCustomer.customerEmail
+        customer.customerEmail === updatedCustomer?.customerEmail
           ? updatedCustomer
           : customer
       );
