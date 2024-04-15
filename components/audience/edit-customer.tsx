@@ -37,6 +37,7 @@ import { Badge } from "@/components/ui/badge";
 import { MdClose } from "react-icons/md";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Customer } from "@/shared/customer-type";
 
 export const EditCustomer = ({ customer }: { customer: Customer }) => {
   const [error, setError] = useState<string | undefined>("");
