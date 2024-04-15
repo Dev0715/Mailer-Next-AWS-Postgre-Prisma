@@ -39,7 +39,11 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Customer } from "@/shared/customer-type";
 
-export const EditCustomer = ({ customer }: { customer: Customer }) => {
+export const EditCustomer = ({
+  customer
+}: {
+  customer: Customer | undefined;
+}) => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -61,12 +65,12 @@ export const EditCustomer = ({ customer }: { customer: Customer }) => {
   const form = useForm<z.infer<typeof EditContactSchema>>({
     resolver: zodResolver(EditContactSchema),
     defaultValues: {
-      email: customer.customerEmail,
-      firstName: customer.firstName,
-      lastName: customer.lastName,
-      address: customer.address,
-      phoneNumber: customer.phoneNumber,
-      subscribed: customer.subscribed ? "subscribed" : "unsubscribed"
+      email: customer?.customerEmail,
+      firstName: customer?.firstName,
+      lastName: customer?.lastName,
+      address: customer?.address,
+      phoneNumber: customer?.phoneNumber,
+      subscribed: customer?.subscribed ? "subscribed" : "unsubscribed"
     }
   });
 
