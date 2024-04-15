@@ -38,12 +38,16 @@ import { MdClose } from "react-icons/md";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Customer } from "@/shared/customer-type";
+import { updateUserTags } from "@/data/user/update-tags";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 export const EditCustomer = ({
   customer
 }: {
   customer: Customer | undefined;
 }) => {
+  const user = useCurrentUser();
+
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -79,7 +83,14 @@ export const EditCustomer = ({
     setError("");
     setSuccess("");
 
-    startTransition(() => {});
+    startTransition(() => {
+      updateUserTags({
+        email: user?.email as string,
+        tags: storedTags
+      }).then((res) => {
+        console.log(res);
+      });
+    });
   };
 
   const onAddNewTag = () => {
