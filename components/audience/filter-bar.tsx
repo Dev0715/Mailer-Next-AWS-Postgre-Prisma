@@ -10,6 +10,7 @@ import {
 import {
   filterAttributes,
   isTypeOfDate,
+  isTypeOfString,
   isTypeOfSubscribed,
   isTypeOfTags
 } from "@/lib/filter-customer";
@@ -18,85 +19,12 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FaClosedCaptioning } from "react-icons/fa";
 import { FilterType } from "@/shared/filter-type";
-
-const TagsCondition = () => {
-  return (
-    <div className="flex gap-x-6">
-      <Select>
-        <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
-          <SelectValue placeholder="Select a condition" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {/* <SelectLabel>Select a Condition</SelectLabel> */}
-            <SelectItem value="contains">Contains</SelectItem>
-            <SelectItem value="not-contains">Doesn't contain</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-      <Select>
-        <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
-          <SelectValue placeholder="Select a tag" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup></SelectGroup>
-        </SelectContent>
-      </Select>
-    </div>
-  );
-};
-
-const StringCondition = () => {
-  return (
-    <Select>
-      <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
-        <SelectValue placeholder="Select a condition" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          {/* <SelectLabel>Select a Condition</SelectLabel> */}
-          <SelectItem value="contains">Contains</SelectItem>
-          <SelectItem value="not-contains">Doesn't contain</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  );
-};
-
-const DateCondition = () => {
-  return (
-    <Select>
-      <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
-        <SelectValue placeholder="Select a condition" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          {/* <SelectLabel>Select a Condition</SelectLabel> */}
-          <SelectItem value="is-after">Is After</SelectItem>
-          <SelectItem value="is-before">Is Before</SelectItem>
-          <SelectItem value="is">Is</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  );
-};
-
-const SubscribedCondition = () => {
-  return (
-    <Select>
-      <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
-        <SelectValue placeholder="Select a condition" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          {/* <SelectLabel>Select a Condition</SelectLabel> */}
-          <SelectItem value="is">Subscribed</SelectItem>
-          <SelectItem value="is-not">Unsubscribed</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  );
-};
+import {
+  DateCondition,
+  StringCondition,
+  SubscribedCondition,
+  TagsCondition
+} from "./condition-tags";
 
 type PropsType = {
   filter: FilterType;
@@ -133,9 +61,9 @@ export const FilterBar = ({
           <DateCondition />
         ) : isTypeOfTags(filter.attribute) ? (
           <TagsCondition />
-        ) : (
+        ) : isTypeOfString(filter.attribute) ? (
           <StringCondition />
-        )}
+        ) : null}
       </div>
       <Button variant="ghost">
         <p className="text-red-700 font-semibold" onClick={onFilterDelete}>
