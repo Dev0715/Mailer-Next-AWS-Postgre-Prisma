@@ -27,7 +27,7 @@ const StringCondition = () => {
   );
 };
 
-const StringCondition = () => {
+const DateCondition = () => {
   return (
     <Select>
       <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
@@ -36,8 +36,9 @@ const StringCondition = () => {
       <SelectContent>
         <SelectGroup>
           {/* <SelectLabel>Select a Condition</SelectLabel> */}
-          <SelectItem value="contains">Contains</SelectItem>
-          <SelectItem value="not-contains">Doesn't contain</SelectItem>
+          <SelectItem value="is-after">Is After</SelectItem>
+          <SelectItem value="is-before">Is Before</SelectItem>
+          <SelectItem value="is">Is</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
