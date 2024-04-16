@@ -12,9 +12,9 @@ export const filterAttributes = [
   { value: "lastChanged", name: "Last Changed" }
 ];
 
-export const isTypeOfArray = (keyName: string) => keyName === "tags";
+export const isTypeOfTags = (keyName: string) => keyName === "tags";
 
-export const isTypeOfBoolean = (keyName: string) => keyName === "subscribed";
+export const isTypeOfSubscribed = (keyName: string) => keyName === "subscribed";
 
 export const isTypeOfDate = (keyName: string) =>
   keyName === "birthday" || keyName === "created" || keyName === "lastChanged";
