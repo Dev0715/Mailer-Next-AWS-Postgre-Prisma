@@ -9,6 +9,18 @@ import {
 } from "@/components/ui/select";
 
 export const FilterBar = () => {
+  const isTypeOfDate = (keyName: string) => {
+    if (
+      keyName === "birthday" ||
+      keyName === "created" ||
+      keyName === "lastChanged"
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const filterKeys = [
     "customerEmail",
     "firstName",
@@ -27,14 +39,14 @@ export const FilterBar = () => {
     "Email",
     "First Name",
     "Last Name",
-    "address",
-    "phoneNumber",
-    "birthday",
-    "tags",
-    "subscribed",
-    "contactRating",
-    "created",
-    "lastChanged"
+    "Address",
+    "Phone Number",
+    "Birthday",
+    "Tags",
+    "Subscribed",
+    "Contact Rating",
+    "Created",
+    "Last Changed"
   ];
 
   return (
@@ -45,12 +57,12 @@ export const FilterBar = () => {
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Fruits</SelectLabel>
-            <SelectItem value="apple">Apple</SelectItem>
-            <SelectItem value="banana">Banana</SelectItem>
-            <SelectItem value="blueberry">Blueberry</SelectItem>
-            <SelectItem value="grapes">Grapes</SelectItem>
-            <SelectItem value="pineapple">Pineapple</SelectItem>
+            <SelectLabel>Key</SelectLabel>
+            {filterKeys.map((key, index) => (
+              <SelectItem key={key} value={key}>
+                {filterKeyNames[index]}
+              </SelectItem>
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>
