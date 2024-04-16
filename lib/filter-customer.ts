@@ -1,29 +1,15 @@
 export const filterKeys = [
-  "customerEmail",
-  "firstName",
-  "lastName",
-  "address",
-  "phoneNumber",
-  "birthday",
-  "tags",
-  "subscribed",
-  "contactRating",
-  "created",
-  "lastChanged"
-];
-
-export const filterKeyNames = [
-  "Email",
-  "First Name",
-  "Last Name",
-  "Address",
-  "Phone Number",
-  "Birthday",
-  "Tags",
-  "Subscribed",
-  "Contact Rating",
-  "Created",
-  "Last Changed"
+  { value: "customerEmail", name: "Email" },
+  { value: "firstName", name: "First Name" },
+  { value: "lastName", name: "Last Name" },
+  { value: "address", name: "Address" },
+  { value: "phoneNumber", name: "Phone Number" },
+  { value: "birthday", name: "Birthday" },
+  { value: "tags", name: "Tags" },
+  { value: "subscribed", name: "Subscribed" },
+  { value: "contactRating", name: "Contact Rating" },
+  { value: "created", name: "Created" },
+  { value: "lastChanged", name: "Last Changed" }
 ];
 
 export const isTypeOfArray = (keyName: string) => keyName === "tags";
