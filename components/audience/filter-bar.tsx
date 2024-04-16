@@ -100,7 +100,7 @@ const SubscribedCondition = () => {
 export const FilterBar = () => {
   const [attribute, setAttribute] = useState<string>("");
   const [condition, setCondition] = useState<string>("");
-  const [filter, setFilter] = useState<string>("");
+  const [value, setValue] = useState<string>("");
 
   const onAttributeChange = (value: string) => {
     setAttribute(value);
