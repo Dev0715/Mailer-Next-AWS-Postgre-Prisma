@@ -17,6 +17,7 @@ import { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FaClosedCaptioning } from "react-icons/fa";
+import { FilterType } from "@/shared/filter-type";
 
 const TagsCondition = () => {
   return (
@@ -97,7 +98,7 @@ const SubscribedCondition = () => {
   );
 };
 
-export const FilterBar = () => {
+export const FilterBar = ({ filter }: { filter: FilterType }) => {
   const [attribute, setAttribute] = useState<string>("");
   const [condition, setCondition] = useState<string>("");
   const [value, setValue] = useState<string>("");
