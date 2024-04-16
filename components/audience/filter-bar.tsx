@@ -98,15 +98,12 @@ const SubscribedCondition = () => {
   );
 };
 
-export const FilterBar = ({ filter }: { filter: FilterType }) => {
-  const [attribute, setAttribute] = useState<string>("");
-  const [condition, setCondition] = useState<string>("");
-  const [value, setValue] = useState<string>("");
+type PropsType = {
+  filter: FilterType;
+  onAttributeChange: (value: string) => void;
+};
 
-  const onAttributeChange = (value: string) => {
-    setAttribute(value);
-  };
-
+export const FilterBar = ({ filter, onAttributeChange }: PropsType) => {
   return (
     <main className="w-full flex items-center justify-between px-6 py-4 border rounded-none">
       <div className="flex items-center gap-x-6">
