@@ -35,8 +35,9 @@ const AddSement = () => {
         <FaFilter />
         Segment Filters
       </div>
-
-      <FilterBar />
+      {filters.map((filter) => (
+        <FilterBar filter={filter} />
+      ))}
       <Button onClick={onAddFilter} className="flex items-center gap-2">
         <FaPlus />
         Add Filter
