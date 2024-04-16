@@ -24,6 +24,10 @@ const AddSement = () => {
     });
   }, []);
 
+  const onAddFilter = () => {
+    setFilters((prev) => [...prev, { attribue: "", condition: "", value: "" }]);
+  };
+
   return (
     <main className="w-full">
       <p className="text-xl font-semibold">Regular Segment Builder</p>
@@ -31,8 +35,9 @@ const AddSement = () => {
         <FaFilter />
         Segment Filters
       </div>
+
       <FilterBar />
-      <Button className="flex items-center gap-2">
+      <Button onClick={onAddFilter} className="flex items-center gap-2">
         <FaPlus />
         Add Filter
       </Button>
