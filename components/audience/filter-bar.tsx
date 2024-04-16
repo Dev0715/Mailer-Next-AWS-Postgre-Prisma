@@ -3,7 +3,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
@@ -14,10 +13,7 @@ import {
   isTypeOfSubscribed,
   isTypeOfTags
 } from "@/lib/filter-customer";
-import { useState } from "react";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { FaClosedCaptioning } from "react-icons/fa";
 import { FilterType } from "@/shared/filter-type";
 import {
   DateCondition,
@@ -29,6 +25,8 @@ import {
 type PropsType = {
   filter: FilterType;
   onAttributeChange: (value: string) => void;
+  onCondtionChange: (value: string) => void;
+  onValueChange: (value: string) => void;
   onFilterDelete: () => void;
 };
 
@@ -40,9 +38,9 @@ export const FilterBar = ({
   return (
     <main className="w-full flex items-center justify-between px-6 py-4 border rounded-none">
       <div className="flex items-center gap-x-6">
-        <Select onValueChange={onAttributeChange}>
+        <Select value={filter.attribute} onValueChange={onAttributeChange}>
           <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
-            <SelectValue placeholder="Select or search a filter" />
+            <SelectValue placeholder="Select a filter" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
