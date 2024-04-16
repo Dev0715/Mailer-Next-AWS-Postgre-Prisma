@@ -1,4 +1,4 @@
-export const filterKeys = [
+export const filterAttributes = [
   { value: "customerEmail", name: "Email" },
   { value: "firstName", name: "First Name" },
   { value: "lastName", name: "Last Name" },
