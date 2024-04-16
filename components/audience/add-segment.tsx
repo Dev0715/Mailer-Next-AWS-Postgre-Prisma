@@ -36,6 +36,12 @@ const AddSement = () => {
 
   const onFilterConditionChange = (index: number, value: string) => {};
 
+  const onFilterValueChange = (index: number, value: string) => {
+    const newFilters = [...filters];
+    newFilters[index].condition = value;
+    setFilters(newFilters);
+  };
+
   const onFilterDelete = (index: number) => {
     const newFilters = [...filters];
     newFilters.splice(index, 1);
@@ -59,6 +65,7 @@ const AddSement = () => {
             onConditionChange={(value: string) =>
               onFilterConditionChange(index, value)
             }
+            onValueChange={(value: string) => onFilterValueChange(index, value)}
             onFilterDelete={() => onFilterDelete(index)}
           />
         ))}
