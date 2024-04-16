@@ -41,13 +41,15 @@ const AddSement = () => {
         <FaFilter />
         Segment Filters
       </div>
-      {filters.map((filter, index) => (
-        <FilterBar
-          filter={filter}
-          onAttributeChange={() => onFilterAttributeChange(index)}
-          onFilterDelete={() => onFilterDelete(index)}
-        />
-      ))}
+      <div className="flex flex-col gap-y-4">
+        {filters.map((filter, index) => (
+          <FilterBar
+            filter={filter}
+            onAttributeChange={() => onFilterAttributeChange(index)}
+            onFilterDelete={() => onFilterDelete(index)}
+          />
+        ))}
+      </div>
       <Button onClick={onAddFilter} className="flex items-center gap-2">
         <FaPlus />
         Add Filter
