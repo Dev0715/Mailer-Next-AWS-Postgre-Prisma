@@ -33,7 +33,14 @@ const TagsCondition = () => {
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Input />
+      <Select>
+        <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
+          <SelectValue placeholder="Select a tag" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup></SelectGroup>
+        </SelectContent>
+      </Select>
     </div>
   );
 };
