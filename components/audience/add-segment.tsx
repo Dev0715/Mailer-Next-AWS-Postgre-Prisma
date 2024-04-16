@@ -28,7 +28,11 @@ const AddSement = () => {
     ]);
   };
 
-  const onFilterAttributeChange = (index: number) => {};
+  const onFilterAttributeChange = (index: number, value: string) => {
+    const newFilters = [...filters];
+    newFilters[index].attribute = value;
+    setFilters(newFilters);
+  };
 
   const onFilterDelete = (index: number) => {
     const newFilters = [...filters];
@@ -47,7 +51,9 @@ const AddSement = () => {
         {filters.map((filter, index) => (
           <FilterBar
             filter={filter}
-            onAttributeChange={() => onFilterAttributeChange(index)}
+            onAttributeChange={(value: string) =>
+              onFilterAttributeChange(index, value)
+            }
             onFilterDelete={() => onFilterDelete(index)}
           />
         ))}
