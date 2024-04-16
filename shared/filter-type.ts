@@ -1,5 +1,5 @@
 export type FilterType = {
-  attribue: string;
+  attribute: string;
   condition: string;
   value: string;
 };

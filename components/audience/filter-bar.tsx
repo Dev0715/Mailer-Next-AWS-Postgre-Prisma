@@ -122,11 +122,11 @@ export const FilterBar = ({ filter, onAttributeChange }: PropsType) => {
             </SelectGroup>
           </SelectContent>
         </Select>
-        {isTypeOfSubscribed(attribute) ? (
+        {isTypeOfSubscribed(filter.attribute) ? (
           <SubscribedCondition />
-        ) : isTypeOfDate(attribute) ? (
+        ) : isTypeOfDate(filter.attribute) ? (
           <DateCondition />
-        ) : isTypeOfTags(attribute) ? (
+        ) : isTypeOfTags(filter.attribute) ? (
           <TagsCondition />
         ) : (
           <StringCondition />
