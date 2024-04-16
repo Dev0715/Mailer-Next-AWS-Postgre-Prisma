@@ -4,12 +4,7 @@ import { FilterBar } from "./filter-bar";
 import { useEffect, useState } from "react";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { useCurrentUser } from "@/hooks/use-current-user";
-
-type FilterType = {
-  attribue: string;
-  condition: string;
-  value: string;
-};
+import { FilterType } from "@/shared/filter-type";
 
 const AddSement = () => {
   const user = useCurrentUser();
