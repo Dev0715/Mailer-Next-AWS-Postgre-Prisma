@@ -1,8 +1,22 @@
 import { FaFilter, FaPlus } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { FilterBar } from "./filter-bar";
+import { useEffect, useState } from "react";
+import { getUserByEmail } from "@/data/user/user-by-email";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const AddSement = () => {
+  const user = useCurrentUser();
+  const [storedTags, setStoredTags] = useState<string[]>([]);
+
+  useEffect(() => {
+    getUserByEmail(user?.email as string).then((res) => {
+      if (res && res.tags) {
+        setStoredTags(res.tags);
+      }
+    });
+  }, []);
+
   return (
     <main className="w-full">
       <p className="text-xl font-semibold">Regular Segment Builder</p>
