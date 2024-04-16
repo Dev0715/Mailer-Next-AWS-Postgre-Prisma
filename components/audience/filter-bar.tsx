@@ -9,9 +9,9 @@ import {
 } from "@/components/ui/select";
 import {
   filterAttributes,
-  isTypeOfArray,
-  isTypeOfBoolean,
-  isTypeOfDate
+  isTypeOfDate,
+  isTypeOfSubscribed,
+  isTypeOfTags
 } from "@/lib/filter-customer";
 import { useState } from "react";
 
@@ -50,7 +50,7 @@ const DateCondition = () => {
   );
 };
 
-const BooleanCondition = () => {
+const SubscribedCondition = () => {
   return (
     <Select>
       <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
@@ -93,9 +93,11 @@ export const FilterBar = () => {
           </SelectGroup>
         </SelectContent>
       </Select>
-      {isTypeOfArray(attribute) ? null : isTypeOfBoolean(
-          attribute
-        ) ? null : isTypeOfDate(attribute) ? null : (
+      {isTypeOfSubscribed(attribute) ? (
+        <SubscribedCondition />
+      ) : isTypeOfDate(attribute) ? (
+        <DateCondition />
+      ) : isTypeOfTags(attribute) ? null : (
         <StringCondition />
       )}
     </main>
