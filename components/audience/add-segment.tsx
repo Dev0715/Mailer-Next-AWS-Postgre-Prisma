@@ -34,11 +34,15 @@ const AddSement = () => {
     setFilters(newFilters);
   };
 
-  const onFilterConditionChange = (index: number, value: string) => {};
+  const onFilterConditionChange = (index: number, value: string) => {
+    const newFilters = [...filters];
+    newFilters[index].condition = value;
+    setFilters(newFilters);
+  };
 
   const onFilterValueChange = (index: number, value: string) => {
     const newFilters = [...filters];
-    newFilters[index].condition = value;
+    newFilters[index].value = value;
     setFilters(newFilters);
   };
 
