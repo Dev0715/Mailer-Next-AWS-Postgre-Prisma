@@ -19,8 +19,25 @@ const StringCondition = () => {
       <SelectContent>
         <SelectGroup>
           {/* <SelectLabel>Select a Condition</SelectLabel> */}
-          <SelectItem value="contains">Containts</SelectItem>
-          <SelectItem value="not-contains">Containts</SelectItem>
+          <SelectItem value="contains">Contains</SelectItem>
+          <SelectItem value="not-contains">Doesn't contain</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  );
+};
+
+const StringCondition = () => {
+  return (
+    <Select>
+      <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
+        <SelectValue placeholder="Select a condition" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {/* <SelectLabel>Select a Condition</SelectLabel> */}
+          <SelectItem value="contains">Contains</SelectItem>
+          <SelectItem value="not-contains">Doesn't contain</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
