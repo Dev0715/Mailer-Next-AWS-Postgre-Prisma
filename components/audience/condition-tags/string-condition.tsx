@@ -11,12 +11,12 @@ import { FilterType } from "@/shared/filter-type";
 
 type PropsType = {
   filter: FilterType;
-  onCondtionChange: (value: string) => void;
+  onConditionChange: (value: string) => void;
 };
 
-export const StringCondition = () => {
+export const StringCondition = ({ filter, onConditionChange }: PropsType) => {
   return (
-    <Select onValueChange={}>
+    <Select onValueChange={onConditionChange}>
       <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
         <SelectValue placeholder="Select a condition" />
       </SelectTrigger>
