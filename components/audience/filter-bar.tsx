@@ -33,6 +33,8 @@ type PropsType = {
 export const FilterBar = ({
   filter,
   onAttributeChange,
+  onCondtionChange,
+  onValueChange,
   onFilterDelete
 }: PropsType) => {
   return (
@@ -54,13 +56,25 @@ export const FilterBar = ({
           </SelectContent>
         </Select>
         {isTypeOfSubscribed(filter.attribute) ? (
-          <SubscribedCondition />
+          <SubscribedCondition
+            filter={filter}
+            onConditionChange={onConditionChange}
+          />
         ) : isTypeOfDate(filter.attribute) ? (
-          <DateCondition />
+          <DateCondition
+            filter={filter}
+            onConditionChange={onConditionChange}
+          />
         ) : isTypeOfTags(filter.attribute) ? (
-          <TagsCondition />
+          <TagsCondition
+            filter={filter}
+            onConditionChange={onConditionChange}
+          />
         ) : isTypeOfString(filter.attribute) ? (
-          <StringCondition />
+          <StringCondition
+            filter={filter}
+            onConditionChange={onConditionChange}
+          />
         ) : null}
       </div>
       <Button variant="ghost">
