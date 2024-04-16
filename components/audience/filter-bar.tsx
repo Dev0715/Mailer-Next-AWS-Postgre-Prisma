@@ -7,11 +7,11 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { filterKeyNames, filterKeys } from "@/lib/filter-customer";
+import { filterAttributes } from "@/lib/filter-customer";
 
 export const FilterBar = () => {
   return (
-    <main className="w-full flex items-center gap-x-6 px-6 py-4 border rounded-full">
+    <main className="w-full flex items-center gap-x-6 px-6 py-4 border rounded-none">
       <Select>
         <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
           <SelectValue placeholder="Select or search a filter" />
@@ -19,9 +19,9 @@ export const FilterBar = () => {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Select a Key</SelectLabel>
-            {filterKeys.map((key, index) => (
-              <SelectItem key={key} value={key}>
-                {filterKeyNames[index]}
+            {filterAttributes.map((attribute, index) => (
+              <SelectItem key={attribute.value} value={attribute.value}>
+                {attribute.name}
               </SelectItem>
             ))}
           </SelectGroup>
