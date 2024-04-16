@@ -28,6 +28,12 @@ const AddSement = () => {
 
   const onFilterAttributeChange = (index: number) => {};
 
+  const onFilterDelete = (index: number) => {
+    const newFilters = [...filters];
+    newFilters.splice(index, 1);
+    setFilters(newFilters);
+  };
+
   return (
     <main className="w-full">
       <p className="text-xl font-semibold">Regular Segment Builder</p>
@@ -39,6 +45,7 @@ const AddSement = () => {
         <FilterBar
           filter={filter}
           onAttributeChange={() => onFilterAttributeChange(index)}
+          onFilterDelete={() => onFilterDelete(index)}
         />
       ))}
       <Button onClick={onAddFilter} className="flex items-center gap-2">
