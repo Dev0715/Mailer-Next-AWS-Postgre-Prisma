@@ -9,6 +9,34 @@ import {
 } from "@/components/ui/select";
 
 export const FilterBar = () => {
+  const filterKeys = [
+    "customerEmail",
+    "firstName",
+    "lastName",
+    "address",
+    "phoneNumber",
+    "birthday",
+    "tags",
+    "subscribed",
+    "contactRating",
+    "created",
+    "lastChanged"
+  ];
+
+  const filterKeyNames = [
+    "Email",
+    "First Name",
+    "Last Name",
+    "address",
+    "phoneNumber",
+    "birthday",
+    "tags",
+    "subscribed",
+    "contactRating",
+    "created",
+    "lastChanged"
+  ];
+
   return (
     <main className="w-full flex items-center gap-x-6 px-6 py-4 border rounded-lg">
       <Select>
