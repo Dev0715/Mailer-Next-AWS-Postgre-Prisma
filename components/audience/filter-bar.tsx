@@ -7,7 +7,12 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { filterAttributes } from "@/lib/filter-customer";
+import {
+  filterAttributes,
+  isTypeOfArray,
+  isTypeOfBoolean,
+  isTypeOfDate
+} from "@/lib/filter-customer";
 import { useState } from "react";
 
 const StringCondition = () => {
@@ -46,9 +51,9 @@ const DateCondition = () => {
 };
 
 export const FilterBar = () => {
-  const [attribute, setAttribute] = useState<string>();
-  const [condition, setCondition] = useState<string>();
-  const [filter, setFilter] = useState<string>();
+  const [attribute, setAttribute] = useState<string>("");
+  const [condition, setCondition] = useState<string>("");
+  const [filter, setFilter] = useState<string>("");
 
   const onAttributeChange = (value: string) => {
     setAttribute(value);
@@ -71,7 +76,11 @@ export const FilterBar = () => {
           </SelectGroup>
         </SelectContent>
       </Select>
-      <StringCondition />
+      {isTypeOfArray(attribute) ? null : isTypeOfBoolean(
+          attribute
+        ) ? null : isTypeOfDate(attribute) ? null : (
+        <StringCondition />
+      )}
     </main>
   );
 };
