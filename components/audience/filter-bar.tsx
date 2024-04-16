@@ -20,12 +20,12 @@ import {
   StringCondition,
   SubscribedCondition,
   TagsCondition
-} from "./condition-tags";
+} from "./condition-tags/string-condition";
 
 type PropsType = {
   filter: FilterType;
   onAttributeChange: (value: string) => void;
-  onCondtionChange: (value: string) => void;
+  onConditionChange: (value: string) => void;
   onValueChange: (value: string) => void;
   onFilterDelete: () => void;
 };
@@ -33,7 +33,7 @@ type PropsType = {
 export const FilterBar = ({
   filter,
   onAttributeChange,
-  onCondtionChange,
+  onConditionChange,
   onValueChange,
   onFilterDelete
 }: PropsType) => {
