@@ -10,10 +10,10 @@ import {
 
 export const FilterBar = () => {
   return (
-    <main className="w-full border px-6 py-4">
+    <main className="w-full px-6 py-4 border rounded-lg">
       <Select>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a fruit" />
+        <SelectTrigger className="w-[240px]">
+          <SelectValue placeholder="Select or search a filter" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
