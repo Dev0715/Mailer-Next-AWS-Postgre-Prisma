@@ -15,6 +15,23 @@ import {
 } from "@/lib/filter-customer";
 import { useState } from "react";
 
+const TagsCondition = () => {
+  return (
+    <Select>
+      <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
+        <SelectValue placeholder="Select a condition" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {/* <SelectLabel>Select a Condition</SelectLabel> */}
+          <SelectItem value="contains">Contains</SelectItem>
+          <SelectItem value="not-contains">Doesn't contain</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  );
+};
+
 const StringCondition = () => {
   return (
     <Select>
@@ -97,7 +114,9 @@ export const FilterBar = () => {
         <SubscribedCondition />
       ) : isTypeOfDate(attribute) ? (
         <DateCondition />
-      ) : isTypeOfTags(attribute) ? null : (
+      ) : isTypeOfTags(attribute) ? (
+        <TagsCondition />
+      ) : (
         <StringCondition />
       )}
     </main>
