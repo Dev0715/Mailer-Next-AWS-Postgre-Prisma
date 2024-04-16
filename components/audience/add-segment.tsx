@@ -9,7 +9,9 @@ import { FilterType } from "@/shared/filter-type";
 const AddSement = () => {
   const user = useCurrentUser();
   const [storedTags, setStoredTags] = useState<string[]>([]);
-  const [filters, setFilters] = useState<FilterType[]>([]);
+  const [filters, setFilters] = useState<FilterType[]>([
+    { attribute: "", condition: "", value: "" }
+  ]);
 
   useEffect(() => {
     getUserByEmail(user?.email as string).then((res) => {
@@ -35,7 +37,7 @@ const AddSement = () => {
   };
 
   return (
-    <main className="w-full">
+    <main className="w-full flex flex-col gap-y-4">
       <p className="text-xl font-semibold">Regular Segment Builder</p>
       <div className="flex items-center gap-2">
         <FaFilter />
@@ -50,7 +52,7 @@ const AddSement = () => {
           />
         ))}
       </div>
-      <Button onClick={onAddFilter} className="flex items-center gap-2">
+      <Button onClick={onAddFilter} className="w-48 flex items-center gap-2">
         <FaPlus />
         Add Filter
       </Button>
