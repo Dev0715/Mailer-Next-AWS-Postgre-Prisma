@@ -20,8 +20,13 @@ const AddSement = () => {
   }, []);
 
   const onAddFilter = () => {
-    setFilters((prev) => [...prev, { attribue: "", condition: "", value: "" }]);
+    setFilters((prev) => [
+      ...prev,
+      { attribute: "", condition: "", value: "" }
+    ]);
   };
+
+  const onFilterAttributeChange = (index: number) => {};
 
   return (
     <main className="w-full">
@@ -30,8 +35,11 @@ const AddSement = () => {
         <FaFilter />
         Segment Filters
       </div>
-      {filters.map((filter) => (
-        <FilterBar filter={filter} />
+      {filters.map((filter, index) => (
+        <FilterBar
+          filter={filter}
+          onAttributeChange={() => onFilterAttributeChange(index)}
+        />
       ))}
       <Button onClick={onAddFilter} className="flex items-center gap-2">
         <FaPlus />
