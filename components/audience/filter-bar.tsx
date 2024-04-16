@@ -101,9 +101,14 @@ const SubscribedCondition = () => {
 type PropsType = {
   filter: FilterType;
   onAttributeChange: (value: string) => void;
+  onFilterDelete: () => void;
 };
 
-export const FilterBar = ({ filter, onAttributeChange }: PropsType) => {
+export const FilterBar = ({
+  filter,
+  onAttributeChange,
+  onFilterDelete
+}: PropsType) => {
   return (
     <main className="w-full flex items-center justify-between px-6 py-4 border rounded-none">
       <div className="flex items-center gap-x-6">
@@ -133,7 +138,9 @@ export const FilterBar = ({ filter, onAttributeChange }: PropsType) => {
         )}
       </div>
       <Button variant="ghost">
-        <p className="text-red-700 font-semibold">Delete</p>
+        <p className="text-red-700 font-semibold" onClick={onFilterDelete}>
+          Delete
+        </p>
       </Button>
     </main>
   );
