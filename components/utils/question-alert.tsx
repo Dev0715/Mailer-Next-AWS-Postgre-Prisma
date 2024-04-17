@@ -15,7 +15,7 @@ type PropsParams = {
   description: string;
   onAlertDialogClosed: (open: boolean) => void;
   onContinue: () => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 export const QuestionAlert = ({
