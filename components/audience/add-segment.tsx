@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FilterType } from "@/shared/filter-type";
+import { defaultConditionOfAttribute } from "@/lib/filter-customer";
 
 const AddSement = () => {
   const user = useCurrentUser();
@@ -30,7 +31,8 @@ const AddSement = () => {
 
   const onFilterAttributeChange = (index: number, value: string) => {
     const newFilters = [...filters];
-    newFilters[index] = { attribute: value, condition: "", value: "" };
+    const condition = defaultConditionOfAttribute(value);
+    newFilters[index] = { attribute: value, condition, value: "" };
     setFilters(newFilters);
   };
 
