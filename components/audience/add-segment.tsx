@@ -12,11 +12,19 @@ import {
 import { FormError } from "../utils/form-error";
 import { Input } from "../ui/input";
 
-const AddSement = ({
-  onNewSegmentAdded
-}: {
-  onNewSegmentAdded: () => void;
-}) => {
+type PropsType = {
+  onNewSegmentAdded: ({
+    title,
+    description,
+    filters
+  }: {
+    title: string;
+    description: string;
+    filters: FilterType[];
+  }) => void;
+};
+
+const AddSement = ({ onNewSegmentAdded }: PropsType) => {
   const user = useCurrentUser();
 
   const [error, setError] = useState("");
@@ -38,8 +46,7 @@ const AddSement = ({
   const onSaveSegment = () => {
     const error = checkFilters(filters, title, description);
     if (error === "") {
-      // ##
-      onNewSegmentAdded();
+      onNewSegmentAdded({ title, description, filters });
     } else {
       setError(error);
     }
