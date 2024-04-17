@@ -178,6 +178,9 @@ export default function Contacts() {
             }
             className="max-w-xs"
           />
+          <Button variant={"outline"} className="border-red-700">
+            Delete selected mails
+          </Button>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
