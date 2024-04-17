@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import AddSement from "@/components/audience/add-segment";
+import { FilterType } from "@/shared/filter-type";
 
 const Segments = () => {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
@@ -48,22 +49,31 @@ const Segments = () => {
 
   const [segments, setSegments] = useState<Segment[]>([
     {
+      ownerEmail: "",
+      segmentId: "",
       title: "Segment 1",
       description: "Segment 1",
-      filters: 10,
-      created: "2021-09-01"
+      filters: [],
+      created: "2021-09-01",
+      lastChanged: ""
     },
     {
-      title: "Segment 2",
+      ownerEmail: "",
+      segmentId: "",
+      title: "Segment 1",
       description: "Segment 1",
-      filters: 10,
-      created: "2021-09-02"
+      filters: [],
+      created: "2021-09-01",
+      lastChanged: ""
     },
     {
-      title: "Segment 3",
+      ownerEmail: "",
+      segmentId: "",
+      title: "Segment 1",
       description: "Segment 1",
-      filters: 10,
-      created: "2021-09-03"
+      filters: [],
+      created: "2021-09-01",
+      lastChanged: ""
     }
   ]);
 
@@ -88,7 +98,15 @@ const Segments = () => {
     }
   });
 
-  const onNewSegmentAdded = () => {
+  const onNewSegmentAdded = ({
+    title,
+    description,
+    filters
+  }: {
+    title: string;
+    description: string;
+    filters: FilterType[];
+  }) => {
     setDialogOpen(false);
   };
 
