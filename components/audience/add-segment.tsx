@@ -65,6 +65,7 @@ const AddSement = () => {
         {filters.map((filter, index) => (
           <FilterBar
             filter={filter}
+            storedTags={storedTags}
             onAttributeChange={(value: string) =>
               onFilterAttributeChange(index, value)
             }
