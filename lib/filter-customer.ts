@@ -38,7 +38,11 @@ export const defaultConditionOfAttribute = (keyName: string) => {
           : "";
 };
 
-export const checkFilters = (filters: FilterType[]) => {
+export const checkFilters = (
+  filters: FilterType[],
+  title: string,
+  description: string
+) => {
   if (filters.length === 0) {
     return "There is a no filter, at least one filter is needed";
   }
@@ -61,6 +65,9 @@ export const checkFilters = (filters: FilterType[]) => {
         return "There are duplicated filters, Remove or Edit one before save them";
       }
     }
+  }
+  if (title === "" || description === "") {
+    return "There should be title and description for this segment";
   }
   return "";
 };
