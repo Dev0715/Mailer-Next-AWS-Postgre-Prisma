@@ -47,6 +47,22 @@ export const getColumnsForSegmentsTable = ({}: PropsType) => {
       )
     },
     {
+      accessorKey: "description",
+      header: () => <div className="text-center">Description</div>,
+      cell: ({ row }) => (
+        <div className="text-center font-medium">
+          {row.getValue("description")}
+        </div>
+      )
+    },
+    {
+      accessorKey: "filters",
+      header: () => <div className="text-center">Filters</div>,
+      cell: ({ row }) => (
+        <div className="text-center font-medium">{row.getValue("filters")}</div>
+      )
+    },
+    {
       accessorKey: "created",
       header: () => <div className="text-center">Created Date</div>,
       cell: ({ row }) => {
