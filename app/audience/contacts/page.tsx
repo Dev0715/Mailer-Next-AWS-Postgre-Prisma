@@ -99,6 +99,10 @@ export default function Contacts() {
 
   const onRowSelectionChange = () => {};
 
+  const onDeleteSelectedRows = () => {
+    console.log(rowSelection);
+  };
+
   const columns = getColumnsForContactsTable({
     onCustomerDelete,
     onCustomerEdit
@@ -178,7 +182,11 @@ export default function Contacts() {
             }
             className="max-w-xs"
           />
-          <Button variant={"outline"} className="border-red-700">
+          <Button
+            variant={"outline"}
+            className="border-red-700"
+            onClick={onDeleteSelectedRows}
+          >
             Delete selected mails
           </Button>
           <DropdownMenu>
