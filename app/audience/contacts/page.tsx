@@ -56,6 +56,8 @@ export default function Contacts() {
   const [isDeleting, setDeleting] = useState<boolean>(false);
   const [deletedEmail, setDeletedEmail] = useState<string>("");
 
+  const [isSelectioinDeleting, setSelectionDeleting] = useState<boolean>(false);
+
   useEffect(() => {
     getAllCustomersByEmail(user?.email as string).then((customers: any) => {
       if (customers) {
@@ -88,6 +90,7 @@ export default function Contacts() {
 
   const onDeleteDlgClosed = (isOpen: boolean) => {
     setDeleting(isOpen);
+    setSelectionDeleting(isOpen);
   };
 
   const onCustomerDeleteConfirmed = () => {
@@ -97,11 +100,11 @@ export default function Contacts() {
     setCustomers(newList);
   };
 
-  const onRowSelectionChange = () => {};
-
   const onDeleteSelectedRows = () => {
     console.log(rowSelection);
   };
+
+  const onSelectionDeleteConfirmed = () => {};
 
   const columns = getColumnsForContactsTable({
     onCustomerDelete,
@@ -150,6 +153,13 @@ export default function Contacts() {
           your mailing list?
         </p>
       </QuestionAlert>
+      <QuestionAlert
+        open={isSelectioinDeleting}
+        title="Delete Customers"
+        description="Are you sure to delete selected emails from your mailing list?"
+        onAlertDialogClosed={onDeleteDlgClosed}
+        onContinue={onSelectionDeleteConfirmed}
+      />
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-4xl text-green-700 font-semibold">All Contacts</p>
         <Button variant="default" asChild className="w-64 flex gap-x-4">
