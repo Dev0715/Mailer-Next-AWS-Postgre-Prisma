@@ -112,6 +112,7 @@ export default function Contacts() {
     const selectedEmails = Object.keys(rowSelection).map(
       (index) => customers[Number(index)].customerEmail
     );
+
     const newList = [...customers];
     Object.keys(rowSelection)
       .map((index) => Number(index))
@@ -120,6 +121,8 @@ export default function Contacts() {
         newList.splice(index, 1);
       });
     setCustomers(newList);
+
+    table.toggleAllPageRowsSelected(false);
   };
 
   const columns = getColumnsForContactsTable({
