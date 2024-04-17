@@ -50,58 +50,17 @@ const Segments = () => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [segments, setSegments] = useState<Segment[]>([]);
+  const [addDlgOpen, setAddDlgOpen] = useState<boolean>(false);
 
-  const [segments, setSegments] = useState<Segment[]>([
-    {
-      ownerEmail: "",
-      segmentId: "",
-      title: "Segment 1",
-      description: "Segment 1",
-      filters: [],
-      created: "2021-09-01",
-      lastChanged: ""
-    },
-    {
-      ownerEmail: "",
-      segmentId: "",
-      title: "Segment 1",
-      description: "Segment 1",
-      filters: [],
-      created: "2021-09-01",
-      lastChanged: ""
-    },
-    {
-      ownerEmail: "",
-      segmentId: "",
-      title: "Segment 1",
-      description: "Segment 1",
-      filters: [],
-      created: "2021-09-01",
-      lastChanged: ""
-    }
-  ]);
+  const [isSelectioinDeleting, setSelectionDeleting] = useState<boolean>(false);
+  const [isConfirmDialog, setConfirmDialog] = useState<boolean>(false);
+  const [confirmTitle, setConfirmTitle] = useState<string>("");
+  const [confirmDescription, setConfirmDescription] = useState<string>("");
 
-  const columns = getColumnsForSegmentsTable({});
-
-  const table = useReactTable({
-    data: segments,
-    columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-      rowSelection
-    }
-  });
+  const isRowSelected = () => {
+    return Object.keys(rowSelection).length > 0;
+  };
 
   const onNewSegmentAdded = ({
     title,
