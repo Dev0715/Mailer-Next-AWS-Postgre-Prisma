@@ -10,6 +10,7 @@ import {
   defaultConditionOfAttribute
 } from "@/lib/filter-customer";
 import { FormError } from "../utils/form-error";
+import { Input } from "../ui/input";
 
 const AddSement = ({
   onNewSegmentAdded
@@ -99,6 +100,7 @@ const AddSement = ({
       </div>
       <FormError message={error} />
       <div className="flex items-center justify-between">
+        <p>Title</p>
         <Button
           onClick={onAddFilter}
           variant={"outline"}
@@ -107,13 +109,17 @@ const AddSement = ({
           <FaPlus />
           Add Filter
         </Button>
-        <Button
-          onClick={onSaveSegment}
-          className="w-48 flex items-center gap-x-2 border-green-700"
-        >
-          <FaCheck />
-          Register
-        </Button>
+        <div className="flex items-center gap-x-4">
+          <Input />
+          <Input />
+          <Button
+            onClick={onSaveSegment}
+            className="w-48 flex items-center gap-x-2 border-green-700"
+          >
+            <FaCheck />
+            Register
+          </Button>
+        </div>
       </div>
     </main>
   );
