@@ -115,7 +115,7 @@ export const getColumnsForContactsTable = ({
         const tags: string[] = row.getValue("tags");
         return (
           <div className="flex justify-center">
-            <div className="font-medium flex flex-wrap gap-1">
+            <div className="font-medium flex flex-wrap justify-center gap-1">
               {tags.map((tag) => (
                 <Badge className="cursor-pointer" key={tag}>
                   {tag}
