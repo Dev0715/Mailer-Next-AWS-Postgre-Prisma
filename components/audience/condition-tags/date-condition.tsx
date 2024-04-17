@@ -3,7 +3,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
@@ -38,7 +37,6 @@ export const DateCondition = ({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {/* <SelectLabel>Select a Condition</SelectLabel> */}
             <SelectItem value="is-after">Is After</SelectItem>
             <SelectItem value="is-before">Is Before</SelectItem>
             <SelectItem value="is">Is</SelectItem>
