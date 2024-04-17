@@ -19,7 +19,6 @@ export const deleteCutomers = async (
         await db.send(command);
       })
     );
-    console.log("__deleteCustomers__", response);
     return { success: true };
   } catch (error) {
     return { success: false };

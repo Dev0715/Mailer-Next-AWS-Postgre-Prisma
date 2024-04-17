@@ -30,6 +30,7 @@ export const getColumnsForContactsTable = ({
       id: "select",
       header: ({ table }) => (
         <Checkbox
+          disabled={isPending}
           checked={
             table.getIsAllPageRowsSelected() ||
             (table.getIsSomePageRowsSelected() && "indeterminate")
@@ -40,6 +41,7 @@ export const getColumnsForContactsTable = ({
       ),
       cell: ({ row }) => (
         <Checkbox
+          disabled={isPending}
           checked={row.getIsSelected()}
           onCheckedChange={(value) => row.toggleSelected(!!value)}
           aria-label="Select row"
