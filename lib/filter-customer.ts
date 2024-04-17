@@ -39,11 +39,11 @@ export const defaultConditionOfAttribute = (keyName: string) => {
 };
 
 export const checkFilters = (filters: FilterType[]) => {
-  filters.forEach((filter, index) => {
+  filters.map((filter, index) => {
     if (
       filter.attribute === "" ||
       filter.condition === "" ||
-      filter.condition === ""
+      filter.value === ""
     ) {
       return "There is a filter which has not been completed, Complete or Delete it";
     } else {
