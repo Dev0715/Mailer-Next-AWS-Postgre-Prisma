@@ -81,6 +81,10 @@ const Segments = () => {
     }
   });
 
+  const onNewSegmentAdded = () => {
+    setDialogOpen(false);
+  };
+
   return (
     <main className="w-5/6 flex flex-col py-6">
       <div className="w-full flex items-end justify-between pb-6">
@@ -96,7 +100,7 @@ const Segments = () => {
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-full w-3/4">
-            <AddSement />
+            <AddSement onNewSegmentAdded={onNewSegmentAdded} />
           </DialogContent>
         </Dialog>
       </div>
