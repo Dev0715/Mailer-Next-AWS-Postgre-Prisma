@@ -41,6 +41,7 @@ import { useAtom } from "jotai";
 import { customersAtom } from "@/app/store/atoms";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { deleteCutomer } from "@/data/audience/delete-customer";
 
 export default function Contacts() {
   const user = useCurrentUser();
@@ -94,10 +95,17 @@ export default function Contacts() {
   };
 
   const onCustomerDeleteConfirmed = () => {
-    const newList = customers.filter(
-      (item) => item.customerEmail !== deletedEmail
-    );
-    setCustomers(newList);
+    deleteCutomer(user?.email as string, deletedEmail).then((res) => {
+      if (res.success) {
+        const newList = customers.filter(
+          (item) => item.customerEmail !== deletedEmail
+        );
+        setCustomers(newList);
+      } else {
+        // # Error Alert
+      }
+      // Need to update to use splice function instead?
+    });
   };
 
   const isRowSelected = () => {
