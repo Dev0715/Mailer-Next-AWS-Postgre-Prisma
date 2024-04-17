@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import {
   ColumnFiltersState,
   RowSelectionState,
@@ -46,6 +46,7 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
 export default function Contacts() {
   const user = useCurrentUser();
+  const [isPending, startTransition] = useTransition();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -99,28 +100,30 @@ export default function Contacts() {
   };
 
   const onCustomerDeleteConfirmed = () => {
-    deleteCutomer(user?.email as string, deletedEmail)
-      .then((res) => {
-        if (res.success) {
-          const newList = customers.filter(
-            (item) => item.customerEmail !== deletedEmail
-          );
-          setCustomers(newList);
-          setConfirmDialog(true);
-          setConfirmTitle("Success");
-          setConfirmDescription("1 custome was removed successfully");
-        } else {
+    startTransition(() => {
+      deleteCutomer(user?.email as string, deletedEmail)
+        .then((res) => {
+          if (res.success) {
+            const newList = customers.filter(
+              (item) => item.customerEmail !== deletedEmail
+            );
+            setCustomers(newList);
+            setConfirmDialog(true);
+            setConfirmTitle("Success");
+            setConfirmDescription("1 custome was removed successfully");
+          } else {
+            setConfirmDialog(true);
+            setConfirmTitle("Failed");
+            setConfirmDescription("An error occurred while removing customer");
+          }
+          // Need to update to use splice function instead?
+        })
+        .catch((error) => {
           setConfirmDialog(true);
           setConfirmTitle("Failed");
           setConfirmDescription("An error occurred while removing customer");
-        }
-        // Need to update to use splice function instead?
-      })
-      .catch((error) => {
-        setConfirmDialog(true);
-        setConfirmTitle("Failed");
-        setConfirmDescription("An error occurred while removing customer");
-      });
+        });
+    });
 
     table.toggleAllPageRowsSelected(false);
   };
@@ -152,7 +155,8 @@ export default function Contacts() {
 
   const columns = getColumnsForContactsTable({
     onCustomerDelete,
-    onCustomerEdit
+    onCustomerEdit,
+    isPending
   });
 
   const table = useReactTable({
@@ -231,6 +235,7 @@ export default function Contacts() {
       <div className="w-full flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
           <Input
+            disabled={isPending}
             placeholder="Filter emails..."
             value={
               (table.getColumn("customerEmail")?.getFilterValue() as string) ??
@@ -244,6 +249,7 @@ export default function Contacts() {
             className="max-w-xs"
           />
           <Input
+            disabled={isPending}
             placeholder="Filter Tags..."
             value={(table.getColumn("tags")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
