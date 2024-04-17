@@ -50,14 +50,17 @@ const Segments = () => {
   const [segments, setSegments] = useState<Segment[]>([
     {
       title: "Segment 1",
+      description: "Segment 1",
       created: "2021-09-01"
     },
     {
       title: "Segment 2",
+      description: "Segment 1",
       created: "2021-09-02"
     },
     {
       title: "Segment 3",
+      description: "Segment 1",
       created: "2021-09-03"
     }
   ]);
