@@ -31,8 +31,8 @@ export const DateCondition = ({
   onValueChange
 }: PropsType) => {
   return (
-    <div className="flex items-center gap-x-6">
-      <Select defaultValue="is-after" onValueChange={onConditionChange}>
+    <div className="w-full flex items-center gap-x-6">
+      <Select value={filter.condition} onValueChange={onConditionChange}>
         <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
           <SelectValue placeholder="Select a condition" />
         </SelectTrigger>
@@ -50,12 +50,12 @@ export const DateCondition = ({
           <Button
             variant={"outline"}
             className={cn(
-              "w-full pl-3 text-left font-normal",
+              "w-60 pl-3 text-left font-normal",
               !filter.value && "text-muted-foreground"
             )}
           >
             {filter.value ? (
-              format(filter.value, "PPP")
+              format(new Date(filter.value), "PPP")
             ) : (
               <span>Pick a date</span>
             )}
