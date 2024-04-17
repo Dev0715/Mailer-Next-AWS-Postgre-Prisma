@@ -74,8 +74,20 @@ export const getColumnsForSegmentsTable = ({}: PropsType) => {
       }
     },
     {
+      accessorKey: "lastChanged",
+      header: () => <div className="text-center">Last Changed</div>,
+      cell: ({ row }) => {
+        const lastChanged = row.getValue("lastChanged");
+        const cellValue = lastChanged
+          ? new Date(lastChanged as string).toDateString()
+          : "";
+        return <div className="text-center font-medium">{cellValue}</div>;
+      }
+    },
+    {
       id: "actions",
       enableHiding: false,
+      header: () => <div className="text-center">More Actions</div>,
       cell: ({ row }) => {
         const segment = row.original;
         return (
