@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import {
   ColumnFiltersState,
+  RowSelectionState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -95,6 +96,8 @@ export default function Contacts() {
     );
     setCustomers(newList);
   };
+
+  const onRowSelectionChange = () => {};
 
   const columns = getColumnsForContactsTable({
     onCustomerDelete,
