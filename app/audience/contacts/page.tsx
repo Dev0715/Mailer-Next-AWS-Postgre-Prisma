@@ -156,19 +156,19 @@ export default function Contacts() {
             setCustomers(newList);
             table.toggleAllPageRowsSelected(false);
 
-            setConfirmDialog(true);
+            setConfirming(true);
             setConfirmTitle("Success");
             setConfirmDescription("Selected emails were removed successfully");
           } else {
             table.toggleAllPageRowsSelected(false);
-            setConfirmDialog(true);
+            setConfirming(true);
             setConfirmTitle("Failure");
             setConfirmDescription("An error occurred while removing emails");
           }
         })
         .catch((error) => {
           table.toggleAllPageRowsSelected(false);
-          setConfirmDialog(true);
+          setConfirming(true);
           setConfirmTitle("Failure");
           setConfirmDescription("An error occurred while removing emails");
         });
@@ -180,7 +180,6 @@ export default function Contacts() {
     onCustomerEdit,
     isPending
   });
-
   const table = useReactTable({
     data: customers,
     columns,
@@ -283,7 +282,7 @@ export default function Contacts() {
             <Button
               variant={"outline"}
               className="border-red-700"
-              onClick={onDeleteSelectedRows}
+              onClick={onSelectedRowsDelete}
             >
               Delete selected mails
             </Button>
