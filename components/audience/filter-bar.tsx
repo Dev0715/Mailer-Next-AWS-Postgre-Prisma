@@ -22,6 +22,7 @@ import { TagsCondition } from "./condition-tags/tag-condition";
 
 type PropsType = {
   filter: FilterType;
+  storedTags: string[];
   onAttributeChange: (value: string) => void;
   onConditionChange: (value: string) => void;
   onValueChange: (value: string) => void;
@@ -30,6 +31,7 @@ type PropsType = {
 
 export const FilterBar = ({
   filter,
+  storedTags,
   onAttributeChange,
   onConditionChange,
   onValueChange,
@@ -56,7 +58,9 @@ export const FilterBar = ({
         {isTypeOfTags(filter.attribute) ? (
           <TagsCondition
             filter={filter}
+            storedTags={storedTags}
             onConditionChange={onConditionChange}
+            onValueChange={onValueChange}
           />
         ) : isTypeOfSubscribed(filter.attribute) ? (
           <SubscribedCondition
