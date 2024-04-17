@@ -105,10 +105,15 @@ export default function Contacts() {
   };
 
   const onDeleteSelectedRows = () => {
-    console.log(rowSelection);
+    setSelectionDeleting(true);
   };
 
-  const onSelectionDeleteConfirmed = () => {};
+  const onSelectionDeleteConfirmed = () => {
+    const selectedEmails = Object.keys(rowSelection).map(
+      (index) => customers[Number(index)].customerEmail
+    );
+    console.log(selectedEmails);
+  };
 
   const columns = getColumnsForContactsTable({
     onCustomerDelete,
