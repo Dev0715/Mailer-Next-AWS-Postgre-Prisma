@@ -12,8 +12,6 @@ export const filterAttributes = [
   { value: "lastChanged", name: "Last Changed" }
 ];
 
-export const isTypeOfString = (keyName: string) => keyName !== "";
-
 export const isTypeOfTags = (keyName: string) => keyName === "tags";
 
 export const isTypeOfSubscribed = (keyName: string) => keyName === "subscribed";
@@ -22,4 +20,18 @@ export const isTypeOfDate = (keyName: string) => {
   return (
     keyName === "birthday" || keyName === "created" || keyName === "lastChanged"
   );
+};
+
+export const isTypeOfString = (keyName: string) => keyName !== "";
+
+export const defaultConditionOfAttribute = (keyName: string) => {
+  return isTypeOfTags(keyName)
+    ? "contains"
+    : isTypeOfSubscribed(keyName)
+      ? "is"
+      : isTypeOfDate(keyName)
+        ? "is-after"
+        : isTypeOfString(keyName)
+          ? "contains"
+          : "";
 };
