@@ -5,10 +5,16 @@ import { useEffect, useState } from "react";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FilterType } from "@/shared/filter-type";
-import { defaultConditionOfAttribute } from "@/lib/filter-customer";
+import {
+  checkFilters,
+  defaultConditionOfAttribute
+} from "@/lib/filter-customer";
+import { FormError } from "../utils/form-error";
 
 const AddSement = () => {
   const user = useCurrentUser();
+
+  const [error, setError] = useState("");
   const [storedTags, setStoredTags] = useState<string[]>([]);
   const [filters, setFilters] = useState<FilterType[]>([
     { attribute: "", condition: "", value: "" }
@@ -21,6 +27,15 @@ const AddSement = () => {
       }
     });
   }, []);
+
+  const onSaveSegment = () => {
+    const error = checkFilters(filters);
+    if (error === "") {
+      setError("Success");
+    } else {
+      setError(error);
+    }
+  };
 
   const onAddFilter = () => {
     setFilters((prev) => [
@@ -77,6 +92,7 @@ const AddSement = () => {
           />
         ))}
       </div>
+      <FormError message={error} />
       <div className="flex items-center justify-between">
         <Button
           onClick={onAddFilter}
@@ -87,7 +103,7 @@ const AddSement = () => {
           Add Filter
         </Button>
         <Button
-          onClick={onAddFilter}
+          onClick={onSaveSegment}
           className="w-48 flex items-center gap-x-2 border-green-700"
         >
           <FaCheck />
