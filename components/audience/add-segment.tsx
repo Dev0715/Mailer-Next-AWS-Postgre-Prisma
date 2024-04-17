@@ -24,6 +24,8 @@ const AddSement = ({
   const [filters, setFilters] = useState<FilterType[]>([
     { attribute: "", condition: "", value: "" }
   ]);
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
 
   useEffect(() => {
     getUserByEmail(user?.email as string).then((res) => {
@@ -34,7 +36,7 @@ const AddSement = ({
   }, []);
 
   const onSaveSegment = () => {
-    const error = checkFilters(filters);
+    const error = checkFilters(filters, title, description);
     if (error === "") {
       // ##
       onNewSegmentAdded();
@@ -100,7 +102,6 @@ const AddSement = ({
       </div>
       <FormError message={error} />
       <div className="flex items-center justify-between">
-        <p>Title</p>
         <Button
           onClick={onAddFilter}
           variant={"outline"}
@@ -110,11 +111,19 @@ const AddSement = ({
           Add Filter
         </Button>
         <div className="flex items-center gap-x-4">
-          <Input />
-          <Input />
+          <p>Title</p>
+          <Input
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
+          <p>Descriptioin</p>
+          <Input
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+          />
           <Button
             onClick={onSaveSegment}
-            className="w-48 flex items-center gap-x-2 border-green-700"
+            className="min-w-48 flex items-center gap-x-2 border-green-700"
           >
             <FaCheck />
             Register
