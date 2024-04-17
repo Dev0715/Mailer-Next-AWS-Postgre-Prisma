@@ -100,6 +100,10 @@ export default function Contacts() {
     setCustomers(newList);
   };
 
+  const isRowSelected = () => {
+    return Object.keys(rowSelection).length > 0;
+  };
+
   const onDeleteSelectedRows = () => {
     console.log(rowSelection);
   };
@@ -192,13 +196,15 @@ export default function Contacts() {
             }
             className="max-w-xs"
           />
-          <Button
-            variant={"outline"}
-            className="border-red-700"
-            onClick={onDeleteSelectedRows}
-          >
-            Delete selected mails
-          </Button>
+          {isRowSelected() && (
+            <Button
+              variant={"outline"}
+              className="border-red-700"
+              onClick={onDeleteSelectedRows}
+            >
+              Delete selected mails
+            </Button>
+          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
