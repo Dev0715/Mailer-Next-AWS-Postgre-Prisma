@@ -43,6 +43,7 @@ import { QuestionAlert } from "@/components/utils/question-alert";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { deleteCutomer } from "@/data/audience/delete-customer";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { deleteCutomers } from "@/data/audience/delete-customers";
 
 export default function Contacts() {
   const user = useCurrentUser();
@@ -104,6 +105,7 @@ export default function Contacts() {
       deleteCutomer(user?.email as string, deletedEmail)
         .then((res) => {
           if (res.success) {
+            // # Need to update to use splice function instead? #
             const newList = customers.filter(
               (item) => item.customerEmail !== deletedEmail
             );
@@ -116,16 +118,15 @@ export default function Contacts() {
             setConfirmTitle("Failed");
             setConfirmDescription("An error occurred while removing customer");
           }
-          // Need to update to use splice function instead?
+          table.toggleAllPageRowsSelected(false);
         })
         .catch((error) => {
           setConfirmDialog(true);
           setConfirmTitle("Failed");
           setConfirmDescription("An error occurred while removing customer");
+          table.toggleAllPageRowsSelected(false);
         });
     });
-
-    table.toggleAllPageRowsSelected(false);
   };
 
   const isRowSelected = () => {
@@ -141,16 +142,37 @@ export default function Contacts() {
       (index) => customers[Number(index)].customerEmail
     );
 
-    const newList = [...customers];
-    Object.keys(rowSelection)
-      .map((index) => Number(index))
-      .reverse()
-      .map((index) => {
-        newList.splice(index, 1);
-      });
-    setCustomers(newList);
+    startTransition(() => {
+      deleteCutomers(user?.email as string, selectedEmails)
+        .then((res) => {
+          if (res.success) {
+            const newList = [...customers];
+            Object.keys(rowSelection)
+              .map((index) => Number(index))
+              .reverse()
+              .map((index) => {
+                newList.splice(index, 1);
+              });
+            setCustomers(newList);
+            table.toggleAllPageRowsSelected(false);
 
-    table.toggleAllPageRowsSelected(false);
+            setConfirmDialog(true);
+            setConfirmTitle("Success");
+            setConfirmDescription("Selected emails were removed successfully");
+          } else {
+            table.toggleAllPageRowsSelected(false);
+            setConfirmDialog(true);
+            setConfirmTitle("Failure");
+            setConfirmDescription("An error occurred while removing emails");
+          }
+        })
+        .catch((error) => {
+          table.toggleAllPageRowsSelected(false);
+          setConfirmDialog(true);
+          setConfirmTitle("Failure");
+          setConfirmDescription("An error occurred while removing emails");
+        });
+    });
   };
 
   const columns = getColumnsForContactsTable({
