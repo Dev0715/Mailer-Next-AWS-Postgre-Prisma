@@ -30,7 +30,7 @@ const AddSement = () => {
 
   const onFilterAttributeChange = (index: number, value: string) => {
     const newFilters = [...filters];
-    newFilters[index].attribute = value;
+    newFilters[index] = { attribute: value, condition: "", value: "" };
     setFilters(newFilters);
   };
 
