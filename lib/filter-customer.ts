@@ -39,6 +39,9 @@ export const defaultConditionOfAttribute = (keyName: string) => {
 };
 
 export const checkFilters = (filters: FilterType[]) => {
+  if (filters.length === 0) {
+    return "There is a no filter, at least one filter is needed";
+  }
   for (let i = 0; i < filters.length; i++) {
     const filter = filters[i];
     if (
