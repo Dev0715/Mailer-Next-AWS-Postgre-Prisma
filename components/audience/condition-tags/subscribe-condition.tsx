@@ -22,24 +22,22 @@ export const SubscribedCondition = ({
 }: PropsType) => {
   return (
     <div className="flex items-center gap-x-6">
-      <Select defaultValue="is" onValueChange={onConditionChange}>
+      <Select value={filter.condition} onValueChange={onConditionChange}>
         <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
           <SelectValue placeholder="Select a condition" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {/* <SelectLabel>Select a Condition</SelectLabel> */}
             <SelectItem value="is">is</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Select defaultValue="subscribed" onValueChange={onValueChange}>
+      <Select value={filter.value} onValueChange={onValueChange}>
         <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
-          <SelectValue placeholder="Select a condition" />
+          <SelectValue placeholder="Select a status" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {/* <SelectLabel>Select a Condition</SelectLabel> */}
             <SelectItem value="subscribed">true</SelectItem>
             <SelectItem value="unsubscribed">false</SelectItem>
           </SelectGroup>
