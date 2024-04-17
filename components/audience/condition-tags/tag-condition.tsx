@@ -30,7 +30,6 @@ export const TagsCondition = ({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {/* <SelectLabel>Select a Condition</SelectLabel> */}
             <SelectItem value="contains">Contains</SelectItem>
             <SelectItem value="not-contains">Doesn't contain</SelectItem>
           </SelectGroup>
@@ -42,7 +41,6 @@ export const TagsCondition = ({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            {/* <SelectLabel>Select a Condition</SelectLabel> */}
             {storedTags.map((tag) => (
               <SelectItem value={tag}>{tag}</SelectItem>
             ))}
