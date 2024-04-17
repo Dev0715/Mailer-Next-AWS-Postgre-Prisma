@@ -56,12 +56,12 @@ export default function Contacts() {
 
   const [customers, setCustomers] = useAtom(customersAtom);
   const [isEditing, setEditing] = useState<boolean>(false);
-  const [editedCustomer, setEditedCustomer] = useState<Customer>();
+  const [editingCustomer, setEditingCustomer] = useState<Customer>();
   const [isDeleting, setDeleting] = useState<boolean>(false);
-  const [deletedEmail, setDeletedEmail] = useState<string>("");
+  const [deletingEmail, setDeletingEmail] = useState<string>("");
+  const [isDeletingMulti, setDeletingMulti] = useState<boolean>(false);
 
-  const [isSelectioinDeleting, setSelectionDeleting] = useState<boolean>(false);
-  const [isConfirmDialog, setConfirmDialog] = useState<boolean>(false);
+  const [isConfirming, setConfirming] = useState<boolean>(false);
   const [confirmTitle, setConfirmTitle] = useState<string>("");
   const [confirmDescription, setConfirmDescription] = useState<string>("");
 
