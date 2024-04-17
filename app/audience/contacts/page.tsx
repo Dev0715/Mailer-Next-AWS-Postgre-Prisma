@@ -99,17 +99,30 @@ export default function Contacts() {
   };
 
   const onCustomerDeleteConfirmed = () => {
-    deleteCutomer(user?.email as string, deletedEmail).then((res) => {
-      if (res.success) {
-        const newList = customers.filter(
-          (item) => item.customerEmail !== deletedEmail
-        );
-        setCustomers(newList);
-      } else {
-        // # Error Alert
-      }
-      // Need to update to use splice function instead?
-    });
+    deleteCutomer(user?.email as string, deletedEmail)
+      .then((res) => {
+        if (res.success) {
+          const newList = customers.filter(
+            (item) => item.customerEmail !== deletedEmail
+          );
+          setCustomers(newList);
+          setConfirmDialog(true);
+          setConfirmTitle("Success");
+          setConfirmDescription("1 custome was removed successfully");
+        } else {
+          setConfirmDialog(true);
+          setConfirmTitle("Failed");
+          setConfirmDescription("An error occurred while removing customer");
+        }
+        // Need to update to use splice function instead?
+      })
+      .catch((error) => {
+        setConfirmDialog(true);
+        setConfirmTitle("Failed");
+        setConfirmDescription("An error occurred while removing customer");
+      });
+
+    table.toggleAllPageRowsSelected(false);
   };
 
   const isRowSelected = () => {
@@ -172,6 +185,7 @@ export default function Contacts() {
           />
         </DialogContent>
       </Dialog>
+
       {/** Delete 1 Customer */}
       <QuestionAlert
         open={isDeleting}
@@ -186,6 +200,7 @@ export default function Contacts() {
           your mailing list?
         </p>
       </QuestionAlert>
+
       {/** Delete Selected Customers */}
       <QuestionAlert
         open={isSelectioinDeleting}
@@ -194,6 +209,7 @@ export default function Contacts() {
         onAlertDialogClosed={onDeleteDlgClosed}
         onContinue={onSelectionDeleteConfirmed}
       />
+
       {/** Confirm Alert */}
       <ConfirmAlert
         open={isConfirmDialog}
@@ -201,6 +217,7 @@ export default function Contacts() {
         description={confirmDescription}
         onAlertDialogClosed={() => setConfirmDialog(false)}
       />
+
       {/** Main Page */}
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-4xl text-green-700 font-semibold">All Contacts</p>
