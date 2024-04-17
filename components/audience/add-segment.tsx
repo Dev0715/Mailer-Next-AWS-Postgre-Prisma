@@ -11,7 +11,11 @@ import {
 } from "@/lib/filter-customer";
 import { FormError } from "../utils/form-error";
 
-const AddSement = () => {
+const AddSement = ({
+  onNewSegmentAdded
+}: {
+  onNewSegmentAdded: () => void;
+}) => {
   const user = useCurrentUser();
 
   const [error, setError] = useState("");
@@ -31,7 +35,8 @@ const AddSement = () => {
   const onSaveSegment = () => {
     const error = checkFilters(filters);
     if (error === "") {
-      setError("Success");
+      // ##
+      onNewSegmentAdded();
     } else {
       setError(error);
     }
