@@ -1,3 +1,5 @@
+import { FilterType } from "@/shared/filter-type";
+
 export const filterAttributes = [
   { value: "customerEmail", name: "Email" },
   { value: "firstName", name: "First Name" },
@@ -34,4 +36,27 @@ export const defaultConditionOfAttribute = (keyName: string) => {
         : isTypeOfString(keyName)
           ? "contains"
           : "";
+};
+
+export const checkFilters = (filters: FilterType[]) => {
+  filters.forEach((filter, index) => {
+    if (
+      filter.attribute === "" ||
+      filter.condition === "" ||
+      filter.condition === ""
+    ) {
+      return "There is a filter which has not been completed, Complete or Delete it";
+    } else {
+      const existingIndex = filters.findIndex(
+        (oldFilter) =>
+          oldFilter.attribute === filter.attribute &&
+          oldFilter.condition === filter.condition &&
+          oldFilter.value === filter.value
+      );
+      if (existingIndex !== -1 && existingIndex < index) {
+        return "There are duplicated filters, Remove or Edit one before save them";
+      }
+    }
+  });
+  return "";
 };
