@@ -91,37 +91,32 @@ export default function Contacts() {
   };
 
   const onCustomerDelete = (customer: Customer) => {
-    setDeletedEmail(customer.customerEmail);
+    setDeletingEmail(customer.customerEmail);
     setDeleting(true);
   };
 
-  const onDeleteDlgClosed = (isOpen: boolean) => {
-    setDeleting(isOpen);
-    setSelectionDeleting(isOpen);
-  };
-
-  const onCustomerDeleteConfirmed = () => {
+  const onCustomerDeleted = () => {
     startTransition(() => {
-      deleteCutomer(user?.email as string, deletedEmail)
+      deleteCutomer(user?.email as string, deletingEmail)
         .then((res) => {
           if (res.success) {
             // # Need to update to use splice function instead? #
             const newList = customers.filter(
-              (item) => item.customerEmail !== deletedEmail
+              (item) => item.customerEmail !== deletingEmail
             );
             setCustomers(newList);
-            setConfirmDialog(true);
+            setConfirming(true);
             setConfirmTitle("Success");
             setConfirmDescription("1 custome was removed successfully");
           } else {
-            setConfirmDialog(true);
+            setConfirming(true);
             setConfirmTitle("Failed");
             setConfirmDescription("An error occurred while removing customer");
           }
           table.toggleAllPageRowsSelected(false);
         })
         .catch((error) => {
-          setConfirmDialog(true);
+          setConfirming(true);
           setConfirmTitle("Failed");
           setConfirmDescription("An error occurred while removing customer");
           table.toggleAllPageRowsSelected(false);
