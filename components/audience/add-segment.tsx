@@ -1,4 +1,4 @@
-import { FaFilter, FaPlus } from "react-icons/fa";
+import { FaCheck, FaFilter, FaPlus } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { FilterBar } from "./filter-bar";
 import { useEffect, useState } from "react";
@@ -77,10 +77,23 @@ const AddSement = () => {
           />
         ))}
       </div>
-      <Button onClick={onAddFilter} className="w-48 flex items-center gap-2">
-        <FaPlus />
-        Add Filter
-      </Button>
+      <div className="flex items-center justify-between">
+        <Button
+          onClick={onAddFilter}
+          variant={"outline"}
+          className="w-48 flex items-center gap-x-2 border-green-700"
+        >
+          <FaPlus />
+          Add Filter
+        </Button>
+        <Button
+          onClick={onAddFilter}
+          className="w-48 flex items-center gap-x-2 border-green-700"
+        >
+          <FaCheck />
+          Register
+        </Button>
+      </div>
     </main>
   );
 };
