@@ -57,6 +57,7 @@ export const FilterBar = ({
           <SubscribedCondition
             filter={filter}
             onConditionChange={onConditionChange}
+            onValueChange={onValueChange}
           />
         ) : isTypeOfDate(filter.attribute) ? (
           <DateCondition
