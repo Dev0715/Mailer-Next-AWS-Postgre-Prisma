@@ -205,8 +205,8 @@ export default function Contacts() {
       <Dialog open={isEditing} onOpenChange={(isOpen) => setEditing(isOpen)}>
         <DialogContent className="max-w-full w-1/2">
           <EditCustomer
-            customer={editedCustomer}
-            onCustomerUpdate={onCustomerUpdate}
+            customer={editingCustomer}
+            onCustomerUpdate={onCustomerEdited}
           />
         </DialogContent>
       </Dialog>
