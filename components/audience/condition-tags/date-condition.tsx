@@ -14,13 +14,22 @@ import {
 } from "@/components/ui/popover";
 import { FilterType } from "@/shared/filter-type";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
 
 type PropsType = {
   filter: FilterType;
   onConditionChange: (value: string) => void;
+  onValueChange: (value: string) => void;
 };
 
-export const DateCondition = ({ filter, onConditionChange }: PropsType) => {
+export const DateCondition = ({
+  filter,
+  onConditionChange,
+  onValueChange
+}: PropsType) => {
   return (
     <div className="flex items-center gap-x-6">
       <Select defaultValue="is-after" onValueChange={onConditionChange}>
@@ -46,7 +55,7 @@ export const DateCondition = ({ filter, onConditionChange }: PropsType) => {
             )}
           >
             {filter.value ? (
-              format(field.value, "PPP")
+              format(filter.value, "PPP")
             ) : (
               <span>Pick a date</span>
             )}
@@ -56,8 +65,8 @@ export const DateCondition = ({ filter, onConditionChange }: PropsType) => {
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
             mode="single"
-            selected={field.value}
-            onSelect={field.onChange}
+            selected={new Date(filter.value)}
+            onSelect={(date) => onValueChange(date?.toISOString() as string)}
             disabled={(date) =>
               date > new Date() || date < new Date("1900-01-01")
             }
