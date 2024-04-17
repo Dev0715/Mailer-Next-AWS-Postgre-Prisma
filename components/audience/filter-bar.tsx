@@ -53,7 +53,12 @@ export const FilterBar = ({
             </SelectGroup>
           </SelectContent>
         </Select>
-        {isTypeOfSubscribed(filter.attribute) ? (
+        {isTypeOfTags(filter.attribute) ? (
+          <TagsCondition
+            filter={filter}
+            onConditionChange={onConditionChange}
+          />
+        ) : isTypeOfSubscribed(filter.attribute) ? (
           <SubscribedCondition
             filter={filter}
             onConditionChange={onConditionChange}
@@ -63,11 +68,7 @@ export const FilterBar = ({
           <DateCondition
             filter={filter}
             onConditionChange={onConditionChange}
-          />
-        ) : isTypeOfTags(filter.attribute) ? (
-          <TagsCondition
-            filter={filter}
-            onConditionChange={onConditionChange}
+            onValueChange={onValueChange}
           />
         ) : isTypeOfString(filter.attribute) ? (
           <StringCondition
