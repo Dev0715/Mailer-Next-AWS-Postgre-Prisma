@@ -74,11 +74,11 @@ export default function Contacts() {
   }, []);
 
   const onCustomerEdit = (customer: Customer) => {
-    setEditedCustomer(customer);
+    setEditingCustomer(customer);
     setEditing(true);
   };
 
-  const onCustomerUpdate = (success: boolean, updatedCustomer?: Customer) => {
+  const onCustomerEdited = (success: boolean, updatedCustomer?: Customer) => {
     if (success) {
       const newCustomers = customers.map((customer) =>
         customer.customerEmail === updatedCustomer?.customerEmail
@@ -129,15 +129,20 @@ export default function Contacts() {
     });
   };
 
+  const onDeleteCancelled = (isOpen: boolean) => {
+    setDeleting(isOpen);
+    setDeletingMulti(isOpen);
+  };
+
   const isRowSelected = () => {
     return Object.keys(rowSelection).length > 0;
   };
 
-  const onDeleteSelectedRows = () => {
-    setSelectionDeleting(true);
+  const onSelectedRowsDelete = () => {
+    setDeletingMulti(true);
   };
 
-  const onSelectionDeleteConfirmed = () => {
+  const onSelectedRowsDeleted = () => {
     const selectedEmails = Object.keys(rowSelection).map(
       (index) => customers[Number(index)].customerEmail
     );
