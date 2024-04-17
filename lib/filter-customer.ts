@@ -39,7 +39,8 @@ export const defaultConditionOfAttribute = (keyName: string) => {
 };
 
 export const checkFilters = (filters: FilterType[]) => {
-  filters.map((filter, index) => {
+  for (let i = 0; i < filters.length; i++) {
+    const filter = filters[i];
     if (
       filter.attribute === "" ||
       filter.condition === "" ||
@@ -53,10 +54,10 @@ export const checkFilters = (filters: FilterType[]) => {
           oldFilter.condition === filter.condition &&
           oldFilter.value === filter.value
       );
-      if (existingIndex !== -1 && existingIndex < index) {
+      if (existingIndex !== -1 && existingIndex < i) {
         return "There are duplicated filters, Remove or Edit one before save them";
       }
     }
-  });
+  }
   return "";
 };
