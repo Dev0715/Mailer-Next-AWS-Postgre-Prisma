@@ -39,6 +39,8 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import AddSement from "@/components/audience/add-segment";
 
 const Segments = () => {
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -83,7 +85,10 @@ const Segments = () => {
     <main className="w-5/6 flex flex-col py-6">
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-4xl text-green-700 font-semibold">All Segments</p>
-        <Dialog>
+        <Dialog
+          open={dialogOpen}
+          onOpenChange={(newStatus) => setDialogOpen(newStatus)}
+        >
           <DialogTrigger asChild>
             <Button variant="default" className="w-64 flex gap-x-4">
               <FaPlus />
