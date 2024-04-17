@@ -38,14 +38,19 @@ import {
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import AddSement from "@/components/audience/add-segment";
 import { FilterType } from "@/shared/filter-type";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { createSegment } from "@/data/segment/create-segment";
+import { v4 as uuidv4 } from "uuid";
 
 const Segments = () => {
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const user = useCurrentUser();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
+
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 
   const [segments, setSegments] = useState<Segment[]>([
     {
@@ -108,6 +113,20 @@ const Segments = () => {
     filters: FilterType[];
   }) => {
     setDialogOpen(false);
+    createSegment({
+      ownerEmail: user?.email as string,
+      segmentId: uuidv4(),
+      title,
+      description,
+      filters,
+      created: new Date().toISOString(),
+      lastChanged: new Date().toISOString()
+    })
+      .then((res) => {
+        if (res.success) {
+        }
+      })
+      .catch((res) => {});
   };
 
   return (
