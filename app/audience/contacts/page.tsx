@@ -42,6 +42,7 @@ import { customersAtom } from "@/app/store/atoms";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { deleteCutomer } from "@/data/audience/delete-customer";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
 export default function Contacts() {
   const user = useCurrentUser();
@@ -58,6 +59,9 @@ export default function Contacts() {
   const [deletedEmail, setDeletedEmail] = useState<string>("");
 
   const [isSelectioinDeleting, setSelectionDeleting] = useState<boolean>(false);
+  const [isConfirmDialog, setConfirmDialog] = useState<boolean>(false);
+  const [confirmTitle, setConfirmTitle] = useState<string>("");
+  const [confirmDescription, setConfirmDescription] = useState<string>("");
 
   useEffect(() => {
     getAllCustomersByEmail(user?.email as string).then((customers: any) => {
@@ -159,6 +163,7 @@ export default function Contacts() {
 
   return (
     <main className="w-full flex flex-col py-6">
+      {/** Edit Customer Dialog */}
       <Dialog open={isEditing} onOpenChange={(isOpen) => setEditing(isOpen)}>
         <DialogContent className="max-w-full w-1/2">
           <EditCustomer
@@ -167,6 +172,7 @@ export default function Contacts() {
           />
         </DialogContent>
       </Dialog>
+      {/** Delete 1 Customer */}
       <QuestionAlert
         open={isDeleting}
         title="Delete Customer"
@@ -180,6 +186,7 @@ export default function Contacts() {
           your mailing list?
         </p>
       </QuestionAlert>
+      {/** Delete Selected Customers */}
       <QuestionAlert
         open={isSelectioinDeleting}
         title="Delete Customers"
@@ -187,6 +194,14 @@ export default function Contacts() {
         onAlertDialogClosed={onDeleteDlgClosed}
         onContinue={onSelectionDeleteConfirmed}
       />
+      {/** Confirm Alert */}
+      <ConfirmAlert
+        open={isConfirmDialog}
+        title={confirmTitle}
+        description={confirmDescription}
+        onAlertDialogClosed={() => setConfirmDialog(false)}
+      />
+      {/** Main Page */}
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-4xl text-green-700 font-semibold">All Contacts</p>
         <Button variant="default" asChild className="w-64 flex gap-x-4">
