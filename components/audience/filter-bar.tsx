@@ -78,6 +78,7 @@ export const FilterBar = ({
           <StringCondition
             filter={filter}
             onConditionChange={onConditionChange}
+            onValueChange={onValueChange}
           />
         ) : null}
       </div>
