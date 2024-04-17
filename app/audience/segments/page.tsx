@@ -46,24 +46,28 @@ const Segments = () => {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  const columns = getColumnsForSegmentsTable({});
   const [segments, setSegments] = useState<Segment[]>([
     {
       title: "Segment 1",
       description: "Segment 1",
+      filters: 10,
       created: "2021-09-01"
     },
     {
       title: "Segment 2",
       description: "Segment 1",
+      filters: 10,
       created: "2021-09-02"
     },
     {
       title: "Segment 3",
       description: "Segment 1",
+      filters: 10,
       created: "2021-09-03"
     }
   ]);
+
+  const columns = getColumnsForSegmentsTable({});
 
   const table = useReactTable({
     data: segments,
