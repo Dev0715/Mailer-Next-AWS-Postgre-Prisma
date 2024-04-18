@@ -122,7 +122,9 @@ const Segments = () => {
     setDeletingSegmentId(segment.segmentId);
   };
 
-  const onSegmentDeleted = () => {};
+  const onSegmentDeleted = () => {
+    setDeleting(true);
+  };
 
   const onSelectedRowsDelete = () => {
     setDeletingMulti(true);
