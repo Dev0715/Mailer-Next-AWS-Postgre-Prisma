@@ -41,6 +41,8 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { createSegment } from "@/data/segment/create-segment";
 import { v4 as uuidv4 } from "uuid";
 import { QuestionAlert } from "@/components/utils/question-alert";
+import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
 const Segments = () => {
   const user = useCurrentUser();
@@ -60,6 +62,14 @@ const Segments = () => {
   const [isConfirming, setConfirming] = useState<boolean>(false);
   const [confirmTitle, setConfirmTitle] = useState<string>("");
   const [confirmDescription, setConfirmDescription] = useState<string>("");
+
+  useEffect(() => {
+    getAllSegmentsByEmail(user?.email as string).then((segments: any) => {
+      if (segments) {
+        setSegments(segments);
+      }
+    });
+  }, []);
 
   const isRowSelected = () => {
     return Object.keys(rowSelection).length > 0;
