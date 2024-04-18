@@ -55,7 +55,7 @@ const Segments = () => {
   const [segments, setSegments] = useState<Segment[]>([]);
   const [isAdding, setAdding] = useState<boolean>(false);
   const [isDeleting, setDeleting] = useState<boolean>(false);
-  const [deletingSegmentId, setDeletingSegmentId] = useState<string>("");
+  const [deletingSegment, setDeletingSegment] = useState<Segment>();
   const [isDeletingMulti, setDeletingMulti] = useState<boolean>(false);
 
   const [isConfirming, setConfirming] = useState<boolean>(false);
