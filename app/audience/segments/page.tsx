@@ -42,6 +42,7 @@ import { deleteSegment } from "@/data/segment/delete-segment";
 import { deleteSegments } from "@/data/segment/delete-segments";
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
+import EditSegment from "@/components/audience/edit-segment";
 
 const Segments = () => {
   const user = useCurrentUser();
@@ -57,6 +58,9 @@ const Segments = () => {
   const [isDeleting, setDeleting] = useState<boolean>(false);
   const [deletingSegment, setDeletingSegment] = useState<Segment>();
   const [isDeletingMulti, setDeletingMulti] = useState<boolean>(false);
+
+  const [isEditing, setEditing] = useState<boolean>(false);
+  const [editingSegment, setEditingSegment] = useState<Segment>();
 
   const [isConfirming, setConfirming] = useState<boolean>(false);
   const [confirmTitle, setConfirmTitle] = useState<string>("");
