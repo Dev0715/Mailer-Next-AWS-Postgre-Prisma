@@ -117,8 +117,9 @@ const Segments = () => {
     });
   };
 
-  const onSegmentDelete = () => {
+  const onSegmentDelete = (segment: Segment) => {
     setDeleting(true);
+    setDeletingSegmentId(segment.segmentId);
   };
 
   const onSegmentDeleted = () => {};
