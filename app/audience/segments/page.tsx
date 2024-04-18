@@ -6,8 +6,8 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 import { getColumnsForSegmentsTable } from "../_components/segments-column";
-import { Segment } from "@/shared/segment-type";
-import { useState } from "react";
+import { Segment, SegmentAddition } from "@/shared/segment-type";
+import { useState, useTransition } from "react";
 import {
   ColumnFiltersState,
   SortingState,
@@ -37,13 +37,14 @@ import {
 } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import AddSement from "@/components/audience/add-segment";
-import { FilterType } from "@/shared/filter-type";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { createSegment } from "@/data/segment/create-segment";
 import { v4 as uuidv4 } from "uuid";
+import { QuestionAlert } from "@/components/utils/question-alert";
 
 const Segments = () => {
   const user = useCurrentUser();
+  const [isPending, startTransition] = useTransition();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -51,10 +52,12 @@ const Segments = () => {
   const [rowSelection, setRowSelection] = useState({});
 
   const [segments, setSegments] = useState<Segment[]>([]);
-  const [addDlgOpen, setAddDlgOpen] = useState<boolean>(false);
+  const [isAdding, setAdding] = useState<boolean>(false);
+  const [isDeleting, setDeleting] = useState<boolean>(false);
+  const [deletingSegmentId, setDeletingSegmentId] = useState<string>("");
+  const [isDeletingMulti, setDeletingMulti] = useState<boolean>(false);
 
-  const [isSelectioinDeleting, setSelectionDeleting] = useState<boolean>(false);
-  const [isConfirmDialog, setConfirmDialog] = useState<boolean>(false);
+  const [isConfirming, setConfirming] = useState<boolean>(false);
   const [confirmTitle, setConfirmTitle] = useState<string>("");
   const [confirmDescription, setConfirmDescription] = useState<string>("");
 
