@@ -170,23 +170,15 @@ export default function Contacts() {
                 newList.splice(index, 1);
               });
             setCustomers(newList);
-            table.toggleAllPageRowsSelected(false);
-
-            setConfirming(true);
-            setConfirmTitle("Success");
-            setConfirmDescription("Selected emails were removed successfully");
+            setSelectedRowsDeletedConfirming(true);
           } else {
-            table.toggleAllPageRowsSelected(false);
-            setConfirming(true);
-            setConfirmTitle("Failure");
-            setConfirmDescription("An error occurred while removing emails");
+            setSelectedRowsDeletedConfirming(false);
           }
+          table.toggleAllPageRowsSelected(false);
         })
         .catch((error) => {
+          setSelectedRowsDeletedConfirming(false);
           table.toggleAllPageRowsSelected(false);
-          setConfirming(true);
-          setConfirmTitle("Failure");
-          setConfirmDescription("An error occurred while removing emails");
         });
     });
   };
