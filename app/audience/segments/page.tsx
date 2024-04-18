@@ -187,13 +187,15 @@ const Segments = () => {
       <QuestionAlert
         open={isDeleting}
         title="Delete Customer"
-        description={`Are you sure to delete ${deletingSegmentId} from your mailing list?`}
+        description={`Are you sure to delete ${deletingSegment?.title} from your mailing list?`}
         onAlertDialogClosed={onDeleteCancelled}
         onContinue={onSegmentDeleted}
       >
         <p>
           Are you sure to delete{" "}
-          <span className="font-bold text-red-700">{deletingSegmentId}</span>{" "}
+          <span className="font-bold text-red-700">
+            {deletingSegment?.title}
+          </span>{" "}
           from your mailing list?
         </p>
       </QuestionAlert>
