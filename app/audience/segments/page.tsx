@@ -332,7 +332,7 @@ const Segments = () => {
         open={isEditing}
         onOpenChange={(newStatus) => setEditing(newStatus)}
       >
-        <DialogContent>
+        <DialogContent className="max-w-full w-3/4">
           <EditSegment
             onSegmentEdited={onSgemendEdited}
             editingSegment={editingSegment as Segment}
@@ -362,6 +362,7 @@ const Segments = () => {
           </DialogContent>
         </Dialog>
       </div>
+
       <div className="w-full flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
           <Input
