@@ -154,7 +154,10 @@ const Segments = () => {
     setDeletingMulti(isOpen);
   };
 
-  const columns = getColumnsForSegmentsTable({});
+  const columns = getColumnsForSegmentsTable({
+    onSegmentDelete,
+    isPending
+  });
   const table = useReactTable({
     data: segments,
     columns,
