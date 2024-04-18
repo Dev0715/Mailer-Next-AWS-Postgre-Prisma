@@ -5,7 +5,7 @@ import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
 import { Header } from "./_components/header";
 import { Footer } from "./_components/footer";
-import StoreProvider from "./store/store-provider";
+import StoreProvider from "../store/store-provider";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
