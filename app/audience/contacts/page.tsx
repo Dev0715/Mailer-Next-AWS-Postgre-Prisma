@@ -215,32 +215,32 @@ export default function Contacts() {
       <QuestionAlert
         open={isDeleting}
         title="Delete Customer"
-        description={`Are you sure to delete ${deletedEmail} from your mailing list?`}
-        onAlertDialogClosed={onDeleteDlgClosed}
-        onContinue={onCustomerDeleteConfirmed}
+        description={`Are you sure to delete ${deletingEmail} from your mailing list?`}
+        onAlertDialogClosed={onDeleteCancelled}
+        onContinue={onCustomerDeleted}
       >
         <p>
           Are you sure to delete{" "}
-          <span className="font-bold text-red-700">{deletedEmail}</span> from
+          <span className="font-bold text-red-700">{deletingEmail}</span> from
           your mailing list?
         </p>
       </QuestionAlert>
 
       {/** Delete Selected Customers */}
       <QuestionAlert
-        open={isSelectioinDeleting}
+        open={isDeletingMulti}
         title="Delete Customers"
         description="Are you sure to delete selected emails from your mailing list?"
-        onAlertDialogClosed={onDeleteDlgClosed}
-        onContinue={onSelectionDeleteConfirmed}
+        onAlertDialogClosed={onDeleteCancelled}
+        onContinue={onSelectedRowsDeleted}
       />
 
       {/** Confirm Alert */}
       <ConfirmAlert
-        open={isConfirmDialog}
+        open={isConfirming}
         title={confirmTitle}
         description={confirmDescription}
-        onAlertDialogClosed={() => setConfirmDialog(false)}
+        onAlertDialogClosed={() => setConfirming(false)}
       />
 
       {/** Main Page */}
