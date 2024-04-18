@@ -101,7 +101,7 @@ const AddSement = ({ onNewSegmentAdded }: PropsType) => {
         ))}
       </div>
       <FormError message={error} />
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-2">
         <Button
           onClick={onAddFilter}
           variant={"outline"}
