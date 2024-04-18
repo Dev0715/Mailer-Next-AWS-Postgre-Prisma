@@ -218,7 +218,11 @@ const Segments = () => {
           onOpenChange={(newStatus) => setAdding(newStatus)}
         >
           <DialogTrigger asChild>
-            <Button variant="default" className="w-64 flex gap-x-4">
+            <Button
+              disabled={isPending}
+              variant="default"
+              className="w-64 flex gap-x-4"
+            >
               <FaPlus />
               Add Segment
             </Button>
