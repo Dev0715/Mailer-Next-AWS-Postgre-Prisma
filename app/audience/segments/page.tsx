@@ -207,26 +207,22 @@ const Segments = () => {
       <div className="w-full flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
           <Input
-            placeholder="Filter emails..."
-            value={
-              (table.getColumn("customerEmail")?.getFilterValue() as string) ??
-              ""
-            }
+            placeholder="Filter Title..."
+            value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
-              table
-                .getColumn("customerEmail")
-                ?.setFilterValue(event.target.value)
+              table.getColumn("title")?.setFilterValue(event.target.value)
             }
             className="max-w-xs"
           />
-          <Input
-            placeholder="Filter Tags..."
-            value={(table.getColumn("tags")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("tags")?.setFilterValue(event.target.value)
-            }
-            className="max-w-xs"
-          />
+          {isRowSelected() && (
+            <Button
+              variant={"outline"}
+              className="border-red-700"
+              onClick={onSelectedRowsDelete}
+            >
+              Delete selected mails
+            </Button>
+          )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
