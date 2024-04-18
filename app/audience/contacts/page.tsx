@@ -94,7 +94,7 @@ export default function Contacts() {
     setConfirming(true);
     if (success) {
       setConfirmTitle("Success");
-      setConfirmDescription("1 custome was removed successfully");
+      setConfirmDescription("1 customer was removed successfully");
     } else {
       setConfirmTitle("Failed");
       setConfirmDescription("An error occurred while removing customer");
