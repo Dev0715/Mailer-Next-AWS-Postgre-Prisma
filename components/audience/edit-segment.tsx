@@ -39,7 +39,7 @@ const EditSegment = ({ onNewSegmentAdded }: PropsType) => {
   const onSaveSegment = () => {
     const error = checkFilters(filters, title, description);
     if (error === "") {
-      onNewSegmentAdded({ title, description, filters });
+      onSegmentEdited({ title, description, filters });
     } else {
       setError(error);
     }
@@ -79,7 +79,7 @@ const EditSegment = ({ onNewSegmentAdded }: PropsType) => {
 
   return (
     <main className="w-full flex flex-col gap-y-4">
-      <p className="text-xl font-semibold">Regular Segment Builder</p>
+      <p className="text-xl font-semibold">Edit Segment: {title}</p>
       <div className="flex items-center gap-2">
         <FaFilter />
         Segment Filters
