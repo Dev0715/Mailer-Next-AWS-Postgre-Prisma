@@ -101,7 +101,7 @@ const EditSegment = ({ onNewSegmentAdded }: PropsType) => {
         ))}
       </div>
       <FormError message={error} />
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-2">
         <Button
           onClick={onAddFilter}
           variant={"outline"}
@@ -126,7 +126,7 @@ const EditSegment = ({ onNewSegmentAdded }: PropsType) => {
             className="min-w-48 flex items-center gap-x-2 border-green-700"
           >
             <FaCheck />
-            Register
+            Save
           </Button>
         </div>
       </div>
