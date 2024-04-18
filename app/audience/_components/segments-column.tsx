@@ -12,17 +12,23 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Segment } from "@/shared/segment-type";
+import { FilterType } from "@/shared/filter-type";
 
 type PropsType = {
   onSegmentDelete: (segment: Segment) => void;
+  isPending: boolean;
 };
 
-export const getColumnsForSegmentsTable = ({ onSegmentDelete }: PropsType) => {
+export const getColumnsForSegmentsTable = ({
+  onSegmentDelete,
+  isPending
+}: PropsType) => {
   const columns: ColumnDef<Segment>[] = [
     {
       id: "select",
       header: ({ table }) => (
         <Checkbox
+          disabled={isPending}
           checked={
             table.getIsAllPageRowsSelected() ||
             (table.getIsSomePageRowsSelected() && "indeterminate")
