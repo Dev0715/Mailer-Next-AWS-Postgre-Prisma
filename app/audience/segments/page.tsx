@@ -217,7 +217,54 @@ const Segments = () => {
     console.log(segment);
   };
 
-  const onSegmentEdit = (segment: Segment) => {};
+  const setEditedConfirming = (success: boolean) => {
+    setConfirming(true);
+    if (success) {
+      setConfirmTitle("Success");
+      setConfirmDescription("1 segment was updated successfully");
+    } else {
+      setConfirmTitle("Failure");
+      setConfirmDescription("An error occurred while updating segments");
+    }
+  };
+
+  const onSegmentEdit = (segment: Segment) => {
+    setEditing(true);
+    setEditingSegment(segment);
+  };
+
+  const onSgemendEdited = ({
+    title,
+    description,
+    filters
+  }: SegmentAddition) => {
+    setEditing(false);
+    startTransition(() => {
+      const updatedSegment = {
+        ...editingSegment,
+        title,
+        description,
+        filters
+      };
+      updateSegment(updatedSegment as Segment)
+        .then((res) => {
+          if (res) {
+            const newList = segments.map((segment) =>
+              segment.segmentId === updatedSegment.segmentId
+                ? (updatedSegment as Segment)
+                : segment
+            );
+            setSegments(newList);
+            setEditedConfirming(true);
+          } else {
+            setEditedConfirming(false);
+          }
+        })
+        .then((error) => {
+          setEditedConfirming(false);
+        });
+    });
+  };
 
   const columns = getColumnsForSegmentsTable({
     onSegmentDelete,
