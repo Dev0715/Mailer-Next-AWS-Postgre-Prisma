@@ -263,7 +263,7 @@ const Segments = () => {
             setEditedConfirming(false);
           }
         })
-        .then((error) => {
+        .catch((error) => {
           setEditedConfirming(false);
         });
     });
