@@ -213,9 +213,12 @@ const Segments = () => {
     console.log(segment);
   };
 
+  const onSegmentEdit = (segment: Segment) => {};
+
   const columns = getColumnsForSegmentsTable({
     onSegmentDelete,
     onSegmentDetails,
+    onSegmentEdit,
     isPending
   });
   const table = useReactTable({
