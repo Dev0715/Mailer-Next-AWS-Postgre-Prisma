@@ -86,8 +86,8 @@ export default function Contacts() {
           : customer
       );
       setCustomers(newCustomers);
-      setEditing(false);
     }
+    setEditing(false);
   };
 
   const setDeletedConfirming = (success: boolean) => {
