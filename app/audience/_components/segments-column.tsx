@@ -16,11 +16,13 @@ import { FilterType } from "@/shared/filter-type";
 
 type PropsType = {
   onSegmentDelete: (segment: Segment) => void;
+  onSegmentDetails: (segment: Segment) => void;
   isPending: boolean;
 };
 
 export const getColumnsForSegmentsTable = ({
   onSegmentDelete,
+  onSegmentDetails,
   isPending
 }: PropsType) => {
   const columns: ColumnDef<Segment>[] = [
@@ -115,7 +117,9 @@ export const getColumnsForSegmentsTable = ({
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem>Copy Segment Info</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onSegmentDetails(segment)}>
+                  View Segment Details
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => onSegmentDelete(segment)}>
                   Delete Segment
