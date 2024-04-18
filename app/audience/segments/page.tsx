@@ -280,6 +280,20 @@ const Segments = () => {
         onAlertDialogClosed={() => setConfirming(false)}
       />
 
+      {/** Edit Segment */}
+      <Dialog
+        open={isEditing}
+        onOpenChange={(newStatus) => setEditing(newStatus)}
+      >
+        <DialogContent>
+          <EditSegment
+            onSegmentEdited={onSgemendEdited}
+            editingSegment={editingSegment as Segment}
+          />
+        </DialogContent>
+      </Dialog>
+
+      {/** Add Segment */}
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-4xl text-green-700 font-semibold">All Segments</p>
         <Dialog
