@@ -7,7 +7,7 @@ import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 import { getColumnsForSegmentsTable } from "../_components/segments-column";
 import { Segment, SegmentAddition } from "@/shared/segment-type";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
   ColumnFiltersState,
   SortingState,
