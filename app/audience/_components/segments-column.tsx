@@ -67,9 +67,10 @@ export const getColumnsForSegmentsTable = ({
     {
       accessorKey: "filters",
       header: () => <div className="text-center">Filters</div>,
-      cell: ({ row }) => (
-        <div className="text-center font-medium">{row.getValue("filters")}</div>
-      )
+      cell: ({ row }) => {
+        const filters: FilterType[] = row.getValue("filters");
+        return <div className="text-center font-medium">{filters.length}</div>;
+      }
     },
     {
       accessorKey: "created",
