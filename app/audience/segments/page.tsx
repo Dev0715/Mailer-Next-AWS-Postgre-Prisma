@@ -1,10 +1,5 @@
 "use client";
 
-import CampaignItem from "@/app/campaign/_components/campaign-item";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
-import { FaPlus } from "react-icons/fa";
 import { getColumnsForSegmentsTable } from "../_components/segments-column";
 import { Segment, SegmentAddition } from "@/shared/segment-type";
 import { useEffect, useState, useTransition } from "react";
