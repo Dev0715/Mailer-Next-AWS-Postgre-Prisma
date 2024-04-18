@@ -1,34 +1,30 @@
+"use sever";
+
 import db from "@/lib/db";
-import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
-import { generateVerificationToken } from "@/lib/tokens";
+import { Segment } from "@/shared/segment-type";
+import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
-const TableName = process.env.AWS_DYNAMODB_USER_TABLE_NAME;
+const TableName = process.env.AWS_DYNAMODB_SEGMENTS_TABLE_NAME;
 
-interface UserSetPassword {
-  email: string;
-  password: string;
-  emailVerified: Date;
-}
-
-export const updateUserPassword = async (data: UserSetPassword) => {
+export const updateSegment = async (segment: Segment) => {
   const command = new UpdateCommand({
     TableName,
-    Key: { email: data.email },
+    Key: { userEmail: segment.userEmail, segmentId: segment.segmentId },
     UpdateExpression:
-      "SET password = :password, emailVerified = :emailVerified",
+      "SET title = :title, description = :description, filters = :filters",
     ExpressionAttributeValues: {
-      ":password": data.password,
-      ":emailVerified": data.emailVerified.toISOString()
+      ":title": segment.title,
+      ":description": segment.description,
+      ":filters": segment.filters
     },
     ReturnValues: "ALL_NEW"
   });
 
   try {
     const response = await db.send(command);
-    console.log("__updateUserPassword__UpdateCommand__RESPONSE", response);
     return response.Attributes;
   } catch (error) {
-    console.log("__updateUserPassword__UpdateCommand__ERROR", error);
+    console.error(error);
     return null;
   }
 };
