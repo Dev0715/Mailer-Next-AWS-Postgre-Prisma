@@ -65,39 +65,133 @@ const Segments = () => {
     return Object.keys(rowSelection).length > 0;
   };
 
+  const setAddedConfirming = (success: boolean) => {
+    setConfirming(true);
+    if (success) {
+      setConfirmTitle("Success");
+      setConfirmDescription("New segment was added successfully");
+    } else {
+      setConfirmTitle("Failure");
+      setConfirmDescription("An error occurred while adding new segment");
+    }
+  };
+
   const onNewSegmentAdded = ({
     title,
     description,
     filters
-  }: {
-    title: string;
-    description: string;
-    filters: FilterType[];
-  }) => {
-    setDialogOpen(false);
-    createSegment({
-      ownerEmail: user?.email as string,
-      segmentId: uuidv4(),
-      title,
-      description,
-      filters,
-      created: new Date().toISOString(),
-      lastChanged: new Date().toISOString()
-    })
-      .then((res) => {
-        if (res.success) {
-        }
-      })
-      .catch((res) => {});
+  }: SegmentAddition) => {
+    setAdding(false);
+    startTransition(() => {
+      const newSegment = {
+        userEmail: user?.email as string,
+        segmentId: uuidv4(),
+        title,
+        description,
+        filters,
+        created: new Date().toISOString(),
+        lastChanged: new Date().toISOString()
+      };
+      createSegment(newSegment)
+        .then((res) => {
+          if (res.success) {
+            setSegments((prev) => [...prev]);
+            setAddedConfirming(true);
+          } else {
+            setAddedConfirming(false);
+          }
+        })
+        .catch((error) => {
+          setAddedConfirming(false);
+        });
+    });
   };
+
+  const onSegmentDelete = () => {};
+
+  const onSegmentDeleted = () => {};
+
+  const onSelectedRowsDelete = () => {
+    setDeletingMulti(true);
+  };
+
+  const onSelectedRowsDeleted = () => {
+    const selectedSegmentIds = Object.keys(rowSelection).map(
+      (index) => segments[Number(index)].segmentId
+    );
+
+    const newList = [...segments];
+    Object.keys(rowSelection)
+      .map((index) => Number(index))
+      .reverse()
+      .map((index) => {
+        newList.splice(index, 1);
+      });
+    setSegments(newList);
+
+    table.toggleAllPageRowsSelected(false);
+
+    setConfirming(true);
+    setConfirmTitle("Success");
+    setConfirmDescription("Selected segments were removed successfully");
+  };
+
+  const onDeleteCancelled = (isOpen: boolean) => {
+    setDeleting(isOpen);
+    setDeletingMulti(isOpen);
+  };
+
+  const columns = getColumnsForSegmentsTable({});
+  const table = useReactTable({
+    data: segments,
+    columns,
+    onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      rowSelection
+    }
+  });
 
   return (
     <main className="w-5/6 flex flex-col py-6">
+      {/** Delete 1 Customer */}
+      <QuestionAlert
+        open={isDeleting}
+        title="Delete Customer"
+        description={`Are you sure to delete ${deletingSegmentId} from your mailing list?`}
+        onAlertDialogClosed={onDeleteCancelled}
+        onContinue={onSegmentDeleted}
+      >
+        <p>
+          Are you sure to delete{" "}
+          <span className="font-bold text-red-700">{deletingSegmentId}</span>{" "}
+          from your mailing list?
+        </p>
+      </QuestionAlert>
+
+      {/** Delete Selected Customers */}
+      <QuestionAlert
+        open={isDeletingMulti}
+        title="Delete Customers"
+        description="Are you sure to delete selected emails from your mailing list?"
+        onAlertDialogClosed={onDeleteCancelled}
+        onContinue={onSelectedRowsDeleted}
+      />
+
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-4xl text-green-700 font-semibold">All Segments</p>
         <Dialog
-          open={dialogOpen}
-          onOpenChange={(newStatus) => setDialogOpen(newStatus)}
+          open={isAdding}
+          onOpenChange={(newStatus) => setAdding(newStatus)}
         >
           <DialogTrigger asChild>
             <Button variant="default" className="w-64 flex gap-x-4">
