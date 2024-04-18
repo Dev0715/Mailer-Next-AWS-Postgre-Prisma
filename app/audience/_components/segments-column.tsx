@@ -126,7 +126,9 @@ export const getColumnsForSegmentsTable = ({
                 <DropdownMenuItem onClick={() => onSegmentDelete(segment)}>
                   Delete Segment
                 </DropdownMenuItem>
-                <DropdownMenuItem>Edit Segment</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onSegmentEdit(segment)}>
+                  Edit Segment
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
