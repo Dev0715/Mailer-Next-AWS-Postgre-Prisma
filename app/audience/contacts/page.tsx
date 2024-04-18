@@ -90,6 +90,17 @@ export default function Contacts() {
     }
   };
 
+  const setDeletedConfirming = (success: boolean) => {
+    setConfirming(true);
+    if (success) {
+      setConfirmTitle("Success");
+      setConfirmDescription("1 custome was removed successfully");
+    } else {
+      setConfirmTitle("Failed");
+      setConfirmDescription("An error occurred while removing customer");
+    }
+  };
+
   const onCustomerDelete = (customer: Customer) => {
     setDeletingEmail(customer.customerEmail);
     setDeleting(true);
