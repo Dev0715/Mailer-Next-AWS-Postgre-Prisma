@@ -203,6 +203,14 @@ const Segments = () => {
         onContinue={onSelectedRowsDeleted}
       />
 
+      {/** Confirm Alert */}
+      <ConfirmAlert
+        open={isConfirming}
+        title={confirmTitle}
+        description={confirmDescription}
+        onAlertDialogClosed={() => setConfirming(false)}
+      />
+
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-4xl text-green-700 font-semibold">All Segments</p>
         <Dialog
