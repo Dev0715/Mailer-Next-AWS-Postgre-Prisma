@@ -235,6 +235,7 @@ const Segments = () => {
       <div className="w-full flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
           <Input
+            disabled={isPending}
             placeholder="Filter Title..."
             value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
