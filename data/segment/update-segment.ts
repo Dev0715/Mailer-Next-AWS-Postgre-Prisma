@@ -1,4 +1,4 @@
-"use sever";
+"use server";
 
 import db from "@/lib/db";
 import { Segment } from "@/shared/segment-type";
