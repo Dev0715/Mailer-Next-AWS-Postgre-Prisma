@@ -43,6 +43,7 @@ import { deleteSegments } from "@/data/segment/delete-segments";
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
 import EditSegment from "@/components/audience/edit-segment";
+import { updateSegment } from "@/data/segment/update-segment";
 
 const Segments = () => {
   const user = useCurrentUser();
@@ -246,8 +247,10 @@ const Segments = () => {
         description,
         filters
       };
+      console.log(updatedSegment);
       updateSegment(updatedSegment as Segment)
         .then((res) => {
+          console.log(res);
           if (res) {
             const newList = segments.map((segment) =>
               segment.segmentId === updatedSegment.segmentId
