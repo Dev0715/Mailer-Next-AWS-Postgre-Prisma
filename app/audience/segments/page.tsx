@@ -132,16 +132,29 @@ const Segments = () => {
       (index) => segments[Number(index)].segmentId
     );
 
-    const newList = [...segments];
-    Object.keys(rowSelection)
-      .map((index) => Number(index))
-      .reverse()
-      .map((index) => {
-        newList.splice(index, 1);
-      });
-    setSegments(newList);
-
-    table.toggleAllPageRowsSelected(false);
+    startTransition(() => {
+      deleteSegments(user?.email as string, selectedSegmentIds)
+        .then((res) => {
+          if (res.success) {
+            const newList = [...segments];
+            Object.keys(rowSelection)
+              .map((index) => Number(index))
+              .reverse()
+              .map((index) => {
+                newList.splice(index, 1);
+              });
+            setSegments(newList);
+            setSelectedRowsDeletedConfirming(true);
+          } else {
+            setSelectedRowsDeletedConfirming(false);
+          }
+          table.toggleAllPageRowsSelected(false);
+        })
+        .catch((error) => {
+          setSelectedRowsDeletedConfirming(false);
+          table.toggleAllPageRowsSelected(false);
+        });
+    });
 
     setConfirming(true);
     setConfirmTitle("Success");
