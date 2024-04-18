@@ -138,6 +138,17 @@ export default function Contacts() {
     return Object.keys(rowSelection).length > 0;
   };
 
+  const setSelectedRowsDeletedConfirming = (success: boolean) => {
+    setConfirming(true);
+    if (success) {
+      setConfirmTitle("Success");
+      setConfirmDescription("Selected emails were removed successfully");
+    } else {
+      setConfirmTitle("Failure");
+      setConfirmDescription("An error occurred while removing emails");
+    }
+  };
+
   const onSelectedRowsDelete = () => {
     setDeletingMulti(true);
   };
