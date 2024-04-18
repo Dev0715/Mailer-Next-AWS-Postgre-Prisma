@@ -122,9 +122,7 @@ const Segments = () => {
     setDeletingSegmentId(segment.segmentId);
   };
 
-  const onSegmentDeleted = () => {
-    setDeleting(true);
-  };
+  const onSegmentDeleted = () => {};
 
   const onSelectedRowsDelete = () => {
     setDeletingMulti(true);
@@ -156,8 +154,13 @@ const Segments = () => {
     setDeletingMulti(isOpen);
   };
 
+  const onSegmentDetails = (segment: Segment) => {
+    console.log(segment);
+  };
+
   const columns = getColumnsForSegmentsTable({
     onSegmentDelete,
+    onSegmentDetails,
     isPending
   });
   const table = useReactTable({
