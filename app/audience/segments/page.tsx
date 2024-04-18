@@ -105,7 +105,7 @@ const Segments = () => {
       createSegment(newSegment)
         .then((res) => {
           if (res.success) {
-            setSegments((prev) => [...prev]);
+            setSegments((prev) => [...prev, newSegment]);
             setAddedConfirming(true);
           } else {
             setAddedConfirming(false);
