@@ -13,9 +13,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Segment } from "@/shared/segment-type";
 
-type PropsType = {};
+type PropsType = {
+  onSegmentDelete: (segment: Segment) => void;
+};
 
-export const getColumnsForSegmentsTable = ({}: PropsType) => {
+export const getColumnsForSegmentsTable = ({ onSegmentDelete }: PropsType) => {
   const columns: ColumnDef<Segment>[] = [
     {
       id: "select",
