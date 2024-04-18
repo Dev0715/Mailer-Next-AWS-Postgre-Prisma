@@ -39,6 +39,7 @@ export const getColumnsForSegmentsTable = ({
       ),
       cell: ({ row }) => (
         <Checkbox
+          disabled={isPending}
           checked={row.getIsSelected()}
           onCheckedChange={(value) => row.toggleSelected(!!value)}
           aria-label="Select row"
