@@ -11,17 +11,10 @@ import {
 } from "@/lib/filter-customer";
 import { FormError } from "../utils/form-error";
 import { Input } from "../ui/input";
+import { SegmentAddition } from "@/shared/segment-type";
 
 type PropsType = {
-  onNewSegmentAdded: ({
-    title,
-    description,
-    filters
-  }: {
-    title: string;
-    description: string;
-    filters: FilterType[];
-  }) => void;
+  onNewSegmentAdded: ({ title, description, filters }: SegmentAddition) => void;
 };
 
 const AddSement = ({ onNewSegmentAdded }: PropsType) => {
