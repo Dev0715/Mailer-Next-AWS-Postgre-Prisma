@@ -107,7 +107,9 @@ const Segments = () => {
     });
   };
 
-  const onSegmentDelete = () => {};
+  const onSegmentDelete = () => {
+    setDeleting(true);
+  };
 
   const onSegmentDeleted = () => {};
 
