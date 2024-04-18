@@ -14,17 +14,19 @@ import {
 import { Segment } from "@/shared/segment-type";
 import { FilterType } from "@/shared/filter-type";
 
-type PropsType = {
+type Props = {
   onSegmentDelete: (segment: Segment) => void;
   onSegmentDetails: (segment: Segment) => void;
+  onSegmentEdit: (segment: Segment) => void;
   isPending: boolean;
 };
 
 export const getColumnsForSegmentsTable = ({
   onSegmentDelete,
   onSegmentDetails,
+  onSegmentEdit,
   isPending
-}: PropsType) => {
+}: Props) => {
   const columns: ColumnDef<Segment>[] = [
     {
       id: "select",
