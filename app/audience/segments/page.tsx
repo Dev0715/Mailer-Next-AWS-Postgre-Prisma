@@ -116,12 +116,55 @@ const Segments = () => {
     });
   };
 
-  const onSegmentDelete = (segment: Segment) => {
-    setDeleting(true);
-    setDeletingSegmentId(segment.segmentId);
+  const setDeleteConfirming = (success: boolean) => {
+    setConfirming(true);
+    if (success) {
+      setConfirmTitle("Success");
+      setConfirmDescription("1 segment was deleted successfully");
+    } else {
+      setConfirmTitle("Failure");
+      setConfirmDescription("An error occured while deleting segment");
+    }
   };
 
-  const onSegmentDeleted = () => {};
+  const onSegmentDelete = (segment: Segment) => {
+    setDeleting(true);
+    setDeletingSegment(segment);
+  };
+
+  const onSegmentDeleted = () => {
+    startTransition(() => {
+      deleteSegment(user?.email as string, deletingSegment?.segmentId as string)
+        .then((res) => {
+          if (res.success) {
+            // # Need to update to use splice function instead? #
+            const newList = segments.filter(
+              (item) => item.segmentId !== deletingSegment?.segmentId
+            );
+            setSegments(newList);
+            setDeleteConfirming(true);
+          } else {
+            setDeleteConfirming(false);
+          }
+          table.toggleAllPageRowsSelected(false);
+        })
+        .catch((error) => {
+          setDeleteConfirming(false);
+          table.toggleAllPageRowsSelected(false);
+        });
+    });
+  };
+
+  const setSelectedRowsDeletedConfirming = (success: boolean) => {
+    setConfirming(true);
+    if (success) {
+      setConfirmTitle("Success");
+      setConfirmDescription("Selected segments were removed successfully");
+    } else {
+      setConfirmTitle("Failure");
+      setConfirmDescription("An error occurred while removing segments");
+    }
+  };
 
   const onSelectedRowsDelete = () => {
     setDeletingMulti(true);
