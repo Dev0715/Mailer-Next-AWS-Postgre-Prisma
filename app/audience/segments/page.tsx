@@ -38,6 +38,10 @@ import { v4 as uuidv4 } from "uuid";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { deleteSegment } from "@/data/segment/delete-segment";
+import { deleteSegments } from "@/data/segment/delete-segments";
+import { Button } from "@/components/ui/button";
+import { FaPlus } from "react-icons/fa";
 
 const Segments = () => {
   const user = useCurrentUser();
