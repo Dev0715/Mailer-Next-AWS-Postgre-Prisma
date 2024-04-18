@@ -116,20 +116,14 @@ export default function Contacts() {
               (item) => item.customerEmail !== deletingEmail
             );
             setCustomers(newList);
-            setConfirming(true);
-            setConfirmTitle("Success");
-            setConfirmDescription("1 custome was removed successfully");
+            setDeletedConfirming(true);
           } else {
-            setConfirming(true);
-            setConfirmTitle("Failed");
-            setConfirmDescription("An error occurred while removing customer");
+            setDeletedConfirming(false);
           }
           table.toggleAllPageRowsSelected(false);
         })
         .catch((error) => {
-          setConfirming(true);
-          setConfirmTitle("Failed");
-          setConfirmDescription("An error occurred while removing customer");
+          setDeletedConfirming(false);
           table.toggleAllPageRowsSelected(false);
         });
     });
