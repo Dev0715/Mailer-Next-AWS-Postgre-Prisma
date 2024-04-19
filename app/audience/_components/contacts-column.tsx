@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -51,7 +51,7 @@ export const getColumnsForContactsTable = ({
       enableHiding: false
     },
     {
-      accessorKey: "customerEmail",
+      accessorKey: "subscriberEmail",
       header: ({ column }) => {
         return (
           <Button
@@ -64,7 +64,7 @@ export const getColumnsForContactsTable = ({
         );
       },
       cell: ({ row }) => (
-        <div className="lowercase">{row.getValue("customerEmail")}</div>
+        <div className="lowercase">{row.getValue("subscriberEmail")}</div>
       )
     },
     {
@@ -205,7 +205,7 @@ export const getColumnsForContactsTable = ({
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
                 onClick={() =>
-                  navigator.clipboard.writeText(customer.customerEmail)
+                  navigator.clipboard.writeText(customer.subscriberEmail)
                 }
               >
                 Copy Customer Email
