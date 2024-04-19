@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger
 } from "@/components/ui/popover";
-import { FilterType } from "@/shared/filter-type";
+import { Filter } from "@/shared/filter-type";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
@@ -19,19 +19,25 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 
 type PropsType = {
-  filter: FilterType;
-  onConditionChange: (value: string) => void;
-  onValueChange: (value: string) => void;
+  disabled?: boolean;
+  filter: Filter;
+  onConditionChange?: (value: string) => void;
+  onValueChange?: (value: string) => void;
 };
 
 export const DateCondition = ({
+  disabled,
   filter,
   onConditionChange,
   onValueChange
 }: PropsType) => {
   return (
     <div className="w-full flex items-center gap-x-6">
-      <Select value={filter.condition} onValueChange={onConditionChange}>
+      <Select
+        disabled={disabled}
+        value={filter.condition}
+        onValueChange={onConditionChange}
+      >
         <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
           <SelectValue placeholder="Select a condition" />
         </SelectTrigger>
