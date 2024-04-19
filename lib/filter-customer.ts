@@ -1,7 +1,7 @@
 import { Filter } from "@/shared/filter-type";
 
 export const filterAttributes = [
-  { value: "customerEmail", name: "Email" },
+  { value: "subscriberEmail", name: "Email" },
   { value: "firstName", name: "First Name" },
   { value: "lastName", name: "Last Name" },
   { value: "address", name: "Address" },

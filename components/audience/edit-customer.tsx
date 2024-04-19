@@ -79,7 +79,7 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
   const form = useForm<z.infer<typeof EditContactSchema>>({
     resolver: zodResolver(EditContactSchema),
     defaultValues: {
-      email: customer?.customerEmail,
+      email: customer?.subscriberEmail,
       firstName: customer?.firstName,
       lastName: customer?.lastName,
       address: customer?.address,
@@ -100,8 +100,8 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
         });
       }
       const newCustomer: Customer = {
-        ownerEmail: user?.email as string,
-        customerEmail: values.email,
+        userEmail: user?.email as string,
+        subscriberEmail: values.email,
         firstName: values.firstName,
         lastName: values.lastName,
         address: values.address,
