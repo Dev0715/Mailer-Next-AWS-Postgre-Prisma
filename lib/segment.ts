@@ -1,5 +1,5 @@
 import { Filter } from "@/shared/filter-type";
-import { isTypeOfString } from "./filter-customer";
+import { isTypeOfString, isTypeOfSubscribed } from "./filter-customer";
 
 interface Customer {
   [key: string]: any;
@@ -11,15 +11,19 @@ const isFiltered = (customer: Customer, filters: Filter[]) => {
     if (isTypeOfString(filter.attribute)) {
       if (
         filter.condition === "contains" &&
-        customer[filter.attribute].includes(filter.value)
-      )
-        return true;
-      else if (
-        filter.condition === "not-contains" &&
         !customer[filter.attribute].includes(filter.value)
       )
-        return true;
-    }
+        return false;
+      else if (
+        filter.condition === "not-contains" &&
+        customer[filter.attribute].includes(filter.value)
+      )
+        return false;
+    } else if (isTypeOfSubscribed(filter.attribute) {
+      if(customer.subscribed !== filter.value) {
+        
+      }
+    })
   }
-  return false;
+  return true;
 };
