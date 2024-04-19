@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Segment } from "@/shared/segment-type";
-import { FilterType } from "@/shared/filter-type";
+import { Filter } from "@/shared/filter-type";
 
 type Props = {
   onSegmentDelete: (segment: Segment) => void;
@@ -72,7 +72,7 @@ export const getColumnsForSegmentsTable = ({
       accessorKey: "filters",
       header: () => <div className="text-center">Filters</div>,
       cell: ({ row }) => {
-        const filters: FilterType[] = row.getValue("filters");
+        const filters: Filter[] = row.getValue("filters");
         return <div className="text-center font-medium">{filters.length}</div>;
       }
     },
