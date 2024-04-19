@@ -11,22 +11,23 @@ import {
 } from "@/lib/filter-customer";
 import { FormError } from "../utils/form-error";
 import { Input } from "../ui/input";
-import { SegmentAddition } from "@/shared/segment-type";
+import { Segment, SegmentAddition } from "@/shared/segment-type";
 
-type PropsType = {
-  onNewSegmentAdded: ({ title, description, filters }: SegmentAddition) => void;
+type Props = {
+  onSegmentEdited: ({ title, description, filters }: SegmentAddition) => void;
+  editingSegment: Segment;
 };
 
-const EditSegment = ({ onNewSegmentAdded }: PropsType) => {
+const EditSegment = ({ onSegmentEdited, editingSegment }: Props) => {
   const user = useCurrentUser();
 
   const [error, setError] = useState("");
   const [storedTags, setStoredTags] = useState<string[]>([]);
-  const [filters, setFilters] = useState<FilterType[]>([
-    { attribute: "", condition: "", value: "" }
-  ]);
-  const [title, setTitle] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const [filters, setFilters] = useState<FilterType[]>(editingSegment.filters);
+  const [title, setTitle] = useState<string>(editingSegment.title);
+  const [description, setDescription] = useState<string>(
+    editingSegment.description
+  );
 
   useEffect(() => {
     getUserByEmail(user?.email as string).then((res) => {
