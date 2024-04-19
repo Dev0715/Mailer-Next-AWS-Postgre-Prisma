@@ -10,7 +10,7 @@ interface Customer {
   [key: string]: any;
 }
 
-const isFiltered = (customer: Customer, filters: Filter[]) => {
+export const isFiltered = (customer: Customer, filters: Filter[]) => {
   for (let i = 0; i < filters.length; i++) {
     const attribute = filters[i].attribute;
     const condition = filters[i].condition;
