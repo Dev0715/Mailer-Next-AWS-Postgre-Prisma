@@ -42,7 +42,11 @@ export const FilterBar = ({
   return (
     <main className="w-full flex items-center justify-between px-6 py-4 border rounded-none">
       <div className="w-full flex items-center gap-x-6">
-        <Select value={filter.attribute} onValueChange={onAttributeChange}>
+        <Select
+          disabled={disabled}
+          value={filter.attribute}
+          onValueChange={onAttributeChange}
+        >
           <SelectTrigger className="min-w-[240px] w-60 px-4 bg-gray-200 rounded-full">
             <SelectValue placeholder="Select a filter" />
           </SelectTrigger>
