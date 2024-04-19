@@ -219,7 +219,8 @@ const Segments = () => {
   };
 
   const onSegmentDetails = (segment: Segment) => {
-    console.log(segment);
+    setMonitoring(true);
+    setMonitoringSegment(segment);
   };
 
   const setEditedConfirming = (success: boolean) => {
