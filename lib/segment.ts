@@ -32,6 +32,16 @@ const isFiltered = (customer: Customer, filters: Filter[]) => {
         return false;
       }
     } else if (isTypeOfDate(attribute)) {
+      const customerDate = new Date(customer[attribute]);
+      const conditionDate = new Date(value);
+      if (condition === "is-after" && customerDate < conditionDate)
+        return false;
+      else if (condition === "is-before" && customerDate > conditionDate)
+        return false;
+      else if (condition === "is") {
+        if (customerDate.getFullYear() !== conditionDate.getFullYear())
+          return false;
+      }
     }
     if (isTypeOfString(attribute)) {
       if (condition === "contains" && !customer[attribute].includes(value))
