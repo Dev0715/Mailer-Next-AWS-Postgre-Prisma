@@ -46,6 +46,7 @@ export const DateCondition = ({
       <Popover>
         <PopoverTrigger asChild>
           <Button
+            disabled={disabled}
             variant={"outline"}
             className={cn(
               "w-60 pl-3 text-left font-normal",
@@ -64,7 +65,11 @@ export const DateCondition = ({
           <Calendar
             mode="single"
             selected={new Date(filter.value)}
-            onSelect={(date) => onValueChange(date?.toISOString() as string)}
+            onSelect={
+              onValueChange
+                ? (date) => onValueChange(date?.toISOString() as string)
+                : undefined
+            }
             disabled={(date) =>
               date > new Date() || date < new Date("1900-01-01")
             }
