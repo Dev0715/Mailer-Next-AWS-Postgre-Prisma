@@ -1,4 +1,4 @@
-import { FilterType } from "@/shared/filter-type";
+import { Filter } from "@/shared/filter-type";
 
 export const filterAttributes = [
   { value: "customerEmail", name: "Email" },
@@ -39,7 +39,7 @@ export const defaultConditionOfAttribute = (keyName: string) => {
 };
 
 export const checkFilters = (
-  filters: FilterType[],
+  filters: Filter[],
   title: string,
   description: string
 ) => {

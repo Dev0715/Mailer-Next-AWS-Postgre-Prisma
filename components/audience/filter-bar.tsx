@@ -14,7 +14,7 @@ import {
   isTypeOfTags
 } from "@/lib/filter-customer";
 import { Button } from "../ui/button";
-import { FilterType } from "@/shared/filter-type";
+import { Filter } from "@/shared/filter-type";
 import { StringCondition } from "./condition-tags/string-condition";
 import { SubscribedCondition } from "./condition-tags/subscribe-condition";
 import { DateCondition } from "./condition-tags/date-condition";
@@ -22,7 +22,7 @@ import { TagsCondition } from "./condition-tags/tag-condition";
 
 type PropsType = {
   disabled?: boolean;
-  filter: FilterType;
+  filter: Filter;
   storedTags: string[];
   onAttributeChange?: (value: string) => void;
   onConditionChange?: (value: string) => void;
