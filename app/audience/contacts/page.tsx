@@ -81,7 +81,7 @@ export default function Contacts() {
   const onCustomerEdited = (success: boolean, updatedCustomer?: Customer) => {
     if (success) {
       const newCustomers = customers.map((customer) =>
-        customer.customerEmail === updatedCustomer?.customerEmail
+        customer.subscriberEmail === updatedCustomer?.subscriberEmail
           ? updatedCustomer
           : customer
       );
@@ -102,7 +102,7 @@ export default function Contacts() {
   };
 
   const onCustomerDelete = (customer: Customer) => {
-    setDeletingEmail(customer.customerEmail);
+    setDeletingEmail(customer.subscriberEmail);
     setDeleting(true);
   };
 
@@ -113,7 +113,7 @@ export default function Contacts() {
           if (res.success) {
             // # Need to update to use splice function instead? #
             const newList = customers.filter(
-              (item) => item.customerEmail !== deletingEmail
+              (item) => item.subscriberEmail !== deletingEmail
             );
             setCustomers(newList);
             setDeletedConfirming(true);
@@ -155,7 +155,7 @@ export default function Contacts() {
 
   const onSelectedRowsDeleted = () => {
     const selectedEmails = Object.keys(rowSelection).map(
-      (index) => customers[Number(index)].customerEmail
+      (index) => customers[Number(index)].subscriberEmail
     );
 
     startTransition(() => {
@@ -267,12 +267,13 @@ export default function Contacts() {
             disabled={isPending}
             placeholder="Filter emails..."
             value={
-              (table.getColumn("customerEmail")?.getFilterValue() as string) ??
-              ""
+              (table
+                .getColumn("subscriberEmail")
+                ?.getFilterValue() as string) ?? ""
             }
             onChange={(event) =>
               table
-                .getColumn("customerEmail")
+                .getColumn("subscriberEmail")
                 ?.setFilterValue(event.target.value)
             }
             className="max-w-xs"
