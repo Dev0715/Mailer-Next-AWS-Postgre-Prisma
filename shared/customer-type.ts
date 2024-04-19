@@ -1,6 +1,6 @@
 export type Customer = {
-  ownerEmail: string;
-  customerEmail: string;
+  userEmail: string;
+  subscriberEmail: string;
   firstName: string;
   lastName: string;
   address: string;

@@ -9,7 +9,7 @@ const TableName = process.env.AWS_DYNAMODB_MAILING_LIST_TABLE_NAME;
 export const updateCustomer = async (data: Customer) => {
   const command = new UpdateCommand({
     TableName,
-    Key: { ownerEmail: data.ownerEmail, customerEmail: data.customerEmail },
+    Key: { userEmail: data.userEmail, subscriberEmail: data.subscriberEmail },
     UpdateExpression:
       "SET firstName = :firstName, lastName = :lastName, address = :address, phoneNumber = :phoneNumber, birthday = :birthday, tags = :tags, subscribed = :subscribed, lastChanged = :lastChanged",
     ExpressionAttributeValues: {

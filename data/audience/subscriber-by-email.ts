@@ -5,15 +5,15 @@ import { generateVerificationToken } from "@/lib/tokens";
 const TableName = process.env.AWS_DYNAMODB_MAILING_LIST_TABLE_NAME;
 
 export const getSubscriberByEmail = async ({
-  ownerEmail,
-  customerEmail
+  userEmail,
+  subscriberEmail
 }: {
-  ownerEmail: string;
-  customerEmail: string;
+  userEmail: string;
+  subscriberEmail: string;
 }) => {
   const command = new GetCommand({
     TableName,
-    Key: { ownerEmail, customerEmail }
+    Key: { userEmail, subscriberEmail }
   });
 
   try {
