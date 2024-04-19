@@ -351,7 +351,7 @@ const Segments = () => {
       {/** Monitor Segment */}
       <Dialog
         open={isMornitoring}
-        onOpenChange={(newStatus) => setEditing(newStatus)}
+        onOpenChange={(newStatus) => setMonitoring(newStatus)}
       >
         <DialogContent className="max-w-full w-[960px]">
           <MonitorSegment
