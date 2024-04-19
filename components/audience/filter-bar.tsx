@@ -63,6 +63,7 @@ export const FilterBar = ({
         </Select>
         {isTypeOfTags(filter.attribute) ? (
           <TagsCondition
+            disabled={disabled}
             filter={filter}
             storedTags={storedTags}
             onConditionChange={onConditionChange}
@@ -91,11 +92,13 @@ export const FilterBar = ({
           />
         ) : null}
       </div>
-      <Button variant="ghost">
-        <p className="text-red-700 font-semibold" onClick={onFilterDelete}>
-          Delete
-        </p>
-      </Button>
+      {!disabled ? (
+        <Button variant="ghost">
+          <p className="text-red-700 font-semibold" onClick={onFilterDelete}>
+            Delete
+          </p>
+        </Button>
+      ) : null}
     </main>
   );
 };
