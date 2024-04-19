@@ -117,7 +117,7 @@ const EditSegment = ({ onSegmentEdited, editingSegment }: Props) => {
             value={title}
             onChange={(event) => setTitle(event.target.value)}
           />
-          <p>Descriptioin</p>
+          <p>Description</p>
           <Input
             value={description}
             onChange={(event) => setDescription(event.target.value)}
