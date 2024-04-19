@@ -10,8 +10,8 @@ export const newSubscriber = async (
   updateChecked: boolean
 ) => {
   const existingSubscriber = await getSubscriberByEmail({
-    ownerEmail: values.ownerEmail,
-    customerEmail: values.customerEmail
+    userEmail: values.userEmail,
+    subscriberEmail: values.subscriberEmail
   });
 
   if (existingSubscriber && !updateChecked) {

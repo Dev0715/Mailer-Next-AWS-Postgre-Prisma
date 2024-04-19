@@ -157,8 +157,8 @@ const NewSubscriber = () => {
       }
       newSubscriber(
         {
-          ownerEmail: user?.email as string,
-          customerEmail: values.email,
+          userEmail: user?.email as string,
+          subscriberEmail: values.email,
           firstName: values.firstName,
           lastName: values.lastName,
           address: values.address,
