@@ -64,18 +64,21 @@ export const FilterBar = ({
           />
         ) : isTypeOfSubscribed(filter.attribute) ? (
           <SubscribedCondition
+            disabled={disabled}
             filter={filter}
             onConditionChange={onConditionChange}
             onValueChange={onValueChange}
           />
         ) : isTypeOfDate(filter.attribute) ? (
           <DateCondition
+            disabled={disabled}
             filter={filter}
             onConditionChange={onConditionChange}
             onValueChange={onValueChange}
           />
         ) : isTypeOfString(filter.attribute) ? (
           <StringCondition
+            disabled={disabled}
             filter={filter}
             onConditionChange={onConditionChange}
             onValueChange={onValueChange}
