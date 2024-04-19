@@ -5,12 +5,12 @@ import { QueryCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_MAILING_LIST_TABLE_NAME;
 
-export const getAllCustomersByEmail = async (ownerEmail: string) => {
+export const getAllCustomersByEmail = async (userEmail: string) => {
   const command = new QueryCommand({
     TableName,
-    KeyConditionExpression: "ownerEmail = :ownerEmail",
+    KeyConditionExpression: "userEmail = :userEmail",
     ExpressionAttributeValues: {
-      ":ownerEmail": ownerEmail
+      ":userEmail": userEmail
     }
   });
 

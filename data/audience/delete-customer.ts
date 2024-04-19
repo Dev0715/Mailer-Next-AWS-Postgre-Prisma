@@ -6,12 +6,12 @@ import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 const TableName = process.env.AWS_DYNAMODB_MAILING_LIST_TABLE_NAME;
 
 export const deleteCutomer = async (
-  ownerEmail: string,
-  customerEmail: string
+  userEmail: string,
+  subscriberEmail: string
 ) => {
   const command = new DeleteCommand({
     TableName,
-    Key: { ownerEmail, customerEmail }
+    Key: { userEmail, subscriberEmail }
   });
 
   try {
