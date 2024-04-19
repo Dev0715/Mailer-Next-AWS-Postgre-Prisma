@@ -1,11 +1,11 @@
-import { FilterType } from "./filter-type";
+import { Filter } from "./filter-type";
 
 export type Segment = {
   userEmail: string;
   segmentId: string;
   title: string;
   description: string;
-  filters: FilterType[];
+  filters: Filter[];
   created: string;
   lastChanged: string;
 };
@@ -13,5 +13,5 @@ export type Segment = {
 export type SegmentAddition = {
   title: string;
   description: string;
-  filters: FilterType[];
+  filters: Filter[];
 };
