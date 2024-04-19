@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Segment } from "@/shared/segment-type";
 import { Filter } from "@/shared/filter-type";
+import Link from "next/link";
 
 type Props = {
   onSegmentDelete: (segment: Segment) => void;
@@ -56,7 +57,13 @@ export const getColumnsForSegmentsTable = ({
       accessorKey: "title",
       header: () => <div className="text-center">Title</div>,
       cell: ({ row }) => (
-        <div className="text-center font-medium">{row.getValue("title")}</div>
+        <Button asChild variant={"link"}>
+          <Link href={`/audience/segments/${row.original.segmentId}`}>
+            <div className="text-center font-medium cursor-pointer">
+              {row.getValue("title")}
+            </div>
+          </Link>
+        </Button>
       )
     },
     {
