@@ -7,22 +7,28 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { FilterType } from "@/shared/filter-type";
+import { Filter } from "@/shared/filter-type";
 
 type PropsType = {
-  filter: FilterType;
-  onConditionChange: (value: string) => void;
-  onValueChange: (value: string) => void;
+  disabled?: boolean;
+  filter: Filter;
+  onConditionChange?: (value: string) => void;
+  onValueChange?: (value: string) => void;
 };
 
 export const SubscribedCondition = ({
+  disabled,
   filter,
   onConditionChange,
   onValueChange
 }: PropsType) => {
   return (
     <div className="flex items-center gap-x-6">
-      <Select value={filter.condition} onValueChange={onConditionChange}>
+      <Select
+        disabled={disabled}
+        value={filter.condition}
+        onValueChange={onConditionChange}
+      >
         <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
           <SelectValue placeholder="Select a condition" />
         </SelectTrigger>
@@ -32,7 +38,11 @@ export const SubscribedCondition = ({
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Select value={filter.value} onValueChange={onValueChange}>
+      <Select
+        disabled={disabled}
+        value={filter.value}
+        onValueChange={onValueChange}
+      >
         <SelectTrigger className="w-[240px] px-4 bg-gray-200 rounded-full">
           <SelectValue placeholder="Select a status" />
         </SelectTrigger>
