@@ -14,7 +14,7 @@ export const isFiltered = (customer: Customer, filters: Filter[]) => {
   for (let i = 0; i < filters.length; i++) {
     const attribute = filters[i].attribute;
     const condition = filters[i].condition;
-    const value = filters[i].condition;
+    const value = filters[i].value;
 
     if (isTypeOfTags(attribute)) {
       if (
