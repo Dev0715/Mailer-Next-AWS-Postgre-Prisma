@@ -348,6 +348,19 @@ const Segments = () => {
         </DialogContent>
       </Dialog>
 
+      {/** Monitor Segment */}
+      <Dialog
+        open={isMornitoring}
+        onOpenChange={(newStatus) => setEditing(newStatus)}
+      >
+        <DialogContent className="max-w-full w-[960px]">
+          <MonitorSegment
+            segment={monitoringSegment as Segment}
+            onFinish={() => setMonitoring(false)}
+          />
+        </DialogContent>
+      </Dialog>
+
       {/** Add Segment */}
       <div className="w-full flex items-end justify-between pb-6">
         <p className="text-4xl text-green-700 font-semibold">All Segments</p>
