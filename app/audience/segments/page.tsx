@@ -64,6 +64,9 @@ const Segments = () => {
   const [isEditing, setEditing] = useState<boolean>(false);
   const [editingSegment, setEditingSegment] = useState<Segment>();
 
+  const [isMornitoring, setMonitoring] = useState<boolean>(false);
+  const [monitoringSegment, setMonitoringSegment] = useState<Segment>();
+
   const [isConfirming, setConfirming] = useState<boolean>(false);
   const [confirmTitle, setConfirmTitle] = useState<string>("");
   const [confirmDescription, setConfirmDescription] = useState<string>("");
