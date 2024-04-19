@@ -4,7 +4,7 @@ import { FilterBar } from "./filter-bar";
 import { useEffect, useState } from "react";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { FilterType } from "@/shared/filter-type";
+import { Filter } from "@/shared/filter-type";
 import {
   checkFilters,
   defaultConditionOfAttribute
@@ -23,7 +23,7 @@ const EditSegment = ({ onSegmentEdited, editingSegment }: Props) => {
 
   const [error, setError] = useState("");
   const [storedTags, setStoredTags] = useState<string[]>([]);
-  const [filters, setFilters] = useState<FilterType[]>(editingSegment.filters);
+  const [filters, setFilters] = useState<Filter[]>(editingSegment.filters);
   const [title, setTitle] = useState<string>(editingSegment.title);
   const [description, setDescription] = useState<string>(
     editingSegment.description

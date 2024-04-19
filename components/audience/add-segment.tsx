@@ -4,7 +4,7 @@ import { FilterBar } from "./filter-bar";
 import { useEffect, useState } from "react";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { FilterType } from "@/shared/filter-type";
+import { Filter } from "@/shared/filter-type";
 import {
   checkFilters,
   defaultConditionOfAttribute
@@ -22,7 +22,7 @@ const AddSement = ({ onNewSegmentAdded }: PropsType) => {
 
   const [error, setError] = useState("");
   const [storedTags, setStoredTags] = useState<string[]>([]);
-  const [filters, setFilters] = useState<FilterType[]>([
+  const [filters, setFilters] = useState<Filter[]>([
     { attribute: "", condition: "", value: "" }
   ]);
   const [title, setTitle] = useState<string>("");
