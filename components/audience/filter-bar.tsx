@@ -21,15 +21,17 @@ import { DateCondition } from "./condition-tags/date-condition";
 import { TagsCondition } from "./condition-tags/tag-condition";
 
 type PropsType = {
+  disabled?: boolean;
   filter: FilterType;
   storedTags: string[];
-  onAttributeChange: (value: string) => void;
-  onConditionChange: (value: string) => void;
-  onValueChange: (value: string) => void;
-  onFilterDelete: () => void;
+  onAttributeChange?: (value: string) => void;
+  onConditionChange?: (value: string) => void;
+  onValueChange?: (value: string) => void;
+  onFilterDelete?: () => void;
 };
 
 export const FilterBar = ({
+  disabled,
   filter,
   storedTags,
   onAttributeChange,
