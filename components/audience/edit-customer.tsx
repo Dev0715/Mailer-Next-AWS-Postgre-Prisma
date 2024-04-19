@@ -100,6 +100,7 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
         });
       }
       const newCustomer: Customer = {
+        ...customer,
         userEmail: user?.email as string,
         subscriberEmail: values.email,
         firstName: values.firstName,
