@@ -10,13 +10,15 @@ import {
 import { FilterType } from "@/shared/filter-type";
 
 type PropsType = {
+  disabled?: boolean;
   filter: FilterType;
   storedTags: string[];
-  onConditionChange: (value: string) => void;
-  onValueChange: (value: string) => void;
+  onConditionChange?: (value: string) => void;
+  onValueChange?: (value: string) => void;
 };
 
 export const TagsCondition = ({
+  disabled,
   filter,
   storedTags,
   onConditionChange,
