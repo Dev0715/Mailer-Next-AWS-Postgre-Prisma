@@ -12,33 +12,33 @@ interface Customer {
 
 const isFiltered = (customer: Customer, filters: Filter[]) => {
   for (let i = 0; i < filters.length; i++) {
-    const filter = filters[i];
-    if (isTypeOfTags(filter.attribute)) {
+    const attribute = filters[i].attribute;
+    const condition = filters[i].condition;
+    const value = filters[i].condition;
+
+    if (isTypeOfTags(attribute)) {
       if (
-        filter.condition === "contains" &&
-        !customer.tags.find((tag: string) => tag === filter.value)
+        condition === "contains" &&
+        !customer.tags.find((tag: string) => tag === value)
       )
         return false;
       else if (
-        filter.condition === "not-contains" &&
-        customer.tags.find((tag: string) => tag === filter.value)
+        condition === "not-contains" &&
+        customer.tags.find((tag: string) => tag === value)
       )
         return false;
-    } else if (isTypeOfSubscribed(filter.attribute)) {
-      if (customer.subscribed !== filter.value) {
+    } else if (isTypeOfSubscribed(attribute)) {
+      if (customer.subscribed !== value) {
         return false;
       }
-    } else if (isTypeOfDate(filter.attribute)) {
+    } else if (isTypeOfDate(attribute)) {
     }
-    if (isTypeOfString(filter.attribute)) {
-      if (
-        filter.condition === "contains" &&
-        !customer[filter.attribute].includes(filter.value)
-      )
+    if (isTypeOfString(attribute)) {
+      if (condition === "contains" && !customer[attribute].includes(value))
         return false;
       else if (
-        filter.condition === "not-contains" &&
-        customer[filter.attribute].includes(filter.value)
+        condition === "not-contains" &&
+        customer[attribute].includes(value)
       )
         return false;
     }
