@@ -44,6 +44,7 @@ import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
 import EditSegment from "@/components/audience/edit-segment";
 import { updateSegment } from "@/data/segment/update-segment";
+import MonitorSegment from "@/components/audience/monitor-segment";
 
 const Segments = () => {
   const user = useCurrentUser();
