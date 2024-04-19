@@ -14,6 +14,7 @@ type Props = {
 const MonitorSegment = ({ segment, onFinish }: Props) => {
   const user = useCurrentUser();
   const [storedTags, setStoredTags] = useState<string[]>([]);
+  const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
     getUserByEmail(user?.email as string).then((res) => {
