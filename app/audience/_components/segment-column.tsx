@@ -14,42 +14,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Customer } from "@/shared/customer-type";
 
-type PropsType = {
-  onCustomerDelete: (customer: Customer) => void;
-  onCustomerEdit: (customer: Customer) => void;
-  isPending: boolean;
-};
-
-export const getColumnsForContactsTable = ({
-  onCustomerDelete,
-  onCustomerEdit,
-  isPending
-}: PropsType) => {
+export const getColumnsForContactsTable = () => {
   const columns: ColumnDef<Customer>[] = [
-    {
-      id: "select",
-      header: ({ table }) => (
-        <Checkbox
-          disabled={isPending}
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && "indeterminate")
-          }
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-        />
-      ),
-      cell: ({ row }) => (
-        <Checkbox
-          disabled={isPending}
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false
-    },
     {
       accessorKey: "subscriberEmail",
       header: ({ column }) => {
