@@ -36,6 +36,9 @@ const MonitorSegment = ({ segment, onFinish }: Props) => {
         });
       }
     });
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   return (
