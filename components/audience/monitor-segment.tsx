@@ -20,12 +20,14 @@ const MonitorSegment = ({ segment, onFinish }: Props) => {
   const [count, setCount] = useState<number>(0);
 
   useEffect(() => {
+    let ignore = false;
     getUserByEmail(user?.email as string).then((res) => {
       if (res && res.tags) {
         setStoredTags(res.tags);
       }
     });
     getAllCustomersByEmail(user?.email as string).then((res) => {
+      if (ignore) return;
       if (res) {
         res.map((customer) => {
           if (isFiltered(customer, segment.filters)) {
