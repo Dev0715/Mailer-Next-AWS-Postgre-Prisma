@@ -14,6 +14,24 @@ const NewEmail = () => {
 
   const onReady: EmailEditorProps["onReady"] = () => {
     const unlayer: any = emailEditorRef.current?.editor;
+    unlayer.loadDesign(jsonData);
+  };
+
+  const exportHtml = () => {
+    const unlayer = emailEditorRef.current?.editor;
+
+    unlayer?.exportHtml(async (data) => {
+      const { design, html } = data;
+      setJsonData(design);
+      await sendEmail({
+        userEmail: ["sponsorship@becodemy.com"],
+        subject: subjectTitle,
+        content: html
+      }).then((res) => {
+        toast.success("Email sent successfully!");
+        history.push("/dashboard/write");
+      });
+    });
   };
 
   return (
