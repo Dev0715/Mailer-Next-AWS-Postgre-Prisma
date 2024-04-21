@@ -10,7 +10,21 @@ const NewEmail = () => {
 
   const emailEditorRef = useRef<EditorRef>(null);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getEmailDetails();
+  }, []);
+
+  const getEmailDetails = async () => {
+    await GetEmailDetails({
+      title: subjectTitle,
+      newsLetterOwnerId: user?.id!
+    }).then((res: any) => {
+      if (res) {
+        setJsonData(JSON.parse(res?.content));
+      }
+      setLoading(false);
+    });
+  };
 
   const onReady: EmailEditorProps["onReady"] = () => {
     const unlayer: any = emailEditorRef.current?.editor;
