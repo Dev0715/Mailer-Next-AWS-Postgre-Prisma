@@ -34,6 +34,22 @@ const NewEmail = () => {
     });
   };
 
+  const saveDraft = async () => {
+    const unlayer = emailEditorRef.current?.editor;
+
+    unlayer?.exportHtml(async (data) => {
+      const { design } = data;
+      await saveEmail({
+        title: subjectTitle,
+        content: JSON.stringify(design),
+        newsLetterOwnerId: user?.id!
+      }).then((res: any) => {
+        toast.success(res.message);
+        history.push("/dashboard/write");
+      });
+    });
+  };
+
   return (
     <div className="w-5/6 flex flex-col py-6">
       <p className="text-5xl text-green-700 font-semibold mb-4">
