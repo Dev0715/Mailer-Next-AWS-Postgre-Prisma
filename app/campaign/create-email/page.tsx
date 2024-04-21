@@ -8,6 +8,7 @@ const NewEmail = () => {
 
   const onReady: EmailEditorProps["onReady"] = () => {
     const unlayer: any = emailEditorRef.current?.editor;
+    console.log(unlayer);
   };
 
   return (
