@@ -1,11 +1,24 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { FaArrowRight, FaPlus } from "react-icons/fa";
-import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
+import { z } from "zod";
+import { useState, useTransition } from "react";
+
+const NewCampaignSchema = z.object({
+  title: z
+    .string()
+    .min(6, "Email Title should be at least 6 characters long")
+    .max(72, "Email Title should be a maximum of 72 characters");
+});
 
 const NewCampaign = () => {
+  const [error, setError] = useState<string | undefined>("");
+  const [isPending, startTransition] =useTransition();
+
+  const onNewCampaign = () => {};
+
   return (
     <main className="w-5/6 flex flex-col py-6">
       <p className="text-5xl text-green-700 font-semibold mb-4">
