@@ -16,6 +16,10 @@ import {
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormError } from "@/components/utils/form-error";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { v4 as uuidv4 } from "uuid";
+import { createCampaign } from "@/data/campaign/create-campaign";
+import { useRouter } from "next/navigation";
 
 const NewCampaignSchema = z.object({
   title: z
@@ -25,6 +29,9 @@ const NewCampaignSchema = z.object({
 });
 
 const NewCampaign = () => {
+  const user = useCurrentUser();
+  const router = useRouter();
+
   const [error, setError] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
@@ -39,7 +46,15 @@ const NewCampaign = () => {
     setError("");
 
     startTransition(() => {
-      // create campaign
+      createCampaign(user?.email as string, uuidv4()).then((data) => {
+        if (data.error) {
+          setError(data.error);
+          return;
+        }
+
+        // Redirect to the newly created campaign
+        router.push(`/campaigns/${data.response.Attributes?.campaignId}`);
+      });
     });
   };
 
