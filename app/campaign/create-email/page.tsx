@@ -1,6 +1,6 @@
 "use client";
 
-import { DefaultJsonData } from "@/shared/default-email-json";
+import { DefaultJsonData } from "@/assets/default-email-json";
 import { useEffect, useRef, useState } from "react";
 import EmailEditor, { EditorRef, EmailEditorProps } from "react-email-editor";
 
