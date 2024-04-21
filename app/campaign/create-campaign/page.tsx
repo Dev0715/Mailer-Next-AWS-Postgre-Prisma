@@ -46,14 +46,19 @@ const NewCampaign = () => {
     setError("");
 
     startTransition(() => {
-      createCampaign(user?.email as string, uuidv4()).then((data) => {
+      const newCampaignId = uuidv4();
+      createCampaign({
+        userEmail: user?.email as string,
+        campaignId: newCampaignId,
+        title: values.title
+      }).then((data) => {
         if (data.error) {
-          setError(data.error);
+          setError("Internal Server Error");
           return;
         }
 
         // Redirect to the newly created campaign
-        router.push(`/campaigns/${data.response.Attributes?.campaignId}`);
+        router.push(`/campaigns/${newCampaignId}`);
       });
     });
   };
