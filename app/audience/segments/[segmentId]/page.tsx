@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect, useTransition } from "react";
+import { useState, useEffect } from "react";
 import {
   ColumnFiltersState,
-  RowSelectionState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -38,10 +37,15 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { isFiltered } from "@/lib/segment";
 import { getSegmentById } from "@/data/segment/segment-by-id";
 import { Customer } from "@/shared/customer-type";
+import { Segment } from "@/shared/segment-type";
 
-export default function Segment(params: { segmentId: string }) {
+export default function CustomersInSegment({
+  params
+}: {
+  params: { segmentId: string };
+}) {
   const user = useCurrentUser();
-  const [isPending, startTransition] = useTransition();
+  const [segment, setSegment] = useState<Segment>();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -52,7 +56,6 @@ export default function Segment(params: { segmentId: string }) {
 
   useEffect(() => {
     getSegmentById(user?.email as string, params.segmentId).then((res) => {
-      console.log(res);
       if (res) {
         getAllCustomersByEmail(user?.email as string).then((customers: any) => {
           if (customers) {
@@ -96,7 +99,6 @@ export default function Segment(params: { segmentId: string }) {
       <div className="w-full flex flex-col gap-y-4">
         <div className="flex items-center gap-x-4">
           <Input
-            disabled={isPending}
             placeholder="Filter emails..."
             value={
               (table
@@ -111,7 +113,6 @@ export default function Segment(params: { segmentId: string }) {
             className="max-w-xs"
           />
           <Input
-            disabled={isPending}
             placeholder="Filter Tags..."
             value={(table.getColumn("tags")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
