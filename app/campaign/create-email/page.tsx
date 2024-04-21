@@ -1,14 +1,19 @@
 "use client";
 
-import { useRef } from "react";
+import { DefaultJsonData } from "@/shared/default-email-json";
+import { useEffect, useRef, useState } from "react";
 import EmailEditor, { EditorRef, EmailEditorProps } from "react-email-editor";
 
 const NewEmail = () => {
+  const [isLoading, setLoading] = useState(true);
+  const [jsonData, setJsonData] = useState<any>(DefaultJsonData);
+
   const emailEditorRef = useRef<EditorRef>(null);
+
+  useEffect(() => {}, []);
 
   const onReady: EmailEditorProps["onReady"] = () => {
     const unlayer: any = emailEditorRef.current?.editor;
-    console.log(unlayer);
   };
 
   return (
