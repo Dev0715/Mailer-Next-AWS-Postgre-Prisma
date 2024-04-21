@@ -10,58 +10,11 @@ const NewEmail = () => {
 
   const emailEditorRef = useRef<EditorRef>(null);
 
-  useEffect(() => {
-    getEmailDetails();
-  }, []);
-
-  const getEmailDetails = async () => {
-    await GetEmailDetails({
-      title: subjectTitle,
-      newsLetterOwnerId: user?.id!
-    }).then((res: any) => {
-      if (res) {
-        setJsonData(JSON.parse(res?.content));
-      }
-      setLoading(false);
-    });
-  };
+  useEffect(() => {}, []);
 
   const onReady: EmailEditorProps["onReady"] = () => {
     const unlayer: any = emailEditorRef.current?.editor;
     unlayer.loadDesign(jsonData);
-  };
-
-  const exportHtml = () => {
-    const unlayer = emailEditorRef.current?.editor;
-
-    unlayer?.exportHtml(async (data) => {
-      const { design, html } = data;
-      setJsonData(design);
-      await sendEmail({
-        userEmail: ["sponsorship@becodemy.com"],
-        subject: subjectTitle,
-        content: html
-      }).then((res) => {
-        toast.success("Email sent successfully!");
-        history.push("/dashboard/write");
-      });
-    });
-  };
-
-  const saveDraft = async () => {
-    const unlayer = emailEditorRef.current?.editor;
-
-    unlayer?.exportHtml(async (data) => {
-      const { design } = data;
-      await saveEmail({
-        title: subjectTitle,
-        content: JSON.stringify(design),
-        newsLetterOwnerId: user?.id!
-      }).then((res: any) => {
-        toast.success(res.message);
-        history.push("/dashboard/write");
-      });
-    });
   };
 
   return (
