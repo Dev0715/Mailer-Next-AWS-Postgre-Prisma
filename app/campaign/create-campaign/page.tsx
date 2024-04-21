@@ -15,6 +15,7 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FormError } from "@/components/utils/form-error";
 
 const NewCampaignSchema = z.object({
   title: z
@@ -74,16 +75,12 @@ const NewCampaign = () => {
               )}
             />
           </div>
-          <Button
-            asChild
-            variant="default"
-            type="submit"
-            className="w-40 flex gap-x-2"
-          >
-            <FaArrowRight />
-            Create Email
-          </Button>
         </form>
+        <FormError message={error} />
+        <Button variant="default" type="submit" className="w-40 flex gap-x-2">
+          <FaArrowRight />
+          Create Email
+        </Button>
       </Form>
     </div>
   );
