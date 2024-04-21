@@ -1,21 +1,22 @@
 "use client";
 
+import { useRef } from "react";
+import EmailEditor, { EditorRef, EmailEditorProps } from "react-email-editor";
+
 const NewEmail = () => {
+  const emailEditorRef = useRef<EditorRef>(null);
+
+  const onReady: EmailEditorProps["onReady"] = () => {
+    const unlayer: any = emailEditorRef.current?.editor;
+  };
+
   return (
-    <main className="w-5/6 flex flex-col py-6">
+    <div className="w-5/6 flex flex-col py-6">
       <p className="text-5xl text-green-700 font-semibold mb-4">
         Create a new Email
       </p>
-      <p className="text-xl text-gray-500 mb-12">Name: Email Title</p>
-      <p className="text-xl text-gray-500 mb-6">To: Select your Customers</p>
-      <p className="text-xl text-gray-500 mb-6">From: Email Name</p>
-      <p className="text-xl text-gray-500 mb-6">
-        Subject: Subject Line for email
-      </p>
-      <p className="text-xl text-gray-500 mb-6">
-        Send Time: When should we send this email
-      </p>
-    </main>
+      <EmailEditor minHeight={"80vh"} ref={emailEditorRef} onReady={onReady} />
+    </div>
   );
 };
 
