@@ -51,19 +51,21 @@ const NewCampaign = () => {
         Reach your customer's inboxes at the right time with Campaign Manager.
       </p>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="mb-4">
-          <div className="space-y-2">
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="mb-4">
             <FormField
               control={form.control}
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Internet Email Name</FormLabel>
+                  <FormLabel className="text-2xl font-semibold pb-2">
+                    Internet Email Name
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       disabled={isPending}
-                      className="w096 h-12 border border-green-700"
+                      className="w-96 h-12 border border-green-700"
                       placeholder="John Doe"
                     />
                   </FormControl>
