@@ -73,7 +73,7 @@ const NewCampaign = () => {
       </p>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="mb-4">
+          <div className="space-y-4">
             <FormField
               control={form.control}
               name="title"
@@ -94,13 +94,18 @@ const NewCampaign = () => {
                 </FormItem>
               )}
             />
+            <FormError message={error} />
+            <Button
+              disabled={isPending}
+              variant="default"
+              type="submit"
+              className="w-40 flex gap-x-2"
+            >
+              <FaArrowRight />
+              Create Email
+            </Button>
           </div>
         </form>
-        <FormError message={error} />
-        <Button variant="default" type="submit" className="w-40 flex gap-x-2">
-          <FaArrowRight />
-          Create Email
-        </Button>
       </Form>
     </div>
   );
