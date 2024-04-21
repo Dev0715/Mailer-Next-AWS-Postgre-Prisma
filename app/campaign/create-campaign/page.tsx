@@ -16,11 +16,14 @@ const NewCampaign = () => {
       </p>
       <p className="text-2xl font-semibold pb-2">Internet email name</p>
       <Input type="text" className="w-96 h-12 border border-green-700 mb-4" />
-      <Button asChild variant="default" className="w-40 flex gap-x-2">
-        <Link href="/campaign/create-email">
-          <FaArrowRight />
-          Create Email
-        </Link>
+      <Button
+        asChild
+        variant="default"
+        className="w-40 flex gap-x-2"
+        onClick={onNewCampaign}
+      >
+        <FaArrowRight />
+        Create Email
       </Button>
     </main>
   );
