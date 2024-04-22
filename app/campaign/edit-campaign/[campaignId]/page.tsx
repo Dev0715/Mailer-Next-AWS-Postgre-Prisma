@@ -198,10 +198,10 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
             </div>
           </AccordionTrigger>
           <AccordionContent className="px-1 pt-1">
-            <div className="w-full flex items-center gap-x-6">
+            <div className="w-full">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
-                  <div className="space-y-4">
+                  <div className="w-full flex items-center gap-x-6">
                     <FormField
                       control={form.control}
                       name="name"
