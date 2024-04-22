@@ -127,113 +127,19 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
         Campaign {campaign?.title}
       </p>
       <Accordion type={"multiple"}>
-        <AccordionItem value="step-0-to">
-          <AccordionTrigger className="hover:no-underline hover:drop-shadow">
-            <div className="flex items-start gap-x-4">
-              <div
-                className={`w-10 h-10 flex items-center justify-center rounded-full ${campaign?.to ? "bg-green-600" : "bg-gray-600"}`}
-              >
-                <FaCheck className="text-white" />
-              </div>
-              <div className="flex flex-col items-start">
-                <p className="text-xl">To</p>
-                <p className="text-sm text-gray-500">
-                  Who are you sending this email to?
-                </p>
-              </div>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent className="px-1 pt-1">
-            <div className="flex flex-col gap-y-2">
-              <p className="text-base text-gray-600 font-medium">
-                Select a segment
-              </p>
-              <Select value={campaign?.to} onValueChange={onToChange}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Segment you want to send" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Your Segments</SelectLabel>
-                    {segments.map((segment) => (
-                      <SelectItem value={segment.segmentId}>
-                        {segment.title}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="step-1-from">
-          <AccordionTrigger className="hover:no-underline hover:drop-shadow">
-            <div className="flex items-start gap-x-4">
-              <div
-                className={`w-10 h-10 flex items-center justify-center rounded-full 
-                  ${campaign?.from ? "bg-green-600" : "bg-gray-600"}
-                `}
-              >
-                <FaCheck className="text-white" />
-              </div>
-              <div className="flex flex-col items-start">
-                <p className="text-xl">From</p>
-                <p className="text-sm text-gray-500">
-                  Who is sending this email?
-                </p>
-              </div>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent className="px-1 pt-1">
-            <Form {...fromForm}>
-              <form
-                onSubmit={fromForm.handleSubmit(onFromSubmit)}
-                className="w-full flex flex-col gap-y-4"
-              >
-                <div className="w-full flex items-start gap-x-6">
-                  <div className="w-1/2 flex">
-                    <FormField
-                      control={fromForm.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem className="w-full">
-                          <FormLabel>Subject*</FormLabel>
-                          <FormControl>
-                            <Input {...field} placeholder="John Doe" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="w-1/2 flex">
-                    <FormField
-                      control={fromForm.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem className="w-full">
-                          <FormLabel>Email*</FormLabel>
-                          <FormControl>
-                            <Input {...field} placeholder="John Doe" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </div>
-                <Button
-                  type="submit"
-                  variant="outline"
-                  className="w-48 flex items-center gap-x-2 border-green-700"
-                >
-                  <FaSave className="text-green-700" />
-                  Save
-                </Button>
-              </form>
-            </Form>
-          </AccordionContent>
-        </AccordionItem>
+        <AccordianItemTo
+          campaign={campaign as Campaign}
+          setCampaign={
+            setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
+          }
+          segments={segments}
+        />
+        <AccordianItemFrom
+          campaign={campaign as Campaign}
+          setCampaign={
+            setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
+          }
+        />
         <AccordionItem value="step-2-subject">
           <AccordionTrigger className="hover:no-underline hover:drop-shadow">
             <div className="flex items-start gap-x-4">
