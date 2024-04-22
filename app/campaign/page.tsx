@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getAllCampaignsByEmail } from "@/data/campaign/all-campaigns";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { Campaign } from "@/shared/campaign-type";
 
 const Blue = ({ children }: { children: React.ReactNode }) => {
   return <span className="text-blue-700">{children}</span>;
@@ -20,7 +21,7 @@ const Strong = ({ children }: { children: React.ReactNode }) => {
 const CampaignPage = () => {
   const user = useCurrentUser();
 
-  const [campaigns, setCampaigns] = useState();
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
 
   useEffect(() => {
     getAllCampaignsByEmail(user?.email as string).then((items) => {
