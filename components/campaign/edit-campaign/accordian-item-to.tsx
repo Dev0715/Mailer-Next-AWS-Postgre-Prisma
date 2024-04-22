@@ -1,5 +1,4 @@
 import {
-  Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger
@@ -14,8 +13,28 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
+import { Campaign } from "@/shared/campaign-type";
+import { Segment } from "@/shared/segment-type";
 
-export const AccordianItemTo = () => {
+type Props = {
+  campaign: Campaign;
+  setCampaign: React.Dispatch<React.SetStateAction<Campaign>>;
+  segments: Segment[];
+};
+
+export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
+  const onToChange = (newValue: string) => {
+    if (campaign) {
+      setCampaign(
+        (prev) =>
+          ({
+            ...prev,
+            to: newValue
+          }) as Campaign
+      );
+    }
+  };
+
   return (
     <AccordionItem value="step-0-to">
       <AccordionTrigger className="hover:no-underline hover:drop-shadow">
