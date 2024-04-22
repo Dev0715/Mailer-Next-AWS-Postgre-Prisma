@@ -52,10 +52,15 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
       </p>
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
-          <AccordionTrigger>
-            <p className="text-xl">To</p>
+          <AccordionTrigger className="hover:no-underline hover:drop-shadow">
+            <div className="flex flex-col items-start">
+              <p className="text-xl">To</p>
+              <p className="text-sm text-gray-500">
+                Who are you sending this email to?
+              </p>
+            </div>
           </AccordionTrigger>
-          <AccordionContent>
+          <AccordionContent className="pl-1 pt-1">
             <Select>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select a fruit" />
