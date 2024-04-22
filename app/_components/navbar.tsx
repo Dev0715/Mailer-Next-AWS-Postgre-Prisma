@@ -44,6 +44,31 @@ export const Navbar = () => {
       }
     ];
 
+  const campaignItems: { title: string; href: string; description: string }[] =
+    [
+      {
+        title: "Audience Dashboard",
+        href: "/audience",
+        description:
+          "Your audience dashboard is the home for all your contacts and audiences"
+      },
+      {
+        title: "All contacts",
+        href: "/audience/contacts",
+        description: "All your contacts stored in your customer database"
+      },
+      {
+        title: "Tags",
+        href: "/audience/tags",
+        description: "Group and manage your audience in tags"
+      },
+      {
+        title: "Segments",
+        href: "/audience/segments",
+        description: "Classify and manage your audience in segments"
+      }
+    ];
+
   const menuItems: MenuItem[] = [
     {
       title: "Features",
@@ -59,7 +84,8 @@ export const Navbar = () => {
     },
     {
       title: "Campaign",
-      href: "/campaign"
+      href: "/campaign",
+      children: campaignItems
     },
     {
       title: "Audience",
@@ -74,9 +100,9 @@ export const Navbar = () => {
         {menuItems.map((menuItem, index) => (
           <NavigationMenuItem key={menuItem.title}>
             <NavigationMenuTrigger>
-              <Link href={menuItem.href} passHref>
-                {menuItem.title}
-              </Link>
+              {/* <Link href={menuItem.href} passHref> */}
+              {menuItem.title}
+              {/* </Link> */}
             </NavigationMenuTrigger>
             {menuItem.children && (
               <NavigationMenuContent>
