@@ -9,3 +9,5 @@ const EditCampaignPage = ({ campaignId }: Props) => {
     </div>
   );
 };
+
+export default EditCampaignPage;
