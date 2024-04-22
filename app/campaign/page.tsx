@@ -61,7 +61,7 @@ const CampaignPage = () => {
         {campaigns.map((campaign) => (
           <div className="flex flex-col gap-y-4">
             <Separator />
-            <CampaignItem />
+            <CampaignItem campaign={campaign} />
           </div>
         ))}
       </div>
