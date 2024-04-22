@@ -73,7 +73,15 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   });
 
   const onSubmit = (values: z.infer<typeof CampaignFromSchema>) => {
-    console.log(values);
+    if (campaign) {
+      setCampaign(
+        (prev) =>
+          ({
+            ...prev,
+            from: values
+          }) as Campaign
+      );
+    }
   };
 
   const isStepComplte = (step: number) => {
@@ -95,36 +103,6 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
           ({
             ...prev,
             to: newValue
-          }) as Campaign
-      );
-    }
-  };
-
-  const onFromNameChange = (newValue: string) => {
-    if (campaign) {
-      setCampaign(
-        (prev) =>
-          ({
-            ...prev,
-            from: {
-              ...prev?.from,
-              name: newValue
-            }
-          }) as Campaign
-      );
-    }
-  };
-
-  const onFromEmailChange = (newValue: string) => {
-    if (campaign) {
-      setCampaign(
-        (prev) =>
-          ({
-            ...prev,
-            from: {
-              ...prev?.from,
-              email: newValue
-            }
           }) as Campaign
       );
     }
