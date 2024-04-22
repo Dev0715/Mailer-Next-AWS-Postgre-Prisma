@@ -13,8 +13,5 @@ export const CampaignSubjectSchema = z.object({
     .string()
     .min(6, "Subject should be at least 6 characters long")
     .max(72, "Subject should be a maximum of 72 characters"),
-  preview: z
-    .string()
-    .min(6, "Preview should be at least 6 characters long")
-    .max(72, "Preview should be a maximum of 72 characters")
+  preview: z.string().optional()
 });
