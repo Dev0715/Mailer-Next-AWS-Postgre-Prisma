@@ -134,7 +134,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
           <AccordionContent className="px-1 pt-1">
             <div className="w-full flex items-center gap-x-6">
               <div className="w-1/2 flex flex-col gap-y-2">
-                <p className="text-base text-gray-600 font-medium">Name</p>
+                <p className="text-base text-gray-600 font-medium">Name*</p>
                 <Input
                   type="text"
                   value={campaign?.from?.name}
@@ -142,7 +142,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
                 />
               </div>
               <div className="w-1/2 flex flex-col gap-y-2">
-                <p className="text-base text-gray-600 font-medium">Email</p>
+                <p className="text-base text-gray-600 font-medium">Email*</p>
                 <Input
                   type="email"
                   value={campaign?.from?.email}
