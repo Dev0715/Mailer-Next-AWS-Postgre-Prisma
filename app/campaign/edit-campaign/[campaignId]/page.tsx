@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
 import { Segment } from "@/shared/segment-type";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaSave } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import {
   Form,
@@ -36,6 +36,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { CampaignFromSchema } from "@/schemas/campaign";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   params: { campaignId: string };
@@ -90,7 +91,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     }
 
     if (step === 1) {
-      return campaign?.from?.email && campaign.from?.name ? true : false;
+      return campaign?.from ? true : false;
     }
 
     return false;
@@ -193,11 +194,13 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
                         </FormItem>
                       )}
                     />
+                  </div>
+                  <div className="w-1/2 flex">
                     <FormField
                       control={form.control}
                       name="email"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="w-full">
                           <FormLabel>Email*</FormLabel>
                           <FormControl>
                             <Input {...field} placeholder="John Doe" />
