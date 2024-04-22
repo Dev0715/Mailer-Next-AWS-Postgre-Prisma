@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
-import CampaignItem from "./_components/campaign-item";
+import CampaignItem from "../../components/campaign/campaign-item";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { useEffect, useState } from "react";
