@@ -70,21 +70,26 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
             </div>
           </AccordionTrigger>
           <AccordionContent className="px-1 pt-1">
-            <Select>
-              <SelectTrigger>
-                <SelectValue placeholder="Select a fruit" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <div className="flex flex-col gap-y-2">
+              <p className="text-base text-gray-600 font-medium">
+                Select a segment
+              </p>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Segment you want to send" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Segments</SelectLabel>
+                    {segments.map((segment) => (
+                      <SelectItem value={segment.segmentId}>
+                        {segment.title}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
