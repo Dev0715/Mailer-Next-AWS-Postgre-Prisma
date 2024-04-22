@@ -23,6 +23,7 @@ import {
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
 import { Segment } from "@/shared/segment-type";
 import { FaCheck } from "react-icons/fa";
+import { Input } from "@/components/ui/input";
 
 type Props = {
   params: { campaignId: string };
@@ -131,25 +132,23 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
             </div>
           </AccordionTrigger>
           <AccordionContent className="px-1 pt-1">
-            <div className="flex flex-col gap-y-2">
-              <p className="text-base text-gray-600 font-medium">
-                Select a segment
-              </p>
-              <Select value={campaign?.to} onValueChange={onToChange}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Segment you want to send" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Your Segments</SelectLabel>
-                    {segments.map((segment) => (
-                      <SelectItem value={segment.segmentId}>
-                        {segment.title}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+            <div className="w-full flex items-center gap-x-6">
+              <div className="w-1/2 flex flex-col gap-y-2">
+                <p className="text-base text-gray-600 font-medium">Name</p>
+                <Input
+                  type="text"
+                  value={campaign?.from?.name}
+                  placeholder="John Doe"
+                />
+              </div>
+              <div className="w-1/2 flex flex-col gap-y-2">
+                <p className="text-base text-gray-600 font-medium">Email</p>
+                <Input
+                  type="email"
+                  value={campaign?.from?.email}
+                  placeholder=""
+                />
+              </div>
             </div>
           </AccordionContent>
         </AccordionItem>
