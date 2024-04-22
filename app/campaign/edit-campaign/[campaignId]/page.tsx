@@ -11,15 +11,6 @@ import {
   AccordionItem,
   AccordionTrigger
 } from "@/components/ui/accordion";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
 import { Segment } from "@/shared/segment-type";
 import { FaCheck, FaSave } from "react-icons/fa";
@@ -37,6 +28,8 @@ import { z } from "zod";
 import { CampaignFromSchema, CampaignSubjectSchema } from "@/schemas/campaign";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
+import { AccordianItemTo } from "@/components/campaign/edit-campaign/accordian-item-to";
+import { AccordianItemFrom } from "@/components/campaign/edit-campaign/accordian-item-from";
 
 type Props = {
   params: { campaignId: string };
@@ -65,26 +58,6 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     });
   }, []);
 
-  const fromForm = useForm<z.infer<typeof CampaignFromSchema>>({
-    resolver: zodResolver(CampaignFromSchema),
-    defaultValues: {
-      name: campaign?.from?.name,
-      email: campaign?.from?.email
-    }
-  });
-
-  const onFromSubmit = (values: z.infer<typeof CampaignFromSchema>) => {
-    if (campaign) {
-      setCampaign(
-        (prev) =>
-          ({
-            ...prev,
-            from: values
-          }) as Campaign
-      );
-    }
-  };
-
   const subjectForm = useForm<z.infer<typeof CampaignSubjectSchema>>({
     resolver: zodResolver(CampaignSubjectSchema),
     defaultValues: {
@@ -100,18 +73,6 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
           ({
             ...prev,
             subject: values
-          }) as Campaign
-      );
-    }
-  };
-
-  const onToChange = (newValue: string) => {
-    if (campaign) {
-      setCampaign(
-        (prev) =>
-          ({
-            ...prev,
-            to: newValue
           }) as Campaign
       );
     }
