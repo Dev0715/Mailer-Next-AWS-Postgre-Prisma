@@ -199,28 +199,38 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
           </AccordionTrigger>
           <AccordionContent className="px-1 pt-1">
             <div className="w-full flex items-center gap-x-6">
-              <div className="w-1/2 flex flex-col gap-y-2">
-                <p className="text-base text-gray-600 font-medium">Name*</p>
-                <Input
-                  type="text"
-                  value={campaign?.from?.name}
-                  onChange={(e) => {
-                    onFromNameChange(e.target.value);
-                  }}
-                  placeholder="John Doe"
-                />
-              </div>
-              <div className="w-1/2 flex flex-col gap-y-2">
-                <p className="text-base text-gray-600 font-medium">Email*</p>
-                <Input
-                  type="email"
-                  value={campaign?.from?.email}
-                  onChange={(e) => {
-                    onFromEmailChange(e.target.value);
-                  }}
-                  placeholder=""
-                />
-              </div>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)}>
+                  <div className="space-y-4">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Name*</FormLabel>
+                          <FormControl>
+                            <Input {...field} placeholder="John Doe" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email*</FormLabel>
+                          <FormControl>
+                            <Input {...field} placeholder="John Doe" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </form>
+              </Form>
             </div>
           </AccordionContent>
         </AccordionItem>
