@@ -24,6 +24,18 @@ import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
 import { Segment } from "@/shared/segment-type";
 import { FaCheck } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { CampaignFromSchema } from "@/schemas/campaign";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type Props = {
   params: { campaignId: string };
@@ -51,6 +63,18 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
       }
     });
   }, []);
+
+  const form = useForm<z.infer<typeof CampaignFromSchema>>({
+    resolver: zodResolver(CampaignFromSchema),
+    defaultValues: {
+      name: campaign?.from?.name,
+      email: campaign?.from?.email
+    }
+  });
+
+  const onSubmit = (values: z.infer<typeof CampaignFromSchema>) => {
+    console.log(values);
+  };
 
   const isStepComplte = (step: number) => {
     if (step === 0) {
