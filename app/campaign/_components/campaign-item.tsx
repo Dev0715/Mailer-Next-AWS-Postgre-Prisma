@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Campaign } from "@/shared/campaign-type";
+import Link from "next/link";
 import { FaEdit, FaMailBulk } from "react-icons/fa";
 
 type Props = {
@@ -31,9 +32,11 @@ const CampaignItem = ({ campaign }: Props) => {
         </Badge>
       </div>
       <div className="flex flex-col">
-        <Button className="flex gap-x-2 w-32 text-black bg-green-500">
-          <FaEdit />
-          Edit
+        <Button asChild className="flex gap-x-2 w-32 text-black bg-green-500">
+          <Link href={`/campaign/edit-campaign/${campaign.campaignId}`}>
+            <FaEdit />
+            Edit
+          </Link>
         </Button>
       </div>
     </div>
