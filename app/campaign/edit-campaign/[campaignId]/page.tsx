@@ -177,15 +177,18 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
             </div>
           </AccordionTrigger>
           <AccordionContent className="px-1 pt-1">
-            <div className="w-full">
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
-                  <div className="w-full flex items-center gap-x-6">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="w-full flex flex-col gap-y-4"
+              >
+                <div className="w-full flex items-center gap-x-6">
+                  <div className="w-1/2 flex">
                     <FormField
                       control={form.control}
                       name="name"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="w-full">
                           <FormLabel>Name*</FormLabel>
                           <FormControl>
                             <Input {...field} placeholder="John Doe" />
@@ -210,9 +213,17 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
                       )}
                     />
                   </div>
-                </form>
-              </Form>
-            </div>
+                </div>
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className="w-48 flex items-center gap-x-2 border-green-700"
+                >
+                  <FaSave className="text-green-700" />
+                  Save
+                </Button>
+              </form>
+            </Form>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
