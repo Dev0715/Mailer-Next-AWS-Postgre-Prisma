@@ -20,6 +20,8 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
+import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
+import { Segment } from "@/shared/segment-type";
 
 type Props = {
   params: { campaignId: string };
@@ -30,6 +32,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
 
   const [loadError, setLoadError] = useState<boolean>(false);
   const [campaign, setCampaign] = useState<Campaign>();
+  const [segments, setSegments] = useState<Segment[]>([]);
 
   useEffect(() => {
     getCampaignById(user?.email as string, campaignId).then((campaign) => {
@@ -37,6 +40,12 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
         setCampaign(campaign as Campaign);
       } else {
         setLoadError(true);
+      }
+    });
+
+    getAllSegmentsByEmail(user?.email as string).then((segments) => {
+      if (segments) {
+        setSegments(segments as Segment[]);
       }
     });
   }, []);
@@ -60,9 +69,9 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
               </p>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="pl-1 pt-1">
+          <AccordionContent className="px-1 pt-1">
             <Select>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger>
                 <SelectValue placeholder="Select a fruit" />
               </SelectTrigger>
               <SelectContent>
