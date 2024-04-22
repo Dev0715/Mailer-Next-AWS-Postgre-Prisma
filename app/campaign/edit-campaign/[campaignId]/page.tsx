@@ -2,6 +2,7 @@
 
 import { getCampaignById } from "@/data/campaign/campaign-by-id";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { Campaign } from "@/shared/campaign-type";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -31,7 +32,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
 
   return (
     <div className="w-5/6 flex flex-col py-6">
-      <h1>Edit Campaign: {campaign.title}</h1>
+      <h1>Edit Campaign: {campaign?.title}</h1>
     </div>
   );
 };
