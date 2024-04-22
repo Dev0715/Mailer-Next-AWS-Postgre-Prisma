@@ -14,12 +14,12 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   const user = useCurrentUser();
 
   const [loadError, setLoadError] = useState<boolean>(false);
-  const [campaign, setCampaign] = useState<any>();
+  const [campaign, setCampaign] = useState<Campaign>();
 
   useEffect(() => {
     getCampaignById(user?.email as string, campaignId).then((campaign) => {
       if (campaign) {
-        setCampaign(campaign);
+        setCampaign(campaign as Campaign);
       } else {
         setLoadError(true);
       }
