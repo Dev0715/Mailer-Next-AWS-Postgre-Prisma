@@ -5,6 +5,9 @@ import { FaPlus } from "react-icons/fa";
 import CampaignItem from "./_components/campaign-item";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getAllCampaignsByEmail } from "@/data/campaign/all-campaigns";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const Blue = ({ children }: { children: React.ReactNode }) => {
   return <span className="text-blue-700">{children}</span>;
@@ -15,6 +18,16 @@ const Strong = ({ children }: { children: React.ReactNode }) => {
 };
 
 const CampaignPage = () => {
+  const user = useCurrentUser();
+
+  const [campaigns, setCampaigns] = useState();
+
+  useEffect(() => {
+    getAllCampaignsByEmail(user?.email as string).then((items) => {
+      console.log(items);
+    });
+  });
+
   return (
     <main className="w-5/6 flex flex-col py-6">
       <p className="text-5xl text-green-700 font-semibold pb-6">
