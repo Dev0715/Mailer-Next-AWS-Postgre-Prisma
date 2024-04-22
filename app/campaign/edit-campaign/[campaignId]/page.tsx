@@ -185,19 +185,19 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
             </div>
           </AccordionTrigger>
           <AccordionContent className="px-1 pt-1">
-            <Form {...form}>
+            <Form {...fromForm}>
               <form
-                onSubmit={form.handleSubmit(onSubmit)}
+                onSubmit={fromForm.handleSubmit(onFromSubmit)}
                 className="w-full flex flex-col gap-y-4"
               >
-                <div className="w-full flex items-center gap-x-6">
+                <div className="w-full flex items-start gap-x-6">
                   <div className="w-1/2 flex">
                     <FormField
-                      control={form.control}
+                      control={fromForm.control}
                       name="name"
                       render={({ field }) => (
                         <FormItem className="w-full">
-                          <FormLabel>Name*</FormLabel>
+                          <FormLabel>Subject*</FormLabel>
                           <FormControl>
                             <Input {...field} placeholder="John Doe" />
                           </FormControl>
@@ -239,7 +239,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
             <div className="flex items-start gap-x-4">
               <div
                 className={`w-10 h-10 flex items-center justify-center rounded-full 
-                  ${isStepComplte(1) ? "bg-green-600" : "bg-gray-600"}
+                  ${campaign?.subject ? "bg-green-600" : "bg-gray-600"}
                 `}
               >
                 <FaCheck className="text-white" />
@@ -253,21 +253,21 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
             </div>
           </AccordionTrigger>
           <AccordionContent className="px-1 pt-1">
-            <Form {...form}>
+            <Form {...subjectForm}>
               <form
-                onSubmit={form.handleSubmit(onSubmit)}
+                onSubmit={subjectForm.handleSubmit(onSubjectSubmit)}
                 className="w-full flex flex-col gap-y-4"
               >
-                <div className="w-full flex items-center gap-x-6">
+                <div className="w-full flex items-start gap-x-6">
                   <div className="w-1/2 flex">
                     <FormField
-                      control={form.control}
-                      name="name"
+                      control={subjectForm.control}
+                      name="subject"
                       render={({ field }) => (
                         <FormItem className="w-full">
-                          <FormLabel>Name*</FormLabel>
+                          <FormLabel>Subject*</FormLabel>
                           <FormControl>
-                            <Input {...field} placeholder="John Doe" />
+                            <Input {...field} placeholder="Subject for email" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -276,13 +276,13 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
                   </div>
                   <div className="w-1/2 flex">
                     <FormField
-                      control={form.control}
-                      name="email"
+                      control={subjectForm.control}
+                      name="preview"
                       render={({ field }) => (
                         <FormItem className="w-full">
-                          <FormLabel>Email*</FormLabel>
+                          <FormLabel>Preview Text</FormLabel>
                           <FormControl>
-                            <Input {...field} placeholder="John Doe" />
+                            <Input {...field} placeholder="Preview Text" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
