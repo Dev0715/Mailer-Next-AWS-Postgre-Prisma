@@ -55,7 +55,7 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
       <AccordionContent className="px-1 pt-1">
         <div className="flex flex-col gap-y-2">
           <p className="text-base text-gray-600 font-medium">
-            Select a segment
+            Select a segment*
           </p>
           <Select value={campaign?.to} onValueChange={onToChange}>
             <SelectTrigger>

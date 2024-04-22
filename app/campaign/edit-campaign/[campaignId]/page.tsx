@@ -30,6 +30,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { AccordianItemTo } from "@/components/campaign/edit-campaign/accordian-item-to";
 import { AccordianItemFrom } from "@/components/campaign/edit-campaign/accordian-item-from";
+import { AccordianItemSubject } from "@/components/campaign/edit-campaign/accordian-item-subject";
 
 type Props = {
   params: { campaignId: string };
@@ -76,6 +77,12 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
           segments={segments}
         />
         <AccordianItemFrom
+          campaign={campaign as Campaign}
+          setCampaign={
+            setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
+          }
+        />
+        <AccordianItemSubject
           campaign={campaign as Campaign}
           setCampaign={
             setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
