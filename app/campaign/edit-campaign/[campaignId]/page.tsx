@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { CampaignFromSchema } from "@/schemas/campaign";
+import { CampaignFromSchema, CampaignSubjectSchema } from "@/schemas/campaign";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 
@@ -131,7 +131,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
           <AccordionTrigger className="hover:no-underline hover:drop-shadow">
             <div className="flex items-start gap-x-4">
               <div
-                className={`w-10 h-10 flex items-center justify-center rounded-full ${isStepComplte(0) ? "bg-green-600" : "bg-gray-600"}`}
+                className={`w-10 h-10 flex items-center justify-center rounded-full ${campaign?.to ? "bg-green-600" : "bg-gray-600"}`}
               >
                 <FaCheck className="text-white" />
               </div>
@@ -171,7 +171,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
             <div className="flex items-start gap-x-4">
               <div
                 className={`w-10 h-10 flex items-center justify-center rounded-full 
-                  ${isStepComplte(1) ? "bg-green-600" : "bg-gray-600"}
+                  ${campaign?.from ? "bg-green-600" : "bg-gray-600"}
                 `}
               >
                 <FaCheck className="text-white" />
@@ -208,7 +208,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
                   </div>
                   <div className="w-1/2 flex">
                     <FormField
-                      control={form.control}
+                      control={fromForm.control}
                       name="email"
                       render={({ field }) => (
                         <FormItem className="w-full">
