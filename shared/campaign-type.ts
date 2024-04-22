@@ -4,7 +4,7 @@ export type Campaign = {
   title: string;
   to?: string;
   from?: {
-    name?: string;
-    email?: string;
+    name: string;
+    email: string;
   };
 };
