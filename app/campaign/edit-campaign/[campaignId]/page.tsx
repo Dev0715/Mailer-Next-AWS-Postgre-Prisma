@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
 import { Segment } from "@/shared/segment-type";
+import { FaCheck } from "react-icons/fa";
 
 type Props = {
   params: { campaignId: string };
@@ -62,11 +63,18 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger className="hover:no-underline hover:drop-shadow">
-            <div className="flex flex-col items-start">
-              <p className="text-xl">To</p>
-              <p className="text-sm text-gray-500">
-                Who are you sending this email to?
-              </p>
+            <div className="flex items-start gap-x-4">
+              <div
+                className={`w-10 h-10 flex items-center justify-center rounded-full ${"bg-gray-600"}`}
+              >
+                <FaCheck className="text-white" />
+              </div>
+              <div className="flex flex-col items-start">
+                <p className="text-xl">To</p>
+                <p className="text-sm text-gray-500">
+                  Who are you sending this email to?
+                </p>
+              </div>
             </div>
           </AccordionTrigger>
           <AccordionContent className="px-1 pt-1">
@@ -80,7 +88,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectLabel>Segments</SelectLabel>
+                    <SelectLabel>Your Segments</SelectLabel>
                     {segments.map((segment) => (
                       <SelectItem value={segment.segmentId}>
                         {segment.title}
