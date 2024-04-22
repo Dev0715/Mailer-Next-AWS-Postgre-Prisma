@@ -65,7 +65,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     });
   }, []);
 
-  const form = useForm<z.infer<typeof CampaignFromSchema>>({
+  const fromForm = useForm<z.infer<typeof CampaignFromSchema>>({
     resolver: zodResolver(CampaignFromSchema),
     defaultValues: {
       name: campaign?.from?.name,
@@ -73,7 +73,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     }
   });
 
-  const onSubmit = (values: z.infer<typeof CampaignFromSchema>) => {
+  const onFromSubmit = (values: z.infer<typeof CampaignFromSchema>) => {
     if (campaign) {
       setCampaign(
         (prev) =>
@@ -85,16 +85,24 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     }
   };
 
-  const isStepComplte = (step: number) => {
-    if (step === 0) {
-      return campaign?.to ? true : false;
+  const subjectForm = useForm<z.infer<typeof CampaignSubjectSchema>>({
+    resolver: zodResolver(CampaignSubjectSchema),
+    defaultValues: {
+      subject: campaign?.subject?.subject,
+      preview: campaign?.subject?.preview
     }
+  });
 
-    if (step === 1) {
-      return campaign?.from ? true : false;
+  const onSubjectSubmit = (values: z.infer<typeof CampaignSubjectSchema>) => {
+    if (campaign) {
+      setCampaign(
+        (prev) =>
+          ({
+            ...prev,
+            subject: values
+          }) as Campaign
+      );
     }
-
-    return false;
   };
 
   const onToChange = (newValue: string) => {
