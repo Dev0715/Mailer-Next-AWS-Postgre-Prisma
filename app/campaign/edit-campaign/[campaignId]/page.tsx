@@ -51,6 +51,18 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     });
   }, []);
 
+  const onToChange = (newValue: string) => {
+    if (campaign) {
+      setCampaign(
+        (prev) =>
+          ({
+            ...prev,
+            to: newValue
+          }) as Campaign
+      );
+    }
+  };
+
   if (loadError) {
     return notFound();
   }
@@ -65,7 +77,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
           <AccordionTrigger className="hover:no-underline hover:drop-shadow">
             <div className="flex items-start gap-x-4">
               <div
-                className={`w-10 h-10 flex items-center justify-center rounded-full ${"bg-gray-600"}`}
+                className={`w-10 h-10 flex items-center justify-center rounded-full ${campaign?.to ? "bg-green-600" : "bg-gray-600"}`}
               >
                 <FaCheck className="text-white" />
               </div>
@@ -82,7 +94,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
               <p className="text-base text-gray-600 font-medium">
                 Select a segment
               </p>
-              <Select>
+              <Select value={campaign?.to} onValueChange={onToChange}>
                 <SelectTrigger>
                   <SelectValue placeholder="Segment you want to send" />
                 </SelectTrigger>
