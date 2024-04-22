@@ -58,7 +58,7 @@ const NewCampaign = () => {
         }
 
         // Redirect to the newly created campaign
-        router.push(`/campaigns/${newCampaignId}`);
+        router.push(`/campaign/edit-campaign/${newCampaignId}`);
       });
     });
   };
