@@ -7,4 +7,8 @@ export type Campaign = {
     name: string;
     email: string;
   };
+  subject?: {
+    subject: string;
+    preview: string;
+  };
 };
