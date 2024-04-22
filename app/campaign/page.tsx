@@ -25,7 +25,9 @@ const CampaignPage = () => {
 
   useEffect(() => {
     getAllCampaignsByEmail(user?.email as string).then((items) => {
-      console.log(items);
+      if (items) {
+        setCampaigns(items as Campaign[]);
+      }
     });
   });
 
@@ -56,12 +58,12 @@ const CampaignPage = () => {
       </div>
       <div className="flex flex-col gap-y-4">
         <p className="text-xl text-gray-500">April, 2024 (2)</p>
-        <Separator />
-        <CampaignItem />
-        <Separator />
-        <CampaignItem />
-        <Separator />
-        <CampaignItem />
+        {campaigns.map((campaign) => (
+          <div className="flex flex-col gap-y-4">
+            <Separator />
+            <CampaignItem />
+          </div>
+        ))}
       </div>
     </main>
   );
