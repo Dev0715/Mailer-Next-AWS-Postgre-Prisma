@@ -47,25 +47,15 @@ export const Navbar = () => {
   const campaignItems: { title: string; href: string; description: string }[] =
     [
       {
-        title: "Audience Dashboard",
-        href: "/audience",
+        title: "Campaign Dashboard",
+        href: "/campaign",
         description:
-          "Your audience dashboard is the home for all your contacts and audiences"
+          "Your campaign dashboard is the home for all your email campaigns"
       },
       {
-        title: "All contacts",
-        href: "/audience/contacts",
-        description: "All your contacts stored in your customer database"
-      },
-      {
-        title: "Tags",
-        href: "/audience/tags",
-        description: "Group and manage your audience in tags"
-      },
-      {
-        title: "Segments",
-        href: "/audience/segments",
-        description: "Classify and manage your audience in segments"
+        title: "New Campaign",
+        href: "/campaign/create-campaign",
+        description: "Create a new email campaign"
       }
     ];
 
