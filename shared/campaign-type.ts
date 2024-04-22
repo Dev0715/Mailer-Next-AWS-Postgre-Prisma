@@ -3,4 +3,8 @@ export type Campaign = {
   campaignId: string;
   title: string;
   to?: string;
+  from?: {
+    name?: string;
+    email?: string;
+  };
 };
