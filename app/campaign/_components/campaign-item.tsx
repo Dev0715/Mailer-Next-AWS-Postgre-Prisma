@@ -1,24 +1,32 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Campaign } from "@/shared/campaign-type";
 import { FaEdit, FaMailBulk } from "react-icons/fa";
 
-const CampaignItem = () => {
+type Props = {
+  campaign: Campaign;
+};
+
+const CampaignItem = ({ campaign }: Props) => {
   return (
     <div className="w-full flex justify-between">
       <div className="flex gap-x-8">
         <FaMailBulk className="text-4xl text-yellow-700" />
-        <div className="flex flex-col gap-y-2 text-gray-500">
-          <p className="text-xl text-blue-500">Email Title</p>
-          <p className="text-base">Regular · Malachi Uy</p>
-          <p className="text-base">Tags: Customer</p>
-          <p className="text-base">Edited Wed, April 10th 11:25 pm by you</p>
+        <div className="flex flex-col gap-y-0 text-gray-500">
+          <p className="text-xl text-blue-500">{campaign.title}</p>
+          <p className="text-base">Subject · {campaign.subject?.subject}</p>
+          <p className="text-base">To · {campaign.to}</p>
+          <p className="text-base">Edited · </p>
         </div>
       </div>
       <div className="flex flex-col gap-y-2">
-        <Badge className="w-fit text-base font-normal text-black text-center bg-gray-200">
+        <Badge
+          variant={"success"}
+          className="w-fit text-base font-normal text-black text-center"
+        >
           Draft
         </Badge>
-        <Badge className="text-base font-normal text-black text-center bg-gray-200">
+        <Badge className="text-base font-normal text-black text-center">
           New Builder
         </Badge>
       </div>
