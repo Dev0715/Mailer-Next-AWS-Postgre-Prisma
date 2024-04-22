@@ -20,7 +20,6 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { LoginButton } from "./login-button";
-import { WrappedButton } from "../utils/wrapped-button";
 import { SignupButton } from "./signup-button";
 
 export const UserButton = () => {
