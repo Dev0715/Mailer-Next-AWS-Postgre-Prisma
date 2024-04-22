@@ -64,6 +64,36 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     }
   };
 
+  const onFromNameChange = (newValue: string) => {
+    if (campaign) {
+      setCampaign(
+        (prev) =>
+          ({
+            ...prev,
+            from: {
+              ...prev?.from,
+              name: newValue
+            }
+          }) as Campaign
+      );
+    }
+  };
+
+  const onFromEmailChange = (newValue: string) => {
+    if (campaign) {
+      setCampaign(
+        (prev) =>
+          ({
+            ...prev,
+            from: {
+              ...prev?.from,
+              email: newValue
+            }
+          }) as Campaign
+      );
+    }
+  };
+
   if (loadError) {
     return notFound();
   }
@@ -138,6 +168,9 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
                 <Input
                   type="text"
                   value={campaign?.from?.name}
+                  onChange={(e) => {
+                    onFromNameChange(e.target.value);
+                  }}
                   placeholder="John Doe"
                 />
               </div>
@@ -146,6 +179,9 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
                 <Input
                   type="email"
                   value={campaign?.from?.email}
+                  onChange={(e) => {
+                    onFromEmailChange(e.target.value);
+                  }}
                   placeholder=""
                 />
               </div>
