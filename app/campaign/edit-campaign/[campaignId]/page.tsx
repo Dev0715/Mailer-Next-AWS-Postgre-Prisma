@@ -52,6 +52,18 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     });
   }, []);
 
+  const isStepComplte = (step: number) => {
+    if (step === 0) {
+      return campaign?.to ? true : false;
+    }
+
+    if (step === 1) {
+      return campaign?.from?.email && campaign.from?.name ? true : false;
+    }
+
+    return false;
+  };
+
   const onToChange = (newValue: string) => {
     if (campaign) {
       setCampaign(
@@ -104,11 +116,11 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
         Campaign {campaign?.title}
       </p>
       <Accordion type={"multiple"}>
-        <AccordionItem value="item-to">
+        <AccordionItem value="step-0-to">
           <AccordionTrigger className="hover:no-underline hover:drop-shadow">
             <div className="flex items-start gap-x-4">
               <div
-                className={`w-10 h-10 flex items-center justify-center rounded-full ${campaign?.to ? "bg-green-600" : "bg-gray-600"}`}
+                className={`w-10 h-10 flex items-center justify-center rounded-full ${isStepComplte(0) ? "bg-green-600" : "bg-gray-600"}`}
               >
                 <FaCheck className="text-white" />
               </div>
@@ -143,12 +155,12 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
             </div>
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-from">
+        <AccordionItem value="step-1-from">
           <AccordionTrigger className="hover:no-underline hover:drop-shadow">
             <div className="flex items-start gap-x-4">
               <div
                 className={`w-10 h-10 flex items-center justify-center rounded-full 
-                  ${campaign?.from?.email && campaign.from?.name ? "bg-green-600" : "bg-gray-600"}
+                  ${isStepComplte(1) ? "bg-green-600" : "bg-gray-600"}
                 `}
               >
                 <FaCheck className="text-white" />
