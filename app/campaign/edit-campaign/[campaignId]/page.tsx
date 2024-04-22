@@ -116,7 +116,9 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
           <AccordionTrigger className="hover:no-underline hover:drop-shadow">
             <div className="flex items-start gap-x-4">
               <div
-                className={`w-10 h-10 flex items-center justify-center rounded-full ${campaign?.from ? "bg-green-600" : "bg-gray-600"}`}
+                className={`w-10 h-10 flex items-center justify-center rounded-full 
+                  ${campaign?.from?.email && campaign.from?.name ? "bg-green-600" : "bg-gray-600"}
+                `}
               >
                 <FaCheck className="text-white" />
               </div>
