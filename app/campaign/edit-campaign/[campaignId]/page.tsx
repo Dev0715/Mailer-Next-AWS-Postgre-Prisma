@@ -226,6 +226,74 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
             </Form>
           </AccordionContent>
         </AccordionItem>
+        <AccordionItem value="step-2-subject">
+          <AccordionTrigger className="hover:no-underline hover:drop-shadow">
+            <div className="flex items-start gap-x-4">
+              <div
+                className={`w-10 h-10 flex items-center justify-center rounded-full 
+                  ${isStepComplte(1) ? "bg-green-600" : "bg-gray-600"}
+                `}
+              >
+                <FaCheck className="text-white" />
+              </div>
+              <div className="flex flex-col items-start">
+                <p className="text-xl">Subject</p>
+                <p className="text-sm text-gray-500">
+                  What's the subject line for this email?
+                </p>
+              </div>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="px-1 pt-1">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="w-full flex flex-col gap-y-4"
+              >
+                <div className="w-full flex items-center gap-x-6">
+                  <div className="w-1/2 flex">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormLabel>Name*</FormLabel>
+                          <FormControl>
+                            <Input {...field} placeholder="John Doe" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="w-1/2 flex">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormLabel>Email*</FormLabel>
+                          <FormControl>
+                            <Input {...field} placeholder="John Doe" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className="w-48 flex items-center gap-x-2 border-green-700"
+                >
+                  <FaSave className="text-green-700" />
+                  Save
+                </Button>
+              </form>
+            </Form>
+          </AccordionContent>
+        </AccordionItem>
       </Accordion>
     </div>
   );
