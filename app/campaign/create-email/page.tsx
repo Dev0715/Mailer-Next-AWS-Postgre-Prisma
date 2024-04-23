@@ -1,6 +1,7 @@
 "use client";
 
 import { DefaultJsonData } from "@/assets/default-email-json";
+import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import EmailEditor, { EditorRef, EmailEditorProps } from "react-email-editor";
 
@@ -17,11 +18,17 @@ const NewEmail = () => {
     unlayer.loadDesign(jsonData);
   };
 
+  const onSaveExist = () => {};
+
   return (
     <div className="w-5/6 flex flex-col py-6">
-      <p className="text-5xl text-green-700 font-semibold mb-4">
-        Create a new Email
-      </p>
+      <div className="w-full flex items-end justify-between pb-4">
+        <p className="text-3xl text-green-700 font-semibold">
+          Create a new Email
+        </p>
+        <Button onClick={onSaveExist}>Save & Exist</Button>
+      </div>
+
       <EmailEditor minHeight={"80vh"} ref={emailEditorRef} onReady={onReady} />
     </div>
   );
