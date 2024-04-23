@@ -4,7 +4,7 @@ import { getCampaignById } from "@/data/campaign/campaign-by-id";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Campaign } from "@/shared/campaign-type";
 import { notFound, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { Accordion } from "@/components/ui/accordion";
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
 import { Segment } from "@/shared/segment-type";
@@ -14,7 +14,13 @@ import { AccordianItemSubject } from "@/components/campaign/edit-campaign/accord
 import { AccordianItemTime } from "@/components/campaign/edit-campaign/accordian-item-time";
 import { AccordianItemContent } from "@/components/campaign/edit-campaign/accordian-item-content";
 import { useAtom } from "jotai";
-import { campaignAtom, emailAtom } from "@/store/customers-atom";
+import { savedEmailContentAtom } from "@/store/saved-email-content-atom";
+import { savedCampaignAtom } from "@/store/saved-campaign-atom";
+import { HTMLRenderer } from "@/components/utils/html-renderer";
+import { Button } from "@/components/ui/button";
+import { FaArrowRight, FaSave, FaVoicemail } from "react-icons/fa";
+import { updateCampaign } from "@/data/campaign/update-campaign";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
 type Props = {
   params: { campaignId: string };
@@ -27,6 +33,9 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   const [loadError, setLoadError] = useState<boolean>(false);
   const [campaign, setCampaign] = useState<Campaign>();
   const [segments, setSegments] = useState<Segment[]>([]);
+
+  const [isConfirming, setConfirming] = useState<boolean>(false);
+  const [isPending, startTransition] = useTransition();
 
   const [savedEmailContent, setSavedEmailContent] = useAtom(
     savedEmailContentAtom
