@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { CampaignFromSchema } from "@/schemas/campaign";
 import { Campaign } from "@/shared/campaign-type";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaCheck, FaSave } from "react-icons/fa";
 import { FcCancel, FcCloseUpMode, FcCollapse } from "react-icons/fc";
@@ -28,18 +29,13 @@ type Props = {
 };
 
 export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
-  const isChanged = () => {
-    return (
-      campaign?.from?.name !== fromForm.getValues("name") ||
-      campaign?.from?.email !== fromForm.getValues("email")
-    );
-  };
+  const [isChanged, setChanged] = useState<boolean>(false);
 
   const fromForm = useForm<z.infer<typeof CampaignFromSchema>>({
     resolver: zodResolver(CampaignFromSchema),
     defaultValues: {
-      name: campaign?.from?.name,
-      email: campaign?.from?.email
+      name: campaign?.from?.name || "",
+      email: campaign?.from?.email || ""
     }
   });
 
@@ -53,6 +49,21 @@ export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
           }) as Campaign
       );
     }
+    setChanged(false);
+  };
+
+  const onFormChanged = () => {
+    const formName = fromForm.getValues("name");
+    const formEmail = fromForm.getValues("email");
+
+    const campaignName = campaign?.from?.name || "";
+    const campaignEmail = campaign?.from?.email || "";
+
+    if (formName !== campaignName || formEmail !== campaignEmail) {
+      return setChanged(true);
+    }
+
+    return setChanged(false);
   };
 
   const onCancel = () => {
@@ -63,6 +74,7 @@ export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
       fromForm.setValue("name", "");
       fromForm.setValue("email", "");
     }
+    setChanged(false);
   };
 
   return (
@@ -86,6 +98,7 @@ export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
         <Form {...fromForm}>
           <form
             onSubmit={fromForm.handleSubmit(onFromSubmit)}
+            onChange={onFormChanged}
             className="w-full flex flex-col gap-y-4"
           >
             <div className="w-full flex items-start gap-x-6">
@@ -122,7 +135,7 @@ export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
             </div>
             <div className="flex gap-x-4">
               <Button
-                disabled={!isChanged()}
+                disabled={!isChanged}
                 type="submit"
                 variant="outline"
                 className="w-48 flex items-center gap-x-2 border-green-700"
@@ -131,7 +144,7 @@ export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
                 Save
               </Button>
               <Button
-                disabled={!isChanged()}
+                disabled={!isChanged}
                 type="button"
                 variant="outline"
                 className="w-48 flex items-center gap-x-2 border-red-700"
