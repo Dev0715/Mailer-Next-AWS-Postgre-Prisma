@@ -12,6 +12,7 @@ import { AccordianItemTo } from "@/components/campaign/edit-campaign/accordian-i
 import { AccordianItemFrom } from "@/components/campaign/edit-campaign/accordian-item-from";
 import { AccordianItemSubject } from "@/components/campaign/edit-campaign/accordian-item-subject";
 import { AccordianItemTime } from "@/components/campaign/edit-campaign/accordian-item-time";
+import { AccordianItemContent } from "@/components/campaign/edit-campaign/accordian-item-content";
 
 type Props = {
   params: { campaignId: string };
@@ -70,6 +71,12 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
           }
         />
         <AccordianItemTime
+          campaign={campaign as Campaign}
+          setCampaign={
+            setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
+          }
+        />
+        <AccordianItemContent
           campaign={campaign as Campaign}
           setCampaign={
             setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
