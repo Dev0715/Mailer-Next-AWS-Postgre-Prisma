@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { CampaignFromSchema } from "@/schemas/campaign";
 import { Campaign } from "@/shared/campaign-type";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaCheck, FaSave } from "react-icons/fa";
 import { FcCancel, FcCloseUpMode, FcCollapse } from "react-icons/fc";
@@ -38,6 +38,13 @@ export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
       email: campaign?.from?.email || ""
     }
   });
+
+  useEffect(() => {
+    if (campaign) {
+      fromForm.setValue("name", campaign.from?.name as string);
+      fromForm.setValue("email", campaign.from?.email as string);
+    }
+  }, [campaign]);
 
   const onFromSubmit = (values: z.infer<typeof CampaignFromSchema>) => {
     if (campaign) {
