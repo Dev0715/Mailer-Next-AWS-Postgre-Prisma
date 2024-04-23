@@ -18,6 +18,7 @@ import { Campaign } from "@/shared/campaign-type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { FaCheck, FaSave } from "react-icons/fa";
+import { FcCancel } from "react-icons/fc";
 import { z } from "zod";
 
 type Props = {
@@ -43,6 +44,16 @@ export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
             subject: values
           }) as Campaign
       );
+    }
+  };
+
+  const onCancel = () => {
+    if (campaign.subject) {
+      subjectForm.setValue("subject", campaign.subject.subject as string);
+      subjectForm.setValue("preview", campaign.subject.preview as string);
+    } else {
+      subjectForm.setValue("subject", "");
+      subjectForm.setValue("preview", "");
     }
   };
 
