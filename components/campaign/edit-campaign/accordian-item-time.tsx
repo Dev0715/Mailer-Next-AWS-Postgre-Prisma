@@ -38,6 +38,7 @@ type Props = {
 };
 
 export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
+  const [isChanged, setChanged] = useState<boolean>(false);
   const [instant, setInstant] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof CampaignTimeSchema>>({
@@ -53,6 +54,7 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
         date: values.date.toISOString()
       }
     });
+    setChanged(false);
   };
 
   const onSubmitClick = () => {
@@ -62,11 +64,23 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
         instant: true
       }
     });
+    setChanged(false);
+  };
+
+  const onInstantChanged = (value: boolean) => {
+    if (value !== instant) {
+      setChanged(true);
+    }
+    setInstant(value);
   };
 
   const onCancel = () => {
     setInstant(campaign.time?.instant || false);
-    form.setValue("date", new Date(campaign.time?.date as string));
+    form.setValue(
+      "date",
+      campaign.time?.date ? new Date(campaign.time?.date as string) : undefined
+    );
+    setChanged(false);
   };
 
   return (
@@ -160,6 +174,7 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
             <div className="flex gap-x-4">
               {instant ? (
                 <Button
+                  disabled={!isChanged}
                   variant="outline"
                   type="button"
                   className="w-48 flex items-center gap-x-2 border-green-700"
@@ -170,6 +185,7 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
                 </Button>
               ) : (
                 <Button
+                  disabled={!isChanged}
                   variant="outline"
                   type="submit"
                   className="w-48 flex items-center gap-x-2 border-green-700"
@@ -179,6 +195,7 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
                 </Button>
               )}
               <Button
+                disabled={!isChanged}
                 variant="outline"
                 type="button"
                 className="w-48 flex items-center gap-x-2 border-red-700"
