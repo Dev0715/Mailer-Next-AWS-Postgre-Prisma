@@ -28,6 +28,13 @@ type Props = {
 };
 
 export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
+  const isChanged = () => {
+    return (
+      campaign?.from?.name !== fromForm.getValues("name") ||
+      campaign?.from?.email !== fromForm.getValues("email")
+    );
+  };
+
   const fromForm = useForm<z.infer<typeof CampaignFromSchema>>({
     resolver: zodResolver(CampaignFromSchema),
     defaultValues: {
@@ -113,14 +120,27 @@ export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
                 />
               </div>
             </div>
-            <Button
-              type="submit"
-              variant="outline"
-              className="w-48 flex items-center gap-x-2 border-green-700"
-            >
-              <FaSave className="text-green-700" />
-              Save
-            </Button>
+            <div className="flex gap-x-4">
+              <Button
+                disabled={!isChanged()}
+                type="submit"
+                variant="outline"
+                className="w-48 flex items-center gap-x-2 border-green-700"
+              >
+                <FaSave className="text-green-700" />
+                Save
+              </Button>
+              <Button
+                disabled={!isChanged()}
+                type="button"
+                variant="outline"
+                className="w-48 flex items-center gap-x-2 border-red-700"
+                onClick={onCancel}
+              >
+                <FcCancel />
+                Cancel
+              </Button>
+            </div>
           </form>
         </Form>
       </AccordionContent>
