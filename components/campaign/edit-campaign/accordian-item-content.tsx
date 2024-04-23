@@ -11,9 +11,14 @@ import Link from "next/link";
 type Props = {
   campaign: Campaign;
   setCampaign: React.Dispatch<React.SetStateAction<Campaign>>;
+  onCreateEmail: () => void;
 };
 
-export const AccordianItemContent = ({ campaign, setCampaign }: Props) => {
+export const AccordianItemContent = ({
+  campaign,
+  setCampaign,
+  onCreateEmail
+}: Props) => {
   return (
     <AccordionItem value="step-4-content">
       <AccordionTrigger className="hover:no-underline hover:drop-shadow">
@@ -33,11 +38,11 @@ export const AccordianItemContent = ({ campaign, setCampaign }: Props) => {
       </AccordionTrigger>
       <AccordionContent className="px-1 pt-1">
         <div className="flex flex-col gap-y-2 px-12">
-          <Button asChild className="w-64 flex gap-x-2">
-            <Link href="/campaign/create-email">
-              <FaNewspaper />
-              Create a new email
-            </Link>
+          <Button className="w-64 flex gap-x-2" onClick={onCreateEmail}>
+            {/* <Link href="/campaign/create-email"> */}
+            <FaNewspaper />
+            Create a new email
+            {/* </Link> */}
           </Button>
         </div>
       </AccordionContent>
