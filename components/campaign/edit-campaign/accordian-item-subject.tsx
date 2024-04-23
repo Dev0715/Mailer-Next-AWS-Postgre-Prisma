@@ -13,10 +13,10 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { CampaignFromSchema, CampaignSubjectSchema } from "@/schemas/campaign";
+import { CampaignSubjectSchema } from "@/schemas/campaign";
 import { Campaign } from "@/shared/campaign-type";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMemo } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaCheck, FaSave } from "react-icons/fa";
 import { FcCancel } from "react-icons/fc";
@@ -28,11 +28,13 @@ type Props = {
 };
 
 export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
+  const [isChanged, setChanged] = useState<boolean>(false);
+
   const subjectForm = useForm<z.infer<typeof CampaignSubjectSchema>>({
     resolver: zodResolver(CampaignSubjectSchema),
     defaultValues: {
-      subject: campaign?.subject?.subject ? campaign?.subject?.subject : "",
-      preview: campaign?.subject?.preview ? campaign?.subject?.preview : ""
+      subject: campaign?.subject?.subject || "",
+      preview: campaign?.subject?.preview || ""
     }
   });
 
@@ -48,19 +50,19 @@ export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
     }
   };
 
-  const isChanged = useMemo(() => {
-    if (campaign?.subject) {
-      return (
-        campaign?.subject?.subject !== subjectForm.getValues("subject") ||
-        campaign?.subject?.preview !== subjectForm.getValues("preview")
-      );
+  const onFormChanged = () => {
+    const formSubject = subjectForm.getValues("subject");
+    const formPreview = subjectForm.getValues("preview");
+
+    const campaignSubject = campaign?.subject?.subject || "";
+    const campaignPreview = campaign?.subject?.preview || "";
+
+    if (formSubject !== campaignSubject || formPreview !== campaignPreview) {
+      setChanged(true);
     } else {
-      return (
-        subjectForm.getValues("subject") !== "" ||
-        subjectForm.getValues("preview") !== ""
-      );
+      setChanged(false);
     }
-  }, [campaign, subjectForm]);
+  };
 
   const onCancel = () => {
     if (campaign.subject) {
@@ -70,6 +72,7 @@ export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
       subjectForm.setValue("subject", "");
       subjectForm.setValue("preview", "");
     }
+    onFormChanged();
   };
 
   return (
@@ -95,6 +98,7 @@ export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
         <Form {...subjectForm}>
           <form
             onSubmit={subjectForm.handleSubmit(onSubjectSubmit)}
+            onChange={onFormChanged}
             className="w-full flex flex-col gap-y-4"
           >
             <div className="w-full flex items-start gap-x-6">
