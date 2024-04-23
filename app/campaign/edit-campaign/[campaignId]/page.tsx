@@ -25,19 +25,37 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   const user = useCurrentUser();
 
   const [loadError, setLoadError] = useState<boolean>(false);
+  const [campaign, setCampaign] = useState<Campaign>();
   const [segments, setSegments] = useState<Segment[]>([]);
 
-  const [emailTemplate] = useAtom(emailAtom);
-  const [campaign, setCampaign] = useAtom(campaignAtom);
+  const [savedEmailContent, setSavedEmailContent] = useAtom(
+    savedEmailContentAtom
+  );
+  const [savedCampaign, setSavedCampaign] = useAtom(savedCampaignAtom);
 
   useEffect(() => {
-    getCampaignById(user?.email as string, campaignId).then((campaign) => {
-      if (campaign) {
-        setCampaign(campaign as Campaign);
-      } else {
-        setLoadError(true);
-      }
-    });
+    if (savedCampaign.isSaved) {
+      setCampaign({
+        ...savedCampaign.campaign,
+        emailContent: savedEmailContent.emailContent
+      });
+      setSavedCampaign({
+        isSaved: false,
+        campaign: savedCampaign.campaign
+      });
+      setSavedEmailContent({
+        isSaved: false,
+        emailContent: savedEmailContent.emailContent
+      });
+    } else {
+      getCampaignById(user?.email as string, campaignId).then((campaign) => {
+        if (campaign) {
+          setCampaign(campaign as Campaign);
+        } else {
+          setLoadError(true);
+        }
+      });
+    }
 
     getAllSegmentsByEmail(user?.email as string).then((segments) => {
       if (segments) {
