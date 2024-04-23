@@ -2,7 +2,7 @@
 
 import { DefaultJsonData } from "@/assets/default-email-json";
 import { Button } from "@/components/ui/button";
-import { campaignAtom, emailAtom } from "@/store/atoms";
+import { campaignAtom, emailAtom } from "@/store/customers-atom";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";

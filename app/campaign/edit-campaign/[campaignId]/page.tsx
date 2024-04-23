@@ -3,7 +3,7 @@
 import { getCampaignById } from "@/data/campaign/campaign-by-id";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Campaign } from "@/shared/campaign-type";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Accordion } from "@/components/ui/accordion";
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
@@ -14,18 +14,20 @@ import { AccordianItemSubject } from "@/components/campaign/edit-campaign/accord
 import { AccordianItemTime } from "@/components/campaign/edit-campaign/accordian-item-time";
 import { AccordianItemContent } from "@/components/campaign/edit-campaign/accordian-item-content";
 import { useAtom } from "jotai";
-import { campaignAtom } from "@/store/atoms";
+import { campaignAtom, emailAtom } from "@/store/customers-atom";
 
 type Props = {
   params: { campaignId: string };
 };
 
 const EditCampaignPage = ({ params: { campaignId } }: Props) => {
+  const history = useRouter();
   const user = useCurrentUser();
 
   const [loadError, setLoadError] = useState<boolean>(false);
   const [segments, setSegments] = useState<Segment[]>([]);
 
+  const [emailTemplate] = useAtom(emailAtom);
   const [campaign, setCampaign] = useAtom(campaignAtom);
 
   useEffect(() => {
@@ -46,6 +48,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
 
   const onCreateEmail = () => {
     console.log("Create a new email");
+    history.push("/campaign/create-email");
   };
 
   if (loadError) {

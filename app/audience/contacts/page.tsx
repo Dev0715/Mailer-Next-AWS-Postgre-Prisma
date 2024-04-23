@@ -38,7 +38,7 @@ import { getColumnsForContactsTable } from "../_components/contacts-column";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { EditCustomer } from "@/components/audience/edit-customer";
 import { useAtom } from "jotai";
-import { customersAtom } from "@/store/atoms";
+import { customersAtom } from "@/store/customers-atom";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { deleteCutomer } from "@/data/audience/delete-customer";
