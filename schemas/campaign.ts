@@ -15,3 +15,9 @@ export const CampaignSubjectSchema = z.object({
     .max(72, "Subject should be a maximum of 72 characters"),
   preview: z.string().optional()
 });
+
+export const CampaignTimeSchema = z.object({
+  date: z.date({
+    required_error: "A date of birth is required."
+  })
+});

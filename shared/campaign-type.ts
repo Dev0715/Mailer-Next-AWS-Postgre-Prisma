@@ -11,4 +11,8 @@ export type Campaign = {
     subject: string;
     preview: string;
   };
+  time?: {
+    instant: boolean;
+    date?: string;
+  };
 };
