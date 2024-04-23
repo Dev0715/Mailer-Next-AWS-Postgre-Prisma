@@ -2,7 +2,8 @@
 
 import { DefaultJsonData } from "@/assets/default-email-json";
 import { Button } from "@/components/ui/button";
-import { campaignAtom, emailAtom } from "@/store/customers-atom";
+import { savedCampaignAtom } from "@/store/saved-campaign-atom";
+import { savedEmailContentAtom } from "@/store/saved-email-content-atom";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -14,16 +15,21 @@ const NewEmail = () => {
   const [isLoading, setLoading] = useState(true);
   const [jsonData, setJsonData] = useState<any>(DefaultJsonData);
 
-  const [emailTemplate, setEmailTemplate] = useAtom(emailAtom);
-  const [campaign] = useAtom(campaignAtom);
+  const [savedEmailContent, setSavedEmailContent] = useAtom(
+    savedEmailContentAtom
+  );
+  const [savedCampaign] = useAtom(savedCampaignAtom);
 
   const emailEditorRef = useRef<EditorRef>(null);
 
-  useEffect(() => {}, []);
-
   const onReady: EmailEditorProps["onReady"] = () => {
     const unlayer: any = emailEditorRef.current?.editor;
-    unlayer.loadDesign(jsonData);
+
+    if (savedEmailContent.isSaved) {
+      unlayer.loadDesign(savedEmailContent.emailContent.design);
+    } else {
+      unlayer.loadDesign(jsonData);
+    }
   };
 
   const onSaveExist = () => {
@@ -31,11 +37,13 @@ const NewEmail = () => {
     unlayer?.exportHtml(async (data) => {
       const { design, html } = data;
       setJsonData(design);
-      setEmailTemplate({
-        design,
-        html
+      setSavedEmailContent({
+        isSaved: true,
+        emailContent: { design, html }
       });
-      history.push(`/campaign/edit-campaign/${campaign.campaignId}`);
+      history.push(
+        `/campaign/edit-campaign/${savedCampaign.campaign.campaignId}`
+      );
     });
   };
 

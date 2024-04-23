@@ -15,4 +15,8 @@ export type Campaign = {
     instant: boolean;
     date?: string;
   };
+  emailContent?: {
+    design: any;
+    html: string;
+  };
 };
