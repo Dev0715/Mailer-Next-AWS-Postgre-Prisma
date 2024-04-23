@@ -48,6 +48,7 @@ export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
           }) as Campaign
       );
     }
+    setChanged(false);
   };
 
   const onFormChanged = () => {
@@ -72,7 +73,7 @@ export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
       subjectForm.setValue("subject", "");
       subjectForm.setValue("preview", "");
     }
-    onFormChanged();
+    setChanged(false);
   };
 
   return (
