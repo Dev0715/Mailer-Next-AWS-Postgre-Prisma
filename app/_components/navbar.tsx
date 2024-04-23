@@ -47,10 +47,9 @@ export const Navbar = () => {
   const campaignItems: { title: string; href: string; description: string }[] =
     [
       {
-        title: "Campaign Dashboard",
+        title: "All Campaigns",
         href: "/campaign",
-        description:
-          "Your campaign dashboard is the home for all your email campaigns"
+        description: "All your campaigns stored in your campaign database"
       },
       {
         title: "New Campaign",
