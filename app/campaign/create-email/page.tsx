@@ -18,7 +18,13 @@ const NewEmail = () => {
     unlayer.loadDesign(jsonData);
   };
 
-  const onSaveExist = () => {};
+  const onSaveExist = () => {
+    const unlayer = emailEditorRef.current?.editor;
+    unlayer?.exportHtml(async (data) => {
+      const { design, html } = data;
+      setJsonData(design);
+    });
+  };
 
   return (
     <div className="w-5/6 flex flex-col py-6">
