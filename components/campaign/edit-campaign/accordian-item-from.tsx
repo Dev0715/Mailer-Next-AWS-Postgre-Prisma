@@ -19,6 +19,7 @@ import { Campaign } from "@/shared/campaign-type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { FaCheck, FaSave } from "react-icons/fa";
+import { FcCancel, FcCloseUpMode, FcCollapse } from "react-icons/fc";
 import { z } from "zod";
 
 type Props = {
@@ -44,6 +45,16 @@ export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
             from: values
           }) as Campaign
       );
+    }
+  };
+
+  const onCancel = () => {
+    if (campaign.from) {
+      fromForm.setValue("name", campaign.from.name as string);
+      fromForm.setValue("email", campaign.from.email as string);
+    } else {
+      fromForm.setValue("name", "");
+      fromForm.setValue("email", "");
     }
   };
 
@@ -77,7 +88,7 @@ export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
                   name="name"
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel>Subject*</FormLabel>
+                      <FormLabel>Name*</FormLabel>
                       <FormControl>
                         <Input {...field} placeholder="John Doe" />
                       </FormControl>
