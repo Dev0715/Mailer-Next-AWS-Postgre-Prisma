@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/accordion";
 import { FaCheck, FaSave } from "react-icons/fa";
 import { Campaign } from "@/shared/campaign-type";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TimeSelect } from "./time-select";
 import { Button } from "@/components/ui/button";
 import { FcCancel } from "react-icons/fc";
@@ -46,6 +46,15 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
     defaultValues: {}
   });
 
+  useEffect(() => {
+    if (campaign) {
+      setInstant(campaign.time?.instant || false);
+      if (campaign.time?.date) {
+        form.setValue("date", new Date(campaign.time?.date as string));
+      }
+    }
+  }, [campaign]);
+
   const onSubmit = (values: z.infer<typeof CampaignTimeSchema>) => {
     setCampaign({
       ...campaign,
@@ -78,7 +87,9 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
     setInstant(campaign.time?.instant || false);
     form.setValue(
       "date",
-      campaign.time?.date ? new Date(campaign.time?.date as string) : undefined
+      campaign.time?.date
+        ? new Date(campaign.time?.date as string)
+        : (undefined as unknown as Date)
     );
     setChanged(false);
   };
