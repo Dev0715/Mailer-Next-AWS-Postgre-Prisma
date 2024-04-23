@@ -111,17 +111,13 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
                 focus={!instant}
                 title="Schedule a time"
                 message="Optimize your timing"
-                onClick={() => {
-                  setInstant(false);
-                }}
+                onClick={() => onInstantChanged(false)}
               />
               <TimeSelect
                 focus={instant}
                 title="Send now"
                 message="Get your email out there now"
-                onClick={() => {
-                  setInstant(true);
-                }}
+                onClick={() => onInstantChanged(true)}
               />
             </div>
             {!instant && (
@@ -142,6 +138,7 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
                               "w-64 justify-start text-left font-normal",
                               !field.value && "text-muted-foreground"
                             )}
+                            onClick={() => setChanged(true)}
                           >
                             <CalendarIcon className="mr-2 h-4 w-4" />
                             {field.value ? (
