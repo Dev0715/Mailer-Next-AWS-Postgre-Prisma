@@ -5,32 +5,13 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { Campaign } from "@/shared/campaign-type";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from "@/components/ui/accordion";
+import { Accordion } from "@/components/ui/accordion";
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
 import { Segment } from "@/shared/segment-type";
-import { FaCheck, FaSave } from "react-icons/fa";
-import { Input } from "@/components/ui/input";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { CampaignFromSchema, CampaignSubjectSchema } from "@/schemas/campaign";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
 import { AccordianItemTo } from "@/components/campaign/edit-campaign/accordian-item-to";
 import { AccordianItemFrom } from "@/components/campaign/edit-campaign/accordian-item-from";
 import { AccordianItemSubject } from "@/components/campaign/edit-campaign/accordian-item-subject";
+import { AccordianItemTime } from "@/components/campaign/edit-campaign/accordian-item-time";
 
 type Props = {
   params: { campaignId: string };
@@ -83,6 +64,12 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
           }
         />
         <AccordianItemSubject
+          campaign={campaign as Campaign}
+          setCampaign={
+            setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
+          }
+        />
+        <AccordianItemTime
           campaign={campaign as Campaign}
           setCampaign={
             setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
