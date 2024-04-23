@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { CampaignSubjectSchema } from "@/schemas/campaign";
 import { Campaign } from "@/shared/campaign-type";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaCheck, FaSave } from "react-icons/fa";
 import { FcCancel } from "react-icons/fc";
@@ -37,6 +37,13 @@ export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
       preview: campaign?.subject?.preview || ""
     }
   });
+
+  useEffect(() => {
+    if (campaign) {
+      subjectForm.setValue("subject", campaign.subject?.subject as string);
+      subjectForm.setValue("preview", campaign.subject?.preview as string);
+    }
+  }, [campaign]);
 
   const onSubjectSubmit = (values: z.infer<typeof CampaignSubjectSchema>) => {
     if (campaign) {
