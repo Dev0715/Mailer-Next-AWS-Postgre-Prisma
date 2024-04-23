@@ -13,6 +13,8 @@ import { AccordianItemFrom } from "@/components/campaign/edit-campaign/accordian
 import { AccordianItemSubject } from "@/components/campaign/edit-campaign/accordian-item-subject";
 import { AccordianItemTime } from "@/components/campaign/edit-campaign/accordian-item-time";
 import { AccordianItemContent } from "@/components/campaign/edit-campaign/accordian-item-content";
+import { useAtom } from "jotai";
+import { campaignAtom } from "@/store/atoms";
 
 type Props = {
   params: { campaignId: string };
@@ -22,8 +24,9 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   const user = useCurrentUser();
 
   const [loadError, setLoadError] = useState<boolean>(false);
-  const [campaign, setCampaign] = useState<Campaign>();
   const [segments, setSegments] = useState<Segment[]>([]);
+
+  const [campaign, setCampaign] = useAtom(campaignAtom);
 
   useEffect(() => {
     getCampaignById(user?.email as string, campaignId).then((campaign) => {
