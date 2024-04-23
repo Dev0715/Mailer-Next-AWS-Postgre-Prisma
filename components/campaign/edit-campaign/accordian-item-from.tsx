@@ -125,7 +125,7 @@ export const AccordianItemFrom = ({ campaign, setCampaign }: Props) => {
                     <FormItem className="w-full">
                       <FormLabel>Email*</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="John Doe" />
+                        <Input {...field} placeholder="user@mail.com" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
