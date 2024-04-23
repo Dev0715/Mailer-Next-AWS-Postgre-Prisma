@@ -2,12 +2,18 @@
 
 import { DefaultJsonData } from "@/assets/default-email-json";
 import { Button } from "@/components/ui/button";
+import { emailAtom } from "@/store/atoms";
+import { useAtom } from "jotai";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import EmailEditor, { EditorRef, EmailEditorProps } from "react-email-editor";
 
 const NewEmail = () => {
+  const history = useRouter();
+
   const [isLoading, setLoading] = useState(true);
   const [jsonData, setJsonData] = useState<any>(DefaultJsonData);
+  const [emailTemplate, setEmailTemplate] = useAtom(emailAtom);
 
   const emailEditorRef = useRef<EditorRef>(null);
 
@@ -23,6 +29,11 @@ const NewEmail = () => {
     unlayer?.exportHtml(async (data) => {
       const { design, html } = data;
       setJsonData(design);
+      setEmailTemplate({
+        design,
+        html
+      });
+      history.push("/campaign/create-email");
     });
   };
 

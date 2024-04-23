@@ -41,6 +41,10 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     });
   }, []);
 
+  const onCreateEmail = () => {
+    console.log("Create a new email");
+  };
+
   if (loadError) {
     return notFound();
   }
@@ -81,6 +85,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
           setCampaign={
             setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
           }
+          onCreateEmail={onCreateEmail}
         />
       </Accordion>
     </div>
