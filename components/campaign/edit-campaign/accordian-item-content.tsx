@@ -4,18 +4,9 @@ import {
   AccordionTrigger
 } from "@/components/ui/accordion";
 import { FaCheck, FaNewspaper, FaUser } from "react-icons/fa";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
 import { Campaign } from "@/shared/campaign-type";
-import { Segment } from "@/shared/segment-type";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 type Props = {
   campaign: Campaign;
@@ -23,18 +14,6 @@ type Props = {
 };
 
 export const AccordianItemContent = ({ campaign, setCampaign }: Props) => {
-  const onToChange = (newValue: string) => {
-    if (campaign) {
-      setCampaign(
-        (prev) =>
-          ({
-            ...prev,
-            to: newValue
-          }) as Campaign
-      );
-    }
-  };
-
   return (
     <AccordionItem value="step-4-content">
       <AccordionTrigger className="hover:no-underline hover:drop-shadow">
@@ -54,9 +33,11 @@ export const AccordianItemContent = ({ campaign, setCampaign }: Props) => {
       </AccordionTrigger>
       <AccordionContent className="px-1 pt-1">
         <div className="flex flex-col gap-y-2 px-12">
-          <Button className="w-64 flex gap-x-2">
-            <FaNewspaper />
-            Create a new email
+          <Button asChild className="w-64 flex gap-x-2">
+            <Link href="/campaign/create-email">
+              <FaNewspaper />
+              Create a new email
+            </Link>
           </Button>
         </div>
       </AccordionContent>
