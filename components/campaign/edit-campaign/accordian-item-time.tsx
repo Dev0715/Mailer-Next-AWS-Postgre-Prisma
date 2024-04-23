@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/accordion";
 import { FaCheck, FaSave } from "react-icons/fa";
 import { Campaign } from "@/shared/campaign-type";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TimeSelect } from "./time-select";
 import { Button } from "@/components/ui/button";
 import { FcCancel } from "react-icons/fc";
@@ -36,7 +36,7 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
         </div>
       </AccordionTrigger>
       <AccordionContent className="px-1 pt-1">
-        <div className="flex flex-col gap-y-2">
+        <div className="flex flex-col gap-y-4 px-12">
           <div className="w-full flex gap-x-6">
             <TimeSelect
               focus={!instant}
@@ -55,12 +55,15 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
               }}
             />
           </div>
-          <p className="text-base text-gray-600 font-medium">
-            Select a segment*
-          </p>
+          {!instant && (
+            <div className="w-full flex flex-col">
+              <p className="text-base text-gray-600 font-medium">
+                Select a time*
+              </p>
+            </div>
+          )}
           <div className="flex gap-x-4">
             <Button
-              type="submit"
               variant="outline"
               className="w-48 flex items-center gap-x-2 border-green-700"
             >
@@ -68,7 +71,6 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
               Save
             </Button>
             <Button
-              type="button"
               variant="outline"
               className="w-48 flex items-center gap-x-2 border-red-700"
             >

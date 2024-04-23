@@ -100,7 +100,7 @@ export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
           <form
             onSubmit={subjectForm.handleSubmit(onSubjectSubmit)}
             onChange={onFormChanged}
-            className="w-full flex flex-col gap-y-4"
+            className="w-full flex flex-col gap-y-4 px-12"
           >
             <div className="w-full flex items-start gap-x-6">
               <div className="w-1/2 flex">
