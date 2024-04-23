@@ -74,9 +74,36 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   }, []);
 
   const onCreateEmail = () => {
-    console.log("Create a new email");
+    setSavedCampaign({
+      isSaved: true,
+      campaign: campaign as Campaign
+    });
+    if (campaign?.emailContent) {
+      setSavedEmailContent({
+        isSaved: true,
+        emailContent: campaign.emailContent
+      });
+    }
     history.push("/campaign/create-email");
   };
+
+  const onFinishLater = () => {
+    startTransition(() => {
+      updateCampaign(campaign as Campaign)
+        .then((res) => {
+          if (res) {
+            history.push("/campaign");
+          } else {
+            setConfirming(true);
+          }
+        })
+        .catch((error) => {
+          setConfirming(true);
+        });
+    });
+  };
+
+  const onSend = () => {};
 
   if (loadError) {
     return notFound();
@@ -84,43 +111,79 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
 
   return (
     <div className="w-5/6 flex flex-col gap-y-6 py-6">
-      <p className="text-4xl text-green-700 font-semibold">
-        Campaign {campaign?.title}
-      </p>
-      <Accordion type={"multiple"}>
-        <AccordianItemTo
-          campaign={campaign as Campaign}
-          setCampaign={
-            setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
-          }
-          segments={segments}
-        />
-        <AccordianItemFrom
-          campaign={campaign as Campaign}
-          setCampaign={
-            setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
-          }
-        />
-        <AccordianItemSubject
-          campaign={campaign as Campaign}
-          setCampaign={
-            setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
-          }
-        />
-        <AccordianItemTime
-          campaign={campaign as Campaign}
-          setCampaign={
-            setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
-          }
-        />
-        <AccordianItemContent
-          campaign={campaign as Campaign}
-          setCampaign={
-            setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
-          }
-          onCreateEmail={onCreateEmail}
-        />
-      </Accordion>
+      <ConfirmAlert
+        open={isConfirming}
+        title="Failure"
+        description="Failed to update campaign"
+        onAlertDialogClosed={() => setConfirming(false)}
+      />
+      <div className="w-full flex items-end justify-between">
+        <p className="text-4xl text-green-700 font-semibold">
+          Campaign {campaign?.title}
+        </p>
+      </div>
+      <div className="w-full flex gap-x-6">
+        <div className="w-2/3 flex flex-col gap-y-6">
+          <Accordion type={"multiple"} className="w-full">
+            <AccordianItemTo
+              campaign={campaign as Campaign}
+              setCampaign={
+                setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
+              }
+              segments={segments}
+            />
+            <AccordianItemFrom
+              campaign={campaign as Campaign}
+              setCampaign={
+                setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
+              }
+            />
+            <AccordianItemSubject
+              campaign={campaign as Campaign}
+              setCampaign={
+                setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
+              }
+            />
+            <AccordianItemTime
+              campaign={campaign as Campaign}
+              setCampaign={
+                setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
+              }
+            />
+            <AccordianItemContent
+              campaign={campaign as Campaign}
+              setCampaign={
+                setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
+              }
+              onCreateEmail={onCreateEmail}
+            />
+          </Accordion>
+          <div className="flex items-center gap-x-6">
+            <Button
+              disabled={isPending}
+              variant={"outline"}
+              className="w-40 flex gap-x-2 border-green-700"
+              onClick={onFinishLater}
+            >
+              <FaSave />
+              Finish Later
+            </Button>
+            <Button
+              disabled={isPending}
+              variant={"default"}
+              className="w-32 flex gap-x-2"
+              onClick={onSend}
+            >
+              <FaArrowRight />
+              Send
+            </Button>
+          </div>
+        </div>
+        <div className="w-1/3 flex flex-col gap-y-4">
+          <p className="text-lg font-semibold drop-shadow-md">Email Preview</p>
+          <HTMLRenderer htmlString={campaign?.emailContent?.html as string} />
+        </div>
+      </div>
     </div>
   );
 };
