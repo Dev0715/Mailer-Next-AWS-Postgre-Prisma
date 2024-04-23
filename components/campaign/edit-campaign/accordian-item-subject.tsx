@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { CampaignFromSchema, CampaignSubjectSchema } from "@/schemas/campaign";
 import { Campaign } from "@/shared/campaign-type";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { FaCheck, FaSave } from "react-icons/fa";
 import { FcCancel } from "react-icons/fc";
@@ -30,8 +31,8 @@ export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
   const subjectForm = useForm<z.infer<typeof CampaignSubjectSchema>>({
     resolver: zodResolver(CampaignSubjectSchema),
     defaultValues: {
-      subject: campaign?.subject?.subject,
-      preview: campaign?.subject?.preview
+      subject: campaign?.subject?.subject ? campaign?.subject?.subject : "",
+      preview: campaign?.subject?.preview ? campaign?.subject?.preview : ""
     }
   });
 
@@ -46,6 +47,20 @@ export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
       );
     }
   };
+
+  const isChanged = useMemo(() => {
+    if (campaign?.subject) {
+      return (
+        campaign?.subject?.subject !== subjectForm.getValues("subject") ||
+        campaign?.subject?.preview !== subjectForm.getValues("preview")
+      );
+    } else {
+      return (
+        subjectForm.getValues("subject") !== "" ||
+        subjectForm.getValues("preview") !== ""
+      );
+    }
+  }, [campaign, subjectForm]);
 
   const onCancel = () => {
     if (campaign.subject) {
@@ -114,14 +129,27 @@ export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
                 />
               </div>
             </div>
-            <Button
-              type="submit"
-              variant="outline"
-              className="w-48 flex items-center gap-x-2 border-green-700"
-            >
-              <FaSave className="text-green-700" />
-              Save
-            </Button>
+            <div className="flex gap-x-4">
+              <Button
+                disabled={!isChanged}
+                type="submit"
+                variant="outline"
+                className="w-48 flex items-center gap-x-2 border-green-700"
+              >
+                <FaSave className="text-green-700" />
+                Save
+              </Button>
+              <Button
+                disabled={!isChanged}
+                type="button"
+                variant="outline"
+                className="w-48 flex items-center gap-x-2 border-red-700"
+                onClick={onCancel}
+              >
+                <FcCancel />
+                Cancel
+              </Button>
+            </div>
           </form>
         </Form>
       </AccordionContent>
