@@ -3,14 +3,35 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const FromMannual = () => {
   const [inputText, setInputText] = useState<string>("");
+  const [isPending, startTransition] = useTransition();
+
+  const recognizeLine = (str: string) => {
+    const fields = str.split(",");
+
+    if (fields.length < 6) {
+      return null;
+    }
+
+    return {
+      subscriberEmail: fields[0],
+      firstName: fields[1],
+      lastName: fields[2],
+      address: fields[3],
+      phoneNumber: fields[4],
+      birthday: fields[5]
+    };
+  };
 
   const onContinueOrganize = () => {
-    console.log(inputText);
+    startTransition(() => {
+      const lines = inputText.split("\n");
+      console.log(lines);
+    });
   };
 
   return (
@@ -39,15 +60,20 @@ const FromMannual = () => {
       />
       <div className="flex justify-between">
         <Button
-          asChild
+          disabled={isPending}
           className="w-64 flex gap-x-2 bg-red-700 hover:bg-red-600"
+          asChild
         >
           <Link href="/audience/contacts/add">
             <FaArrowLeft />
             Back
           </Link>
         </Button>
-        <Button className="w-64 flex gap-x-2" onClick={onContinueOrganize}>
+        <Button
+          disabled={isPending}
+          className="w-64 flex gap-x-2"
+          onClick={onContinueOrganize}
+        >
           <FaArrowRight />
           Continue to Organize
         </Button>
