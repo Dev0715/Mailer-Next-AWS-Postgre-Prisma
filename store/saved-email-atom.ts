@@ -1,16 +1,16 @@
 import { atom } from "jotai";
 
-type SavedEmailContent = {
+type SavedEmail = {
   isSaved: boolean;
-  emailContent: {
+  email: {
     design: any;
     html: string;
   };
 };
 
-export const savedEmailContentAtom = atom<SavedEmailContent>({
+export const savedEmailContentAtom = atom<SavedEmail>({
   isSaved: false,
-  emailContent: {
+  email: {
     design: {},
     html: ""
   }

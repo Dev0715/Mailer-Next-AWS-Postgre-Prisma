@@ -1,4 +1,4 @@
-export const DefaultJsonData = {
+export const DefaultEmailDesign = {
   counters: {
     u_column: 2,
     u_row: 2,
