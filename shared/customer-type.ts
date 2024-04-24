@@ -6,8 +6,8 @@ export type Customer = {
   address: string;
   phoneNumber: string;
   birthday: string;
-  tags: string[];
-  subscribed: boolean;
+  tags?: string[];
+  subscribed?: boolean;
   contactRating?: number;
   created?: string;
   lastChanged?: string;
