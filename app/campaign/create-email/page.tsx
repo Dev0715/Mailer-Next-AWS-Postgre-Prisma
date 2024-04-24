@@ -39,14 +39,16 @@ const NewEmail = () => {
     const unlayer = emailEditorRef.current?.editor;
     unlayer?.exportHtml(async (data) => {
       const { design, html } = data;
-      setJsonData(design);
-      setSavedEmailContent({
-        isSaved: true,
-        emailContent: { design, html }
-      });
-      history.push(
-        `/campaign/edit-campaign/${savedCampaign.campaign.campaignId}`
-      );
+      console.log("__DESIGN__", design);
+      console.log("__HTML__", html);
+      // setJsonData(design);
+      // setSavedEmailContent({
+      //   isSaved: true,
+      //   emailContent: { design, html }
+      // });
+      // history.push(
+      //   `/campaign/edit-campaign/${savedCampaign.campaign.campaignId}`
+      // );
     });
   };
 
