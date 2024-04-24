@@ -14,7 +14,7 @@ import { AccordianItemSubject } from "@/components/campaign/edit-campaign/accord
 import { AccordianItemTime } from "@/components/campaign/edit-campaign/accordian-item-time";
 import { AccordianItemContent } from "@/components/campaign/edit-campaign/accordian-item-content";
 import { useAtom } from "jotai";
-import { savedEmailContentAtom } from "@/store/saved-email-content-atom";
+import { savedEmailAtom } from "@/store/saved-email-atom";
 import { savedCampaignAtom } from "@/store/saved-campaign-atom";
 import { HTMLRenderer } from "@/components/utils/html-renderer";
 import { Button } from "@/components/ui/button";
@@ -37,16 +37,14 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   const [isConfirming, setConfirming] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
 
-  const [savedEmailContent, setSavedEmailContent] = useAtom(
-    savedEmailContentAtom
-  );
+  const [savedEmailContent, setSavedEmailContent] = useAtom(savedEmailAtom);
   const [savedCampaign, setSavedCampaign] = useAtom(savedCampaignAtom);
 
   useEffect(() => {
     if (savedCampaign.isSaved) {
       setCampaign({
         ...savedCampaign.campaign,
-        emailContent: savedEmailContent.emailContent
+        emailContent: savedEmailContent.email
       });
       setSavedCampaign({
         isSaved: false,
@@ -54,7 +52,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
       });
       setSavedEmailContent({
         isSaved: false,
-        emailContent: savedEmailContent.emailContent
+        email: savedEmailContent.email
       });
     } else {
       getCampaignById(user?.email as string, campaignId).then((campaign) => {
@@ -81,7 +79,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     if (campaign?.emailContent) {
       setSavedEmailContent({
         isSaved: true,
-        emailContent: campaign.emailContent
+        email: campaign.emailContent
       });
     }
     history.push("/campaign/create-email");
