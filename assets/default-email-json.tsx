@@ -1,4 +1,4 @@
-export const DefaultEmailDesign = {
+export const DEFAULT_EMAIL_DESIGN = {
   counters: {
     u_column: 2,
     u_row: 2,

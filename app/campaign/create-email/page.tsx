@@ -1,9 +1,9 @@
 "use client";
 
-import { DefaultJsonData } from "@/assets/default-email-json";
+import { DEFAULT_EMAIL_DESIGN } from "@/assets/default-email-json";
 import { Button } from "@/components/ui/button";
 import { savedCampaignAtom } from "@/store/saved-campaign-atom";
-import { savedEmailContentAtom } from "@/store/saved-email-content-atom";
+import { savedEmailAtom } from "@/store/saved-email-atom";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
@@ -13,11 +13,7 @@ const NewEmail = () => {
   const history = useRouter();
 
   const [isLoading, setLoading] = useState(true);
-  const [jsonData, setJsonData] = useState<any>(DefaultJsonData);
-
-  const [savedEmailContent, setSavedEmailContent] = useAtom(
-    savedEmailContentAtom
-  );
+  const [savedEmail, setSavedEmail] = useAtom(savedEmailAtom);
   const [savedCampaign] = useAtom(savedCampaignAtom);
 
   const emailEditorRef = useRef<EditorRef>(null);
@@ -25,30 +21,26 @@ const NewEmail = () => {
   const onReady: EmailEditorProps["onReady"] = () => {
     const unlayer: any = emailEditorRef.current?.editor;
 
-    if (savedEmailContent.isSaved) {
-      unlayer.loadDesign(savedEmailContent.emailContent.design);
-      setJsonData(savedEmailContent.emailContent.design);
-    } else {
-      unlayer.loadDesign(jsonData);
-    }
+    unlayer.loadDesign(
+      savedEmail.isSaved ? savedEmail.email.design : DEFAULT_EMAIL_DESIGN
+    );
 
     setLoading(false);
   };
 
   const onSaveExist = () => {
     const unlayer = emailEditorRef.current?.editor;
+
     unlayer?.exportHtml(async (data) => {
       const { design, html } = data;
-      console.log("__DESIGN__", design);
-      console.log("__HTML__", html);
-      // setJsonData(design);
-      // setSavedEmailContent({
-      //   isSaved: true,
-      //   emailContent: { design, html }
-      // });
-      // history.push(
-      //   `/campaign/edit-campaign/${savedCampaign.campaign.campaignId}`
-      // );
+      setEmailDesign(design);
+      setSavedEmail({
+        isSaved: true,
+        email: { design, html }
+      });
+      history.push(
+        `/campaign/edit-campaign/${savedCampaign.campaign.campaignId}`
+      );
     });
   };
 
@@ -62,7 +54,6 @@ const NewEmail = () => {
           Save & Exist
         </Button>
       </div>
-
       <EmailEditor minHeight={"80vh"} ref={emailEditorRef} onReady={onReady} />
     </div>
   );
