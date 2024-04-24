@@ -9,6 +9,10 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 const FromMannual = () => {
   const [inputText, setInputText] = useState<string>("");
 
+  const onContinueOrganize = () => {
+    console.log(inputText);
+  };
+
   return (
     <main className="w-5/6 flex flex-col py-6">
       <p className="text-4xl font-semibold mb-6">
@@ -31,7 +35,7 @@ const FromMannual = () => {
         className="h-64 border-green-500 mb-8"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
-        placeholder="Email, First Name, Last Name, Address"
+        placeholder="Email, First Name, Last Name, Address, Phone Number, Birthday"
       />
       <div className="flex justify-between">
         <Button
@@ -43,11 +47,9 @@ const FromMannual = () => {
             Back
           </Link>
         </Button>
-        <Button asChild className="w-64 flex gap-x-2">
-          <Link href="/">
-            <FaArrowRight />
-            Continue to Organize
-          </Link>
+        <Button className="w-64 flex gap-x-2" onClick={onContinueOrganize}>
+          <FaArrowRight />
+          Continue to Organize
         </Button>
       </div>
     </main>
