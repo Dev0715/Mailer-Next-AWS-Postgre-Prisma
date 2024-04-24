@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import Link from "next/link";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const FromMannual = () => {
@@ -13,7 +13,9 @@ const FromMannual = () => {
   const [inputText, setInputText] = useState<string>("");
   const [isLoading, setLoading] = useState<boolean>(false);
 
-  const recognizeLine = async (str: string) => {
+  const recognizeLine: (str: string) => Promise<number> = async (
+    str: string
+  ) => {
     const fields = str.split(",");
 
     if (fields.length < 6) {
@@ -21,6 +23,7 @@ const FromMannual = () => {
     }
 
     const contact = {
+      userEmail: user?.email as string,
       subscriberEmail: fields[0],
       firstName: fields[1],
       lastName: fields[2],
@@ -28,14 +31,23 @@ const FromMannual = () => {
       phoneNumber: fields[4],
       birthday: fields[5]
     };
+
+    return 1;
   };
 
   const onContinueOrganize = () => {
-    startTransition(() => {
-      const lines = inputText.split("\n");
-      lines.map((line) => {
-        recognizeLine(line);
-      });
+    setLoading(true);
+    const lines = inputText.split("\n");
+    Promise.all(
+      lines.map(async (line) => {
+        return await recognizeLine(line);
+      })
+    ).then((res) => {
+      const successedCnt = res.reduce(
+        (accumulator, cur) => accumulator + cur,
+        0
+      );
+      setLoading(false);
     });
   };
 
