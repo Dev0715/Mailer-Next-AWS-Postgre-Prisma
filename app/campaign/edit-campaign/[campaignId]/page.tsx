@@ -105,8 +105,44 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     });
   };
 
+  const isAbleToSend = () => {
+    return (
+      campaign?.to &&
+      campaign.from &&
+      campaign.subject &&
+      campaign.time &&
+      campaign.email
+    );
+  };
+
   const onSend = () => {
     // # Create cron or trigger
+    // transporter.sendMail({
+    //   from: "malachi.uudev@gmail.com",
+    //   to: "andrei.devcasian@gmail.com",
+    //   subject: "Test-Email",
+    //   html: campaign?.email?.html
+    // });
+    const command = new SendEmailCommand({
+      Source: "malachi.uudev@gmail.com",
+      Destination: {
+        ToAddresses: ["andrei.devcasian@gmail.com"]
+      },
+      Message: {
+        Body: {
+          Html: {
+            Data: campaign?.email?.html
+          }
+        },
+        Subject: {
+          Data: campaign?.subject?.subject
+        }
+      }
+    });
+
+    sesClient.send(command).then((res) => {
+      console.log(res);
+    });
   };
 
   if (loadError) {
