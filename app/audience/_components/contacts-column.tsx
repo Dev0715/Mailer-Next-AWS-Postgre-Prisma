@@ -116,7 +116,7 @@ export const getColumnsForContactsTable = ({
       accessorKey: "tags",
       header: () => <div className="text-center">Tags</div>,
       cell: ({ row }) => {
-        const tags: string[] = row.getValue("tags");
+        const tags: string[] = row.getValue("tags") || [];
         return (
           <div className="flex justify-center">
             <div className="font-medium flex flex-wrap justify-center gap-1">
@@ -131,7 +131,7 @@ export const getColumnsForContactsTable = ({
       },
       // Customized Filter Function
       filterFn: (row, id, filterValue) => {
-        const tags: string[] = row.getValue("tags");
+        const tags: string[] = row.getValue("tags") || [];
         if (tags.find((tag) => tag.toLowerCase().includes(filterValue)))
           return true;
         else return false;

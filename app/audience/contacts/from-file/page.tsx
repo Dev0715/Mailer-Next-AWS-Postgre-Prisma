@@ -40,11 +40,12 @@ const FromFile = () => {
       <Input
         className="hidden"
         type="file"
-        accept=".csv,.txt"
+        accept="text/*"
         ref={hiddenFileInput}
         onChange={onFileSelected}
       />
       <Button
+        disabled={isLoading}
         variant="outline"
         className="w-96 h-32 flex gap-x-2 border-green-700 mb-8"
         onClick={() => hiddenFileInput.current?.click()}
