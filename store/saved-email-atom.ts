@@ -8,7 +8,7 @@ type SavedEmail = {
   };
 };
 
-export const savedEmailContentAtom = atom<SavedEmail>({
+export const savedEmailAtom = atom<SavedEmail>({
   isSaved: false,
   email: {
     design: {},
