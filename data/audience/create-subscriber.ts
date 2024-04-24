@@ -1,3 +1,5 @@
+"use server";
+
 import db from "@/lib/db";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { Customer } from "@/shared/customer-type";

@@ -35,9 +35,8 @@ const FromMannual = () => {
       birthday: fields[5]
     };
 
-    console.log(contact);
-
     const res = await createSubscriber(contact);
+    console.log(res);
     return res.success ? 1 : 0;
   };
 
