@@ -3,10 +3,9 @@ import {
   AccordionItem,
   AccordionTrigger
 } from "@/components/ui/accordion";
-import { FaCheck, FaNewspaper, FaUser } from "react-icons/fa";
+import { FaCheck, FaNewspaper } from "react-icons/fa";
 import { Campaign } from "@/shared/campaign-type";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 type Props = {
   campaign: Campaign;
@@ -24,7 +23,7 @@ export const AccordianItemContent = ({
       <AccordionTrigger className="hover:no-underline hover:drop-shadow">
         <div className="flex items-start gap-x-4">
           <div
-            className={`w-10 h-10 flex items-center justify-center rounded-full ${campaign?.to ? "bg-green-600" : "bg-gray-600"}`}
+            className={`w-10 h-10 flex items-center justify-center rounded-full ${campaign?.emailContent ? "bg-green-600" : "bg-gray-600"}`}
           >
             <FaCheck className="text-white" />
           </div>
@@ -41,7 +40,7 @@ export const AccordianItemContent = ({
           <Button className="w-64 flex gap-x-2" onClick={onCreateEmail}>
             {/* <Link href="/campaign/create-email"> */}
             <FaNewspaper />
-            Create a new email
+            {campaign?.emailContent ? "Edit email" : "Create a new email"}
             {/* </Link> */}
           </Button>
         </div>
