@@ -3,7 +3,6 @@
 import { useState, useEffect, useTransition } from "react";
 import {
   ColumnFiltersState,
-  RowSelectionState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -44,6 +43,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { deleteCutomer } from "@/data/audience/delete-customer";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { deleteCutomers } from "@/data/audience/delete-customers";
+import { Spinner } from "@nextui-org/spinner";
 
 export default function Contacts() {
   const user = useCurrentUser();
@@ -287,15 +287,19 @@ export default function Contacts() {
             }
             className="max-w-xs"
           />
-          {isRowSelected() && (
-            <Button
-              variant={"outline"}
-              className="border-red-700"
-              onClick={onSelectedRowsDelete}
-            >
-              Delete selected mails
-            </Button>
-          )}
+          <div className="flex items-center gap-x-6">
+            {isRowSelected() && (
+              <Button
+                disabled={isPending}
+                variant={"outline"}
+                className="border-red-700"
+                onClick={onSelectedRowsDelete}
+              >
+                Delete selected mails
+              </Button>
+            )}
+            {isPending && <Spinner color="danger" />}
+          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
