@@ -2,6 +2,7 @@ export type Campaign = {
   userEmail: string;
   campaignId: string;
   title: string;
+
   to?: string;
   from?: {
     name: string;
@@ -9,13 +10,13 @@ export type Campaign = {
   };
   subject?: {
     subject: string;
-    preview: string;
+    preview?: string;
   };
   time?: {
     instant: boolean;
     date?: string;
   };
-  emailContent?: {
+  email?: {
     design: any;
     html: string;
   };

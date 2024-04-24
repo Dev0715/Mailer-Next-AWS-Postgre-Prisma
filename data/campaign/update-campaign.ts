@@ -23,7 +23,7 @@ export const updateCampaign = async (campaign: Campaign) => {
       ":from": campaign.from || null,
       ":subject": campaign.subject || null,
       ":time": campaign.time || null,
-      ":emailContent": campaign.emailContent || null
+      ":emailContent": campaign.email || null
     },
     ReturnValues: "ALL_NEW"
   });
