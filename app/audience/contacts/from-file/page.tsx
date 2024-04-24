@@ -9,7 +9,12 @@ import { Input } from "@/components/ui/input";
 const FromFile = () => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
-  const onFileSelected = () => {};
+  const onFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      console.log(file);
+    }
+  };
 
   return (
     <main className="w-5/6 flex flex-col py-6">
@@ -30,7 +35,7 @@ const FromFile = () => {
       <Input
         className="hidden"
         type="file"
-        accept="image/*"
+        accept=".csv,.txt"
         ref={hiddenFileInput}
         onChange={onFileSelected}
       />
