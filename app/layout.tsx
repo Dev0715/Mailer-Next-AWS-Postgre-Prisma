@@ -7,6 +7,7 @@ import { Header } from "./_components/header";
 import { Footer } from "./_components/footer";
 import StoreProvider from "../store/store-provider";
 import "./globals.css";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,13 +28,15 @@ export default async function RootLayout({
       <html lang="en">
         <Toaster />
         <StoreProvider>
-          <body className={inter.className}>
-            <div className="w-full min-h-full px-6 pt-6 flex flex-col items-center bg-gray-50 mb-[-48px] after:h-12">
-              <Header />
-              {children}
-            </div>
-            <Footer />
-          </body>
+          <Providers>
+            <body className={inter.className}>
+              <div className="w-full min-h-full px-6 pt-6 flex flex-col items-center bg-gray-50 mb-[-48px] after:h-12">
+                <Header />
+                {children}
+              </div>
+              <Footer />
+            </body>
+          </Providers>
         </StoreProvider>
       </html>
     </SessionProvider>
