@@ -12,7 +12,12 @@ const FromFile = () => {
   const onFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      console.log(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target?.result;
+        console.log(text);
+      };
+      reader.readAsText(file);
     }
   };
 
