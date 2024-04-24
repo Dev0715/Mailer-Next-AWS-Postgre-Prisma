@@ -18,7 +18,7 @@ import { savedEmailAtom } from "@/store/saved-email-atom";
 import { savedCampaignAtom } from "@/store/saved-campaign-atom";
 import { HTMLRenderer } from "@/components/utils/html-renderer";
 import { Button } from "@/components/ui/button";
-import { FaArrowRight, FaSave, FaVoicemail } from "react-icons/fa";
+import { FaArrowRight, FaSave } from "react-icons/fa";
 import { updateCampaign } from "@/data/campaign/update-campaign";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 
@@ -39,17 +39,6 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
 
   const [savedEmail, setSavedEmail] = useAtom(savedEmailAtom);
   const [savedCampaign, setSavedCampaign] = useAtom(savedCampaignAtom);
-
-  const clearRelavantAtoms = () => {
-    setSavedCampaign({
-      isSaved: false,
-      campaign: savedCampaign.campaign
-    });
-    setSavedEmail({
-      isSaved: false,
-      email: savedEmail.email
-    });
-  };
 
   useEffect(() => {
     getAllSegmentsByEmail(user?.email as string).then((segments) => {
@@ -75,15 +64,26 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     }
   }, []);
 
+  const clearRelavantAtoms = () => {
+    setSavedCampaign({
+      isSaved: false,
+      campaign: savedCampaign.campaign
+    });
+    setSavedEmail({
+      isSaved: false,
+      email: savedEmail.email
+    });
+  };
+
   const onCreateEmail = () => {
     setSavedCampaign({
       isSaved: true,
       campaign: campaign as Campaign
     });
-    if (campaign?.emailContent) {
+    if (campaign?.email) {
       setSavedEmail({
         isSaved: true,
-        email: campaign.emailContent
+        email: campaign.email
       });
     }
     history.push("/campaign/create-email");
@@ -105,7 +105,9 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     });
   };
 
-  const onSend = () => {};
+  const onSend = () => {
+    // # Create cron or trigger
+  };
 
   if (loadError) {
     return notFound();
@@ -183,7 +185,15 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
         </div>
         <div className="w-1/3 flex flex-col gap-y-4">
           <p className="text-lg font-semibold drop-shadow-md">Email Preview</p>
-          <HTMLRenderer htmlString={campaign?.emailContent?.html as string} />
+          {campaign?.email?.html ? (
+            <HTMLRenderer htmlString={campaign?.email?.html as string} />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center border border-gray-200 rounded-xl">
+              <p className="text-lg text-gray-500">
+                No email content to preview
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
