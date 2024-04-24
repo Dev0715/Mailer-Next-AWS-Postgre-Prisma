@@ -2,6 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { createSubscriber } from "@/data/audience/create-subscriber";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import Link from "next/link";
 import { useState } from "react";
@@ -12,12 +14,13 @@ const FromMannual = () => {
 
   const [inputText, setInputText] = useState<string>("");
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [isConfirming, setConfirming] = useState<boolean>(false);
+  const [confirmText, setConfirmText] = useState<string>("");
 
   const recognizeLine: (str: string) => Promise<number> = async (
     str: string
   ) => {
     const fields = str.split(",");
-
     if (fields.length < 6) {
       return 0;
     }
@@ -32,7 +35,8 @@ const FromMannual = () => {
       birthday: fields[5]
     };
 
-    return 1;
+    const res = await createSubscriber(contact);
+    return res.success ? 1 : 0;
   };
 
   const onContinueOrganize = () => {
@@ -48,11 +52,21 @@ const FromMannual = () => {
         0
       );
       setLoading(false);
+      setConfirming(true);
+      setConfirmText(
+        `${successedCnt} contacts out of ${lines.length} were added successfully.`
+      );
     });
   };
 
   return (
     <main className="w-5/6 flex flex-col py-6">
+      <ConfirmAlert
+        open={isConfirming}
+        title="Result"
+        description={confirmText}
+        onAlertDialogClosed={() => setConfirming(false)}
+      />
       <p className="text-4xl font-semibold mb-6">
         Copy and paste your contacts
       </p>
@@ -70,6 +84,7 @@ const FromMannual = () => {
         <p>There should be one contact per line.</p>
       </div>
       <Textarea
+        disabled={isLoading}
         className="h-64 border-green-500 mb-8"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
@@ -77,7 +92,7 @@ const FromMannual = () => {
       />
       <div className="flex justify-between">
         <Button
-          disabled={isPending}
+          disabled={isLoading}
           className="w-64 flex gap-x-2 bg-red-700 hover:bg-red-600"
           asChild
         >
@@ -87,7 +102,7 @@ const FromMannual = () => {
           </Link>
         </Button>
         <Button
-          disabled={isPending}
+          disabled={isLoading}
           className="w-64 flex gap-x-2"
           onClick={onContinueOrganize}
         >
