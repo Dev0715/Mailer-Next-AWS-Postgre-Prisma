@@ -35,6 +35,8 @@ const FromMannual = () => {
       birthday: fields[5]
     };
 
+    console.log(contact);
+
     const res = await createSubscriber(contact);
     return res.success ? 1 : 0;
   };
@@ -44,7 +46,8 @@ const FromMannual = () => {
     const lines = inputText.split("\n");
     Promise.all(
       lines.map(async (line) => {
-        return await recognizeLine(line);
+        const res = await recognizeLine(line);
+        return res;
       })
     ).then((res) => {
       const successedCnt = res.reduce(
