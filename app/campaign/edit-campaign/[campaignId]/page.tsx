@@ -31,14 +31,25 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   const history = useRouter();
 
   const [loadError, setLoadError] = useState<boolean>(false);
-  const [campaign, setCampaign] = useState<Campaign>();
   const [segments, setSegments] = useState<Segment[]>([]);
+  const [campaign, setCampaign] = useState<Campaign>();
 
   const [isConfirming, setConfirming] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
 
   const [savedEmail, setSavedEmail] = useAtom(savedEmailAtom);
   const [savedCampaign, setSavedCampaign] = useAtom(savedCampaignAtom);
+
+  const clearRelavantAtoms = () => {
+    setSavedCampaign({
+      isSaved: false,
+      campaign: savedCampaign.campaign
+    });
+    setSavedEmail({
+      isSaved: false,
+      email: savedEmail.email
+    });
+  };
 
   useEffect(() => {
     getAllSegmentsByEmail(user?.email as string).then((segments) => {
@@ -50,16 +61,9 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     if (savedCampaign.isSaved) {
       setCampaign({
         ...savedCampaign.campaign,
-        emailContent: savedEmail.email
-      });
-      setSavedCampaign({
-        isSaved: false,
-        campaign: savedCampaign.campaign
-      });
-      setSavedEmail({
-        isSaved: false,
         email: savedEmail.email
       });
+      clearRelavantAtoms();
     } else {
       getCampaignById(user?.email as string, campaignId).then((campaign) => {
         if (campaign) {
