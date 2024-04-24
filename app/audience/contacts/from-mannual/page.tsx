@@ -6,11 +6,13 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { createSubscriber } from "@/data/audience/create-subscriber";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const FromMannual = () => {
   const user = useCurrentUser();
+  const history = useRouter();
 
   const [inputText, setInputText] = useState<string>("");
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -36,11 +38,14 @@ const FromMannual = () => {
     };
 
     const res = await createSubscriber(contact);
-    console.log(res);
     return res.success ? 1 : 0;
   };
 
   const onContinueOrganize = () => {
+    if (inputText === "") {
+      return;
+    }
+
     setLoading(true);
     const lines = inputText.split("\n");
     Promise.all(
@@ -59,6 +64,10 @@ const FromMannual = () => {
         `${successedCnt} contacts out of ${lines.length} were added successfully.`
       );
     });
+  };
+
+  const onBack = () => {
+    history.push("/audience/contacts/add");
   };
 
   return (
@@ -96,12 +105,12 @@ const FromMannual = () => {
         <Button
           disabled={isLoading}
           className="w-64 flex gap-x-2 bg-red-700 hover:bg-red-600"
-          asChild
+          onClick={onBack}
         >
-          <Link href="/audience/contacts/add">
-            <FaArrowLeft />
-            Back
-          </Link>
+          {/* <Link href="/audience/contacts/add"> */}
+          <FaArrowLeft />
+          Back
+          {/* </Link> */}
         </Button>
         <Button
           disabled={isLoading}
