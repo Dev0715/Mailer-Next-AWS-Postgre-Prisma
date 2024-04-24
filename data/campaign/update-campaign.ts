@@ -11,11 +11,12 @@ export const updateCampaign = async (campaign: Campaign) => {
     TableName,
     Key: { userEmail: campaign.userEmail, campaignId: campaign.campaignId },
     UpdateExpression:
-      "SET title = :title, #to = :to, #from = :from, subject = :subject, #time = :time, emailContent = :emailContent",
+      "SET title = :title, #to = :to, #from = :from, subject = :subject, #time = :time, #email = :email",
     ExpressionAttributeNames: {
       "#to": "to",
       "#from": "from",
-      "#time": "time"
+      "#time": "time",
+      "#email": "email"
     },
     ExpressionAttributeValues: {
       ":title": campaign.title,
@@ -23,7 +24,7 @@ export const updateCampaign = async (campaign: Campaign) => {
       ":from": campaign.from || null,
       ":subject": campaign.subject || null,
       ":time": campaign.time || null,
-      ":emailContent": campaign.email || null
+      ":email": campaign.email || null
     },
     ReturnValues: "ALL_NEW"
   });
