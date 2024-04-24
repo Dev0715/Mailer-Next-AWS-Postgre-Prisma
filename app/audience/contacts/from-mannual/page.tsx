@@ -11,13 +11,13 @@ const FromMannual = () => {
   const user = useCurrentUser();
 
   const [inputText, setInputText] = useState<string>("");
-  const [isPending, startTransition] = useTransition();
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const recognizeLine = async (str: string) => {
     const fields = str.split(",");
 
     if (fields.length < 6) {
-      return;
+      return 0;
     }
 
     const contact = {
