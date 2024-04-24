@@ -27,8 +27,8 @@ type Props = {
 };
 
 const EditCampaignPage = ({ params: { campaignId } }: Props) => {
-  const history = useRouter();
   const user = useCurrentUser();
+  const history = useRouter();
 
   const [loadError, setLoadError] = useState<boolean>(false);
   const [campaign, setCampaign] = useState<Campaign>();

@@ -14,11 +14,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ user, account }) {
-      console.log("__CALLBACK__signIn", user, account);
       return true;
     },
     async session({ token, session }) {
-      console.log("__CALLBACK__session", token, session);
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
@@ -31,7 +29,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
     async jwt({ token }) {
-      console.log("__CALLBACK__jwt", token);
       return token;
     }
   },
