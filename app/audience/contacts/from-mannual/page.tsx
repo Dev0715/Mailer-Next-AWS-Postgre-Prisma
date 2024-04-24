@@ -2,22 +2,25 @@
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { useCurrentUser } from "@/hooks/use-current-user";
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const FromMannual = () => {
+  const user = useCurrentUser();
+
   const [inputText, setInputText] = useState<string>("");
   const [isPending, startTransition] = useTransition();
 
-  const recognizeLine = (str: string) => {
+  const recognizeLine = async (str: string) => {
     const fields = str.split(",");
 
     if (fields.length < 6) {
-      return null;
+      return;
     }
 
-    return {
+    const contact = {
       subscriberEmail: fields[0],
       firstName: fields[1],
       lastName: fields[2],
@@ -30,7 +33,9 @@ const FromMannual = () => {
   const onContinueOrganize = () => {
     startTransition(() => {
       const lines = inputText.split("\n");
-      console.log(lines);
+      lines.map((line) => {
+        recognizeLine(line);
+      });
     });
   };
 
