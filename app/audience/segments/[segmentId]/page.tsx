@@ -37,7 +37,6 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { isFiltered } from "@/lib/segment";
 import { getSegmentById } from "@/data/segment/segment-by-id";
 import { Customer } from "@/shared/customer-type";
-import { Segment } from "@/shared/segment-type";
 
 export default function CustomersInSegment({
   params
@@ -45,7 +44,6 @@ export default function CustomersInSegment({
   params: { segmentId: string };
 }) {
   const user = useCurrentUser();
-  const [segment, setSegment] = useState<Segment>();
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
