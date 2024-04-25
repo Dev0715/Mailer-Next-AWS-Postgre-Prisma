@@ -47,14 +47,25 @@ const FromFile = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const text = e.target?.result;
-        console.log(text);
+        const splitter = file.type === "text/csv" ? "\t" : ",";
+        processText(text as string, splitter);
       };
       reader.readAsText(file);
     }
   };
 
+  const onBack = () => {
+    history.push("/audience/contacts/add");
+  };
+
   return (
     <main className="w-5/6 flex flex-col py-6">
+      <ConfirmAlert
+        open={isConfirming}
+        title="Result"
+        description={confirmText}
+        onAlertDialogClosed={() => setConfirming(false)}
+      />
       <p className="text-4xl font-semibold mb-6">Upload a File.</p>
       <p className="text-xl mb-8">Not sure how to format your file?</p>
       <Link
