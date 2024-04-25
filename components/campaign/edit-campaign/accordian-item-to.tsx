@@ -23,15 +23,23 @@ type Props = {
 };
 
 export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
+  const [selectedInex, setSelectedIndex] = useState<number>(
+    segments.findIndex(
+      (segment) => segment.segmentId === campaign.to?.segmentId
+    )
+  );
+
   const onToChange = (newValue: string) => {
+    setSelectedIndex(parseInt(newValue));
+
     if (campaign) {
       setCampaign(
         (prev) =>
           ({
             ...prev,
             to: {
-              segmentId: newValue,
-              segmentTitle: ""
+              segmentId: segments[parseInt(newValue)].segmentId,
+              segmentTitle: segments[parseInt(newValue)].title
             }
           }) as Campaign
       );
