@@ -7,7 +7,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { Segment } from "@/shared/segment-type";
 import { getAllCustomersByEmail } from "@/data/audience/all-customers";
 import { isFiltered } from "@/lib/segment";
-import { Customer } from "@/shared/customer-type";
+import { Spinner } from "@nextui-org/spinner";
 
 type Props = {
   segment: Segment;
@@ -46,10 +46,13 @@ const MonitorSegment = ({ segment, onFinish }: Props) => {
       <p className="text-xl font-semibold">{segment.title}</p>
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center gap-2">{segment.description}</div>
-        <p className="px-4">
-          Total members in this segment:{" "}
-          <span className="text-xl font-semibold">{count}</span>
-        </p>
+        <div className="flex items-center gap-x-2">
+          <Spinner size="sm" />
+          <p className="px-4">
+            Total members in this segment:{" "}
+            <span className="text-xl font-semibold">{count}</span>
+          </p>
+        </div>
       </div>
       <div className="flex flex-col gap-y-4">
         {segment.filters.map((filter, index) => (
