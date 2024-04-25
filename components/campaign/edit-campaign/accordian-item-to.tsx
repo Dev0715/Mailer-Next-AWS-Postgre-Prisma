@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Campaign } from "@/shared/campaign-type";
 import { Segment } from "@/shared/segment-type";
+import { useState } from "react";
 
 type Props = {
   campaign: Campaign;
@@ -68,7 +69,7 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
           <p className="text-base text-gray-600 font-medium">
             Select a segment*
           </p>
-          <Select value={campaign?.to?.segmentId} onValueChange={onToChange}>
+          <Select value={selectedInex.toString()} onValueChange={onToChange}>
             <SelectTrigger>
               <SelectValue placeholder="Segment you want to send" />
             </SelectTrigger>
