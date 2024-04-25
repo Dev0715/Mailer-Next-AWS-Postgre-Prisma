@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import { FaArrowRight, FaSave } from "react-icons/fa";
 import { updateCampaign } from "@/data/campaign/update-campaign";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { sendEmail } from "@/data/ses/send-ses";
+import { sendEmail } from "@/data/email/send-email";
 
 type Props = {
   params: { campaignId: string };
