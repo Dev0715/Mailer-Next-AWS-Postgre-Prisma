@@ -20,7 +20,6 @@ const Strong = ({ children }: { children: React.ReactNode }) => {
 
 const CampaignPage = () => {
   const user = useCurrentUser();
-
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
 
   useEffect(() => {
@@ -30,6 +29,8 @@ const CampaignPage = () => {
       }
     });
   });
+
+  const onRemove = () => {};
 
   return (
     <main className="w-5/6 flex flex-col py-6">
@@ -61,7 +62,7 @@ const CampaignPage = () => {
         {campaigns.map((campaign) => (
           <div className="flex flex-col gap-y-4">
             <Separator />
-            <CampaignItem campaign={campaign} />
+            <CampaignItem campaign={campaign} onRemove={() => onRemove()} />
           </div>
         ))}
       </div>

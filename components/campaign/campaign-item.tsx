@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Campaign } from "@/shared/campaign-type";
 import Link from "next/link";
-import { FaEdit, FaMailBulk } from "react-icons/fa";
+import { FaEdit, FaMailBulk, FaRemoveFormat, FaTrash } from "react-icons/fa";
 
 type Props = {
   campaign: Campaign;
@@ -31,12 +31,19 @@ const CampaignItem = ({ campaign }: Props) => {
           New Builder
         </Badge>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-y-2">
         <Button asChild className="flex gap-x-2 w-32 text-black bg-green-500">
           <Link href={`/campaign/edit-campaign/${campaign.campaignId}`}>
             <FaEdit />
             Edit
           </Link>
+        </Button>
+        <Button
+          variant={"destructive"}
+          className="flex gap-x-2 w-32 text-black"
+        >
+          <FaTrash />
+          Remove
         </Button>
       </div>
     </div>
