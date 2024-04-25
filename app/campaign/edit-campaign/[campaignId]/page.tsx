@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { FaArrowRight, FaSave } from "react-icons/fa";
 import { updateCampaign } from "@/data/campaign/update-campaign";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
+import { sendSES } from "@/data/ses/send-ses";
 
 type Props = {
   params: { campaignId: string };
@@ -123,24 +124,24 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     //   subject: "Test-Email",
     //   html: campaign?.email?.html
     // });
-    const command = new SendEmailCommand({
+    const command = {
       Source: "malachi.uudev@gmail.com",
       Destination: {
-        ToAddresses: ["andrei.devcasian@gmail.com"]
+        ToAddresses: ["malachi.uudev@gmail.com"]
       },
       Message: {
         Body: {
           Html: {
-            Data: campaign?.email?.html
+            Data: "<p>sdafsdaf</p>" //campaign?.email?.html
           }
         },
         Subject: {
-          Data: campaign?.subject?.subject
+          Data: "sdafsdafdsf" //campaign?.subject?.subject
         }
       }
-    });
+    };
 
-    sesClient.send(command).then((res) => {
+    sendSES(command).then((res) => {
       console.log(res);
     });
   };
@@ -209,7 +210,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
               Finish Later
             </Button>
             <Button
-              disabled={isPending}
+              //              disabled={isPending || !isAbleToSend()}
               variant={"default"}
               className="w-32 flex gap-x-2"
               onClick={onSend}
