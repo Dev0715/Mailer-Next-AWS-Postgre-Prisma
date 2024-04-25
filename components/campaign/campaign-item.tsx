@@ -9,8 +9,6 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { deleteCampaign } from "@/data/campaign/delete-campaign";
 import { toast } from "sonner";
 import { Spinner } from "@nextui-org/spinner";
-import { Segment } from "@/shared/segment-type";
-import { getSegmentById } from "@/data/segment/segment-by-id";
 
 type Props = {
   campaign: Campaign;
@@ -22,17 +20,6 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
 
   const [isPending, startTransition] = useTransition();
   const [confirmAlert, setConfirmAlert] = useState(false);
-  const [segment, setSegment] = useState<Segment>();
-
-  useEffect(() => {
-    if (campaign.to) {
-      getSegmentById(user?.email as string, campaign.to).then((response) => {
-        if (response) {
-          setSegment(response as Segment);
-        }
-      });
-    }
-  }, []);
 
   const onConfirmAlertClosed = () => {
     // # Need to Stop Trigger? #
@@ -67,8 +54,8 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
           <p className="text-base">Subject · {campaign.subject?.subject}</p>
           <p className="text-base">
             To ·{" "}
-            <span className="text-green-700 font-semi-bold">
-              {segment?.title}
+            <span className="text-black font-bold">
+              {campaign.to?.segmentTitle}
             </span>
           </p>
           <p className="text-base">Edited · </p>
