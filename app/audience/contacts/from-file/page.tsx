@@ -96,11 +96,13 @@ const FromFile = () => {
         <FaFileUpload />
         Browse
       </Button>
-      <Button asChild className="w-64 flex gap-x-2">
-        <Link href={`/audience/contacts/add`}>
-          <FaArrowLeft />
-          Back
-        </Link>
+      <Button
+        disabled={isLoading}
+        onClick={onBack}
+        className="w-64 flex gap-x-2"
+      >
+        <FaArrowLeft />
+        Back
       </Button>
     </main>
   );
