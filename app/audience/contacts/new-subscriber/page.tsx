@@ -136,6 +136,17 @@ const NewSubscriber = () => {
     }
   });
 
+  const verifyMyEmail = async () => {
+    const { validFormat, validSmtp, validMx } = await verifyEmail({
+      emailAddress: "foo@email.com",
+      verifyMx: true,
+      verifySmtp: true,
+      timeout: 3000
+    });
+
+    console.log(validFormat, validSmtp, validMx);
+  };
+
   const onSubmit = (values: z.infer<typeof NewSubscriberSchema>) => {
     setError("");
     setSuccess("");
@@ -147,9 +158,7 @@ const NewSubscriber = () => {
       return;
     }
 
-    verifyEmail({ emailAddress: values.email }).then((res) => {
-      console.log(res);
-    });
+    verifyMyEmail();
 
     // startTransition(() => {
     //   if (isStoredTagsUpdated) {
