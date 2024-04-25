@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
 import CampaignItem from "../../components/campaign/campaign-item";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getAllCampaignsByEmail } from "@/data/campaign/all-campaigns";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Campaign } from "@/shared/campaign-type";
+import Link from "next/link";
 
 const Blue = ({ children }: { children: React.ReactNode }) => {
   return <span className="text-blue-700">{children}</span>;
@@ -30,7 +30,12 @@ const CampaignPage = () => {
     });
   });
 
-  const onRemove = () => {};
+  const onRemove = (campaignId: string) => {
+    // # Need to Stop Trigger? #
+    setCampaigns((prevCampaigns) =>
+      prevCampaigns.filter((campaign) => campaign.campaignId !== campaignId)
+    );
+  };
 
   return (
     <main className="w-5/6 flex flex-col py-6">
@@ -60,9 +65,12 @@ const CampaignPage = () => {
       <div className="flex flex-col gap-y-4">
         <p className="text-xl text-gray-500">April, 2024 (2)</p>
         {campaigns.map((campaign) => (
-          <div className="flex flex-col gap-y-4">
+          <div key={campaign.campaignId} className="flex flex-col gap-y-4">
             <Separator />
-            <CampaignItem campaign={campaign} onRemove={() => onRemove()} />
+            <CampaignItem
+              campaign={campaign}
+              onRemove={() => onRemove(campaign.campaignId)}
+            />
           </div>
         ))}
       </div>
