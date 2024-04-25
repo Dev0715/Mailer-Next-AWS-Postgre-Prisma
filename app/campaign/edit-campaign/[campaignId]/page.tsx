@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import { FaArrowRight, FaSave } from "react-icons/fa";
 import { updateCampaign } from "@/data/campaign/update-campaign";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { sendSES } from "@/data/ses/send-ses";
+import { sendEmail } from "@/data/ses/send-ses";
 
 type Props = {
   params: { campaignId: string };
@@ -117,31 +117,12 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   };
 
   const onSend = () => {
-    // # Create cron or trigger
-    // transporter.sendMail({
-    //   from: "malachi.uudev@gmail.com",
-    //   to: "andrei.devcasian@gmail.com",
-    //   subject: "Test-Email",
-    //   html: campaign?.email?.html
-    // });
-    const command = {
-      Source: "malachi.uudev@gmail.com",
-      Destination: {
-        ToAddresses: ["malachi.uudev@gmail.com"]
-      },
-      Message: {
-        Body: {
-          Html: {
-            Data: "<p>sdafsdaf</p>" //campaign?.email?.html
-          }
-        },
-        Subject: {
-          Data: "sdafsdafdsf" //campaign?.subject?.subject
-        }
-      }
-    };
-
-    sendSES(command).then((res) => {
+    sendEmail({
+      from: "malachi.uudev@gmail.com",
+      to: ["malachi.uudev@gmail.com"],
+      subject: "Test-Email",
+      html: campaign?.email?.html as string
+    }).then((res) => {
       console.log(res);
     });
   };
@@ -210,7 +191,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
               Finish Later
             </Button>
             <Button
-              //              disabled={isPending || !isAbleToSend()}
+              disabled={isPending || !isAbleToSend()}
               variant={"default"}
               className="w-32 flex gap-x-2"
               onClick={onSend}
