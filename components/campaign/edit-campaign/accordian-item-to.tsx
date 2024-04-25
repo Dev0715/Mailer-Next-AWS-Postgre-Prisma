@@ -29,7 +29,10 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
         (prev) =>
           ({
             ...prev,
-            to: newValue
+            to: {
+              segmentId: newValue,
+              segmentTitle: ""
+            }
           }) as Campaign
       );
     }
@@ -57,15 +60,15 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
           <p className="text-base text-gray-600 font-medium">
             Select a segment*
           </p>
-          <Select value={campaign?.to} onValueChange={onToChange}>
+          <Select value={campaign?.to?.segmentId} onValueChange={onToChange}>
             <SelectTrigger>
               <SelectValue placeholder="Segment you want to send" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Your Segments</SelectLabel>
-                {segments.map((segment) => (
-                  <SelectItem value={segment.segmentId}>
+                {segments.map((segment, index) => (
+                  <SelectItem value={index.toString()}>
                     {segment.title}
                   </SelectItem>
                 ))}
