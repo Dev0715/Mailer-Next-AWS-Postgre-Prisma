@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Campaign } from "@/shared/campaign-type";
 import { Segment } from "@/shared/segment-type";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = {
   campaign: Campaign;
@@ -24,11 +24,16 @@ type Props = {
 };
 
 export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
-  const [selectedInex, setSelectedIndex] = useState<number>(
-    segments.findIndex(
-      (segment) => segment.segmentId === campaign.to?.segmentId
-    )
-  );
+  const [selectedInex, setSelectedIndex] = useState<number>(-1);
+
+  useEffect(() => {
+    if (campaign?.to) {
+      const index = segments.findIndex(
+        (segment) => segment.segmentId === campaign.to?.segmentId
+      );
+      setSelectedIndex(index);
+    }
+  }, [campaign]);
 
   const onToChange = (newValue: string) => {
     setSelectedIndex(parseInt(newValue));
