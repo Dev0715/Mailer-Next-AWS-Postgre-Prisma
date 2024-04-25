@@ -5,6 +5,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { createSubscriber } from "@/data/audience/create-subscriber";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { Customer } from "@/shared/customer-type";
+import { recognizeLine } from "@/shared/funcs/recognizeLine";
+import { Spinner } from "@nextui-org/spinner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -19,28 +22,6 @@ const FromMannual = () => {
   const [isConfirming, setConfirming] = useState<boolean>(false);
   const [confirmText, setConfirmText] = useState<string>("");
 
-  const recognizeLine: (str: string) => Promise<number> = async (
-    str: string
-  ) => {
-    const fields = str.split(",");
-    if (fields.length < 6) {
-      return 0;
-    }
-
-    const contact = {
-      userEmail: user?.email as string,
-      subscriberEmail: fields[0],
-      firstName: fields[1],
-      lastName: fields[2],
-      address: fields[3],
-      phoneNumber: fields[4],
-      birthday: fields[5]
-    };
-
-    const res = await createSubscriber(contact);
-    return res.success ? 1 : 0;
-  };
-
   const onContinueOrganize = () => {
     if (inputText === "") {
       return;
@@ -50,7 +31,7 @@ const FromMannual = () => {
     const lines = inputText.split("\n");
     Promise.all(
       lines.map(async (line) => {
-        const res = await recognizeLine(line);
+        const res = await recognizeLine(user?.email as string, line, ",");
         return res;
       })
     ).then((res) => {
@@ -99,7 +80,7 @@ const FromMannual = () => {
         className="h-64 border-green-500 mb-8"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
-        placeholder="Email, First Name, Last Name, Address, Phone Number, Birthday"
+        placeholder="Email, First Name, Last Name, Address, Phone Number, Birthday (Fri Apr 19 2024)"
       />
       <div className="flex justify-between">
         <Button
@@ -112,14 +93,17 @@ const FromMannual = () => {
           Back
           {/* </Link> */}
         </Button>
-        <Button
-          disabled={isLoading}
-          className="w-64 flex gap-x-2"
-          onClick={onContinueOrganize}
-        >
-          <FaArrowRight />
-          Continue to Organize
-        </Button>
+        <div className="flex items-center gap-x-6">
+          {isLoading && <Spinner color="primary" />}
+          <Button
+            disabled={isLoading}
+            className="w-64 flex gap-x-2"
+            onClick={onContinueOrganize}
+          >
+            <FaArrowRight />
+            Continue to Organize
+          </Button>
+        </div>
       </div>
     </main>
   );
