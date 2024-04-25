@@ -3,7 +3,10 @@ export type Campaign = {
   campaignId: string;
   title: string;
 
-  to?: string;
+  to?: {
+    segmentId: string;
+    segmentTitle: string;
+  };
   from?: {
     name: string;
     email: string;
