@@ -54,6 +54,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { updateUserTags } from "@/data/user/update-tags";
+import { verifyEmail } from "@devmehq/email-validator-js";
 
 const NewSubscriber = () => {
   const user = useCurrentUser();
@@ -146,33 +147,37 @@ const NewSubscriber = () => {
       return;
     }
 
-    startTransition(() => {
-      if (isStoredTagsUpdated) {
-        updateUserTags({
-          email: user?.email as string,
-          tags: storedTags
-        }).then((res) => {
-          console.log(res);
-        });
-      }
-      newSubscriber(
-        {
-          userEmail: user?.email as string,
-          subscriberEmail: values.email,
-          firstName: values.firstName,
-          lastName: values.lastName,
-          address: values.address,
-          phoneNumber: values.phoneNumber,
-          birthday: values.birthday.toISOString(),
-          tags: selectedTags,
-          subscribed: true
-        },
-        updateChecked
-      ).then((data) => {
-        setError(data.error as string);
-        setSuccess(data?.success);
-      });
+    verifyEmail({ emailAddress: values.email }).then((res) => {
+      console.log(res);
     });
+
+    // startTransition(() => {
+    //   if (isStoredTagsUpdated) {
+    //     updateUserTags({
+    //       email: user?.email as string,
+    //       tags: storedTags
+    //     }).then((res) => {
+    //       console.log(res);
+    //     });
+    //   }
+    //   newSubscriber(
+    //     {
+    //       userEmail: user?.email as string,
+    //       subscriberEmail: values.email,
+    //       firstName: values.firstName,
+    //       lastName: values.lastName,
+    //       address: values.address,
+    //       phoneNumber: values.phoneNumber,
+    //       birthday: values.birthday.toISOString(),
+    //       tags: selectedTags,
+    //       subscribed: true
+    //     },
+    //     updateChecked
+    //   ).then((data) => {
+    //     setError(data.error as string);
+    //     setSuccess(data?.success);
+    //   });
+    // });
   };
 
   return (
