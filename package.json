@@ -12,6 +12,7 @@
     "@aws-sdk/client-dynamodb": "^3.540.0",
     "@aws-sdk/client-ses": "^3.556.0",
     "@aws-sdk/lib-dynamodb": "^3.540.0",
+    "@devmehq/email-validator-js": "^1.0.19",
     "@hookform/resolvers": "^3.3.3",
     "@nextui-org/react": "^2.3.6",
     "@nextui-org/spinner": "^2.0.28",
