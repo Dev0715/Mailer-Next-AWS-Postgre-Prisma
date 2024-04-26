@@ -172,39 +172,42 @@ const NewSubscriber = () => {
           console.log(res);
         });
       }
-      // newSubscriber(
-      //   {
-      //     userEmail: user?.email as string,
-      //     subscriberEmail: values.email,
-      //     firstName: values.firstName,
-      //     lastName: values.lastName,
-      //     address: values.address,
-      //     phoneNumber: values.phoneNumber,
-      //     birthday: values.birthday.toISOString(),
-      //     tags: selectedTags,
-      //     subscribed: true
-      //   },
-      //   updateChecked
-      // ).then((data) => {
-      //   setError(data.error as string);
-      //   setSuccess(data?.success);
-      // });
-      newSubscriberPrisma({
-        userEmail: user?.email as string,
-        subscriberEmail: values.email,
-        address: values.address,
-        birthday: values.birthday.toISOString(),
-        firstName: values.firstName,
-        lastName: values.lastName,
-        tags: {}
-      }).then((res) => {
-        console.log("__prisma__", res);
+      newSubscriber(
+        {
+          userEmail: user?.email as string,
+          subscriberEmail: values.email,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          address: values.address,
+          phoneNumber: values.phoneNumber,
+          birthday: values.birthday.toISOString(),
+          tags: selectedTags,
+          subscribed: true
+        },
+        updateChecked
+      ).then((data) => {
+        setError(data.error as string);
+        setSuccess(data?.success);
       });
+    });
+  };
+
+  const onTestClick = () => {
+    newSubscriberPrisma({
+      userEmail: "user?.email as string",
+      subscriberEmail: "values.email",
+      address: "values.address",
+      birthday: "values.birthday.toISOString()",
+      firstName: "values.firstName",
+      lastName: "values.lastName"
+    }).then((res) => {
+      console.log("__prisma__", res);
     });
   };
 
   return (
     <main className="w-5/6 flex flex-col py-6">
+      <Button onClick={onTestClick}>Test Click</Button>
       <ConfirmAlert
         open={alertOpen}
         title={alertTile}
