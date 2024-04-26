@@ -33,11 +33,6 @@ export const Navbar = () => {
         description: "All your contacts stored in your customer database"
       },
       {
-        title: "Tags",
-        href: "/audience/tags",
-        description: "Group and manage your audience in tags"
-      },
-      {
         title: "Segments",
         href: "/audience/segments",
         description: "Classify and manage your audience in segments"
