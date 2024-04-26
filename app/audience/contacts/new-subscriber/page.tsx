@@ -192,13 +192,11 @@ const NewSubscriber = () => {
       newSubscriberPrisma({
         userEmail: user?.email as string,
         subscriberEmail: values.email,
+        address: values.address,
+        birthday: values.birthday.toISOString(),
         firstName: values.firstName,
         lastName: values.lastName,
-        address: values.address,
-        phoneNumber: values.phoneNumber,
-        birthday: values.birthday.toISOString(),
-        tags: selectedTags,
-        subscribed: true
+        tags: {}
       }).then((res) => {
         console.log("__prisma__", res);
       });
