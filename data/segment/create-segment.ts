@@ -24,9 +24,11 @@ export const createSegment = async (data: Segment) => {
 };
 
 export const createSegmentHandler = async (data: Segment) => {
-  const response = await prisma.results.create({
+  console.log(prisma["mailmanjs-mailing-list"]);
+  const response = await prisma["mailmanjs-mailing-list"].create({
     ...data,
     tags: {}
   });
   console.log(response);
+  return response;
 };
