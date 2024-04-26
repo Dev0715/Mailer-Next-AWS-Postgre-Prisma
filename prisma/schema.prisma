@@ -8,16 +8,17 @@ datasource db {
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model mailmanjs_mailing_list {
-  id              BigInt   @id @default(autoincrement())
-  created         DateTime @default(now()) @db.Timestamptz(6)
-  userEmail       String?  @db.VarChar
-  subscriberEmail String?  @db.VarChar
-  address         String?  @db.VarChar
-  birthday        String?  @db.VarChar
-  firstName       String?  @db.VarChar
-  lastName        String?  @db.VarChar
-  tags            Json?    @db.Json
-
-  @@map("mailmanjs-mailing-list")
+model mailinglist {
+  id              BigInt    @id @default(autoincrement())
+  created         DateTime  @default(now()) @db.Timestamptz(6)
+  userEmail       String?   @db.VarChar
+  subscriberEmail String?   @db.VarChar
+  address         String?   @db.VarChar
+  birthday        DateTime? @db.Date
+  firstName       String?   @db.VarChar
+  lastName        String?   @db.VarChar
+  phoneNumber     String?   @db.VarChar
+  lastChanged     DateTime? @db.Timestamptz(6)
+  subscribed      Boolean?
+  tags            Json?     @db.Json
 }
