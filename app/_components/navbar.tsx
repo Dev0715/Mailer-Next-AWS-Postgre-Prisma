@@ -54,18 +54,18 @@ export const Navbar = () => {
     ];
 
   const menuItems: MenuItem[] = [
-    {
-      title: "Features",
-      href: "/"
-    },
-    {
-      title: "Pricing",
-      href: "/"
-    },
-    {
-      title: "Resources",
-      href: "/"
-    },
+    // {
+    //   title: "Features",
+    //   href: "/"
+    // },
+    // {
+    //   title: "Pricing",
+    //   href: "/"
+    // },
+    // {
+    //   title: "Resources",
+    //   href: "/"
+    // },
     {
       title: "Campaign",
       href: "/campaign",
