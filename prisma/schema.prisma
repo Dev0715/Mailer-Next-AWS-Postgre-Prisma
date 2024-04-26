@@ -1,14 +1,51 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Requests {
+  id                      Int       @id @default(autoincrement())
+  fullName                String
+  emailAddress            String
+  phoneNumber             String
+  address                 String
+  location                Json      @db.Json
+  locationSize            Int
+  locationSizeToBePlanted Int
+  locationPolygon         Json      @db.Json
+  result                  Results?
+  locationHasBeenCleared  Boolean
+  source                  String
+  createdAt               DateTime? @default(now())
+  updatedAt               DateTime?
+}
+
+model Results {
+  id          Int        @id @default(autoincrement())
+  requestId   Int        @unique
+  request     Requests   @relation(fields: [requestId], references: [id])
+  empAnnual   Float?
+  empTotal    Float?
+  valueAnnual Float?
+  valueTotal  Float?
+  complete    Boolean
+  uuid        String     @unique
+  createdAt   DateTime?  @default(now())
+  updatedAt   DateTime?  @updatedAt
+  purchased   Purchases?
+}
+
+model Purchases {
+  id           Int       @id @default(autoincrement())
+  resultId     Int       @unique
+  result       Results   @relation(fields: [resultId], references: [id])
+  stripeHash   String    @unique
+  purchaseDate DateTime? @default(now())
 }
