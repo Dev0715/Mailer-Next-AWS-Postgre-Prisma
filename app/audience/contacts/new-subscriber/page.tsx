@@ -54,7 +54,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { updateUserTags } from "@/data/user/update-tags";
-import { verifyEmail } from "@devmehq/email-validator-js";
+// import { verifyEmail } from "@devmehq/email-validator-js";
 
 const NewSubscriber = () => {
   const user = useCurrentUser();
@@ -136,16 +136,16 @@ const NewSubscriber = () => {
     }
   });
 
-  const verifyMyEmail = async () => {
-    const { validFormat, validSmtp, validMx } = await verifyEmail({
-      emailAddress: "foo@email.com",
-      verifyMx: true,
-      verifySmtp: true,
-      timeout: 3000
-    });
+  // const verifyMyEmail = async () => {
+  //   const { validFormat, validSmtp, validMx } = await verifyEmail({
+  //     emailAddress: "foo@email.com",
+  //     verifyMx: true,
+  //     verifySmtp: true,
+  //     timeout: 3000
+  //   });
 
-    console.log(validFormat, validSmtp, validMx);
-  };
+  //   console.log(validFormat, validSmtp, validMx);
+  // };
 
   const onSubmit = (values: z.infer<typeof NewSubscriberSchema>) => {
     setError("");
