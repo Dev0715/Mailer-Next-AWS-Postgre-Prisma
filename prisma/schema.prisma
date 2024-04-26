@@ -1,11 +1,23 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model mailmanjs_mailing_list {
+  id              BigInt   @id @default(autoincrement())
+  created         DateTime @default(now()) @db.Timestamptz(6)
+  userEmail       String?  @db.VarChar
+  subscriberEmail String?  @db.VarChar
+  address         String?  @db.VarChar
+  birthday        String?  @db.VarChar
+  firstName       String?  @db.VarChar
+  lastName        String?  @db.VarChar
+  tags            String?  @db.VarChar
+
+  @@map("mailmanjs-mailing-list")
 }
