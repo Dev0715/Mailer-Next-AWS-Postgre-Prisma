@@ -199,7 +199,8 @@ const NewSubscriber = () => {
       address: "values.address",
       birthday: "values.birthday.toISOString()",
       firstName: "values.firstName",
-      lastName: "values.lastName"
+      lastName: "values.lastName",
+      tags: selectedTags
     }).then((res) => {
       console.log("__prisma__", res);
     });
