@@ -323,7 +323,9 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
                       <SelectGroup>
                         {/* <SelectLabel>Tags</SelectLabel> */}
                         {storedTags.map((tag) => (
-                          <SelectItem value={tag}>{tag}</SelectItem>
+                          <SelectItem key={tag} value={tag}>
+                            {tag}
+                          </SelectItem>
                         ))}
                       </SelectGroup>
                     </SelectContent>
