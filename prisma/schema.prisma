@@ -17,6 +17,7 @@ model mailmanjs_mailing_list {
   birthday        String?  @db.VarChar
   firstName       String?  @db.VarChar
   lastName        String?  @db.VarChar
+  tags            Json?    @db.Json
 
   @@map("mailmanjs-mailing-list")
 }
