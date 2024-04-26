@@ -61,7 +61,36 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
           <p className="text-base">Edited · </p>
         </div>
       </div>
-      <div className="w-2/6 flex flex-col items-center gap-y-2">
+      <div className="w-1/6 flex flex-col items-center gap-y-2">
+        <Badge
+          variant={"success"}
+          className="w-fit text-sm font-normal text-black text-center"
+        >
+          Draft
+        </Badge>
+        <Badge className="text-sm font-normal text-black text-center">
+          Sending
+        </Badge>
+        <Badge
+          variant={"secondary"}
+          className="text-sm font-normal text-black text-center"
+        >
+          Opened: 0
+        </Badge>
+        <Badge
+          variant={"secondary"}
+          className="text-sm font-normal text-black text-center"
+        >
+          Bounced: 0
+        </Badge>
+        <Badge
+          variant={"secondary"}
+          className="text-sm font-normal text-black text-center"
+        >
+          Unsubscribed: 0
+        </Badge>
+      </div>
+      <div className="w-1/6 flex flex-col items-center gap-y-2">
         <Badge
           variant={"success"}
           className="w-fit text-sm font-normal text-black text-center"
