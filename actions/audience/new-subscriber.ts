@@ -44,9 +44,9 @@ export const newSubscriber = async (
   }
 };
 
-export const newSubscriberPrisma = async (values: any) => {
-  const response = await prisma.mailmanjs_mailing_list.create({
-    data: { ...values }
+export const newSubscriberPrisma = async (values: Customer) => {
+  const response = await prisma.mailinglist.create({
+    data: { ...values, lastChanged: new Date() }
   });
 
   console.log(response);
