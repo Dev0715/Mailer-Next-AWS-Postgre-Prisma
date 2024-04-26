@@ -1,6 +1,7 @@
 "use server";
 
 import db from "@/lib/db";
+import { prisma } from "@/lib/prisma";
 import { Segment } from "@/shared/segment-type";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
 
@@ -20,4 +21,12 @@ export const createSegment = async (data: Segment) => {
   } catch (error) {
     return { error };
   }
+};
+
+export const createSegmentHandler = async (data: Segment) => {
+  const response = await prisma.results.create({
+    ...data,
+    tags: {}
+  });
+  console.log(response);
 };
