@@ -158,35 +158,35 @@ const NewSubscriber = () => {
       return;
     }
 
-    verifyMyEmail();
+    // verifyMyEmail();
 
-    // startTransition(() => {
-    //   if (isStoredTagsUpdated) {
-    //     updateUserTags({
-    //       email: user?.email as string,
-    //       tags: storedTags
-    //     }).then((res) => {
-    //       console.log(res);
-    //     });
-    //   }
-    //   newSubscriber(
-    //     {
-    //       userEmail: user?.email as string,
-    //       subscriberEmail: values.email,
-    //       firstName: values.firstName,
-    //       lastName: values.lastName,
-    //       address: values.address,
-    //       phoneNumber: values.phoneNumber,
-    //       birthday: values.birthday.toISOString(),
-    //       tags: selectedTags,
-    //       subscribed: true
-    //     },
-    //     updateChecked
-    //   ).then((data) => {
-    //     setError(data.error as string);
-    //     setSuccess(data?.success);
-    //   });
-    // });
+    startTransition(() => {
+      if (isStoredTagsUpdated) {
+        updateUserTags({
+          email: user?.email as string,
+          tags: storedTags
+        }).then((res) => {
+          console.log(res);
+        });
+      }
+      newSubscriber(
+        {
+          userEmail: user?.email as string,
+          subscriberEmail: values.email,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          address: values.address,
+          phoneNumber: values.phoneNumber,
+          birthday: values.birthday.toISOString(),
+          tags: selectedTags,
+          subscribed: true
+        },
+        updateChecked
+      ).then((data) => {
+        setError(data.error as string);
+        setSuccess(data?.success);
+      });
+    });
   };
 
   return (
