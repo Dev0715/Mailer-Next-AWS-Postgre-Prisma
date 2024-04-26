@@ -69,7 +69,25 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
           Draft
         </Badge>
         <Badge className="text-sm font-normal text-black text-center">
-          New Builder
+          Sending
+        </Badge>
+        <Badge
+          variant={"secondary"}
+          className="text-sm font-normal text-black text-center"
+        >
+          Opened: 0
+        </Badge>
+        <Badge
+          variant={"secondary"}
+          className="text-sm font-normal text-black text-center"
+        >
+          Bounced: 0
+        </Badge>
+        <Badge
+          variant={"secondary"}
+          className="text-sm font-normal text-black text-center"
+        >
+          Unsubscribed: 0
         </Badge>
       </div>
       <div className="w-1/6 flex flex-col items-center gap-y-2">
