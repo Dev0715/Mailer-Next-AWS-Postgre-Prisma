@@ -33,7 +33,10 @@ import {
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import AddSement from "@/components/audience/add-segment";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { createSegment } from "@/data/segment/create-segment";
+import {
+  createSegment,
+  createSegmentHandler
+} from "@/data/segment/create-segment";
 import { v4 as uuidv4 } from "uuid";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
@@ -110,18 +113,21 @@ const Segments = () => {
         created: new Date().toISOString(),
         lastChanged: new Date().toISOString()
       };
-      createSegment(newSegment)
-        .then((res) => {
-          if (res.success) {
-            setSegments((prev) => [...prev, newSegment]);
-            setAddedConfirming(true);
-          } else {
-            setAddedConfirming(false);
-          }
-        })
-        .catch((error) => {
-          setAddedConfirming(false);
-        });
+      // createSegment(newSegment)
+      //   .then((res) => {
+      //     if (res.success) {
+      //       setSegments((prev) => [...prev, newSegment]);
+      //       setAddedConfirming(true);
+      //     } else {
+      //       setAddedConfirming(false);
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     setAddedConfirming(false);
+      //   });
+      createSegmentHandler(newSegment).then((res) => {
+        console.log(res);
+      });
     });
   };
 
