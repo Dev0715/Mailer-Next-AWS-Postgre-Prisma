@@ -41,7 +41,10 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
-import { newSubscriber } from "@/actions/audience/new-subscriber";
+import {
+  newSubscriber,
+  newSubscriberPrisma
+} from "@/actions/audience/new-subscriber";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import {
   Popover,
@@ -169,22 +172,35 @@ const NewSubscriber = () => {
           console.log(res);
         });
       }
-      newSubscriber(
-        {
-          userEmail: user?.email as string,
-          subscriberEmail: values.email,
-          firstName: values.firstName,
-          lastName: values.lastName,
-          address: values.address,
-          phoneNumber: values.phoneNumber,
-          birthday: values.birthday.toISOString(),
-          tags: selectedTags,
-          subscribed: true
-        },
-        updateChecked
-      ).then((data) => {
-        setError(data.error as string);
-        setSuccess(data?.success);
+      // newSubscriber(
+      //   {
+      //     userEmail: user?.email as string,
+      //     subscriberEmail: values.email,
+      //     firstName: values.firstName,
+      //     lastName: values.lastName,
+      //     address: values.address,
+      //     phoneNumber: values.phoneNumber,
+      //     birthday: values.birthday.toISOString(),
+      //     tags: selectedTags,
+      //     subscribed: true
+      //   },
+      //   updateChecked
+      // ).then((data) => {
+      //   setError(data.error as string);
+      //   setSuccess(data?.success);
+      // });
+      newSubscriberPrisma({
+        userEmail: user?.email as string,
+        subscriberEmail: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        address: values.address,
+        phoneNumber: values.phoneNumber,
+        birthday: values.birthday.toISOString(),
+        tags: selectedTags,
+        subscribed: true
+      }).then((res) => {
+        console.log("__prisma__", res);
       });
     });
   };

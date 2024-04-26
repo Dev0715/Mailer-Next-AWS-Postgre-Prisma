@@ -3,6 +3,7 @@
 import { createSubscriber } from "@/data/audience/create-subscriber";
 import { getSubscriberByEmail } from "@/data/audience/subscriber-by-email";
 import { updateCustomer } from "@/data/audience/update-cusomer";
+import { prisma } from "@/lib/prisma";
 import { Customer } from "@/shared/customer-type";
 
 export const newSubscriber = async (
@@ -41,4 +42,8 @@ export const newSubscriber = async (
   } else {
     return { error: response.error };
   }
+};
+
+export const newSubscriberPrisma = async (values: Customer) => {
+  console.log(values);
 };
