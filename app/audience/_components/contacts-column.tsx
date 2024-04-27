@@ -12,11 +12,11 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { Customer } from "@/shared/customer-type";
+import { Subscriber } from "@/shared/types/subscriber";
 
 type PropsType = {
-  onCustomerDelete: (customer: Customer) => void;
-  onCustomerEdit: (customer: Customer) => void;
+  onCustomerDelete: (customer: Subscriber) => void;
+  onCustomerEdit: (customer: Subscriber) => void;
   isPending: boolean;
 };
 
@@ -25,7 +25,7 @@ export const getColumnsForContactsTable = ({
   onCustomerEdit,
   isPending
 }: PropsType) => {
-  const columns: ColumnDef<Customer>[] = [
+  const columns: ColumnDef<Subscriber>[] = [
     {
       id: "select",
       header: ({ table }) => (
@@ -106,9 +106,7 @@ export const getColumnsForContactsTable = ({
       header: () => <div className="text-center">Birthday</div>,
       cell: ({ row }) => {
         const birthday = row.getValue("birthday");
-        const cellValue = birthday
-          ? new Date(birthday as string).toDateString()
-          : "";
+        const cellValue = birthday ? (birthday as Date).toDateString() : "";
         return <div className="text-center font-medium">{cellValue}</div>;
       }
     },
