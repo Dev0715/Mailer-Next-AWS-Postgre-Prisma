@@ -4,7 +4,7 @@ import {
   AccordionTrigger
 } from "@/components/ui/accordion";
 import { FaCheck, FaNewspaper } from "react-icons/fa";
-import { Campaign } from "@/shared/campaign-type";
+import { Campaign } from "@/shared/types/campaign";
 import { Button } from "@/components/ui/button";
 
 type Props = {

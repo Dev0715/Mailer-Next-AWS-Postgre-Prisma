@@ -4,7 +4,7 @@ import {
   AccordionTrigger
 } from "@/components/ui/accordion";
 import { FaCheck, FaSave } from "react-icons/fa";
-import { Campaign } from "@/shared/campaign-type";
+import { Campaign } from "@/shared/types/campaign";
 import { useEffect, useState } from "react";
 import { TimeSelect } from "./time-select";
 import { Button } from "@/components/ui/button";

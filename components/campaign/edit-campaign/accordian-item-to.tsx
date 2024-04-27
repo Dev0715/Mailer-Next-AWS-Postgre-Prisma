@@ -13,8 +13,8 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { Campaign } from "@/shared/campaign-type";
-import { Segment } from "@/shared/segment-type";
+import { Campaign } from "@/shared/types/campaign";
+import { Segment } from "@/shared/types/segment-type";
 import { useEffect, useState } from "react";
 
 type Props = {

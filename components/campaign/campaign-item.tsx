@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Campaign } from "@/shared/campaign-type";
+import { Campaign } from "@/shared/types/campaign";
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { FaEdit, FaMailBulk, FaTrash } from "react-icons/fa";

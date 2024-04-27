@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import { Filter } from "@/shared/filter-type";
+import { Filter } from "@/shared/types/filter";
 
 type PropsType = {
   disabled?: boolean;

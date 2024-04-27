@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger
 } from "@/components/ui/popover";
-import { Filter } from "@/shared/filter-type";
+import { Filter } from "@/shared/types/filter";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
