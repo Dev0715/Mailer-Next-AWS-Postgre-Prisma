@@ -1,7 +1,7 @@
 "use server";
 
 import db from "@/lib/db";
-import { Campaign } from "@/shared/campaign-type";
+import { Campaign } from "@/shared/types/campaign";
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_CAMPAIGNS_TABLE_NAME;

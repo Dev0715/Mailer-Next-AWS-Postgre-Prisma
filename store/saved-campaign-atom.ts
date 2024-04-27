@@ -1,4 +1,4 @@
-import { Campaign } from "@/shared/campaign-type";
+import { Campaign } from "@/shared/types/campaign";
 import { atom } from "jotai";
 
 type SavedCampaign = {

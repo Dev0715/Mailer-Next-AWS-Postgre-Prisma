@@ -1,4 +1,4 @@
-import { Customer } from "@/shared/customer-type";
+import { Subscriber } from "@/shared/types/subscriber";
 import { atom } from "jotai";
 
-export const customersAtom = atom<Customer[]>([]);
+export const subscriberAtom = atom<Subscriber[]>([]);
