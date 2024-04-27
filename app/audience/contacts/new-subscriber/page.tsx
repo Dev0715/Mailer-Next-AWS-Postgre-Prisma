@@ -1,9 +1,8 @@
 "use client";
 
+import * as z from "zod";
 import { FaArrowLeft, FaPlus } from "react-icons/fa";
 import Link from "next/link";
-
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -41,10 +40,7 @@ import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormError } from "@/components/utils/form-error";
 import { FormSuccess } from "@/components/utils/form-success";
-import {
-  newSubscriber,
-  newSubscriberPrisma
-} from "@/actions/audience/new-subscriber";
+import { newSubscriber } from "@/actions/audience/new-subscriber";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import {
   Popover,
@@ -57,7 +53,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { updateUserTags } from "@/data/user/update-tags";
-// import { verifyEmail } from "@devmehq/email-validator-js";
+import { Subscriber } from "@/shared/types/subscriber";
 
 const NewSubscriber = () => {
   const user = useCurrentUser();
@@ -139,17 +135,6 @@ const NewSubscriber = () => {
     }
   });
 
-  // const verifyMyEmail = async () => {
-  //   const { validFormat, validSmtp, validMx } = await verifyEmail({
-  //     emailAddress: "foo@email.com",
-  //     verifyMx: true,
-  //     verifySmtp: true,
-  //     timeout: 3000
-  //   });
-
-  //   console.log(validFormat, validSmtp, validMx);
-  // };
-
   const onSubmit = (values: z.infer<typeof NewSubscriberSchema>) => {
     setError("");
     setSuccess("");
@@ -173,25 +158,23 @@ const NewSubscriber = () => {
         });
       }
 
-      const customer = {
+      const subscriber: Subscriber = {
         userEmail: user?.email as string,
         subscriberEmail: values.email,
         firstName: values.firstName,
         lastName: values.lastName,
         address: values.address,
         phoneNumber: values.phoneNumber,
-        birthday: values.birthday.toISOString(),
+        // birthday: values.birthday.toISOString(),
+        birthday: values.birthday,
         tags: selectedTags,
-        subscribed: true
+        subscribed: true,
+        contactRating: 0
       };
 
-      // newSubscriber(customer, updateChecked).then((data) => {
-      //   setError(data.error as string);
-      //   setSuccess(data?.success);
-      // });
-
-      newSubscriberPrisma(customer).then((data) => {
-        console.log(data);
+      newSubscriber(subscriber, updateChecked).then((data) => {
+        setError(data.error as string);
+        setSuccess(data?.success);
       });
     });
   };
@@ -393,7 +376,9 @@ const NewSubscriber = () => {
                           <SelectGroup>
                             {/* <SelectLabel>Tags</SelectLabel> */}
                             {storedTags.map((tag) => (
-                              <SelectItem value={tag}>{tag}</SelectItem>
+                              <SelectItem key={tag} value={tag}>
+                                {tag}
+                              </SelectItem>
                             ))}
                           </SelectGroup>
                         </SelectContent>
