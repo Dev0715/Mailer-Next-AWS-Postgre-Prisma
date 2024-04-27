@@ -1,7 +1,7 @@
 "use client";
 
 import { getColumnsForSegmentsTable } from "../_components/segments-column";
-import { Segment, SegmentAddition } from "@/shared/segment-type";
+import { Segment, SegmentAddition } from "@/shared/types/segment";
 import { useEffect, useState, useTransition } from "react";
 import {
   ColumnFiltersState,

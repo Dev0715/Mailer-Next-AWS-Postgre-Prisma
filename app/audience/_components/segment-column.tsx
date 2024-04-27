@@ -12,10 +12,10 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
-import { Customer } from "@/shared/customer-type";
+import { Subscriber } from "@/shared/types/subscriber";
 
 export const getColumnsForContactsTable = () => {
-  const columns: ColumnDef<Customer>[] = [
+  const columns: ColumnDef<Subscriber>[] = [
     {
       accessorKey: "subscriberEmail",
       header: ({ column }) => {

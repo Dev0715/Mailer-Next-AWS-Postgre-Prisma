@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
 import { getAllCampaignsByEmail } from "@/data/campaign/all-campaigns";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { Campaign } from "@/shared/campaign-type";
+import { Campaign } from "@/shared/types/campaign";
 import Link from "next/link";
 
 const Blue = ({ children }: { children: React.ReactNode }) => {

@@ -4,14 +4,14 @@ import { FilterBar } from "./filter-bar";
 import { useEffect, useState } from "react";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { Filter } from "@/shared/filter-type";
+import { Filter } from "@/shared/types/filter";
 import {
   checkFilters,
   defaultConditionOfAttribute
-} from "@/lib/filter-customer";
+} from "@/shared/feature/filter-customer";
 import { FormError } from "../utils/form-error";
 import { Input } from "../ui/input";
-import { SegmentAddition } from "@/shared/segment-type";
+import { SegmentAddition } from "@/shared/types/segment";
 
 type PropsType = {
   onNewSegmentAdded: ({ title, description, filters }: SegmentAddition) => void;

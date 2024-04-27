@@ -11,8 +11,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import { Segment } from "@/shared/segment-type";
-import { Filter } from "@/shared/filter-type";
+import { Segment } from "@/shared/types/segment-type";
+import { Filter } from "@/shared/types/filter/";
 import Link from "next/link";
 
 type Props = {

@@ -2,12 +2,12 @@
 
 import { getCampaignById } from "@/data/campaign/campaign-by-id";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { Campaign } from "@/shared/campaign-type";
+import { Campaign } from "@/shared/types/campaign";
 import { notFound, useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { Accordion } from "@/components/ui/accordion";
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
-import { Segment } from "@/shared/segment-type";
+import { Segment } from "@/shared/types/segment-type";
 import { AccordianItemTo } from "@/components/campaign/edit-campaign/accordian-item-to";
 import { AccordianItemFrom } from "@/components/campaign/edit-campaign/accordian-item-from";
 import { AccordianItemSubject } from "@/components/campaign/edit-campaign/accordian-item-subject";

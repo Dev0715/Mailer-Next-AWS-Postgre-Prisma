@@ -12,9 +12,9 @@ import {
   isTypeOfString,
   isTypeOfSubscribed,
   isTypeOfTags
-} from "@/lib/filter-customer";
+} from "@/shared/feature/filter-customer";
 import { Button } from "../ui/button";
-import { Filter } from "@/shared/filter-type";
+import { Filter } from "@/shared/types/filter";
 import { StringCondition } from "./condition-tags/string-condition";
 import { SubscribedCondition } from "./condition-tags/subscribe-condition";
 import { DateCondition } from "./condition-tags/date-condition";
