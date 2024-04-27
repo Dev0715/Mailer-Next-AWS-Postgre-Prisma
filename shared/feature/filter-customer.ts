@@ -1,4 +1,4 @@
-import { Filter } from "@/shared/filter-type";
+import { Filter } from "@/shared/types/filter";
 
 export const filterAttributes = [
   { value: "subscriberEmail", name: "Email" },

@@ -1,4 +1,4 @@
-import { Filter } from "./filter-type";
+import { Filter } from "./filter";
 
 export type Segment = {
   userEmail: string;
