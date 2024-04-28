@@ -146,8 +146,6 @@ const NewSubscriber = () => {
       return;
     }
 
-    // verifyMyEmail();
-
     startTransition(() => {
       if (isStoredTagsUpdated) {
         updateUserTags({
