@@ -31,18 +31,18 @@ import {
 } from "@/components/ui/table";
 import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
-import { Customer } from "@/shared/customer-type";
-import { getAllCustomersByEmail } from "@/data/audience/all-customers";
+import { Subscriber } from "@/shared/types/subscriber";
+import { getAllSubscribersByEmail } from "@/data/audience/subscribers-all";
 import { getColumnsForContactsTable } from "../_components/contacts-column";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { EditCustomer } from "@/components/audience/edit-customer";
 import { useAtom } from "jotai";
-import { customersAtom } from "@/store/customers-atom";
+import { subscriberAtom } from "@/store/customers-atom";
 import { QuestionAlert } from "@/components/utils/question-alert";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { deleteCutomer } from "@/data/audience/delete-customer";
+import { deleteSubscriber } from "@/data/audience/subscriber-delete";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { deleteCutomers } from "@/data/audience/delete-customers";
+import { deleteSubscribers } from "@/data/audience/subscribers-delete";
 import { Spinner } from "@nextui-org/spinner";
 
 export default function Contacts() {
@@ -54,9 +54,9 @@ export default function Contacts() {
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  const [customers, setCustomers] = useAtom(customersAtom);
+  const [subscribers, setSubscribers] = useAtom(subscriberAtom);
   const [isEditing, setEditing] = useState<boolean>(false);
-  const [editingCustomer, setEditingCustomer] = useState<Customer>();
+  const [editingCustomer, setEditingCustomer] = useState<Subscriber>();
   const [isDeleting, setDeleting] = useState<boolean>(false);
   const [deletingEmail, setDeletingEmail] = useState<string>("");
   const [isDeletingMulti, setDeletingMulti] = useState<boolean>(false);
@@ -66,26 +66,26 @@ export default function Contacts() {
   const [confirmDescription, setConfirmDescription] = useState<string>("");
 
   useEffect(() => {
-    getAllCustomersByEmail(user?.email as string).then((customers: any) => {
-      if (customers) {
-        setCustomers(customers);
-      }
+    if (subscribers.length > 0) return;
+    getAllSubscribersByEmail(user?.email as string).then((_subscribers) => {
+      if (!_subscribers) return;
+      setSubscribers(_subscribers);
     });
   }, []);
 
-  const onCustomerEdit = (customer: Customer) => {
-    setEditingCustomer(customer);
+  const onSubscriberEdit = (_subscriber: Subscriber) => {
+    setEditingCustomer(_subscriber);
     setEditing(true);
   };
 
-  const onCustomerEdited = (success: boolean, updatedCustomer?: Customer) => {
+  const onCustomerEdited = (success: boolean, updatedCustomer?: Subscriber) => {
     if (success) {
-      const newCustomers = customers.map((customer) =>
+      const newCustomers = subscribers.map((customer) =>
         customer.subscriberEmail === updatedCustomer?.subscriberEmail
           ? updatedCustomer
           : customer
       );
-      setCustomers(newCustomers);
+      setSubscribers(newCustomers);
     }
     setEditing(false);
   };
@@ -101,21 +101,21 @@ export default function Contacts() {
     }
   };
 
-  const onCustomerDelete = (customer: Customer) => {
+  const onCustomerDelete = (customer: Subscriber) => {
     setDeletingEmail(customer.subscriberEmail);
     setDeleting(true);
   };
 
   const onCustomerDeleted = () => {
     startTransition(() => {
-      deleteCutomer(user?.email as string, deletingEmail)
+      deleteSubscriber(user?.email as string, deletingEmail)
         .then((res) => {
           if (res.success) {
             // # Need to update to use splice function instead? #
-            const newList = customers.filter(
+            const newList = subscribers.filter(
               (item) => item.subscriberEmail !== deletingEmail
             );
-            setCustomers(newList);
+            setSubscribers(newList);
             setDeletedConfirming(true);
           } else {
             setDeletedConfirming(false);
@@ -155,21 +155,21 @@ export default function Contacts() {
 
   const onSelectedRowsDeleted = () => {
     const selectedEmails = Object.keys(rowSelection).map(
-      (index) => customers[Number(index)].subscriberEmail
+      (index) => subscribers[Number(index)].subscriberEmail
     );
 
     startTransition(() => {
-      deleteCutomers(user?.email as string, selectedEmails)
+      deleteSubscribers(user?.email as string, selectedEmails)
         .then((res) => {
           if (res.success) {
-            const newList = [...customers];
+            const newList = [...subscribers];
             Object.keys(rowSelection)
               .map((index) => Number(index))
               .reverse()
               .map((index) => {
                 newList.splice(index, 1);
               });
-            setCustomers(newList);
+            setSubscribers(newList);
             setSelectedRowsDeletedConfirming(true);
           } else {
             setSelectedRowsDeletedConfirming(false);
@@ -185,11 +185,11 @@ export default function Contacts() {
 
   const columns = getColumnsForContactsTable({
     onCustomerDelete,
-    onCustomerEdit,
+    onCustomerEdit: onSubscriberEdit,
     isPending
   });
   const table = useReactTable({
-    data: customers,
+    data: subscribers,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
