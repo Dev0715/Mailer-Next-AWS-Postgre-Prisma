@@ -1,27 +1,44 @@
-import db from "@/lib/db";
-import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
-import { generateVerificationToken } from "@/lib/tokens";
+// import db from "@/lib/db";
+// import { GetCommand } from "@aws-sdk/lib-dynamodb";
 
-const TableName = process.env.AWS_DYNAMODB_MAILING_LIST_TABLE_NAME;
+import { prisma } from "@/lib/prisma";
+
+// const TableName = process.env.AWS_DYNAMODB_MAILING_LIST_TABLE_NAME;
+
+type Params = {
+  userEmail: string;
+  subscriberEmail: string;
+};
+
+// export const getSubscriberByEmail = async ({
+//   userEmail,
+//   subscriberEmail
+// }: Params) => {
+//   const command = new GetCommand({
+//     TableName,
+//     Key: { userEmail, subscriberEmail }
+//   });
+
+//   try {
+//     const response = await db.send(command);
+//     return response.Item;
+//   } catch (error) {
+//     return null;
+//   }
+// };
 
 export const getSubscriberByEmail = async ({
   userEmail,
   subscriberEmail
-}: {
-  userEmail: string;
-  subscriberEmail: string;
-}) => {
-  const command = new GetCommand({
-    TableName,
-    Key: { userEmail, subscriberEmail }
-  });
-
+}: Params) => {
   try {
-    const response = await db.send(command);
-    console.log("__getSubscriberByEmail__GetCommand__RESPONSE", response);
-    return response.Item;
+    return await prisma.mailinglist.findFirst({
+      where: {
+        userEmail: userEmail,
+        subscriberEmail: subscriberEmail
+      }
+    });
   } catch (error) {
-    console.log("__getSubscriberByEmail__GetCommand__ERROR", error);
     return null;
   }
 };
