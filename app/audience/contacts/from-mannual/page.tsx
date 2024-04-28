@@ -3,10 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { createSubscriber } from "@/data/audience/create-subscriber";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { Customer } from "@/shared/customer-type";
-import { recognizeLine } from "@/shared/funcs/recognizeLine";
+import { createSubscriberFromStr } from "@/shared/feature/subscriber-create-from-str";
 import { Spinner } from "@nextui-org/spinner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -31,7 +29,11 @@ const FromMannual = () => {
     const lines = inputText.split("\n");
     Promise.all(
       lines.map(async (line) => {
-        const res = await recognizeLine(user?.email as string, line, ",");
+        const res = await createSubscriberFromStr(
+          user?.email as string,
+          line,
+          ","
+        );
         return res;
       })
     ).then((res) => {
