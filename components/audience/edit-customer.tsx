@@ -33,11 +33,11 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { MdClose } from "react-icons/md";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { Customer } from "@/shared/customer-type";
+import { Subscriber } from "@/shared/types/subscriber";
 import { updateUserTags } from "@/data/user/update-tags";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getUserByEmail } from "@/data/user/user-by-email";
-import { updateCustomer } from "@/data/audience/update-cusomer";
+import { updateSubscriber } from "@/data/audience/subscriber-update";
 import {
   Popover,
   PopoverContent,
@@ -49,12 +49,11 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 
 type PropsParams = {
-  customer: Customer | undefined;
-  onCustomerUpdate: (success: boolean, updatedCustomer?: Customer) => void;
+  customer: Subscriber | undefined;
+  onCustomerUpdate: (success: boolean, updatedCustomer?: Subscriber) => void;
 };
 
 export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
-  const user = useCurrentUser();
   const [isPending, startTransition] = useTransition();
 
   const [newTagVal, setNewTagVal] = useState<string>("");
@@ -68,7 +67,7 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
   const [alertDescription, setAlertDescription] = useState<string>("");
 
   useEffect(() => {
-    getUserByEmail(user?.email as string).then((res) => {
+    getUserByEmail(customer?.userEmail as string).then((res) => {
       if (res && res.tags) {
         setStoredTags(res.tags);
       }
@@ -84,7 +83,7 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
       lastName: customer?.lastName,
       address: customer?.address,
       phoneNumber: customer?.phoneNumber,
-      birthday: new Date(customer?.birthday as string),
+      birthday: customer?.birthday,
       subscribed: customer?.subscribed ? "subscribed" : "unsubscribed"
     }
   });
@@ -93,26 +92,24 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
     startTransition(() => {
       if (isStoredTagsUpdated) {
         updateUserTags({
-          email: user?.email as string,
+          email: customer?.userEmail as string,
           tags: storedTags
         }).then((res) => {
           console.log(res);
         });
       }
-      const newCustomer: Customer = {
-        ...customer,
-        userEmail: user?.email as string,
-        subscriberEmail: values.email,
+      const newCustomer: Subscriber = {
+        ...(customer as Subscriber),
         firstName: values.firstName,
         lastName: values.lastName,
         address: values.address,
         phoneNumber: values.phoneNumber,
-        birthday: values.birthday.toISOString(),
+        birthday: values.birthday,
         subscribed: values.subscribed === "subscribed",
         tags: selectedTags,
-        lastChanged: new Date().toISOString()
+        lastChanged: new Date()
       };
-      updateCustomer(newCustomer).then((res) => {
+      updateSubscriber(newCustomer).then((res) => {
         if (res.success) {
           onCustomerUpdate(true, newCustomer);
         } else {
@@ -358,7 +355,7 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
                   >
                     <p>{tag}</p>
                     <Button
-                      asChild
+                      disabled={isPending}
                       variant="link"
                       className="p-0 text-base text-black cursor-pointer"
                       onClick={() => onDeleteTag(index)}
