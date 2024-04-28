@@ -4,21 +4,31 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("POSTGRE_DATABASE_URL")
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model mailinglist {
-  id              BigInt    @id @default(autoincrement())
-  created         DateTime  @default(now()) @db.Timestamptz(6)
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   userEmail       String?   @db.VarChar
   subscriberEmail String?   @db.VarChar
-  address         String?   @db.VarChar
-  birthday        DateTime? @db.Date
   firstName       String?   @db.VarChar
   lastName        String?   @db.VarChar
+  address         String?   @db.VarChar
   phoneNumber     String?   @db.VarChar
-  lastChanged     DateTime? @db.Timestamptz(6)
+  birthday        DateTime? @db.Date
   subscribed      Boolean?
-  tags            Json?     @db.Json
+  contactRating   Int?
+  created         DateTime? @default(now()) @db.Timestamptz(6)
+  lastChanged     DateTime? @default(now()) @db.Timestamptz(6)
+  tags            String[]  @db.VarChar
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model test_table {
+  id         BigInt   @id @default(autoincrement())
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  tags       String[] @db.VarChar
+
+  @@map("test-table")
 }
