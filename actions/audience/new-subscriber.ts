@@ -4,6 +4,7 @@ import { createSubscriber } from "@/data/audience/subscriber-create";
 import { getSubscriberByEmail } from "@/data/audience/subscriber-by-email";
 import { updateSubscriber } from "@/data/audience/subscriber-update";
 import { Subscriber } from "@/shared/types/subscriber";
+import { checkValidationOfEmail } from "@/data/email/check-validation";
 
 export const newSubscriber = async (
   values: Subscriber,
@@ -31,6 +32,11 @@ export const newSubscriber = async (
     } else {
       return { error: "Internal Server Error" };
     }
+  }
+
+  const valid = checkValidationOfEmail(values.subscriberEmail);
+  if (!valid) {
+    return { error: "Invalid email address" };
   }
 
   const created = new Date();
