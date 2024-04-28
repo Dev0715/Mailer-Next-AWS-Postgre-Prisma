@@ -5,7 +5,7 @@ import { FaArrowLeft, FaFileUpload } from "react-icons/fa";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { recognizeLine } from "@/shared/funcs/recognizeLine";
+import { createSubscriberFromStr } from "@/shared/feature/subscriber-create-from-str";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { useRouter } from "next/navigation";
@@ -25,7 +25,11 @@ const FromFile = () => {
     const lines = text.split("\n");
     Promise.all(
       lines.map(async (line) => {
-        const res = await recognizeLine(user?.email as string, line, splitter);
+        const res = await createSubscriberFromStr(
+          user?.email as string,
+          line,
+          splitter
+        );
         return res;
       })
     ).then((res) => {
