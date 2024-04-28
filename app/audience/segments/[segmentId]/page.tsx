@@ -29,14 +29,12 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { getAllCustomersByEmail } from "@/data/audience/all-customers";
 import { getColumnsForContactsTable } from "../../_components/segment-column";
-import { useAtom } from "jotai";
-import { customersAtom } from "@/store/customers-atom";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { isFiltered } from "@/lib/segment";
 import { getSegmentById } from "@/data/segment/segment-by-id";
-import { Customer } from "@/shared/customer-type";
+import { Subscriber } from "@/shared/types/subscriber";
+import { getAllSubscribersByCondition } from "@/data/audience/subscribers-by-condition";
+import { getConditionFromFilters } from "@/shared/feature/condition-from-filters";
 
 export default function CustomersInSegment({
   params
@@ -50,21 +48,29 @@ export default function CustomersInSegment({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
 
-  const [customers, setCustomers] = useAtom(customersAtom);
+  const [customers, setCustomers] = useState<Subscriber[]>([]);
 
   useEffect(() => {
-    getSegmentById(user?.email as string, params.segmentId).then((res) => {
-      if (res) {
-        getAllCustomersByEmail(user?.email as string).then((customers: any) => {
-          if (customers) {
-            setCustomers(
-              customers.filter((customer: Customer) =>
-                isFiltered(customer, res.filters)
-              )
-            );
-          }
-        });
-      }
+    getSegmentById(user?.email as string, params.segmentId).then((_segment) => {
+      if (!_segment) return;
+      const condition = getConditionFromFilters(_segment.filters);
+      console.log(condition);
+      getAllSubscribersByCondition(condition).then((_subscribers) => {
+        setCustomers(_subscribers || []);
+      });
+
+      // ## Dynamo DB ##
+      // getAllSubscribersByEmail(user?.email as string).then(
+      //   (customers: any) => {
+      //     if (customers) {
+      //       setCustomers(
+      //         customers.filter((customer: Subscriber) =>
+      //           isFiltered(customer, res.filters)
+      //         )
+      //       );
+      //     }
+      //   }
+      // );
     });
   }, []);
 
