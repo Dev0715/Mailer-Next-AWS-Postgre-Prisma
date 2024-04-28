@@ -4,10 +4,10 @@ import { FilterBar } from "./filter-bar";
 import { useEffect, useState } from "react";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { Segment } from "@/shared/segment-type";
-import { getAllCustomersByEmail } from "@/data/audience/all-customers";
-import { isFiltered } from "@/lib/segment";
 import { Spinner } from "@nextui-org/spinner";
+import { Segment } from "@/shared/types/segment";
+import { getNubmersOfSubscribersByCondition } from "@/data/audience/count-subscribers-condition";
+import { getConditionFromFilters } from "@/shared/feature/condition-from-filters";
 
 type Props = {
   segment: Segment;
@@ -17,28 +17,19 @@ type Props = {
 const MonitorSegment = ({ segment, onFinish }: Props) => {
   const user = useCurrentUser();
   const [storedTags, setStoredTags] = useState<string[]>([]);
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState<number>(-1);
 
   useEffect(() => {
-    let ignore = false;
     getUserByEmail(user?.email as string).then((res) => {
       if (res && res.tags) {
         setStoredTags(res.tags);
       }
     });
-    getAllCustomersByEmail(user?.email as string).then((res) => {
-      if (ignore) return;
-      if (res) {
-        res.map((customer) => {
-          if (isFiltered(customer, segment.filters)) {
-            setCount((prev) => prev + 1);
-          }
-        });
-      }
+
+    const condition = getConditionFromFilters(segment.filters);
+    getNubmersOfSubscribersByCondition(condition).then((_count) => {
+      setCount(_count || 0);
     });
-    return () => {
-      ignore = true;
-    };
   }, []);
 
   return (
@@ -47,11 +38,12 @@ const MonitorSegment = ({ segment, onFinish }: Props) => {
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center gap-2">{segment.description}</div>
         <div className="flex items-center gap-x-2">
-          <Spinner size="sm" />
-          <p className="px-4">
-            Total members in this segment:{" "}
+          <p>Total members in this segment: </p>
+          {count === -1 ? (
+            <Spinner size="sm" />
+          ) : (
             <span className="text-xl font-semibold">{count}</span>
-          </p>
+          )}
         </div>
       </div>
       <div className="flex flex-col gap-y-4">
