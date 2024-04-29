@@ -41,9 +41,9 @@ import { Campaign } from "@/shared/types/campaign";
 
 export const updateCampaign = async (campaign: Campaign) => {
   try {
-    await prisma.campaigns.updateMany({
+    await prisma.campaigns.update({
       where: {
-        id: campaign.id
+        campaignId: campaign.campaignId
       },
       data: {
         ...campaign
