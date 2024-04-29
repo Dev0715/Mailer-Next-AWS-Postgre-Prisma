@@ -1,5 +1,6 @@
 import { createSubscriber } from "@/data/audience/subscriber-create";
 import { Subscriber } from "../types/subscriber";
+import { getSubscriberByEmail } from "@/data/audience/subscriber-by-email";
 
 type FunctionType = (
   userEmail: string,
@@ -17,16 +18,15 @@ export const createSubscriberFromStr: FunctionType = async (
     return 0;
   }
 
-  const myPromise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve("foo");
-    }, 10);
+  const subscriberEmail = fields[0].trim();
+  const existingSubscriber = await getSubscriberByEmail({
+    userEmail,
+    subscriberEmail
   });
 
-  myPromise.then(() => {
-    console.log(fields);
-    return true;
-  });
+  if (existingSubscriber) {
+    return 0;
+  }
 
   const contact: Subscriber = {
     userEmail,
