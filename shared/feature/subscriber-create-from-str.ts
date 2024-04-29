@@ -17,6 +17,17 @@ export const createSubscriberFromStr: FunctionType = async (
     return 0;
   }
 
+  const myPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("foo");
+    }, 10);
+  });
+
+  myPromise.then(() => {
+    console.log(fields);
+    return true;
+  });
+
   const contact: Subscriber = {
     userEmail,
     subscriberEmail: fields[0].trim(),
