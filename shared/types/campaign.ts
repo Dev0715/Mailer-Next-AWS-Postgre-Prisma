@@ -1,5 +1,4 @@
 export type Campaign = {
-  id?: number;
   userEmail: string;
   campaignId: string;
   title: string;
