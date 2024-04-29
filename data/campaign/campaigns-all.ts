@@ -1,22 +1,36 @@
 "use server";
 
-import db from "@/lib/db";
-import { QueryCommand } from "@aws-sdk/lib-dynamodb";
+import { prisma } from "@/lib/prisma";
 
-const TableName = process.env.AWS_DYNAMODB_CAMPAIGNS_TABLE_NAME;
+// import db from "@/lib/db";
+// import { QueryCommand } from "@aws-sdk/lib-dynamodb";
+
+// const TableName = process.env.AWS_DYNAMODB_CAMPAIGNS_TABLE_NAME;
+
+// export const getAllCampaignsByEmail = async (userEmail: string) => {
+//   const command = new QueryCommand({
+//     TableName,
+//     KeyConditionExpression: "userEmail = :userEmail",
+//     ExpressionAttributeValues: {
+//       ":userEmail": userEmail
+//     }
+//   });
+
+//   try {
+//     const response = await db.send(command);
+//     return response.Items;
+//   } catch (error) {
+//     return null;
+//   }
+// };
 
 export const getAllCampaignsByEmail = async (userEmail: string) => {
-  const command = new QueryCommand({
-    TableName,
-    KeyConditionExpression: "userEmail = :userEmail",
-    ExpressionAttributeValues: {
-      ":userEmail": userEmail
-    }
-  });
-
   try {
-    const response = await db.send(command);
-    return response.Items;
+    return await prisma.campaigns.findMany({
+      where: {
+        userEmail
+      }
+    });
   } catch (error) {
     return null;
   }
