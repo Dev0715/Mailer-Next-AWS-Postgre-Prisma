@@ -28,6 +28,7 @@ export const deleteCampaign = async (userEmail: string, campaignId: string) => {
         campaignId
       }
     });
+    return { success: true };
   } catch (error) {
     return { success: false };
   }
