@@ -1,6 +1,7 @@
 import { createSubscriber } from "@/data/audience/subscriber-create";
 import { Subscriber } from "../types/subscriber";
 import { getSubscriberByEmail } from "@/data/audience/subscriber-by-email";
+import { checkValidationOfEmail } from "@/data/email/check-validation";
 
 type FunctionType = (
   userEmail: string,
@@ -28,9 +29,14 @@ export const createSubscriberFromStr: FunctionType = async (
     return 0;
   }
 
+  const valid = checkValidationOfEmail(subscriberEmail);
+  if (!valid) {
+    return 0;
+  }
+
   const contact: Subscriber = {
     userEmail,
-    subscriberEmail: fields[0].trim(),
+    subscriberEmail,
     firstName: fields[1].trim(),
     lastName: fields[2].trim(),
     address: fields[3],
