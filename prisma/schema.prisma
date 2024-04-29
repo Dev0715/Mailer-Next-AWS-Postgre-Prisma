@@ -25,10 +25,17 @@ model mailinglist {
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model test_table {
-  id         BigInt   @id @default(autoincrement())
-  created_at DateTime @default(now()) @db.Timestamptz(6)
-  tags       String[] @db.VarChar
-
-  @@map("test-table")
+model campaigns {
+  id            BigInt   @id @default(autoincrement())
+  userEmail     String?  @db.VarChar
+  campaignId    String?  @db.VarChar
+  title         String?  @db.VarChar
+  to            Json?    @db.Json
+  from          Json?    @db.Json
+  subject       Json?    @db.Json
+  time          Json?    @db.Json
+  email         Json?    @db.Json
+  openedEmails  String[] @db.VarChar
+  unsubEmails   String[] @db.VarChar
+  bouncedEmails String[] @db.VarChar
 }
