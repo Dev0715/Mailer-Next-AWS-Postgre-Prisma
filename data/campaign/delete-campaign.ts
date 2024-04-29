@@ -22,9 +22,9 @@ import { prisma } from "@/lib/prisma";
 
 export const deleteCampaign = async (userEmail: string, campaignId: string) => {
   try {
-    await prisma.campaigns.deleteMany({
+    await prisma.campaigns.delete({
       where: {
-        userEmail,
+        // userEmail,
         campaignId
       }
     });
