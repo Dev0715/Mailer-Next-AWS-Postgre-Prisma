@@ -18,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormError } from "@/components/utils/form-error";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { v4 as uuidv4 } from "uuid";
-import { createCampaign } from "@/data/campaign/create-campaign";
+import { createCampaign } from "@/data/campaign/campaign-create";
 import { useRouter } from "next/navigation";
 
 const NewCampaignSchema = z.object({
