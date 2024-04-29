@@ -7,7 +7,7 @@ import { notFound, useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { Accordion } from "@/components/ui/accordion";
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
-import { Segment } from "@/shared/types/segment-type";
+import { Segment } from "@/shared/types/segment";
 import { AccordianItemTo } from "@/components/campaign/edit-campaign/accordian-item-to";
 import { AccordianItemFrom } from "@/components/campaign/edit-campaign/accordian-item-from";
 import { AccordianItemSubject } from "@/components/campaign/edit-campaign/accordian-item-subject";
