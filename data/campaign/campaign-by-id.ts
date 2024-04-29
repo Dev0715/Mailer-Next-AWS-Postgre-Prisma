@@ -28,9 +28,9 @@ export const getCampaignById = async (
   campaignId: string
 ) => {
   try {
-    return await prisma.campaigns.findFirst({
+    return await prisma.campaigns.findUnique({
       where: {
-        userEmail: userEmail,
+        // userEmail: userEmail,
         campaignId: campaignId
       }
     });
