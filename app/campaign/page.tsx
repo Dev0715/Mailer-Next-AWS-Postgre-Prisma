@@ -5,7 +5,7 @@ import { FaPlus } from "react-icons/fa";
 import CampaignItem from "../../components/campaign/campaign-item";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
-import { getAllCampaignsByEmail } from "@/data/campaign/all-campaigns";
+import { getAllCampaignsByEmail } from "@/data/campaign/campaigns-all";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Campaign } from "@/shared/types/campaign";
 import Link from "next/link";
@@ -25,7 +25,7 @@ const CampaignPage = () => {
   useEffect(() => {
     getAllCampaignsByEmail(user?.email as string).then((items) => {
       if (items) {
-        setCampaigns(items as Campaign[]);
+        setCampaigns(items.map((item) => item as unknown as Campaign));
       }
     });
   });
