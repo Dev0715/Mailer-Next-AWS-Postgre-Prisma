@@ -26,9 +26,8 @@ model mailinglist {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model campaigns {
-  id            BigInt   @id @default(autoincrement())
   userEmail     String?  @db.VarChar
-  campaignId    String?  @db.VarChar
+  campaignId    String   @id @db.VarChar
   title         String?  @db.VarChar
   to            Json?    @db.Json
   from          Json?    @db.Json
