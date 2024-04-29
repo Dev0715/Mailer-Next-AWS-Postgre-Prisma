@@ -52,7 +52,8 @@ const FromFile = () => {
       reader.onload = (e) => {
         const text = e.target?.result;
         const splitter = file.type === "text/csv" ? "\t" : ",";
-        processText(text as string, splitter);
+        console.log(text, splitter);
+        // processText(text as string, splitter);
       };
       reader.readAsText(file);
     }
