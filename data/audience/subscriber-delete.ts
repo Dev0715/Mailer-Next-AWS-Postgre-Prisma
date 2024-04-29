@@ -25,14 +25,14 @@ import { prisma } from "@/lib/prisma";
 // };
 
 export const deleteSubscriber = async (
-  userEmail: string,
-  subscriberEmail: string
+  // userEmail: string,
+  // subscriberEmail: string,
+  id: string
 ) => {
   try {
-    await prisma.mailinglist.deleteMany({
+    await prisma.mailinglist.delete({
       where: {
-        userEmail,
-        subscriberEmail
+        id
       }
     });
     return { success: true };
