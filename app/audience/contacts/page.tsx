@@ -59,6 +59,7 @@ export default function Contacts() {
   const [editingCustomer, setEditingCustomer] = useState<Subscriber>();
   const [isDeleting, setDeleting] = useState<boolean>(false);
   const [deletingEmail, setDeletingEmail] = useState<string>("");
+  const [deletingId, setDeletingId] = useState<string>("");
   const [isDeletingMulti, setDeletingMulti] = useState<boolean>(false);
 
   const [isConfirming, setConfirming] = useState<boolean>(false);
@@ -105,17 +106,19 @@ export default function Contacts() {
 
   const onCustomerDelete = (customer: Subscriber) => {
     setDeletingEmail(customer.subscriberEmail);
+    setDeletingId(customer.id as string);
     setDeleting(true);
   };
 
   const onCustomerDeleted = () => {
     startTransition(() => {
-      deleteSubscriber(user?.email as string, deletingEmail)
+      //  deleteSubscriber(user?.email as string, deletingEmail)
+      deleteSubscriber(deletingId)
         .then((res) => {
           if (res.success) {
             // # Need to update to use splice function instead? #
             const newList = subscribers.filter(
-              (item) => item.subscriberEmail !== deletingEmail
+              (item) => item.id !== deletingId
             );
             setSubscribers(newList);
             setDeletedConfirming(true);
