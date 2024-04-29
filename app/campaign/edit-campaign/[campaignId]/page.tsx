@@ -19,7 +19,7 @@ import { savedCampaignAtom } from "@/store/saved-campaign-atom";
 import { HTMLRenderer } from "@/components/utils/html-renderer";
 import { Button } from "@/components/ui/button";
 import { FaArrowRight, FaSave } from "react-icons/fa";
-import { updateCampaign } from "@/data/campaign/update-campaign";
+import { updateCampaign } from "@/data/campaign/campaign-update";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { sendEmail } from "@/data/email/send-email";
 
