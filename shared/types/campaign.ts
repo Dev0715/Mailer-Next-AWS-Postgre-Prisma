@@ -1,4 +1,5 @@
 export type Campaign = {
+  id?: string;
   userEmail: string;
   campaignId: string;
   title: string;
@@ -24,7 +25,7 @@ export type Campaign = {
     html: string;
   };
 
-  opened?: string[];
-  unsubscribed?: string[];
-  bounced?: string[];
+  openedEmails?: string[];
+  unsubEmails?: string[];
+  bouncedEmails?: string[];
 };
