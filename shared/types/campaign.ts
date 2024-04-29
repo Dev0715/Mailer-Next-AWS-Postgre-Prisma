@@ -23,4 +23,8 @@ export type Campaign = {
     design: any;
     html: string;
   };
+
+  opened?: string[];
+  unsubscribed?: string[];
+  bounced?: string[];
 };
