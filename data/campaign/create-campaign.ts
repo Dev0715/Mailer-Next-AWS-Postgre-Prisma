@@ -2,6 +2,7 @@
 
 import db from "@/lib/db";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
+import { prisma } from "@/lib/prisma";
 
 const TableName = process.env.AWS_DYNAMODB_CAMPAIGNS_TABLE_NAME;
 
@@ -11,7 +12,7 @@ type Params = {
   title: string;
 };
 
-export const createCampaign = async (data: Params) => {
+export const _createCampaign = async (data: Params) => {
   const command = new PutCommand({
     TableName,
     Item: {
@@ -25,4 +26,14 @@ export const createCampaign = async (data: Params) => {
   } catch (error) {
     return { error };
   }
+};
+
+export const createCampaign = async (data: Params) => {
+  try {
+    await prisma.campaigns.create({
+      data: {
+        ...data
+      }
+    });
+  } catch (error) {}
 };
