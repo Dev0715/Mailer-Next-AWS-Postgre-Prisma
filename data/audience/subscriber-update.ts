@@ -34,6 +34,7 @@ import { Subscriber } from "@/shared/types/subscriber";
 //   }
 // };
 
+// # Update a subscriber based on id? #
 export const updateSubscriber = async (data: Subscriber) => {
   try {
     await prisma.mailinglist.updateMany({
