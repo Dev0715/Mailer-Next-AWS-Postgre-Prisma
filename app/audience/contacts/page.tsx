@@ -69,7 +69,9 @@ export default function Contacts() {
     if (subscribers.length > 0) return;
     getAllSubscribersByEmail(user?.email as string).then((_subscribers) => {
       if (!_subscribers) return;
-      setSubscribers(_subscribers);
+      setSubscribers(
+        _subscribers.map((subscriber) => subscriber as Subscriber)
+      );
     });
   }, []);
 
