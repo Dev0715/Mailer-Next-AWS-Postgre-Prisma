@@ -24,7 +24,7 @@ import { prisma } from "@/lib/prisma";
 // };
 
 export const getCampaignById = async (
-  userEmail: string,
+  // userEmail: string,
   campaignId: string
 ) => {
   try {
