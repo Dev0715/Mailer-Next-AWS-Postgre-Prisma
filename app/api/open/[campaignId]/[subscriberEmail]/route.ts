@@ -21,6 +21,14 @@ export const POST = async (
   }
 
   const _openedEmails = campaign.openedEmails || [];
+  const isAlreadyOpened = _openedEmails.includes(subscriberEmail);
+  if (isAlreadyOpened) {
+    return NextResponse.json(
+      { error: "Email was regitered already" },
+      { status: 404 }
+    );
+  }
+
   const openedEmails = [..._openedEmails, subscriberEmail];
   await updateCampaignOpened(campaignId, openedEmails);
 
