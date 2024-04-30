@@ -3,10 +3,10 @@ import Github from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import Discord from "next-auth/providers/discord";
 import Apple from "next-auth/providers/apple";
-import bcrypt from "bcryptjs";
 
 import type { NextAuthConfig } from "next-auth";
 import { getUserByEmail } from "@/data/user/user-by-email";
+import { passwordsMatch } from "./lib/password-match";
 
 export default {
   secret: process.env.AUTH_SECRET,
@@ -37,11 +37,11 @@ export default {
         const { email, password } = credentials;
         const user = await getUserByEmail(email as string);
         if (!user || !user.password) return null;
-        const passwordsMatch = await bcrypt.compare(
+        const _passwordsMatch = await passwordsMatch(
           password as string,
           user.password
         );
-        if (passwordsMatch) return user;
+        if (_passwordsMatch) return user;
         else return null;
       }
     })
