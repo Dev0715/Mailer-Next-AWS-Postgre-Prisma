@@ -18,10 +18,13 @@ export const runCampaign = async (campaign: Campaign) => {
   if (!segment) return;
 
   const condition = getConditionFromFilters(segment.filters);
-  const customers: Subscriber[] | null =
-    await getAllSubscribersByCondition(condition);
+  const response = await getAllSubscribersByCondition(condition);
 
-  if (!customers) return;
+  if (!response) return;
+
+  const customers: Subscriber[] = response.map(
+    (subscriber) => subscriber as Subscriber
+  );
 
   customers.map((customer: Subscriber) => {});
 };
