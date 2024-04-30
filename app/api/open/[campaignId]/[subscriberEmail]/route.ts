@@ -5,4 +5,7 @@ type Params = {
   subscriberEmail: string;
 };
 
-export const POST = async (request: NextRequest, params: Params) => {};
+export const POST = async (request: NextRequest, params: Params) => {
+  console.log("Request", request);
+  console.log("Params", params);
+};
