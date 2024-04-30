@@ -1,4 +1,5 @@
 import { getCampaignById } from "@/data/campaign/campaign-by-id";
+import { updateCampaignOpened } from "@/data/campaign/campaign-update-opened";
 import { NextRequest } from "next/server";
 
 type Params = {
@@ -10,4 +11,10 @@ type Params = {
 export const POST = async (request: NextRequest, params: Params) => {
   const { campaignId, subscriberEmail } = params;
   const campaign = await getCampaignById(campaignId);
+  if (campaign === null) {
+    return;
+  }
+  const _openedEmails = campaign.openedEmails || [];
+  const openedEmails = [..._openedEmails, subscriberEmail];
+  await updateCampaignOpened(campaignId, openedEmails);
 };
