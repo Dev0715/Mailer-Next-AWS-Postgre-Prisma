@@ -3,12 +3,14 @@ import { updateCampaignOpened } from "@/data/campaign/campaign-update-opened";
 import { NextRequest, NextResponse } from "next/server";
 
 type Params = {
-  campaignId: string;
-  subscriberEmail: string;
+  params: {
+    campaignId: string;
+    subscriberEmail: string;
+  };
 };
 
-// ## http://localhost:3000/api/open/id/mail
-export const POST = async (request: NextRequest, params: Params) => {
+// ## http://localhost:3000/api/open/campaign-id/user-email
+export const POST = async (request: NextRequest, { params }: Params) => {
   console.log(params);
   const { campaignId, subscriberEmail } = params;
   const campaign = await getCampaignById(campaignId);
