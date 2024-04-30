@@ -34,8 +34,8 @@ export const login = async (
     });
 
     const response = await sendVerificationEmail(
-      updatedUser.email,
-      updatedUser.verificationToken
+      updatedUser?.email,
+      updatedUser?.verificationToken
     );
 
     if (response.error) {
