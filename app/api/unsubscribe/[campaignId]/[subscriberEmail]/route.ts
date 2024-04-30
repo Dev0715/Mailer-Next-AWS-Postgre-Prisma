@@ -1,19 +1,23 @@
 import { getCampaignById } from "@/data/campaign/campaign-by-id";
+import { updateCampaignUnsub } from "@/data/campaign/campaign-update-unsub";
 import { NextRequest, NextResponse } from "next/server";
-import { updateCampaignUnsub } from "../../../../../data/campaign/campaign-update-unsub";
 
 type Params = {
-  campaignId: string;
-  subscriberEmail: string;
+  params: {
+    campaignId: string;
+    subscriberEmail: string;
+  };
 };
 
-export const POST = async (request: NextRequest, params: Params) => {
-  console.log(params);
+// ## http://localhost:3000/api/unsubscribe/campaign-id/user-email
+
+export const POST = async (request: NextRequest, { params }: Params) => {
   const { campaignId, subscriberEmail } = params;
   const campaign = await getCampaignById(campaignId);
   if (campaign === null) {
     return NextResponse.json({ error: "Campaign not found" }, { status: 404 });
   }
+
   const _unsubEmails = campaign.unsubEmails || [];
   const isAlreadyUnsubed = _unsubEmails.includes(subscriberEmail);
   if (isAlreadyUnsubed) {
