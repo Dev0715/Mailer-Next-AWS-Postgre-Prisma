@@ -19,5 +19,12 @@ export const POST = async (
   }
   const _unsubEmails = campaign.unsubEmails || [];
   const isAlreadyUnsubed = _unsubEmails.includes(subscriberEmail);
+  if (isAlreadyUnsubed) {
+    return NextResponse.json(
+      { error: "Email was already regitered as unsubscribed" },
+      { status: 404 }
+    );
+  }
+
   return NextResponse.json({ success: true });
 };
