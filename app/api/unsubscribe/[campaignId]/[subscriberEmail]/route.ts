@@ -28,7 +28,14 @@ export const POST = async (
   }
 
   const unsubEmails = [..._unsubEmails, subscriberEmail];
-  await updateCampaignUnsub(campaignId, unsubEmails);
+  const res = await updateCampaignUnsub(campaignId, unsubEmails);
 
-  return NextResponse.json({ success: true });
+  if (res?.success) {
+    return NextResponse.json({ success: true });
+  } else {
+    return NextResponse.json(
+      { error: "Failed to update campaign" },
+      { status: 500 }
+    );
+  }
 };
