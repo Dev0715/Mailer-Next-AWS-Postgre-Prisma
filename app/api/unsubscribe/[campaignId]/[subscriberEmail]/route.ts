@@ -1,5 +1,6 @@
 import { getCampaignById } from "@/data/campaign/campaign-by-id";
 import { NextRequest, NextResponse } from "next/server";
+import { updateCampaignUnsub } from "../../../../../data/campaign/campaign-update-unsub";
 
 type Params = {
   campaignId: string;
@@ -25,6 +26,9 @@ export const POST = async (
       { status: 404 }
     );
   }
+
+  const unsubEmails = [..._unsubEmails, subscriberEmail];
+  await updateCampaignUnsub(campaignId, unsubEmails);
 
   return NextResponse.json({ success: true });
 };
