@@ -17,5 +17,7 @@ export const POST = async (
   if (campaign === null) {
     return NextResponse.json({ error: "Campaign not found" }, { status: 404 });
   }
+  const _unsubEmails = campaign.unsubEmails || [];
+  const isAlreadyUnsubed = _unsubEmails.includes(subscriberEmail);
   return NextResponse.json({ success: true });
 };
