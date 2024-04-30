@@ -30,7 +30,14 @@ export const POST = async (
   }
 
   const openedEmails = [..._openedEmails, subscriberEmail];
-  await updateCampaignOpened(campaignId, openedEmails);
+  const res = await updateCampaignOpened(campaignId, openedEmails);
 
-  return NextResponse.json({ success: true });
+  if (res?.success) {
+    return NextResponse.json({ success: true });
+  } else {
+    return NextResponse.json(
+      { error: "Failed to update campaign" },
+      { status: 500 }
+    );
+  }
 };
