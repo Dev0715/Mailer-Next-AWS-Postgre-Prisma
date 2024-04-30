@@ -10,8 +10,8 @@ type Params = {
 };
 
 // ## http://localhost:3000/api/open/campaign-id/user-email
+
 export const POST = async (request: NextRequest, { params }: Params) => {
-  console.log(params);
   const { campaignId, subscriberEmail } = params;
   const campaign = await getCampaignById(campaignId);
   if (campaign === null) {
