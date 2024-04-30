@@ -55,7 +55,8 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
       });
       clearRelavantAtoms();
     } else {
-      getCampaignById(user?.email as string, campaignId).then((campaign) => {
+      //  getCampaignById(user?.email as string, campaignId).then((campaign) => {
+      getCampaignById(campaignId).then((campaign) => {
         if (campaign) {
           setCampaign(campaign as Campaign);
         } else {
