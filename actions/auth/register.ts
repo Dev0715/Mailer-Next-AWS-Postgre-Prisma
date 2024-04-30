@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 import { RegisterSchema } from "@/schemas/auth";
 import { getUserByEmail } from "@/data/user/user-by-email";
