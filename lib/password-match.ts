@@ -1,6 +1,6 @@
 "use server";
 
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 export const passwordsMatch = async (password: string, hash: string) => {
   const _match = await bcrypt.compare(password, hash);
