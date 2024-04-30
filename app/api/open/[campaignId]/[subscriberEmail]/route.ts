@@ -24,7 +24,7 @@ export const POST = async (
   const isAlreadyOpened = _openedEmails.includes(subscriberEmail);
   if (isAlreadyOpened) {
     return NextResponse.json(
-      { error: "Email was regitered already" },
+      { error: "Email was already regitered as opened" },
       { status: 404 }
     );
   }
