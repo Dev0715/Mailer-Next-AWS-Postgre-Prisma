@@ -1,7 +1,7 @@
 "use server";
 
 import db from "@/lib/db";
-import { Segment } from "@/shared/types/segment-type";
+import { Segment } from "@/shared/types/segment";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_SEGMENTS_TABLE_NAME;
