@@ -26,15 +26,17 @@ model mailinglist {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model campaigns {
-  userEmail     String?  @db.VarChar
-  campaignId    String   @id @db.VarChar
-  title         String?  @db.VarChar
-  to            Json?    @db.Json
-  from          Json?    @db.Json
-  subject       Json?    @db.Json
-  time          Json?    @db.Json
-  email         Json?    @db.Json
-  openedEmails  String[] @db.VarChar
-  unsubEmails   String[] @db.VarChar
-  bouncedEmails String[] @db.VarChar
+  userEmail     String?   @db.VarChar
+  campaignId    String    @id @db.VarChar
+  title         String?   @db.VarChar
+  to            Json?     @db.Json
+  from          Json?     @db.Json
+  subject       Json?     @db.Json
+  time          Json?     @db.Json
+  email         Json?     @db.Json
+  openedEmails  String[]  @db.VarChar
+  unsubEmails   String[]  @db.VarChar
+  bouncedEmails String[]  @db.VarChar
+  state         String?   @db.VarChar
+  lastUpdated   DateTime? @db.Timestamptz(6)
 }
