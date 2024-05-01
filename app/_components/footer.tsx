@@ -1,8 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const Footer = () => {
+  const path = usePathname();
+  if (path.indexOf("/unsubscribe") === 0) {
+    return null;
+  }
+
   return (
     <div className="w-full h-12 flex items-center justify-center bg-gray-200 z-10 relative">
       <div className="w-5/6 flex justify-between">
