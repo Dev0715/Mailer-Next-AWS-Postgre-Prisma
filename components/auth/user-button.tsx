@@ -2,12 +2,7 @@
 
 import Link from "next/link";
 import { FaUser } from "react-icons/fa";
-import {
-  BackpackIcon,
-  ExitIcon,
-  MixerHorizontalIcon,
-  PersonIcon
-} from "@radix-ui/react-icons";
+import { ExitIcon, MixerHorizontalIcon } from "@radix-ui/react-icons";
 
 import {
   DropdownMenu,
