@@ -35,7 +35,6 @@ import { MdClose } from "react-icons/md";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { Subscriber } from "@/shared/types/subscriber";
 import { updateUserTags } from "@/data/user/update-tags";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { updateSubscriber } from "@/data/audience/subscriber-update";
 import {

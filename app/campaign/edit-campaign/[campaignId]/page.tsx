@@ -101,7 +101,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
             setConfirming(true);
           }
         })
-        .catch((error) => {
+        .catch(() => {
           setConfirming(true);
         });
     });
