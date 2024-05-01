@@ -47,7 +47,7 @@ const MonitorSegment = ({ segment, onFinish }: Props) => {
         </div>
       </div>
       <div className="flex flex-col gap-y-4">
-        {segment.filters.map((filter, index) => (
+        {segment.filters.map((filter) => (
           <FilterBar disabled filter={filter} storedTags={storedTags} />
         ))}
       </div>

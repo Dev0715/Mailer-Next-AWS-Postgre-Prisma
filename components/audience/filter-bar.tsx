@@ -53,7 +53,7 @@ export const FilterBar = ({
           <SelectContent>
             <SelectGroup>
               {/* <SelectLabel>Select a Key</SelectLabel> */}
-              {filterAttributes.map((attribute, index) => (
+              {filterAttributes.map((attribute) => (
                 <SelectItem key={attribute.value} value={attribute.value}>
                   {attribute.name}
                 </SelectItem>
