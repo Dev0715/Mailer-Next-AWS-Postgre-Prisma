@@ -1,7 +1,7 @@
 "use server";
 
 import * as z from "zod";
-import bcrypt from "bcryptjs";
+import { hash } from "bcryptjs";
 
 import { NewPasswordSchema } from "@/schemas/auth";
 import { getUserByEmail } from "@/data/user/user-by-email";
@@ -38,7 +38,7 @@ export const newPassword = async (
   }
 
   const { password } = validatedFields.data;
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await hash(password, 10);
   const updatedUser = await updateUserPassword({
     email: userEmail,
     password: hashedPassword,
