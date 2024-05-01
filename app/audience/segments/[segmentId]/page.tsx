@@ -56,7 +56,13 @@ export default function CustomersInSegment({
       const condition = getConditionFromFilters(_segment.filters);
       console.log(condition);
       getAllSubscribersByCondition(condition).then((_subscribers) => {
-        setCustomers(_subscribers || []);
+        if (!_subscribers) {
+          setCustomers([]);
+        } else {
+          setCustomers(
+            _subscribers.map((subscriber) => subscriber as Subscriber)
+          );
+        }
       });
 
       // ## Dynamo DB ##
