@@ -6,6 +6,7 @@ import { ResetSchema } from "@/schemas/auth";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { sendPasswordResetEmail } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/tokens";
+import { updateUserToken } from "@/data/user/update-token";
 
 export const reset = async (values: z.infer<typeof ResetSchema>) => {
   const validatedFields = ResetSchema.safeParse(values);
