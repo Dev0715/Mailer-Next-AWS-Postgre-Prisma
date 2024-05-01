@@ -127,7 +127,7 @@ export default function Contacts() {
           }
           table.toggleAllPageRowsSelected(false);
         })
-        .catch((error) => {
+        .catch(() => {
           setDeletedConfirming(false);
           table.toggleAllPageRowsSelected(false);
         });
@@ -181,7 +181,7 @@ export default function Contacts() {
           }
           table.toggleAllPageRowsSelected(false);
         })
-        .catch((error) => {
+        .catch(() => {
           setSelectedRowsDeletedConfirming(false);
           table.toggleAllPageRowsSelected(false);
         });

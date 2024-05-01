@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -81,7 +79,7 @@ export const Navbar = () => {
   return (
     <NavigationMenu>
       <NavigationMenuList className="gap-x-2">
-        {menuItems.map((menuItem, index) => (
+        {menuItems.map((menuItem) => (
           <NavigationMenuItem key={menuItem.title}>
             <NavigationMenuTrigger>
               {/* <Link href={menuItem.href} passHref> */}
