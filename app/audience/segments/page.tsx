@@ -72,9 +72,9 @@ const Segments = () => {
   const [confirmDescription, setConfirmDescription] = useState<string>("");
 
   useEffect(() => {
-    getAllSegmentsByEmail(user?.email as string).then((segments: any) => {
+    getAllSegmentsByEmail(user?.email as string).then((segments) => {
       if (segments) {
-        setSegments(segments);
+        setSegments(segments.map((segment) => segment as Segment));
       }
     });
   }, []);
@@ -119,7 +119,7 @@ const Segments = () => {
             setAddedConfirming(false);
           }
         })
-        .catch((error) => {
+        .catch(() => {
           setAddedConfirming(false);
         });
     });
@@ -157,7 +157,7 @@ const Segments = () => {
           }
           table.toggleAllPageRowsSelected(false);
         })
-        .catch((error) => {
+        .catch(() => {
           setDeleteConfirming(false);
           table.toggleAllPageRowsSelected(false);
         });
@@ -202,7 +202,7 @@ const Segments = () => {
           }
           table.toggleAllPageRowsSelected(false);
         })
-        .catch((error) => {
+        .catch(() => {
           setSelectedRowsDeletedConfirming(false);
           table.toggleAllPageRowsSelected(false);
         });
@@ -268,7 +268,7 @@ const Segments = () => {
             setEditedConfirming(false);
           }
         })
-        .catch((error) => {
+        .catch(() => {
           setEditedConfirming(false);
         });
     });
