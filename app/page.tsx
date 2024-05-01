@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import { SignupButton } from "@/components/auth/signup-button";
 import { WrappedButton } from "@/components/utils/wrapped-button";
 
