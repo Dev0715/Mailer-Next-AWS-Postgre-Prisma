@@ -1,5 +1,4 @@
 import {
-  Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger
@@ -20,7 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaCheck, FaSave } from "react-icons/fa";
-import { FcCancel, FcCloseUpMode, FcCollapse } from "react-icons/fc";
+import { FcCancel } from "react-icons/fc";
 import { z } from "zod";
 
 type Props = {

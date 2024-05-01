@@ -14,7 +14,7 @@ import {
   SelectValue
 } from "@/components/ui/select";
 import { Campaign } from "@/shared/types/campaign";
-import { Segment } from "@/shared/types/segment-type";
+import { Segment } from "@/shared/types/segment";
 import { useEffect, useState } from "react";
 
 type Props = {

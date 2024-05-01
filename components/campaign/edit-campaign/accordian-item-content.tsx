@@ -13,11 +13,7 @@ type Props = {
   onCreateEmail: () => void;
 };
 
-export const AccordianItemContent = ({
-  campaign,
-  setCampaign,
-  onCreateEmail
-}: Props) => {
+export const AccordianItemContent = ({ campaign, onCreateEmail }: Props) => {
   return (
     <AccordionItem value="step-4-content">
       <AccordionTrigger className="hover:no-underline hover:drop-shadow">
