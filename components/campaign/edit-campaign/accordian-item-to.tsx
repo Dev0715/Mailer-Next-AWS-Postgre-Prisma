@@ -62,8 +62,9 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
               ({
                 ...prev,
                 to: {
-                  segmentId: segments[parseInt(newValue)].segmentId,
-                  segmentTitle: segments[parseInt(newValue)].title
+                  segmentId: segments[selectedInex].segmentId,
+                  segmentTitle: segments[selectedInex].title,
+                  totalNumber
                 }
               }) as Campaign
           );
@@ -95,28 +96,33 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
         </div>
       </AccordionTrigger>
       <AccordionContent className="px-1 pt-1">
-        <div className="flex flex-col gap-y-2 px-12">
-          <p className="text-base text-gray-600 font-medium">
-            Select a segment*
-          </p>
-          <Select value={selectedInex.toString()} onValueChange={onToChange}>
-            <SelectTrigger>
-              <SelectValue placeholder="Segment you want to send" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Your Segments</SelectLabel>
-                {segments.map((segment, index) => (
-                  <SelectItem value={index.toString()}>
-                    {segment.title}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+        <div className="flex flex-col gap-y-4 px-12">
+          <div className="flex flex-col gap-y-2">
+            <p
+              className={`text-base text-gray-600 font-medium ${error ? "text-red-600" : ""}`}
+            >
+              Select a segment*
+            </p>
+            <Select value={selectedInex.toString()} onValueChange={onToChange}>
+              <SelectTrigger>
+                <SelectValue placeholder="Segment you want to send" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Your Segments</SelectLabel>
+                  {segments.map((segment, index) => (
+                    <SelectItem value={index.toString()}>
+                      {segment.title}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          {error && <p className="text-xs text-red-600">{error}</p>}
           <div className="flex gap-x-4">
             <Button
-              disabled={!isChanged}
+              disabled={!isChanged || isPending}
               variant="outline"
               className="w-48 flex items-center gap-x-2 border-green-700"
               onClick={onSave}
