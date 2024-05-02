@@ -22,6 +22,7 @@ import { FaArrowRight, FaSave } from "react-icons/fa";
 import { updateCampaign } from "@/data/campaign/campaign-update";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { sendEmail } from "@/data/email/send-email";
+import { updateCampaignState } from "@/data/campaign/campaign-update-state";
 
 type Props = {
   params: { campaignId: string };
@@ -124,6 +125,12 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   const onSend = () => {
     // ## You can send TEST email
     // ## Only available with INSTANTLY at the moment
+    updateCampaignState(campaignId, "sending").then((res) => {
+      if (res?.success) {
+      } else {
+        setConfirming(true);
+      }
+    });
   };
 
   if (loadError) {
