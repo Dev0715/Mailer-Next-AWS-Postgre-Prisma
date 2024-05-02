@@ -15,7 +15,9 @@ type Params = {
 export const GET = async (request: NextRequest, { params }: Params) => {
   const { campaignId } = params;
 
-  const campaign: Campaign = (await getCampaignById(campaignId)) as Campaign;
+  const campaign: Campaign = (await getCampaignById(
+    campaignId
+  )) as unknown as Campaign;
   if (campaign === null) {
     return NextResponse.json({ error: "Campaign not found" }, { status: 404 });
   }
@@ -41,12 +43,13 @@ export const GET = async (request: NextRequest, { params }: Params) => {
   }
 
   const customers: string[] = response.map(
-    (subscriber) => subscriber.userEmail as string
+    (subscriber) => subscriber.subscriberEmail as string
   );
 
   return NextResponse.json({
     from: campaign.from?.email,
     customers,
+    subject: campaign.subject?.subject + " " + campaign.subject?.preview,
     html: campaign.email?.html
   });
 };
