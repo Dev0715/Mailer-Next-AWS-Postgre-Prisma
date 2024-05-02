@@ -93,7 +93,11 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
 
   const onFinishLater = () => {
     startTransition(() => {
-      updateCampaign(campaign as Campaign)
+      updateCampaign({
+        ...campaign,
+        state: "draft",
+        lastUpdated: new Date()
+      } as Campaign)
         .then((res) => {
           if (res) {
             history.push("/campaign");
@@ -118,14 +122,8 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   };
 
   const onSend = () => {
-    sendEmail({
-      from: "malachi.uudev@gmail.com",
-      to: ["malachi.uudev@gmail.com"],
-      subject: "Test-Email",
-      html: campaign?.email?.html as string
-    }).then((res) => {
-      console.log(res);
-    });
+    // ## You can send TEST email
+    // ## Only available with INSTANTLY at the moment
   };
 
   if (loadError) {
