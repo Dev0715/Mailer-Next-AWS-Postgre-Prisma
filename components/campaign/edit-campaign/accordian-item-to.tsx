@@ -3,7 +3,7 @@ import {
   AccordionItem,
   AccordionTrigger
 } from "@/components/ui/accordion";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaSave } from "react-icons/fa";
 import {
   Select,
   SelectContent,
@@ -59,6 +59,7 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
       getNubmersOfSubscribersByCondition(condition).then((_count) => {
         const totalNumber = _count || 0;
         if (totalNumber === 0) {
+          setError("No subscribers found in this segment");
           // setError
           return;
         }
@@ -82,6 +83,7 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
   const onCancel = () => {
     setCampainInex();
     setChanged(false);
+    setError("");
   };
 
   return (
@@ -137,7 +139,7 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
               Save
             </Button>
             <Button
-              disabled={!isChanged}
+              disabled={!isChanged || isPending}
               variant="outline"
               className="w-48 flex items-center gap-x-2 border-red-700"
               onClick={onCancel}
