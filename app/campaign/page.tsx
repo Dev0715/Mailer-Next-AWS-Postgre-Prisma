@@ -10,14 +10,6 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { Campaign } from "@/shared/types/campaign";
 import Link from "next/link";
 
-const Blue = ({ children }: { children: React.ReactNode }) => {
-  return <span className="text-blue-700">{children}</span>;
-};
-
-const Strong = ({ children }: { children: React.ReactNode }) => {
-  return <span className="font-semibold">{children}</span>;
-};
-
 const CampaignPage = () => {
   const user = useCurrentUser();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
