@@ -125,11 +125,13 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   const onSend = () => {
     // ## You can send TEST email
     // ## Only available with INSTANTLY at the moment
-    updateCampaignState(campaignId, "sending").then((res) => {
-      if (res?.success) {
-      } else {
-        setConfirming(true);
-      }
+    startTransition(() => {
+      updateCampaignState(campaignId, "sending").then((res) => {
+        if (res?.success) {
+        } else {
+          setConfirming(true);
+        }
+      });
     });
   };
 
