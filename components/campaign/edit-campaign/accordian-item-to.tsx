@@ -16,6 +16,10 @@ import {
 import { Campaign } from "@/shared/types/campaign";
 import { Segment } from "@/shared/types/segment";
 import { useEffect, useState, useTransition } from "react";
+import { Button } from "@/components/ui/button";
+import { FcCancel } from "react-icons/fc";
+import { getConditionFromFilters } from "@/shared/feature/condition-from-filters";
+import { getNubmersOfSubscribersByCondition } from "@/data/audience/count-subscribers-condition";
 
 type Props = {
   campaign: Campaign;
@@ -27,6 +31,7 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
   const [isPending, startTransition] = useTransition();
 
   const [isChanged, setChanged] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   const [selectedInex, setSelectedIndex] = useState<number>(-1);
 
   useEffect(() => {
@@ -45,6 +50,7 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
   const onToChange = (newValue: string) => {
     setSelectedIndex(parseInt(newValue));
     setChanged(true);
+    setError("");
   };
 
   const onSave = () => {
