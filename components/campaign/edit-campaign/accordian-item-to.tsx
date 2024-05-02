@@ -48,18 +48,33 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
   };
 
   const onSave = () => {
-    if (campaign) {
-      setCampaign(
-        (prev) =>
-          ({
-            ...prev,
-            to: {
-              segmentId: segments[parseInt(newValue)].segmentId,
-              segmentTitle: segments[parseInt(newValue)].title
-            }
-          }) as Campaign
-      );
-    }
+    startTransition(() => {
+      const condition = getConditionFromFilters(segments[selectedInex].filters);
+      getNubmersOfSubscribersByCondition(condition).then((_count) => {
+        const totalNumber = _count || 0;
+        if (totalNumber === 0) {
+          // setError
+          return;
+        }
+        if (campaign) {
+          setCampaign(
+            (prev) =>
+              ({
+                ...prev,
+                to: {
+                  segmentId: segments[parseInt(newValue)].segmentId,
+                  segmentTitle: segments[parseInt(newValue)].title
+                }
+              }) as Campaign
+          );
+        }
+      });
+    });
+  };
+
+  const onCancel = () => {
+    setCampainInex();
+    setChanged(false);
   };
 
   return (
