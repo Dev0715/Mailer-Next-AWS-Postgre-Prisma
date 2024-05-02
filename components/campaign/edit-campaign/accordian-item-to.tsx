@@ -25,20 +25,29 @@ type Props = {
 
 export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
   const [isPending, startTransition] = useTransition();
+
+  const [isChanged, setChanged] = useState<boolean>(false);
   const [selectedInex, setSelectedIndex] = useState<number>(-1);
 
   useEffect(() => {
+    setCampainInex();
+  }, [campaign]);
+
+  const setCampainInex = () => {
     if (campaign?.to) {
       const index = segments.findIndex(
         (segment) => segment.segmentId === campaign.to?.segmentId
       );
       setSelectedIndex(index);
     }
-  }, [campaign]);
+  };
 
   const onToChange = (newValue: string) => {
     setSelectedIndex(parseInt(newValue));
+    setChanged(true);
+  };
 
+  const onSave = () => {
     if (campaign) {
       setCampaign(
         (prev) =>
