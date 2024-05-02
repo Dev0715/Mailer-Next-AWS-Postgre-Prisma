@@ -25,4 +25,15 @@ export const handler = async (event, context) => {
   const sesClient = new SESClient();
 
   // for (let i = 0; i < customers.length; i++) {
+  for (let i = 0; i < 1; i++) {
+    const _subEmail = customers[i];
+
+    const _unsub_url = url_api_unsub + campaignId + "/" + _subEmail;
+    const _html_unsub = html.replace(symbol_unsub, _unsub_url);
+
+    const _open_url = campaignId + "/" + _subEmail;
+    const _tag_open = tag_open.replace(symbol_open, _open_url);
+
+    const _html = _html_unsub.replace(symbol_body, _tag_open);
+  }
 };
