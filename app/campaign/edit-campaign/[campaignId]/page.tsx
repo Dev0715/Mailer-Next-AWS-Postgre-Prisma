@@ -58,7 +58,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
       //  getCampaignById(user?.email as string, campaignId).then((campaign) => {
       getCampaignById(campaignId).then((campaign) => {
         if (campaign) {
-          setCampaign(campaign as Campaign);
+          setCampaign(campaign as unknown as Campaign);
         } else {
           setLoadError(true);
         }
