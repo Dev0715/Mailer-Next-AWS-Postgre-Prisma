@@ -21,7 +21,7 @@ export const getColumnsForContactsTable = () => {
         );
       },
       cell: ({ row }) => (
-        <div className="lowercase">{row.getValue("subscriberEmail")}</div>
+        <div className="pl-4 lowercase">{row.getValue("subscriberEmail")}</div>
       )
     },
     {
@@ -77,7 +77,7 @@ export const getColumnsForContactsTable = () => {
         return (
           <div className="flex justify-center">
             <div className="font-medium flex flex-wrap justify-center gap-1">
-              {tags.map((tag) => (
+              {tags?.map((tag) => (
                 <Badge className="cursor-pointer" key={tag}>
                   {tag}
                 </Badge>
