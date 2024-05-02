@@ -1,4 +1,4 @@
-import { getAllSubscribersByCondition } from "@/data/audience/subscribers-by-condition";
+import { getAllSubscriberEmailsByCondition } from "@/data/audience/subscribers-email-by-condition";
 import { getCampaignById } from "@/data/campaign/campaign-by-id";
 import { getSegmentById } from "@/data/segment/segment-by-id";
 import { getConditionFromFilters } from "@/shared/feature/condition-from-filters";
@@ -33,7 +33,7 @@ export const GET = async (request: NextRequest, { params }: Params) => {
   }
 
   const condition = getConditionFromFilters(segment.filters);
-  const response = await getAllSubscribersByCondition(condition);
+  const response = await getAllSubscriberEmailsByCondition(condition);
 
   if (!response) {
     return NextResponse.json(
