@@ -39,22 +39,11 @@ const CampaignPage = () => {
 
   return (
     <main className="w-5/6 flex flex-col py-6">
-      <p className="text-5xl text-green-700 font-semibold pb-6">
+      <p className="text-2xl text-green-700 font-semibold pb-6">
         Campaign Dashboard
       </p>
-      <p className="text-2xl font-semibold pb-2">Hi, Malachi Uy!</p>
       <div className="flex items-end justify-between pb-6">
-        <p className="text-xl">
-          Your audience has{" "}
-          <Blue>
-            <Strong>17</Strong>{" "}
-          </Blue>{" "}
-          contacts.{" "}
-          <Blue>
-            <Strong>15</Strong>
-          </Blue>{" "}
-          of these are subscribed.
-        </p>
+        <p className="text-xl font-semibold pb-2">Hi, {user?.name}!</p>
         <Button asChild variant="default" className="flex gap-x-2">
           <Link href="/campaign/create-campaign">
             <FaPlus />
