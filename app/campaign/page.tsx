@@ -17,7 +17,15 @@ const CampaignPage = () => {
   useEffect(() => {
     getAllCampaignsByEmail(user?.email as string).then((items) => {
       if (items) {
-        setCampaigns(items.map((item) => item as unknown as Campaign));
+        setCampaigns(
+          items.map((_item) => {
+            const item = _item as unknown as Campaign;
+            if (item?.time?.date) {
+              item.time.date = new Date(item.time.date);
+            }
+            return item;
+          })
+        );
       }
     });
   });
