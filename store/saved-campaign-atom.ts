@@ -11,6 +11,8 @@ export const savedCampaignAtom = atom<SavedCampaign>({
   campaign: {
     userEmail: "",
     campaignId: "",
-    title: ""
+    title: "",
+    state: "draft",
+    lastUpdated: new Date()
   }
 });
