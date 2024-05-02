@@ -42,5 +42,23 @@ export const handler = async (event, context) => {
     const _tag_open = tag_open.replace(symbol_open, _open_url);
 
     const _html = _html_unsub.replace(symbol_body, _tag_open);
+
+    const command = new SendEmailCommand({
+      Source: from,
+      Destination: {
+        ToAddresses: [_subEmail]
+      },
+      Message: {
+        Subject: {
+          Data: subject
+        },
+        Body: {
+          Html: {
+            Data: _html
+          }
+        }
+      }
+    });
+    const res = await sesClient.send(command);
   }
 };
