@@ -50,54 +50,42 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
       />
       <div className="w-3/6 flex gap-x-8">
         <FaMailBulk className="text-4xl text-yellow-700" />
-        <div className="flex flex-col gap-y-0 text-gray-500">
+        <div className="flex flex-col gap-y-1 text-gray-500">
           <p className="text-xl text-blue-500">{campaign.title}</p>
-          <p className="text-base">Subject · {campaign.subject?.subject}</p>
-          <p className="text-base">
-            To ·{" "}
-            <span className="text-black font-bold">
-              {campaign.to?.segmentTitle}
-            </span>
-          </p>
-          <p className="text-base">Edited · </p>
+          <DetailShowItem title="Subject" content={campaign.subject?.subject} />
+          <DetailShowItem title="To" content={campaign.to?.segmentTitle} />
+          <DetailShowItem
+            title="Edited"
+            content={`${campaign.lastUpdated.toDateString()} ${campaign.lastUpdated.toLocaleTimeString()}`}
+          />
         </div>
       </div>
-      <div className="w-1/6 flex flex-col items-center gap-y-2">
-        <Badge
-          variant={"success"}
-          className="w-fit text-sm font-normal text-black text-center"
-        >
-          Draft
-        </Badge>
-        <Badge className="text-sm font-normal text-black text-center">
-          Sending
-        </Badge>
+      <div className="w-1/6 flex flex-col items-center gap-y-4">
+        <DetailShowItem
+          title="Subscribers"
+          content={campaign.to?.totalNumber}
+        />
+        <StateBadge state={campaign.state} />
       </div>
-      <div className="w-1/6 flex flex-col items-center gap-y-2">
-        <Badge
-          variant={"secondary"}
-          className="text-sm font-normal text-black text-center"
-        >
-          Opened: 0
-        </Badge>
-        <Badge
-          variant={"secondary"}
-          className="text-sm font-normal text-black text-center"
-        >
-          Bounced: 0
-        </Badge>
-        <Badge
-          variant={"secondary"}
-          className="text-sm font-normal text-black text-center"
-        >
-          Unsubscribed: 0
-        </Badge>
+      <div className="w-1/6 flex flex-col items-center gap-y-4">
+        <DetailShowItem
+          title="Opened"
+          content={campaign.openedEmails?.length}
+        />
+        <DetailShowItem
+          title="Bounced"
+          content={campaign.bouncedEmails?.length}
+        />
+        <DetailShowItem
+          title="Unsubscribed"
+          content={campaign.unsubEmails?.length}
+        />
       </div>
-      <div className="w-1/6 flex flex-col items-center gap-y-2">
-        <Button disabled={isPending} className="w-fit flex">
+      <div className="w-1/6 flex flex-col items-center gap-y-4">
+        <Button disabled={isPending} className="w-fit flex rounded-none">
           <Link
             href={`/campaign/edit-campaign/${campaign.campaignId}`}
-            className="flex items-center gap-x-2 text-black"
+            className="flex items-center gap-x-2"
           >
             <FaEdit />
             Edit
