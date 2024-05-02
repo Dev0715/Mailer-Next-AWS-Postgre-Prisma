@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Campaign } from "@/shared/types/campaign";
 import { Segment } from "@/shared/types/segment";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 type Props = {
   campaign: Campaign;
@@ -24,6 +24,7 @@ type Props = {
 };
 
 export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
+  const [isPending, startTransition] = useTransition();
   const [selectedInex, setSelectedIndex] = useState<number>(-1);
 
   useEffect(() => {
