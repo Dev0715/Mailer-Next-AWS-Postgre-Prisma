@@ -51,12 +51,16 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
       <div className="w-3/6 flex gap-x-8">
         <FaMailBulk className="text-4xl text-yellow-700" />
         <div className="flex flex-col gap-y-1 text-gray-500">
-          <p className="text-xl text-blue-500">{campaign.title}</p>
+          <Button variant={"link"} className="px-0 justify-start">
+            <Link href={`/campaign/details/${campaign.campaignId}`}>
+              <p className="text-xl text-blue-500">{campaign.title}</p>
+            </Link>
+          </Button>
           <DetailShowItem title="Subject" content={campaign.subject?.subject} />
           <DetailShowItem title="To" content={campaign.to?.segmentTitle} />
           <DetailShowItem
             title="Edited"
-            content={`${campaign.lastUpdated.toDateString()} ${campaign.lastUpdated.toLocaleTimeString()}`}
+            content={`${campaign.lastUpdated?.toDateString()} ${campaign.lastUpdated?.toLocaleTimeString()}`}
           />
         </div>
       </div>
