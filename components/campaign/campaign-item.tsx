@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Campaign } from "@/shared/types/campaign";
 import Link from "next/link";
