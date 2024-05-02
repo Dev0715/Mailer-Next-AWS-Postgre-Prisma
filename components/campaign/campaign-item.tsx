@@ -8,6 +8,8 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { deleteCampaign } from "@/data/campaign/campaign-delete";
 import { toast } from "sonner";
 import { Spinner } from "@nextui-org/spinner";
+import { DetailShowItem } from "./campaign-detail-item";
+import { StateBadge } from "./campaign-state-badge";
 
 type Props = {
   campaign: Campaign;
@@ -104,7 +106,7 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
         <Button
           disabled={isPending}
           variant={"destructive"}
-          className="w-fit flex gap-x-2 text-black"
+          className="w-fit flex gap-x-2 rounded-none"
           onClick={() => setConfirmAlert(true)}
         >
           {isPending ? <Spinner size="sm" /> : <FaTrash />}
