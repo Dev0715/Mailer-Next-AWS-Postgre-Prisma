@@ -99,6 +99,26 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
               </SelectGroup>
             </SelectContent>
           </Select>
+          <div className="flex gap-x-4">
+            <Button
+              disabled={!isChanged}
+              variant="outline"
+              className="w-48 flex items-center gap-x-2 border-green-700"
+              onClick={onSave}
+            >
+              <FaSave className="text-green-700" />
+              Save
+            </Button>
+            <Button
+              disabled={!isChanged}
+              variant="outline"
+              className="w-48 flex items-center gap-x-2 border-red-700"
+              onClick={onCancel}
+            >
+              <FcCancel />
+              Cancel
+            </Button>
+          </div>
         </div>
       </AccordionContent>
     </AccordionItem>
