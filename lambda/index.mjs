@@ -6,6 +6,13 @@ import axios from "axios";
 const url_api_campaign = "https://mailmanjs-git.vercel.app/api/campaign/";
 const url_api_unsub = "https://mailmanjs-git.vercel.app/unsubscribe/";
 
+const symbol_unsub = "##!!UNSUBSCRIBE!!##";
+const symbol_open = "##!!OPEN!!##";
+const symbol_body = "</body>";
+
+const tag_open =
+  '<img src="https://mailmanjs-git.vercel.app/api/open/##!!OPEN!!##" height="1" width="1" alt="" class="CToWUd" data-bit="iit"></body>';
+
 export const handler = async (event, context) => {
   const campaignId = event.campaignId;
   const url_campaign = url_api_campaign + campaignId;
