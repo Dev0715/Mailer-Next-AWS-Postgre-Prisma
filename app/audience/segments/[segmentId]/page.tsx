@@ -33,14 +33,16 @@ import { getColumnsForContactsTable } from "../../_components/segment-column";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getSegmentById } from "@/data/segment/segment-by-id";
 import { Subscriber } from "@/shared/types/subscriber";
-import { getAllSubscribersByCondition } from "@/data/audience/subscribers-by-condition";
 import { getConditionFromFilters } from "@/shared/feature/condition-from-filters";
+import { getAllSubscribersByCondition } from "@/data/audience/subscribersl-by-condition";
 
-export default function CustomersInSegment({
-  params
-}: {
-  params: { segmentId: string };
-}) {
+type Props = {
+  params: {
+    segmentId: string;
+  };
+};
+
+export default function CustomersInSegment({ params }: Props) {
   const user = useCurrentUser();
 
   const [sorting, setSorting] = useState<SortingState>([]);
