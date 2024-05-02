@@ -7,7 +7,7 @@ export const getAllSubscribersByCondition = async (condition: any) => {
     return await prisma.mailinglist.findMany({
       ...condition,
       select: {
-        userEmail: true
+        subscriberEmail: true
       }
     });
   } catch (error) {
