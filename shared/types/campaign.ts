@@ -1,11 +1,21 @@
+export type CampaignState =
+  | "draft"
+  | "scheduled"
+  | "sending"
+  | "sent"
+  | "failed";
+
 export type Campaign = {
   userEmail: string;
   campaignId: string;
   title: string;
+  state: CampaignState;
+  lastUpdated: Date;
 
   to?: {
     segmentId: string;
     segmentTitle: string;
+    totalNumber?: number;
   };
   from?: {
     name: string;
@@ -17,7 +27,7 @@ export type Campaign = {
   };
   time?: {
     instant: boolean;
-    date?: string;
+    date: Date;
   };
   email?: {
     design: any;
