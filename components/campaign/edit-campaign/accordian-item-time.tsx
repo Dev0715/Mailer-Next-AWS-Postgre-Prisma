@@ -49,7 +49,7 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
     if (campaign) {
       setInstant(campaign.time?.instant || false);
       if (campaign.time?.date) {
-        form.setValue("date", new Date(campaign.time?.date as string));
+        form.setValue("date", campaign.time?.date);
       }
     }
   }, [campaign]);
@@ -59,7 +59,7 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
       ...campaign,
       time: {
         instant: false,
-        date: values.date.toISOString()
+        date: values.date
       }
     });
     setChanged(false);
@@ -69,7 +69,8 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
     setCampaign({
       ...campaign,
       time: {
-        instant: true
+        instant: true,
+        date: new Date()
       }
     });
     setChanged(false);
@@ -86,9 +87,7 @@ export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
     setInstant(campaign.time?.instant || false);
     form.setValue(
       "date",
-      campaign.time?.date
-        ? new Date(campaign.time?.date as string)
-        : (undefined as unknown as Date)
+      campaign.time?.date ? campaign.time.date : (undefined as unknown as Date)
     );
     setChanged(false);
   };
