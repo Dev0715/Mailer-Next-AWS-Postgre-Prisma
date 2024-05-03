@@ -52,7 +52,7 @@ const CampaignPage = () => {
         </Button>
       </div>
       <div className="flex flex-col gap-y-4">
-        <p className="text-xl text-gray-500">April, 2024 (2)</p>
+        <p className="text-lg text-gray-500">April, 2024 (2)</p>
         {campaigns.map((campaign) => (
           <div key={campaign.campaignId} className="flex flex-col gap-y-4">
             <Separator />
