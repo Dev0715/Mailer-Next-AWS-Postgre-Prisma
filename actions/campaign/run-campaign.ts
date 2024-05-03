@@ -1,3 +1,5 @@
+"use server";
+
 import lambdaClient from "@/lib/lambda";
 import { InvokeCommand } from "@aws-sdk/client-lambda";
 
