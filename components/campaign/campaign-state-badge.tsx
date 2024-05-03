@@ -8,7 +8,7 @@ const CLASS_NAME_Text: Record<CampaignState, string> = {
   failed: "bg-red-500"
 };
 
-export const StateBadge = ({ state }: { state: CampaignState }) => {
+export const CampaignStateBadge = ({ state }: { state: CampaignState }) => {
   return (
     <span
       className={`w-fit px-4 py-1 text-sm text-white capitalize font-normal ${CLASS_NAME_Text[state]}`}
