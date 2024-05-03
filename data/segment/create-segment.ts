@@ -1,6 +1,6 @@
 "use server";
 
-import db from "@/lib/db";
+import db from "@/lib/dynamo";
 import { Segment } from "@/shared/types/segment";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
 
