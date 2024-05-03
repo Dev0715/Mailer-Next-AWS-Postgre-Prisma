@@ -32,6 +32,7 @@ export const getAllCampaignsByEmail = async (userEmail: string) => {
       }
     });
   } catch (error) {
+    console.error(error);
     return null;
   }
 };
