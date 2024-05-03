@@ -36,7 +36,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   const [segments, setSegments] = useState<Segment[]>([]);
   const [campaign, setCampaign] = useState<Campaign>();
 
-  const [isConfirming, setConfirming] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   const [isPending, startTransition] = useTransition();
 
   const [savedEmail, setSavedEmail] = useAtom(savedEmailAtom);
@@ -98,17 +98,13 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
         ...campaign,
         state: "draft",
         lastUpdated: new Date()
-      } as Campaign)
-        .then((res) => {
-          if (res) {
-            history.push("/campaign");
-          } else {
-            setConfirming(true);
-          }
-        })
-        .catch(() => {
-          setConfirming(true);
-        });
+      } as Campaign).then((res) => {
+        if (res) {
+          history.push("/campaign");
+        } else {
+          setError("Failed to save campaign");
+        }
+      });
     });
   };
 
