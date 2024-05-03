@@ -121,16 +121,22 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   const onSend = () => {
     // ## You can send TEST email
     // ## Only available with INSTANTLY at the moment
-    // startTransition(() => {
-    //   updateCampaignState(campaignId, "sending").then((res) => {
-    //     if (res?.success) {
-    //       history.push("/campaign");
-    //     } else {
-    //       setConfirming(true);
-    //     }
-    //   });
-    // });
-    runCampaign(campaignId);
+    startTransition(() => {
+      updateCampaignState(campaignId, "sending").then((_res) => {
+        if (!_res?.success) {
+          setError("Failed to save campaign");
+          return;
+        }
+        runCampaign(campaignId).then((res) => {
+          if (res.error) {
+            updateCampaignState(campaignId, "failed");
+            setError("Failed to send campaign");
+            return;
+          }
+          history.push("/campaign");
+        });
+      });
+    });
   };
 
   if (loadError) {
@@ -140,10 +146,10 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   return (
     <div className="w-5/6 flex flex-col gap-y-6 py-6">
       <ConfirmAlert
-        open={isConfirming}
+        open={!!error}
         title="Failure"
-        description="Failed to update campaign"
-        onAlertDialogClosed={() => setConfirming(false)}
+        description={error}
+        onAlertDialogClosed={() => setError("")}
       />
       <div className="w-full flex items-end justify-between">
         <p className="text-4xl text-green-700 font-semibold">
