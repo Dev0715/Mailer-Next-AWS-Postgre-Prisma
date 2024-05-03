@@ -11,9 +11,9 @@ export const runCampaign = async (campaignId: string) => {
   });
 
   try {
-    const res = await lambdaClient.send(command);
-    console.log(res);
+    await lambdaClient.send(command);
+    return { success: true };
   } catch (error) {
-    console.error(error);
+    return { error };
   }
 };
