@@ -49,7 +49,9 @@ export const GET = async (request: NextRequest, { params }: Params) => {
   return NextResponse.json({
     from: campaign.from?.email,
     customers,
-    subject: campaign.subject?.subject + " " + campaign.subject?.preview,
+    subject:
+      campaign.subject?.subject +
+      (campaign.subject?.preview ? " " + campaign.subject.preview : ""),
     html: campaign.email?.html
   });
 };
