@@ -12,5 +12,5 @@ export const POST = async (request: NextRequest, { params }: Params) => {
 
   await updateCampaignState(campaignId, "sent");
 
-  return NextResponse.json({ error: "Campaign not found" });
+  return NextResponse.json({ success: true });
 };
