@@ -1,4 +1,4 @@
-import db from "@/lib/db";
+import db from "@/lib/dynamo";
 import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 import { generateVerificationToken } from "@/lib/tokens";
 
