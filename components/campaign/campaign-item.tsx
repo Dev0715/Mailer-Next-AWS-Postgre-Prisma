@@ -86,7 +86,10 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
         />
       </div>
       <div className="w-1/6 flex flex-col items-center gap-y-4">
-        <Button disabled={isPending} className="w-fit flex rounded-none">
+        <Button
+          disabled={isPending || campaign.state !== "draft"}
+          className="w-fit flex rounded-none"
+        >
           <Link
             href={`/campaign/edit-campaign/${campaign.campaignId}`}
             className="flex items-center gap-x-2"
