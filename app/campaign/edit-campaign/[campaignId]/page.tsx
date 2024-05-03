@@ -21,7 +21,6 @@ import { Button } from "@/components/ui/button";
 import { FaArrowRight, FaSave } from "react-icons/fa";
 import { updateCampaign } from "@/data/campaign/campaign-update";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
-import { sendEmail } from "@/data/email/send-email";
 import { updateCampaignState } from "@/data/campaign/campaign-update-state";
 
 type Props = {
@@ -128,6 +127,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     startTransition(() => {
       updateCampaignState(campaignId, "sending").then((res) => {
         if (res?.success) {
+          history.push("/campaign");
         } else {
           setConfirming(true);
         }
