@@ -9,7 +9,7 @@ import { deleteCampaign } from "@/data/campaign/campaign-delete";
 import { toast } from "sonner";
 import { Spinner } from "@nextui-org/spinner";
 import { DetailShowItem } from "./campaign-detail-item";
-import { StateBadge } from "./campaign-state-badge";
+import { CampaignStateBadge } from "./campaign-state-badge";
 
 type Props = {
   campaign: Campaign;
@@ -69,7 +69,7 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
           title="Subscribers"
           content={campaign.to?.totalNumber}
         />
-        <StateBadge state={campaign.state} />
+        <CampaignStateBadge state={campaign.state} />
       </div>
       <div className="w-1/6 flex flex-col items-center gap-y-4">
         <DetailShowItem
