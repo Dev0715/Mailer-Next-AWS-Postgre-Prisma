@@ -1,11 +1,6 @@
 type Awaitable<T> = T | PromiseLike<T>;
 
-import type {
-  Adapter,
-  AdapterAccount,
-  AdapterUser,
-  AdapterSession
-} from "next-auth/adapters";
+import type { Adapter, AdapterAccount, AdapterUser } from "next-auth/adapters";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { createUser } from "@/data/user/create-user";
 
