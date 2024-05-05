@@ -6,10 +6,10 @@ import { AuthError } from "next-auth";
 import { LoginSchema } from "@/schemas/auth";
 import { getUserByEmail } from "@/data/user/user-by-email";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { sendVerificationEmail } from "@/lib/mail";
 import { signIn } from "@/auth";
 import { generateVerificationToken } from "@/lib/tokens";
 import { updateUserToken } from "@/data/user/update-token";
+import { sendVerificationEmail } from "../mail/send-verification";
 
 export const login = async (
   values: z.infer<typeof LoginSchema>,
@@ -20,26 +20,32 @@ export const login = async (
     return { error: "Server Says Fields are Invalid!" };
   }
 
-  const { email, password, code } = validateFields.data;
+  const { email, password } = validateFields.data;
   const existingUser = await getUserByEmail(email);
   if (!existingUser || !existingUser.email) {
     return { error: "Email does not exist!" };
   }
 
+  const verificationToken = generateVerificationToken(email);
+  const expires = new Date(new Date().getTime() + 3600 * 1000);
+
   if (!existingUser.emailVerified) {
-    const updatedUser = await updateUserToken({
+    const response = await updateUserToken({
       email,
-      verificationToken: generateVerificationToken(email),
-      expires: new Date(new Date().getTime() + 3600 * 1000)
+      verificationToken,
+      expires
     });
 
-    const response = await sendVerificationEmail(
-      updatedUser?.email,
-      updatedUser?.verificationToken
-    );
-
     if (response.error) {
-      return { error: response.error.name };
+      return {
+        error: "Something went wrong!"
+      };
+    }
+
+    const _response = await sendVerificationEmail(email, verificationToken);
+
+    if (_response.error) {
+      return { error: "Error occurred while sending verification email" };
     }
 
     return { success: "Confirmation email sent!" };
