@@ -30,7 +30,7 @@ export const GET = async (request: NextRequest, { params }: Params) => {
   const openedEmails = [..._openedEmails, subscriberEmail];
   const res = await updateCampaignOpened(campaignId, openedEmails);
 
-  if (res?.success) {
+  if (res.success) {
     return NextResponse.json({ success: true });
   } else {
     return NextResponse.json(
