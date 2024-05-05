@@ -1,6 +1,5 @@
 import { getCampaignById } from "@/data/campaign/campaign-by-id";
 import { updateCampaignBounced } from "@/data/campaign/campaign-update-bounced";
-import { updateCampaignOpened } from "@/data/campaign/campaign-update-opened";
 import { NextRequest, NextResponse } from "next/server";
 
 type Params = {
@@ -31,7 +30,7 @@ export const POST = async (request: NextRequest, { params }: Params) => {
   const bouncedEmails = [..._bouncedEmails, subscriberEmail];
   const res = await updateCampaignBounced(campaignId, bouncedEmails);
 
-  if (res?.success) {
+  if (res.success) {
     return NextResponse.json({ success: true });
   } else {
     return NextResponse.json(
