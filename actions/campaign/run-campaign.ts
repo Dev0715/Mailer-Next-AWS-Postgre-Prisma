@@ -14,6 +14,6 @@ export const runCampaign = async (campaignId: string) => {
     await lambdaClient.send(command);
     return { success: true };
   } catch (error) {
-    return { error };
+    return { error: true };
   }
 };
