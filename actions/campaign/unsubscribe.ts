@@ -24,7 +24,7 @@ export const unsubscribe = async (params: Params) => {
   const unsubEmails = [..._unsubEmails, subscriberEmail];
   const res = await updateCampaignUnsub(campaignId, unsubEmails);
 
-  if (res?.success) {
+  if (res.success) {
     return { success: true };
   } else {
     return { error: "Failed to update campaign" };
