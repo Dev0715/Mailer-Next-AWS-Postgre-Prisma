@@ -5,8 +5,8 @@ import { hash } from "bcryptjs";
 
 import { RegisterSchema } from "@/schemas/auth";
 import { getUserByEmail } from "@/data/user/user-by-email";
-import { sendVerificationEmail } from "@/lib/mail";
 import { createUser } from "@/data/user/create-user";
+import { sendVerificationEmail } from "../mail/send-verification";
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const validateFields = RegisterSchema.safeParse(values);
@@ -28,10 +28,14 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     password: hashedPassword
   });
 
-  // const verificationToken = await generateVerificationToken(email);
-
   if (verificationToken) {
-    const response = await sendVerificationEmail(email, verificationToken);
-    return { success: "New user registered, Check your mailbox!" };
-  } else return { error: "Server Error!" };
+    await sendVerificationEmail(email, verificationToken);
+    return {
+      success: "New user registered, Check your mailbox!"
+    };
+  } else {
+    return {
+      error: "Server Error!"
+    };
+  }
 };
