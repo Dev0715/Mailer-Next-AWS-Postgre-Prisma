@@ -10,7 +10,7 @@ export const deleteSegments = async (
   segmentIds: string[]
 ) => {
   try {
-    const response = await Promise.all(
+    await Promise.all(
       segmentIds.map(async (segmentId) => {
         const command = new DeleteCommand({
           TableName,
@@ -19,8 +19,12 @@ export const deleteSegments = async (
         await db.send(command);
       })
     );
-    return { success: true };
+    return {
+      success: true
+    };
   } catch (error) {
-    return { success: false };
+    return {
+      error: true
+    };
   }
 };
