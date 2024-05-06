@@ -119,24 +119,72 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     );
   };
 
+  const sendInstantly = async () => {
+    const _response = await updateCampaign({
+      ...campaign,
+      state: "sending",
+      lastUpdated: new Date()
+    } as Campaign);
+
+    if (_response.error) {
+      return { error: "Failed to save campaign" };
+    }
+
+    const response = await runCampaign(campaignId);
+    if (response.error) {
+      updateCampaignState(campaignId, "failed");
+      return { error: "Failed to send campaign" };
+    }
+    return { success: true };
+  };
+
+  const sendScheduled = async () => {
+    const _response = await updateCampaign({
+      ...campaign,
+      state: "scheduled",
+      lastUpdated: new Date()
+    } as Campaign);
+
+    if (_response.error) {
+      return { error: "Failed to save campaign" };
+    }
+
+    const scheduledTime = campaign?.time?.date as Date;
+    if (scheduledTime < new Date()) {
+      return { error: "Scheduled time should be in future" };
+    }
+
+    const _scheduledTime = scheduledTime.toISOString().split(".")[0];
+    const response = await scheduleCampaign(campaignId, _scheduledTime);
+
+    if (response.error) {
+      updateCampaignState(campaignId, "failed");
+      return { error: "Failed to schedule campaign" };
+    }
+
+    return { success: true };
+  };
+
   const onSend = () => {
     // ## You can send TEST email
-    // ## Only available with INSTANTLY at the moment
     startTransition(() => {
-      updateCampaignState(campaignId, "sending").then((_res) => {
-        if (!_res?.success) {
-          setError("Failed to save campaign");
-          return;
-        }
-        runCampaign(campaignId).then((res) => {
+      if (campaign?.time?.instant) {
+        sendInstantly().then((res) => {
           if (res.error) {
-            updateCampaignState(campaignId, "failed");
-            setError("Failed to send campaign");
-            return;
+            setError(res.error);
+          } else {
+            history.push("/campaign");
           }
-          history.push("/campaign");
         });
-      });
+      } else {
+        sendScheduled().then((res) => {
+          if (res.error) {
+            setError(res.error);
+          } else {
+            history.push("/campaign");
+          }
+        });
+      }
     });
   };
 
