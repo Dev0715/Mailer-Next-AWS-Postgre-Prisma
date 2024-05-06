@@ -92,7 +92,7 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
       </div>
       <div className="w-1/6 flex flex-col items-center gap-y-4">
         <Button
-          disabled={isPending || campaign.state !== "draft"}
+          disabled={isPending || !isEditable}
           className="w-fit flex rounded-none"
         >
           <Link
@@ -104,7 +104,7 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
           </Link>
         </Button>
         <Button
-          disabled={isPending}
+          disabled={isPending || !isDeleteable}
           variant={"destructive"}
           className="w-fit flex gap-x-2 rounded-none"
           onClick={() => setConfirmAlert(true)}
