@@ -1,8 +1,7 @@
 "use server";
 
 import db from "@/lib/dynamo";
-import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
-import { generateVerificationToken } from "@/lib/tokens";
+import { GetCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_USER_TABLE_NAME;
 
@@ -14,10 +13,8 @@ export const getUserByEmail = async (email: string) => {
 
   try {
     const response = await db.send(command);
-    console.log("__getUserByEmail__GetCommand__RESPONSE", response);
     return response.Item;
   } catch (error) {
-    console.log("__getUserByEmail__GetCommand__ERROR", error);
     return null;
   }
 };
