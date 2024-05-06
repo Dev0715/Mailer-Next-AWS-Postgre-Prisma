@@ -16,26 +16,32 @@ type Props = {
 };
 
 const CampaignItem = ({ campaign, onRemove }: Props) => {
-  const user = useCurrentUser();
-
   const [isPending, startTransition] = useTransition();
   const [confirmAlert, setConfirmAlert] = useState(false);
 
+  const isEditable = useMemo(() => {
+    return campaign.state === "draft" || campaign.state === "failed";
+  }, [campaign.state]);
+
+  const isDeleteable = useMemo(() => {
+    return (
+      campaign.state === "draft" ||
+      campaign.state === "failed" ||
+      campaign.state === "sent"
+    );
+  }, [campaign.state]);
+
   const onConfirmAlertClosed = () => {
-    // # Need to Stop Trigger? #
     setConfirmAlert(false);
     startTransition(() => {
-      deleteCampaign(user?.email as string, campaign.campaignId)
-        .then((response) => {
-          if (response.success) {
-            onRemove();
-          } else {
-            toast.error("Failed to remove campaign");
-          }
-        })
-        .catch(() => {
+      // deleteCampaign(user?.email as string, campaign.campaignId).then(
+      deleteCampaign(campaign.campaignId).then((response) => {
+        if (response.success) {
+          onRemove();
+        } else {
           toast.error("Failed to remove campaign");
-        });
+        }
+      });
     });
   };
 
