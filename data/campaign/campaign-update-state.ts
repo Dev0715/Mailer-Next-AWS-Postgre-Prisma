@@ -17,8 +17,12 @@ export const updateCampaignState = async (
       }
     });
 
-    return { success: true };
+    return {
+      success: true
+    };
   } catch (error) {
-    return null;
+    return {
+      error: true
+    };
   }
 };

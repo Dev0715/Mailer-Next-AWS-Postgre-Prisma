@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { Campaign } from "@/shared/types/campaign";
 
 export const updateCampaignUnsub = async (
   campaignId: string,
@@ -17,8 +16,12 @@ export const updateCampaignUnsub = async (
       }
     });
 
-    return { success: true };
+    return {
+      success: true
+    };
   } catch (error) {
-    return null;
+    return {
+      error: true
+    };
   }
 };
