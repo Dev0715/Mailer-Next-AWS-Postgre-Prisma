@@ -37,7 +37,6 @@ export const createCampaign = async (data: Params) => {
     });
     return { success: true };
   } catch (error) {
-    console.log(error);
     return { error: true };
   }
 };
