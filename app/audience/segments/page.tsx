@@ -72,10 +72,8 @@ const Segments = () => {
   const [confirmDescription, setConfirmDescription] = useState<string>("");
 
   useEffect(() => {
-    getAllSegmentsByEmail(user?.email as string).then((segments) => {
-      if (segments) {
-        setSegments(segments.map((segment) => segment as Segment));
-      }
+    getAllSegmentsByEmail(user?.email as string).then((response) => {
+      setSegments(response.items as Segment[]);
     });
   }, []);
 
@@ -110,18 +108,14 @@ const Segments = () => {
         created: new Date().toISOString(),
         lastChanged: new Date().toISOString()
       };
-      createSegment(newSegment)
-        .then((res) => {
-          if (res.success) {
-            setSegments((prev) => [...prev, newSegment]);
-            setAddedConfirming(true);
-          } else {
-            setAddedConfirming(false);
-          }
-        })
-        .catch(() => {
+      createSegment(newSegment).then((res) => {
+        if (res.success) {
+          setSegments((prev) => [...prev, newSegment]);
+          setAddedConfirming(true);
+        } else {
           setAddedConfirming(false);
-        });
+        }
+      });
     });
   };
 
