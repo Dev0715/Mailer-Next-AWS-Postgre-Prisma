@@ -23,6 +23,7 @@ import { updateCampaign } from "@/data/campaign/campaign-update";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { updateCampaignState } from "@/data/campaign/campaign-update-state";
 import { runCampaign } from "@/actions/campaign/run-campaign";
+import { scheduleCampaign } from "@/actions/campaign/schedule-campaign";
 
 type Props = {
   params: { campaignId: string };

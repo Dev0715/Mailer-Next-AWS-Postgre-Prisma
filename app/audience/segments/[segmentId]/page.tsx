@@ -34,7 +34,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { getSegmentById } from "@/data/segment/segment-by-id";
 import { Subscriber } from "@/shared/types/subscriber";
 import { getConditionFromFilters } from "@/shared/feature/condition-from-filters";
-import { getAllSubscribersByCondition } from "@/data/audience/subscribersl-by-condition";
+import { getAllSubscribersByCondition } from "@/data/audience/subscribers-by-condition";
 
 type Props = {
   params: {
