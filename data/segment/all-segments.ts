@@ -16,10 +16,12 @@ export const getAllSegmentsByEmail = async (userEmail: string) => {
 
   try {
     const response = await db.send(command);
-    console.log("__getAllSegmentsByEmail__GetCommand__RESPONSE", response);
-    return response.Items;
+    return {
+      items: response.Items
+    };
   } catch (error) {
-    console.log("__getAllSegmentsByEmail__GetCommand__ERROR", error);
-    return null;
+    return {
+      items: []
+    };
   }
 };
