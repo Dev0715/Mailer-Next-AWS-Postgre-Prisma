@@ -24,15 +24,11 @@ import { Campaign } from "@/shared/types/campaign";
 //   }
 // };
 
-export const getCampaignById = async (
-  // userEmail: string,
-  campaignId: string
-) => {
+export const getCampaignById = async (campaignId: string) => {
   try {
     const campaign: Campaign = (await prisma.campaigns.findUnique({
       where: {
-        // userEmail: userEmail,
-        campaignId: campaignId
+        campaignId
       }
     })) as unknown as Campaign;
     if (campaign?.time?.date) {
@@ -40,7 +36,6 @@ export const getCampaignById = async (
     }
     return campaign;
   } catch (error) {
-    console.error(error);
     return null;
   }
 };
