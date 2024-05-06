@@ -1,7 +1,6 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { Campaign } from "@/shared/types/campaign";
 
 export const updateCampaignBounced = async (
   campaignId: string,
@@ -19,6 +18,6 @@ export const updateCampaignBounced = async (
 
     return { success: true };
   } catch (error) {
-    return null;
+    return { error: true };
   }
 };
