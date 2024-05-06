@@ -15,9 +15,13 @@ export const createSegment = async (data: Segment) => {
   });
 
   try {
-    const response = await db.send(command);
-    return { success: true, response };
+    await db.send(command);
+    return {
+      success: true
+    };
   } catch (error) {
-    return { error };
+    return {
+      error: true
+    };
   }
 };
