@@ -24,7 +24,11 @@ export const isTypeOfDate = (keyName: string) => {
   );
 };
 
-export const isTypeOfString = (keyName: string) => keyName !== "";
+export const isTypeOfString = (keyName: string) =>
+  !isTypeOfTags(keyName) &&
+  !isTypeOfSubscribed(keyName) &&
+  !isTypeOfDate(keyName) &&
+  keyName !== "";
 
 export const defaultConditionOfAttribute = (keyName: string) => {
   return isTypeOfTags(keyName)
