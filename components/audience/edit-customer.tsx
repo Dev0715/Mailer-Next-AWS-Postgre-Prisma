@@ -93,8 +93,6 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
         updateUserTags({
           email: customer?.userEmail as string,
           tags: storedTags
-        }).then((res) => {
-          console.log(res);
         });
       }
       const newCustomer: Subscriber = {

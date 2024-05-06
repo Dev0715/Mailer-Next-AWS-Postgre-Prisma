@@ -23,7 +23,7 @@ import { prisma } from "@/lib/prisma";
 //     );
 //     return { success: true };
 //   } catch (error) {
-//     return { success: false };
+//     return { error: true };
 //   }
 // };
 
@@ -42,6 +42,6 @@ export const deleteSubscribers = async (
     });
     return { success: true };
   } catch (error) {
-    return { success: false };
+    return { error: true };
   }
 };

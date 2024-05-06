@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Campaign } from "@/shared/types/campaign";
 import Link from "next/link";
-import { useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { FaEdit, FaMailBulk, FaTrash } from "react-icons/fa";
 import { ConfirmAlert } from "../utils/confirm-alert";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import { deleteCampaign } from "@/data/campaign/campaign-delete";
 import { toast } from "sonner";
 import { Spinner } from "@nextui-org/spinner";
