@@ -250,25 +250,19 @@ const Segments = () => {
         description,
         filters
       };
-      console.log(updatedSegment);
-      updateSegment(updatedSegment as Segment)
-        .then((res) => {
-          console.log(res);
-          if (res) {
-            const newList = segments.map((segment) =>
-              segment.segmentId === updatedSegment.segmentId
-                ? (updatedSegment as Segment)
-                : segment
-            );
-            setSegments(newList);
-            setEditedConfirming(true);
-          } else {
-            setEditedConfirming(false);
-          }
-        })
-        .catch(() => {
+      updateSegment(updatedSegment as Segment).then((res) => {
+        if (res.success) {
+          const newList = segments.map((segment) =>
+            segment.segmentId === updatedSegment.segmentId
+              ? (updatedSegment as Segment)
+              : segment
+          );
+          setSegments(newList);
+          setEditedConfirming(true);
+        } else {
           setEditedConfirming(false);
-        });
+        }
+      });
     });
   };
 
