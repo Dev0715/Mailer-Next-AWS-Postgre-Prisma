@@ -1,5 +1,5 @@
 import db from "@/lib/dynamo";
-import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { generateVerificationToken } from "@/lib/tokens";
 
 const TableName = process.env.AWS_DYNAMODB_USER_TABLE_NAME;
@@ -30,11 +30,9 @@ export const createUser = async (data: NewUser) => {
   });
 
   try {
-    const response = await db.send(command);
-    console.log("__createUser__PutCommand__RESPONSE", response);
+    await db.send(command);
     return verificationToken;
   } catch (error) {
-    console.log("__createUser__PutCommand__ERROR", error);
     return null;
   }
 };
