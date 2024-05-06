@@ -23,9 +23,13 @@ export const updateUserPassword = async (data: UserSetPassword) => {
   });
 
   try {
-    const response = await db.send(command);
-    return response.Attributes;
+    await db.send(command);
+    return {
+      success: true
+    };
   } catch (error) {
-    return null;
+    return {
+      error: true
+    };
   }
 };
