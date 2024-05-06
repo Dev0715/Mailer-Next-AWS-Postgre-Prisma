@@ -28,9 +28,14 @@ export const sendEmail = async (email: Params) => {
         }
       }
     });
-    const res = await sesClient.send(command);
-    return res;
+
+    await sesClient.send(command);
+    return {
+      success: true
+    };
   } catch (error) {
-    return error;
+    return {
+      error: true
+    };
   }
 };
