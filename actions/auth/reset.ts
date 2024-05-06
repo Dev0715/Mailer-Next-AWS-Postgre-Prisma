@@ -4,9 +4,9 @@ import * as z from "zod";
 
 import { ResetSchema } from "@/schemas/auth";
 import { getUserByEmail } from "@/data/user/user-by-email";
-import { sendPasswordResetEmail } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/tokens";
 import { updateUserToken } from "@/data/user/update-token";
+import { sendPasswordResetEmail } from "../mail/send-password-reset";
 
 export const reset = async (values: z.infer<typeof ResetSchema>) => {
   const validatedFields = ResetSchema.safeParse(values);
@@ -23,23 +23,20 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
 
   const verificationToken = generateVerificationToken(email);
 
-  const updatedUser = await updateUserToken({
+  const response = await updateUserToken({
     email,
     verificationToken,
     expires: new Date(new Date().getTime() + 3600 * 1000)
   });
 
-  if (!updatedUser) {
+  if (response.error) {
     return { error: "Server Error" };
   }
 
-  const response = await sendPasswordResetEmail(
-    updatedUser.email,
-    updatedUser.verificationToken
-  );
+  const _response = await sendPasswordResetEmail(email, verificationToken);
 
-  if (response.error) {
-    return { error: response.error.name };
+  if (_response.error) {
+    return { error: "Error occurred while sending email" };
   }
 
   return { success: "Reset email sent!" };
