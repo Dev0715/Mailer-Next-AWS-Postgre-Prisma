@@ -164,27 +164,22 @@ export default function Contacts() {
     );
 
     startTransition(() => {
-      deleteSubscribers(user?.email as string, selectedEmails)
-        .then((res) => {
-          if (res.success) {
-            const newList = [...subscribers];
-            Object.keys(rowSelection)
-              .map((index) => Number(index))
-              .reverse()
-              .map((index) => {
-                newList.splice(index, 1);
-              });
-            setSubscribers(newList);
-            setSelectedRowsDeletedConfirming(true);
-          } else {
-            setSelectedRowsDeletedConfirming(false);
-          }
-          table.toggleAllPageRowsSelected(false);
-        })
-        .catch(() => {
+      deleteSubscribers(user?.email as string, selectedEmails).then((res) => {
+        if (res.success) {
+          const newList = [...subscribers];
+          Object.keys(rowSelection)
+            .map((index) => Number(index))
+            .reverse()
+            .map((index) => {
+              newList.splice(index, 1);
+            });
+          setSubscribers(newList);
+          setSelectedRowsDeletedConfirming(true);
+        } else {
           setSelectedRowsDeletedConfirming(false);
-          table.toggleAllPageRowsSelected(false);
-        });
+        }
+        table.toggleAllPageRowsSelected(false);
+      });
     });
   };
 
