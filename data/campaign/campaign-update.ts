@@ -50,9 +50,12 @@ export const updateCampaign = async (campaign: Campaign) => {
       }
     });
 
-    return { success: true };
+    return {
+      success: true
+    };
   } catch (error) {
-    console.error(error);
-    return null;
+    return {
+      error: true
+    };
   }
 };
