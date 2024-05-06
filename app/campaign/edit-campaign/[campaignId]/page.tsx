@@ -44,10 +44,8 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
   const [savedCampaign, setSavedCampaign] = useAtom(savedCampaignAtom);
 
   useEffect(() => {
-    getAllSegmentsByEmail(user?.email as string).then((segments) => {
-      if (segments) {
-        setSegments(segments as Segment[]);
-      }
+    getAllSegmentsByEmail(user?.email as string).then((response) => {
+      setSegments(response.items as Segment[]);
     });
 
     if (savedCampaign.isSaved) {
@@ -100,7 +98,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
         state: "draft",
         lastUpdated: new Date()
       } as Campaign).then((res) => {
-        if (res) {
+        if (res.success) {
           history.push("/campaign");
         } else {
           setError("Failed to save campaign");
