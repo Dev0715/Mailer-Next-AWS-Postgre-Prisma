@@ -20,16 +20,15 @@ import { prisma } from "@/lib/prisma";
 //   }
 // };
 
-export const deleteCampaign = async (userEmail: string, campaignId: string) => {
+export const deleteCampaign = async (campaignId: string) => {
   try {
     await prisma.campaigns.delete({
       where: {
-        // userEmail,
         campaignId
       }
     });
     return { success: true };
   } catch (error) {
-    return { success: false };
+    return { error: true };
   }
 };

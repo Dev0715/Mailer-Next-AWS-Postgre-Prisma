@@ -119,7 +119,10 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
                 <SelectGroup>
                   <SelectLabel>Your Segments</SelectLabel>
                   {segments.map((segment, index) => (
-                    <SelectItem value={index.toString()}>
+                    <SelectItem
+                      key={segment.segmentId}
+                      value={index.toString()}
+                    >
                       {segment.title}
                     </SelectItem>
                   ))}
