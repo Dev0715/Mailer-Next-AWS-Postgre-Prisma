@@ -143,24 +143,22 @@ const Segments = () => {
 
   const onSegmentDeleted = () => {
     startTransition(() => {
-      deleteSegment(user?.email as string, deletingSegment?.segmentId as string)
-        .then((res) => {
-          if (res.success) {
-            // # Need to update to use splice function instead? #
-            const newList = segments.filter(
-              (item) => item.segmentId !== deletingSegment?.segmentId
-            );
-            setSegments(newList);
-            setDeleteConfirming(true);
-          } else {
-            setDeleteConfirming(false);
-          }
-          table.toggleAllPageRowsSelected(false);
-        })
-        .catch(() => {
+      deleteSegment(
+        user?.email as string,
+        deletingSegment?.segmentId as string
+      ).then((res) => {
+        if (res.success) {
+          // # Need to update to use splice function instead? #
+          const newList = segments.filter(
+            (item) => item.segmentId !== deletingSegment?.segmentId
+          );
+          setSegments(newList);
+          setDeleteConfirming(true);
+        } else {
           setDeleteConfirming(false);
-          table.toggleAllPageRowsSelected(false);
-        });
+        }
+        table.toggleAllPageRowsSelected(false);
+      });
     });
   };
 
