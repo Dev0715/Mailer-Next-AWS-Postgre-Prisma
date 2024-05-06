@@ -151,8 +151,6 @@ const NewSubscriber = () => {
         updateUserTags({
           email: user?.email as string,
           tags: storedTags
-        }).then((res) => {
-          console.log(res);
         });
       }
 
