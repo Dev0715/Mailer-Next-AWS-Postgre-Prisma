@@ -1,8 +1,7 @@
 "use server";
 
 import db from "@/lib/dynamo";
-import { GetCommand, PutCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
-import { generateVerificationToken } from "@/lib/tokens";
+import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_USER_TABLE_NAME;
 
@@ -23,11 +22,13 @@ export const updateUserTags = async (data: UserSetToken) => {
   });
 
   try {
-    const response = await db.send(command);
-    console.log("__updateUserTags__UpdateCommand__RESPONSE", response);
-    return response.Attributes;
+    await db.send(command);
+    return {
+      success: true
+    };
   } catch (error) {
-    console.log("__updateUserTags__UpdateCommand__ERROR", error);
-    return null;
+    return {
+      error: true
+    };
   }
 };
