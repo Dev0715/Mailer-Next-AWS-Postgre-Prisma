@@ -1,9 +1,15 @@
+import { checkValidationOfEmail } from "@/data/email/check-validation";
 import { NextRequest, NextResponse } from "next/server";
 
-// ## http://localhost:3000/api/subscriber/new
 export const POST = async (request: NextRequest) => {
   const data = await request.json();
-  console.log(data);
+
+  const { ownerEmail, firstName, lastName, subscriberEmail } = data;
+
+  const emailValidation = await checkValidationOfEmail(subscriberEmail);
+  if (!emailValidation) {
+    return NextResponse.json({ error: "Email is invalid" });
+  }
 
   return NextResponse.json({ message: "Subscriber added" });
 };
