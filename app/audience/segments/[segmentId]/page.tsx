@@ -33,7 +33,7 @@ import { getColumnsForContactsTable } from "../../_components/segment-column";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getSegmentById } from "@/data/segment/segment-by-id";
 import { Subscriber } from "@/shared/types/subscriber";
-import { getConditionFromFilters } from "@/shared/feature/condition-from-filters";
+import { getConditionFromFilters } from "@/shared/functions/condition-from-filters";
 import { getAllSubscribersByCondition } from "@/data/audience/subscribers-by-condition";
 
 type Props = {

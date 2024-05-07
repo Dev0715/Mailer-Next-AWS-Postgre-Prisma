@@ -8,7 +8,7 @@ import { Filter } from "@/shared/types/filter";
 import {
   checkFilters,
   defaultConditionOfAttribute
-} from "@/shared/feature/filter-customer";
+} from "@/shared/functions/filter-customer";
 import { FormError } from "../utils/form-error";
 import { Input } from "../ui/input";
 import { SegmentAddition } from "@/shared/types/segment";
