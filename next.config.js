@@ -9,11 +9,6 @@ module.exports = {
   //     }
   //   ];
   // }
-  resolve: {
-    fallback: {
-      crypto: false
-    }
-  },
   async headers() {
     return [
       {
