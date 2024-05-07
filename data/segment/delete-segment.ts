@@ -12,11 +12,13 @@ export const deleteSegment = async (userEmail: string, segmentId: string) => {
   });
 
   try {
-    const response = await db.send(command);
-    console.log("__deleteSegment__DeleteCommand__RESPONSE", response);
-    return { success: true, response };
+    await db.send(command);
+    return {
+      success: true
+    };
   } catch (error) {
-    console.log("__deleteSegment__DeleteCommand__ERROR", error);
-    return { error };
+    return {
+      error: true
+    };
   }
 };
