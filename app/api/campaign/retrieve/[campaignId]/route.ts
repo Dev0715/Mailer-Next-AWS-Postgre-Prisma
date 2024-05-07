@@ -1,7 +1,7 @@
 import { getAllSubscriberEmailsByCondition } from "@/data/audience/subscribers-email-by-condition";
 import { getCampaignById } from "@/data/campaign/campaign-by-id";
 import { getSegmentById } from "@/data/segment/segment-by-id";
-import { getConditionFromFilters } from "@/shared/feature/condition-from-filters";
+import { getConditionFromFilters } from "@/shared/functions/condition-from-filters";
 import { Campaign } from "@/shared/types/campaign";
 import { Segment } from "@/shared/types/segment";
 import { NextRequest, NextResponse } from "next/server";

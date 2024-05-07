@@ -5,7 +5,7 @@ import { FaArrowLeft, FaFileUpload } from "react-icons/fa";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { createSubscriberFromStr } from "@/shared/feature/subscriber-create-from-str";
+import { createSubscriberFromStr } from "@/shared/functions/subscriber-create-from-str";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { useRouter } from "next/navigation";

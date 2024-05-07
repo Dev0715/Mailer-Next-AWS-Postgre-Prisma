@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ConfirmAlert } from "@/components/utils/confirm-alert";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { createSubscriberFromStr } from "@/shared/feature/subscriber-create-from-str";
+import { createSubscriberFromStr } from "@/shared/functions/subscriber-create-from-str";
 import { Spinner } from "@nextui-org/spinner";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
