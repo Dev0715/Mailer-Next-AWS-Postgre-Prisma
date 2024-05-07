@@ -3,7 +3,7 @@
 import { sendEmail } from "@/data/email/send-email";
 
 const domain = process.env.NEXT_PUBLIC_APP_URL;
-const fromEmail = "malachi.uudev@gmail.com";
+const fromEmail = process.env.SITE_OWNER_EMAIL as string;
 
 export const sendPasswordResetEmail = async (email: string, token: string) => {
   const resetLink = `${domain}/auth/new-password?token=${token}`;

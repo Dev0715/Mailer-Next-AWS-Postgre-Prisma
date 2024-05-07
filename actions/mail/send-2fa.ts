@@ -2,7 +2,7 @@
 
 import { sendEmail } from "@/data/email/send-email";
 
-const fromEmail = "malachi.uudev@gmail.com";
+const fromEmail = process.env.SITE_OWNER_EMAIL as string;
 
 export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
   return await sendEmail({
