@@ -21,10 +21,13 @@ export const updateSegment = async (segment: Segment) => {
   });
 
   try {
-    const response = await db.send(command);
-    return response.Attributes;
+    await db.send(command);
+    return {
+      success: true
+    };
   } catch (error) {
-    console.error(error);
-    return null;
+    return {
+      error: true
+    };
   }
 };
