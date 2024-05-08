@@ -12,7 +12,7 @@ import {
   isTypeOfString,
   isTypeOfSubscribed,
   isTypeOfTags
-} from "@/shared/feature/filter-customer";
+} from "@/shared/functions/filter-customer";
 import { Button } from "../ui/button";
 import { Filter } from "@/shared/types/filter";
 import { StringCondition } from "./condition-tags/string-condition";

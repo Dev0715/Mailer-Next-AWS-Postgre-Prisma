@@ -7,7 +7,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { Spinner } from "@nextui-org/spinner";
 import { Segment } from "@/shared/types/segment";
 import { getNubmersOfSubscribersByCondition } from "@/data/audience/count-subscribers-condition";
-import { getConditionFromFilters } from "@/shared/feature/condition-from-filters";
+import { getConditionFromFilters } from "@/shared/functions/condition-from-filters";
 
 type Props = {
   segment: Segment;
