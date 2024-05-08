@@ -22,6 +22,8 @@ model mailinglist {
   created         DateTime? @default(now()) @db.Timestamptz(6)
   lastChanged     DateTime? @default(now()) @db.Timestamptz(6)
   tags            String[]  @db.VarChar
+  otp             String?   @db.VarChar
+  validated       Boolean?
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
