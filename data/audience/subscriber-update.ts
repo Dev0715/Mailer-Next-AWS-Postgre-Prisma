@@ -1,9 +1,41 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+
+type UpdateData = Record<string, string | Date | string[] | boolean | number>;
+
+type Params = UpdateData & {
+  id: string;
+};
+
+export const updateSubscriber = async (data: Params) => {
+  const _data: UpdateData = {
+    ...data,
+    lastChanged: new Date()
+  };
+
+  if (_data.id) {
+    delete _data.id;
+  }
+
+  try {
+    await prisma.mailinglist.updateMany({
+      where: {
+        id: data.id
+      },
+      data: {
+        ..._data
+      }
+    });
+
+    return { success: true };
+  } catch (error) {
+    return { error: true };
+  }
+};
+
 // import db from "@/lib/db";
 // import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
-import { Subscriber } from "@/shared/types/subscriber";
 
 // const TableName = process.env.AWS_DYNAMODB_MAILING_LIST_TABLE_NAME;
 
@@ -33,29 +65,3 @@ import { Subscriber } from "@/shared/types/subscriber";
 //     return { error };
 //   }
 // };
-
-// # Update a subscriber based on id? #
-export const updateSubscriber = async (data: Subscriber) => {
-  try {
-    await prisma.mailinglist.updateMany({
-      where: {
-        userEmail: data.userEmail,
-        subscriberEmail: data.subscriberEmail
-      },
-      data: {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        address: data.address,
-        phoneNumber: data.phoneNumber,
-        birthday: data.birthday,
-        tags: data.tags,
-        subscribed: data.subscribed,
-        lastChanged: data.lastChanged
-      }
-    });
-
-    return { success: true };
-  } catch (error) {
-    return { error: true };
-  }
-};
