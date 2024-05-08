@@ -18,7 +18,7 @@ import { Segment } from "@/shared/types/segment";
 import { useEffect, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { FcCancel } from "react-icons/fc";
-import { getConditionFromFilters } from "@/shared/feature/condition-from-filters";
+import { getConditionFromFilters } from "@/shared/functions/condition-from-filters";
 import { getNubmersOfSubscribersByCondition } from "@/data/audience/count-subscribers-condition";
 
 type Props = {
