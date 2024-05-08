@@ -4,10 +4,10 @@ export type Subscriber = {
   subscriberEmail: string;
   firstName: string;
   lastName: string;
-  address: string;
-  phoneNumber: string;
+  address?: string;
+  phoneNumber?: string;
   // birthday: string;
-  birthday: Date;
+  birthday?: Date;
   tags?: string[];
   subscribed?: boolean;
   contactRating?: number;
@@ -15,4 +15,6 @@ export type Subscriber = {
   created?: Date;
   // lastChanged?: string;
   lastChanged?: Date;
+  otp?: string;
+  validated?: boolean;
 };
