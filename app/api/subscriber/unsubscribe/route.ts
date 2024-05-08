@@ -4,20 +4,14 @@ import { updateSubscriber } from "@/data/audience/subscriber-update";
 import { generateOtp } from "@/shared/functions/generate-otp";
 import { NextRequest, NextResponse } from "next/server";
 
-type Params = {
-  params: {
-    userEmail: string;
-    subscriberEmail: string;
-  };
-};
-
 // ## Unsubscribe Email: Send UNSUB OTP to [subscriberEmail]
 
-export const POST = async (request: NextRequest, { params }: Params) => {
-  const { userEmail, subscriberEmail } = params;
+export const POST = async (request: NextRequest) => {
+  const data = await request.json();
+  const { ownerEmail, subscriberEmail } = data;
 
   const existingSubscriber = await getSubscriberByEmail({
-    userEmail,
+    userEmail: ownerEmail,
     subscriberEmail
   });
 
