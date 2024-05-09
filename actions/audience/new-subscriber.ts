@@ -24,6 +24,7 @@ export const newSubscriber = async (
   if (existingSubscriber) {
     const response = await updateSubscriber({
       ...values,
+      id: values.id as string,
       lastChanged: new Date()
     });
 
