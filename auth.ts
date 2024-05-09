@@ -3,6 +3,7 @@ import authConfig from "@/auth.config";
 import adapter from "@/adapter";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   adapter,
   session: { strategy: "jwt" },
   // pages: {
@@ -31,6 +32,5 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token }) {
       return token;
     }
-  },
-  ...authConfig
+  }
 });

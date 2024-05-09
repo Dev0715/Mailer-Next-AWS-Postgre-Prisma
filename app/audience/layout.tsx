@@ -1,11 +1,11 @@
 "use client";
 
-import { currentUser } from "@/lib/auth";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const AudienceLayout = ({
   children
 }: Readonly<{ children: React.ReactNode }>) => {
-  const user = currentUser();
+  const user = useCurrentUser();
 
   if (!user) {
     return (
