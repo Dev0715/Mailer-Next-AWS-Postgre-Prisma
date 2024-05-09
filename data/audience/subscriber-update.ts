@@ -19,7 +19,7 @@ export const updateSubscriber = async (data: Params) => {
   }
 
   try {
-    await prisma.mailinglist.updateMany({
+    await prisma.mailinglist.update({
       where: {
         id: data.id
       },
