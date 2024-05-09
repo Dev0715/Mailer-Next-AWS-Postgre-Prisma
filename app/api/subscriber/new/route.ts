@@ -40,7 +40,7 @@ export const POST = async (request: NextRequest) => {
         return NextResponse.json({}, { status: 404 });
       }
 
-      sendOtpValidationEmail(subscriberEmail, otp);
+      await sendOtpValidationEmail(subscriberEmail, otp);
       return NextResponse.json({ invalidated: true });
     }
   } else {
@@ -58,7 +58,7 @@ export const POST = async (request: NextRequest) => {
       return NextResponse.json({}, { status: 404 });
     }
 
-    sendOtpValidationEmail(subscriberEmail, otp);
+    await sendOtpValidationEmail(subscriberEmail, otp);
     return NextResponse.json({ created: true });
   }
 };
