@@ -95,8 +95,9 @@ export const EditCustomer = ({ customer, onCustomerUpdate }: PropsParams) => {
           tags: storedTags
         });
       }
-      const newCustomer: Subscriber = {
+      const newCustomer = {
         ...(customer as Subscriber),
+        id: customer?.id as string,
         firstName: values.firstName,
         lastName: values.lastName,
         address: values.address,
