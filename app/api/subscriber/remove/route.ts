@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
   const data = await request.json();
-  const { ownerEmail, subscriberEmail, opt } = data;
+  const { ownerEmail, subscriberEmail, otp } = data;
 
   const existingSubscriber: Subscriber = (await getSubscriberByEmail({
     userEmail: ownerEmail,
@@ -18,15 +18,17 @@ export const POST = async (request: NextRequest) => {
     return NextResponse.json({}, { status: 404 });
   }
 
-  if (existingSubscriber.otp !== opt) {
-    return NextResponse.json({ incorrect: true });
+  if (existingSubscriber.otp !== (otp as string)) {
+    return NextResponse.json({ error: "OTP is invalid" });
   }
 
-  const response = await deleteSubscriber(existingSubscriber.id as string);
+  const response_remove = await deleteSubscriber(
+    existingSubscriber.id as string
+  );
 
-  if (response.error) {
+  if (response_remove.error) {
     return NextResponse.json({}, { status: 404 });
   } else {
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ removed: true });
   }
 };
