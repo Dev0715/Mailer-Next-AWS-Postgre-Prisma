@@ -41,7 +41,7 @@ export const POST = async (request: NextRequest) => {
       }
 
       sendOtpValidationEmail(subscriberEmail, otp);
-      return NextResponse.json({ unValidated: true });
+      return NextResponse.json({ invalidated: true });
     }
   } else {
     const otp = generateOtp();
