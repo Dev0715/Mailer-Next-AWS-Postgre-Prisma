@@ -18,7 +18,7 @@ export const POST = async (request: NextRequest) => {
     return NextResponse.json({}, { status: 404 });
   }
 
-  if (existingSubscriber.otp !== otp) {
+  if (existingSubscriber.otp !== (otp as string)) {
     return NextResponse.json({ error: "OTP is invalid" });
   }
 
