@@ -5,12 +5,16 @@ import React from "react";
 import { Navbar } from "./navbar";
 import { UserButton } from "@/components/auth/user-button";
 import { usePathname } from "next/navigation";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 export const Header = () => {
   const path = usePathname();
-  if (path.indexOf("/unsubscribe") === 0) {
+
+  if (path.startsWith("/unsubscribe")) {
     return null;
   }
+
+  const user = useCurrentUser();
 
   return (
     <nav className="w-full flex justify-center box-border border-b-[1px] z-10">
@@ -22,7 +26,7 @@ export const Header = () => {
             </p>
           </Link>
         </div>
-        <Navbar />
+        {user && <Navbar />}
         <UserButton />
       </div>
     </nav>
