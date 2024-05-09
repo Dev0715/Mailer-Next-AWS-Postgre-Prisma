@@ -1,5 +1,6 @@
 "use client";
 
+import { Forbidden } from "@/components/utils/forbidden";
 import { useCurrentUser } from "@/hooks/use-current-user";
 
 const AudienceLayout = ({
@@ -8,11 +9,7 @@ const AudienceLayout = ({
   const user = useCurrentUser();
 
   if (!user) {
-    return (
-      <div>
-        <h1>Not logged in</h1>
-      </div>
-    );
+    return <Forbidden />;
   }
 
   return children;
