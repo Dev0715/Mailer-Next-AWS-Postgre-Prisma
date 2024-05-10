@@ -13,7 +13,7 @@ import { groupCampaigns } from "@/shared/functions/group-campaigns";
 
 const CampaignPage = () => {
   const user = useCurrentUser();
-  // const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [groupedCampaigns, setGroupedCampaigns] = useState<
     Record<string, Campaign[]>
   >({});
@@ -21,18 +21,16 @@ const CampaignPage = () => {
   useEffect(() => {
     getAllCampaignsByEmail(user?.email as string).then((items) => {
       if (items) {
-        // setCampaigns(
-        //   items.map((_item) => {
-        //     const item = _item as unknown as Campaign;
-        //     if (item?.time?.date) {
-        //       item.time.date = new Date(item.time.date);
-        //     }
-        //     return item;
-        //   })
-        // );
-        setGroupedCampaigns(
-          groupCampaigns(items.map((item) => item as unknown as Campaign))
-        );
+        const _items = items.map((_item) => {
+          const item = _item as unknown as Campaign;
+          if (item?.time?.date) {
+            item.time.date = new Date(item.time.date);
+          }
+          return item;
+        }) as Campaign[];
+
+        setCampaigns(_items);
+        setGroupedCampaigns(groupCampaigns(_items));
       }
     });
   });
