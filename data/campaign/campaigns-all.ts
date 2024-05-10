@@ -29,6 +29,9 @@ export const getAllCampaignsByEmail = async (userEmail: string) => {
     return await prisma.campaigns.findMany({
       where: {
         userEmail
+      },
+      orderBy: {
+        lastUpdated: "desc"
       }
     });
   } catch (error) {
