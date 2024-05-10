@@ -21,7 +21,6 @@ const CampaignPage = () => {
   useEffect(() => {
     getAllCampaignsByEmail(user?.email as string).then((items) => {
       if (items) {
-        console.log(items);
         const _items = items.map((_item) => {
           const item = _item as unknown as Campaign;
           if (item?.time?.date) {
@@ -59,9 +58,11 @@ const CampaignPage = () => {
       </div>
       {groupedCampaigns &&
         Object.keys(groupedCampaigns).length &&
-        Object.keys(groupedCampaigns).map((month) => (
+        Object.keys(groupedCampaigns).map((monthYear) => (
           <div className="flex flex-col gap-y-4">
-            <p className="text-lg text-gray-500">{month}, 2024 (2)</p>
+            <p className="text-lg text-gray-500">
+              {monthYear} ({Object.keys(groupedCampaigns).length})
+            </p>
             {campaigns.map((campaign) => (
               <div key={campaign.campaignId} className="flex flex-col gap-y-4">
                 <Separator />
