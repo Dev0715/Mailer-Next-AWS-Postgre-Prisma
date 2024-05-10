@@ -2,6 +2,22 @@
 
 import { prisma } from "@/lib/prisma";
 
+export const getAllCampaignsByEmail = async (userEmail: string) => {
+  try {
+    return await prisma.campaigns.findMany({
+      where: {
+        userEmail
+      },
+      orderBy: {
+        lastUpdated: "desc"
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 // import db from "@/lib/db";
 // import { QueryCommand } from "@aws-sdk/lib-dynamodb";
 
@@ -23,18 +39,3 @@ import { prisma } from "@/lib/prisma";
 //     return null;
 //   }
 // };
-
-export const getAllCampaignsByEmail = async (userEmail: string) => {
-  try {
-    return await prisma.campaigns.findMany({
-      where: {
-        userEmail
-      },
-      orderBy: {
-        lastUpdated: "desc"
-      }
-    });
-  } catch (error) {
-    return null;
-  }
-};
