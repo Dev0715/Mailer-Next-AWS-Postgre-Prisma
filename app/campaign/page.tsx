@@ -19,8 +19,10 @@ const CampaignPage = () => {
   >({});
 
   useEffect(() => {
+    console.log("CampaignPage");
     getAllCampaignsByEmail(user?.email as string).then((items) => {
       if (items) {
+        console.log(items);
         const _items = items.map((_item) => {
           const item = _item as unknown as Campaign;
           if (item?.time?.date) {
@@ -31,9 +33,10 @@ const CampaignPage = () => {
 
         setCampaigns(_items);
         setGroupedCampaigns(groupCampaigns(_items));
+        console.log(_items);
       }
     });
-  });
+  }, []);
 
   const onRemove = (campaignId: string) => {
     // # Need to Stop Trigger? #
