@@ -2,29 +2,36 @@
 
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
-import CampaignItem from "../../components/campaign/campaign-item";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
 import { getAllCampaignsByEmail } from "@/data/campaign/campaigns-all";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Campaign } from "@/shared/types/campaign";
+import CampaignItem from "../../components/campaign/campaign-item";
 import Link from "next/link";
+import { groupCampaigns } from "@/shared/functions/group-campaigns";
 
 const CampaignPage = () => {
   const user = useCurrentUser();
-  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  // const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const [groupedCampaigns, setGroupedCampaigns] = useState<
+    Record<string, Campaign[]>
+  >({});
 
   useEffect(() => {
     getAllCampaignsByEmail(user?.email as string).then((items) => {
       if (items) {
-        setCampaigns(
-          items.map((_item) => {
-            const item = _item as unknown as Campaign;
-            if (item?.time?.date) {
-              item.time.date = new Date(item.time.date);
-            }
-            return item;
-          })
+        // setCampaigns(
+        //   items.map((_item) => {
+        //     const item = _item as unknown as Campaign;
+        //     if (item?.time?.date) {
+        //       item.time.date = new Date(item.time.date);
+        //     }
+        //     return item;
+        //   })
+        // );
+        setGroupedCampaigns(
+          groupCampaigns(items.map((item) => item as unknown as Campaign))
         );
       }
     });
@@ -32,9 +39,9 @@ const CampaignPage = () => {
 
   const onRemove = (campaignId: string) => {
     // # Need to Stop Trigger? #
-    setCampaigns((prevCampaigns) =>
-      prevCampaigns.filter((campaign) => campaign.campaignId !== campaignId)
-    );
+    // setCampaigns((prevCampaigns) =>
+    //   prevCampaigns.filter((campaign) => campaign.campaignId !== campaignId)
+    // );
   };
 
   return (
