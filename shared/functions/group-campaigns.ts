@@ -11,5 +11,5 @@ export const groupCampaigns = (campaigns: Campaign[]) => {
     }
     groupedCampaigns[month].push(campaign);
   });
-  return groupCampaigns;
+  return groupedCampaigns;
 };
