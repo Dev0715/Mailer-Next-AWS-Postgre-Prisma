@@ -2,6 +2,25 @@
 
 import { prisma } from "@/lib/prisma";
 
+export const deleteSubscribers = async (
+  userEmail: string,
+  subscriberEmails: string[]
+) => {
+  try {
+    await prisma.mailinglist.deleteMany({
+      where: {
+        userEmail,
+        subscriberEmail: {
+          in: subscriberEmails
+        }
+      }
+    });
+    return { success: true };
+  } catch (error) {
+    return { error: true };
+  }
+};
+
 // import db from "@/lib/db";
 // import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 
@@ -26,22 +45,3 @@ import { prisma } from "@/lib/prisma";
 //     return { error: true };
 //   }
 // };
-
-export const deleteSubscribers = async (
-  userEmail: string,
-  subscriberEmails: string[]
-) => {
-  try {
-    await prisma.mailinglist.deleteMany({
-      where: {
-        userEmail,
-        subscriberEmail: {
-          in: subscriberEmails
-        }
-      }
-    });
-    return { success: true };
-  } catch (error) {
-    return { error: true };
-  }
-};

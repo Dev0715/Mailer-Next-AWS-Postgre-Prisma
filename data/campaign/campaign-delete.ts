@@ -1,7 +1,21 @@
 "use server";
 
-// import db from "@/lib/db";
 import { prisma } from "@/lib/prisma";
+
+export const deleteCampaign = async (campaignId: string) => {
+  try {
+    await prisma.campaigns.delete({
+      where: {
+        campaignId
+      }
+    });
+    return { success: true };
+  } catch (error) {
+    return { error: true };
+  }
+};
+
+// import db from "@/lib/db";
 // import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 
 // const TableName = process.env.AWS_DYNAMODB_CAMPAIGNS_TABLE_NAME;
@@ -19,16 +33,3 @@ import { prisma } from "@/lib/prisma";
 //     return { error };
 //   }
 // };
-
-export const deleteCampaign = async (campaignId: string) => {
-  try {
-    await prisma.campaigns.delete({
-      where: {
-        campaignId
-      }
-    });
-    return { success: true };
-  } catch (error) {
-    return { error: true };
-  }
-};
