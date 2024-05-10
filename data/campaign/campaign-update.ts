@@ -1,8 +1,30 @@
 "use server";
 
-// import db from "@/lib/db";
 import { prisma } from "@/lib/prisma";
 import { Campaign } from "@/shared/types/campaign";
+
+export const updateCampaign = async (campaign: Campaign) => {
+  try {
+    await prisma.campaigns.update({
+      where: {
+        campaignId: campaign.campaignId
+      },
+      data: {
+        ...campaign
+      }
+    });
+
+    return {
+      success: true
+    };
+  } catch (error) {
+    return {
+      error: true
+    };
+  }
+};
+
+// import db from "@/lib/db";
 // import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 // const TableName = process.env.AWS_DYNAMODB_CAMPAIGNS_TABLE_NAME;
@@ -38,24 +60,3 @@ import { Campaign } from "@/shared/types/campaign";
 //     return null;
 //   }
 // };
-
-export const updateCampaign = async (campaign: Campaign) => {
-  try {
-    await prisma.campaigns.update({
-      where: {
-        campaignId: campaign.campaignId
-      },
-      data: {
-        ...campaign
-      }
-    });
-
-    return {
-      success: true
-    };
-  } catch (error) {
-    return {
-      error: true
-    };
-  }
-};
