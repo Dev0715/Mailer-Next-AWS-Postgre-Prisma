@@ -6,10 +6,13 @@ export const groupCampaigns = (campaigns: Campaign[]) => {
     const month = campaign.lastUpdated.toLocaleString("default", {
       month: "long"
     });
-    if (!groupedCampaigns[month]) {
-      groupedCampaigns[month] = [];
+    const year = campaign.lastUpdated.getFullYear();
+    const monthYear = `${month}, ${year}`;
+
+    if (!groupedCampaigns[monthYear]) {
+      groupedCampaigns[monthYear] = [];
     }
-    groupedCampaigns[month].push(campaign);
+    groupedCampaigns[monthYear].push(campaign);
   });
   return groupedCampaigns;
 };
