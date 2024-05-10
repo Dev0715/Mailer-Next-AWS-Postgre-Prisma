@@ -59,18 +59,22 @@ const CampaignPage = () => {
           </Link>
         </Button>
       </div>
-      <div className="flex flex-col gap-y-4">
-        <p className="text-lg text-gray-500">April, 2024 (2)</p>
-        {campaigns.map((campaign) => (
-          <div key={campaign.campaignId} className="flex flex-col gap-y-4">
-            <Separator />
-            <CampaignItem
-              campaign={campaign}
-              onRemove={() => onRemove(campaign.campaignId)}
-            />
+      {groupedCampaigns &&
+        Object.keys(groupedCampaigns).length === 0 &&
+        Object.keys(groupedCampaigns).map((month) => (
+          <div className="flex flex-col gap-y-4">
+            <p className="text-lg text-gray-500">April, 2024 (2)</p>
+            {campaigns.map((campaign) => (
+              <div key={campaign.campaignId} className="flex flex-col gap-y-4">
+                <Separator />
+                <CampaignItem
+                  campaign={campaign}
+                  onRemove={() => onRemove(campaign.campaignId)}
+                />
+              </div>
+            ))}
           </div>
         ))}
-      </div>
     </main>
   );
 };
