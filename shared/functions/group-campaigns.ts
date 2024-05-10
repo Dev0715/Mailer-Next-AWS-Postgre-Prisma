@@ -1,6 +1,6 @@
 import { Campaign } from "../types/campaign";
 
-const groupCampaigns = (campaigns: Campaign[]) => {
+export const groupCampaigns = (campaigns: Campaign[]) => {
   const groupedCampaigns: Record<string, Campaign[]> = {};
   campaigns.map((campaign: Campaign) => {
     const month = campaign.lastUpdated.toLocaleString("default", {
