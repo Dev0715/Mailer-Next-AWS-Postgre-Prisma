@@ -53,7 +53,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
         ...savedCampaign.campaign,
         email: savedEmail.email
       });
-      clearRelavantAtoms();
+      clearRelevantAtoms();
     } else {
       //  getCampaignById(user?.email as string, campaignId).then((campaign) => {
       getCampaignById(campaignId).then((campaign) => {
@@ -66,7 +66,7 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
     }
   }, []);
 
-  const clearRelavantAtoms = () => {
+  const clearRelevantAtoms = () => {
     setSavedCampaign({
       isSaved: false,
       campaign: savedCampaign.campaign
