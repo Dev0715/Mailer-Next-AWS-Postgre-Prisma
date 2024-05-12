@@ -6,7 +6,7 @@ import { getUserByEmail } from "@/data/user/user-by-email";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Spinner } from "@nextui-org/spinner";
 import { Segment } from "@/shared/types/segment";
-import { getNubmersOfSubscribersByCondition } from "@/data/audience/count-subscribers-condition";
+import { getNumbersOfSubscribersByCondition } from "@/data/audience/count-subscribers-condition";
 import { getConditionFromFilters } from "@/shared/functions/condition-from-filters";
 
 type Props = {
@@ -27,7 +27,7 @@ const MonitorSegment = ({ segment, onFinish }: Props) => {
     });
 
     const condition = getConditionFromFilters(segment.filters);
-    getNubmersOfSubscribersByCondition(condition).then((_count) => {
+    getNumbersOfSubscribersByCondition(condition).then((_count) => {
       setCount(_count || 0);
     });
   }, []);
