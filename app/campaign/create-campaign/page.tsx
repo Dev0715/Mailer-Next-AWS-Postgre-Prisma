@@ -50,7 +50,9 @@ const NewCampaign = () => {
       createCampaign({
         userEmail: user?.email as string,
         campaignId: newCampaignId,
-        title: values.title
+        title: values.title,
+        state: "draft",
+        lastUpdated: new Date()
       }).then((data) => {
         if (data.error) {
           setError("Internal Server Error");
