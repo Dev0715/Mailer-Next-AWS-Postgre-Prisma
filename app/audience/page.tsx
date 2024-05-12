@@ -52,8 +52,8 @@ const AudiencePage = () => {
             <p className="text-base text-gray-700">from 0 (last 4 weeks)</p>
           </div>
           <Badge
-            variant="default"
-            className="flex gap-x-1 py-1 rounded-full bg-gray-700"
+            variant={"secondary"}
+            className="flex gap-x-1 py-1 rounded-full"
           >
             - 0%
           </Badge>
@@ -65,8 +65,8 @@ const AudiencePage = () => {
             <p className="text-base text-gray-700">from 0 (last 4 weeks)</p>
           </div>
           <Badge
-            variant="default"
-            className="flex gap-x-1 py-1 rounded-full bg-gray-700"
+            variant={"secondary"}
+            className="flex gap-x-1 py-1 rounded-full"
           >
             - 0%
           </Badge>
