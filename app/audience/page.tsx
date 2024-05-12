@@ -23,24 +23,26 @@ const AudiencePage = () => {
       <p className="text-xl pb-6">
         Your audience has{" "}
         <Blue>
-          <Strong>17</Strong>{" "}
+          <Strong>{totalNumber}</Strong>{" "}
         </Blue>{" "}
         contacts.{" "}
         <Blue>
-          <Strong>15</Strong>
+          <Strong>{validatedNumber}</Strong>
         </Blue>{" "}
-        of these are subscribed.
+        of these are validated.
       </p>
 
       <div className="w-full flex gap-x-6 pb-6">
         <Card className="w-[400px] flex items-center justify-between px-8 py-4">
           <div className="flex flex-col gap-y-2">
             <p className="text-xl font-semibold">Subscribers</p>
-            <p className="text-lg font-semibold">170</p>
-            <p className="text-base text-gray-700">from 50 (last 4 weeks)</p>
+            <p className="text-lg font-semibold">{totalNumber}</p>
+            <p className="text-base text-gray-700">
+              from {lastNumber} (last 4 weeks)
+            </p>
           </div>
           <Badge variant="default" className="flex gap-x-1 py-1 rounded-full">
-            <FaArrowUp /> 100%
+            <FaArrowUp /> {increasedPercent}%
           </Badge>
         </Card>
         <Card className="w-[400px] flex items-center justify-between px-8 py-4">
