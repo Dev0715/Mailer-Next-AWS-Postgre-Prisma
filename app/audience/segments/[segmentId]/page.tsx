@@ -54,9 +54,11 @@ export default function CustomersInSegment({ params }: Props) {
 
   useEffect(() => {
     getSegmentById(user?.email as string, params.segmentId).then((_segment) => {
-      if (!_segment) return;
+      if (!_segment) {
+        return;
+      }
+
       const condition = getConditionFromFilters(_segment.filters);
-      console.log(condition);
       getAllSubscribersByCondition(condition).then((_subscribers) => {
         if (!_subscribers) {
           setCustomers([]);
@@ -66,19 +68,6 @@ export default function CustomersInSegment({ params }: Props) {
           );
         }
       });
-
-      // ## Dynamo DB ##
-      // getAllSubscribersByEmail(user?.email as string).then(
-      //   (customers: any) => {
-      //     if (customers) {
-      //       setCustomers(
-      //         customers.filter((customer: Subscriber) =>
-      //           isFiltered(customer, res.filters)
-      //         )
-      //       );
-      //     }
-      //   }
-      // );
     });
   }, []);
 
