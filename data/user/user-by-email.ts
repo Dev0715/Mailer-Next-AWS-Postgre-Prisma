@@ -1,6 +1,6 @@
 "use server";
 
-import db from "@/lib/dynamo";
+import dynamoDB from "@/lib/dynamo";
 import { GetCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_USER_TABLE_NAME;
