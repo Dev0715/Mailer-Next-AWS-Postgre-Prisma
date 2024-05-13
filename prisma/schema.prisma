@@ -41,4 +41,7 @@ model campaigns {
   bouncedEmails String[]  @db.VarChar
   state         String?   @db.VarChar
   lastUpdated   DateTime? @db.Timestamptz(6)
+  openedNumber  Int?
+  unsubedNumber Int?
+  bouncedNumber Int?
 }
