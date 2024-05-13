@@ -12,7 +12,7 @@ export const getUserByEmail = async (email: string) => {
   });
 
   try {
-    const response = await db.send(command);
+    const response = await dynamoDB.send(command);
     return response.Item;
   } catch (error) {
     return null;
