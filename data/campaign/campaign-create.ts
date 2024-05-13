@@ -1,14 +1,9 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { Campaign } from "@/shared/types/campaign";
 
-type Params = {
-  userEmail: string;
-  campaignId: string;
-  title: string;
-};
-
-export const createCampaign = async (data: Params) => {
+export const createCampaign = async (data: Campaign) => {
   try {
     await prisma.campaigns.create({
       data: {
@@ -20,23 +15,3 @@ export const createCampaign = async (data: Params) => {
     return { error: true };
   }
 };
-
-// import db from "@/lib/db";
-// import { PutCommand } from "@aws-sdk/lib-dynamodb";
-// const TableName = process.env.AWS_DYNAMODB_CAMPAIGNS_TABLE_NAME;
-
-// export const createCampaign = async (data: Params) => {
-//   const command = new PutCommand({
-//     TableName,
-//     Item: {
-//       ...data
-//     }
-//   });
-
-//   try {
-//     const response = await db.send(command);
-//     return { success: true, response };
-//   } catch (error) {
-//     return { error };
-//   }
-// };
