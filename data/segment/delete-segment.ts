@@ -1,6 +1,6 @@
 "use server";
 
-import db from "@/lib/dynamo";
+import dynamoDB from "@/lib/dynamo";
 import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
 
 const TableName = process.env.AWS_DYNAMODB_SEGMENTS_TABLE_NAME;
@@ -12,7 +12,7 @@ export const deleteSegment = async (userEmail: string, segmentId: string) => {
   });
 
   try {
-    await db.send(command);
+    await dynamoDB.send(command);
     return {
       success: true
     };
