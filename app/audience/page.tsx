@@ -1,11 +1,12 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import AreaChartPlot from "@/components/utils/areachart-plot";
+import AreaChartPlot, { ChartItem } from "@/components/utils/areachart-plot";
 import { StatisticsCard } from "@/components/utils/statistics-card";
 import { getNumbersOfSubscribersByCondition } from "@/data/audience/count-subscribers-condition";
 import { getAllCampaignsForStatistics } from "@/data/campaign/campaigns-for-statistics";
 import { useCurrentUser } from "@/hooks/use-current-user";
+import { getFirstDateOfMonthsAgo } from "@/shared/functions/get-date-months-ago";
 import { useEffect, useState } from "react";
 
 const Blue = ({ children }: { children: React.ReactNode }) => {
@@ -19,9 +20,10 @@ const Strong = ({ children }: { children: React.ReactNode }) => {
 const AudiencePage = () => {
   const user = useCurrentUser();
 
+  const [validatedNumber, setValidatedNumber] = useState<number>(0);
   const [totalNumber, setTotalNumber] = useState<number>(0);
   const [lastNumber, setLastNumber] = useState<number>(0);
-  const [validatedNumber, setValidatedNumber] = useState<number>(0);
+  const [chartData, setChartData] = useState<ChartItem[]>([]);
 
   useEffect(() => {
     getNumbersOfSubscribersByCondition().then((numbers) => {
@@ -36,8 +38,17 @@ const AudiencePage = () => {
   }, []);
 
   const getStatistics = () => {
+    const _chartData: ChartItem[] = [];
+    [4, 3, 2, 1, 0].map((i) => {
+      const _date = getFirstDateOfMonthsAgo(i).toLocaleDateString("default", {
+        month: "long"
+      });
+    });
+
     getAllCampaignsForStatistics(user?.email as string).then((campaigns) => {
-      console.log(campaigns);
+      if (!campaigns) {
+        return;
+      }
     });
   };
 
@@ -61,7 +72,6 @@ const AudiencePage = () => {
         validated: true
       }
     };
-
     const validatedNumber = await getNumbersOfSubscribersByCondition(condition);
     return validatedNumber || 0;
   };
