@@ -36,10 +36,10 @@ const AudiencePage = () => {
     getNumbersOfValidated().then((numbers) => {
       setValidatedNumber(numbers || 0);
     });
-    getStatistics();
+    getStatisticsForCampaigns();
   }, []);
 
-  const getStatistics = () => {
+  const getStatisticsForCampaigns = () => {
     const _chartData: ChartItem[] = [];
     [4, 3, 2, 1, 0].map((i) => {
       const _monthYear = getMonthYearStr(getFirstDateOfMonthsAgo(i));
@@ -55,13 +55,40 @@ const AudiencePage = () => {
         return;
       }
 
+      const _rate_last = {
+        sent: 0,
+        opened: 0,
+        unsubscribed: 0
+      };
+
+      const _rate_new = {
+        sent: 0,
+        opened: 0,
+        unsubscribed: 0
+      };
+
+      const date4WeeksAgo = new Date(new Date().getDate() - 7 * 4);
+
       campaigns.map((campaign) => {
         const _monthYear = getMonthYearStr(campaign.lastUpdated);
+
         const index = _chartData.findIndex((item) => item.month === _monthYear);
         if (index !== -1) {
           _chartData[index].Sent +=
             (campaign.to as { totalNumber?: number }).totalNumber || 0;
           _chartData[index].Opened += campaign.openedNumber || 0;
+        }
+
+        _rate_new.sent +=
+          (campaign.to as { totalNumber?: number }).totalNumber || 0;
+        _rate_new.opened += campaign.openedNumber || 0;
+        _rate_new.unsubscribed += campaign.unsubedNumber || 0;
+
+        if ((campaign.lastUpdated as Date) > date4WeeksAgo) {
+          _rate_last.sent +=
+            (campaign.to as { totalNumber?: number }).totalNumber || 0;
+          _rate_last.opened += campaign.openedNumber || 0;
+          _rate_last.unsubscribed += campaign.unsubedNumber || 0;
         }
       });
 
