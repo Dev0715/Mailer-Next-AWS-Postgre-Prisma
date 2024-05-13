@@ -57,6 +57,29 @@ const AudiencePage = () => {
     return lastNumber || 0;
   };
 
+  const getNumbersOfValidated = async () => {
+    const condition = {
+      where: {
+        validated: true
+      }
+    };
+
+    const validatedNumber = await getNumbersOfSubscribersByCondition(condition);
+    return validatedNumber || 0;
+  };
+
+  const increasedPercent = useMemo(() => {
+    if (lastNumber === 0) {
+      if (totalNumber === 0) {
+        return 0;
+      } else {
+        return 100;
+      }
+    }
+
+    return ((totalNumber - lastNumber) * 100) / lastNumber;
+  }, [totalNumber, lastNumber]);
+
   return (
     <main className="w-5/6 flex flex-col py-6">
       <p className="text-5xl text-green-700 font-semibold pb-6">
