@@ -71,9 +71,20 @@ export const Navbar = () => {
                   ))}
                 </ul>
               </NavigationMenuContent>
-            )}
-          </NavigationMenuItem>
-        ))}
+            </NavigationMenuItem>
+          ) : (
+            <NavigationMenuItem key={menuItem.href}>
+              <Link href={menuItem.href || ""} legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={navigationMenuTriggerStyle()}
+                  active={path === menuItem.href}
+                >
+                  {menuItem.title}
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          )
+        )}
       </NavigationMenuList>
     </NavigationMenu>
   );
