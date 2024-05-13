@@ -8,35 +8,13 @@ import {
   CartesianGrid
 } from "recharts";
 
-const AreaChartPlot = () => {
-  const data = [
-    {
-      month: "03",
-      Sent: 400,
-      Opened: 250
-    },
-    {
-      month: "04",
-      Sent: 0,
-      Opened: 0
-    },
-    {
-      month: "05",
-      Sent: 400,
-      Opened: 370
-    },
-    {
-      month: "06",
-      Sent: 200,
-      Opened: 100
-    },
-    {
-      month: "07",
-      Sent: 350,
-      Opened: 250
-    }
-  ];
+export type ChartItem = {
+  month: string;
+  Sent: number;
+  Opened: number;
+};
 
+const AreaChartPlot = ({ data }: { data: ChartItem[] }) => {
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
