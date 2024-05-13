@@ -35,15 +35,25 @@ const AudiencePage = () => {
     getNumbersOfValidated().then((numbers) => {
       setValidatedNumber(numbers || 0);
     });
+    getStatistics();
   }, []);
 
   const getStatistics = () => {
     const _chartData: ChartItem[] = [];
     [4, 3, 2, 1, 0].map((i) => {
-      const _date = getFirstDateOfMonthsAgo(i).toLocaleDateString("default", {
+      const _date = getFirstDateOfMonthsAgo(i);
+      const _month = _date.toLocaleDateString("default", {
         month: "long"
       });
+      const _year = _date.getFullYear();
+      const _monthYear = `${_month}, ${_year}`;
+      _chartData.push({
+        month: _monthYear,
+        Sent: 0,
+        Opened: 0
+      });
     });
+    setChartData(_chartData);
 
     getAllCampaignsForStatistics(user?.email as string).then((campaigns) => {
       if (!campaigns) {
@@ -119,7 +129,7 @@ const AudiencePage = () => {
         </CardHeader>
         <CardContent>
           <div className="w-full h-[480px]">
-            <AreaChartPlot />
+            <AreaChartPlot data={chartData} />
           </div>
         </CardContent>
       </Card>
