@@ -7,6 +7,7 @@ import { getNumbersOfSubscribersByCondition } from "@/data/audience/count-subscr
 import { getAllCampaignsForStatistics } from "@/data/campaign/campaigns-for-statistics";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { getFirstDateOfMonthsAgo } from "@/shared/functions/get-date-months-ago";
+import { getMonthYearStr } from "@/shared/functions/get-month-year-str";
 import { useEffect, useState } from "react";
 
 const Blue = ({ children }: { children: React.ReactNode }) => {
@@ -41,12 +42,7 @@ const AudiencePage = () => {
   const getStatistics = () => {
     const _chartData: ChartItem[] = [];
     [4, 3, 2, 1, 0].map((i) => {
-      const _date = getFirstDateOfMonthsAgo(i);
-      const _month = _date.toLocaleDateString("default", {
-        month: "long"
-      });
-      const _year = _date.getFullYear();
-      const _monthYear = `${_month}, ${_year}`;
+      const _monthYear = getMonthYearStr(getFirstDateOfMonthsAgo(i));
       _chartData.push({
         month: _monthYear,
         Sent: 0,
@@ -60,16 +56,11 @@ const AudiencePage = () => {
       }
 
       campaigns.map((campaign) => {
-        const _date = new Date(campaign.lastUpdated as Date);
-        const _month = _date.toLocaleDateString("default", {
-          month: "long"
-        });
-        const _year = _date.getFullYear();
-        const _monthYear = `${_month}, ${_year}`;
-
+        const _monthYear = getMonthYearStr(campaign.lastUpdated);
         const index = _chartData.findIndex((item) => item.month === _monthYear);
         if (index !== -1) {
-          _chartData[index].Sent += campaign.to?.totalNumber || 0;
+          _chartData[index].Sent +=
+            (campaign.to as { totalNumber?: number }).totalNumber || 0;
           _chartData[index].Opened += campaign.openedNumber || 0;
         }
       });
