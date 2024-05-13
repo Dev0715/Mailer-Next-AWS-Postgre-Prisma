@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { FaPlus } from "react-icons/fa";
 import { Separator } from "@/components/ui/separator";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getAllCampaignsByEmail } from "@/data/campaign/campaigns-all";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { Campaign } from "@/shared/types/campaign";
@@ -37,16 +37,19 @@ const CampaignPage = () => {
         }) as Campaign[];
 
         setCampaigns(_items);
-        setGroupedCampaigns(groupCampaigns(_items));
       }
     });
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   const onRemove = (campaignId: string) => {
-    // # Need to Stop Trigger? #
-    // setCampaigns((prevCampaigns) =>
-    //   prevCampaigns.filter((campaign) => campaign.campaignId !== campaignId)
-    // );
+    // # Need to Stop Lambda? #
+    setCampaigns((prevCampaigns) =>
+      prevCampaigns.filter((campaign) => campaign.campaignId !== campaignId)
+    );
   };
 
   return (
