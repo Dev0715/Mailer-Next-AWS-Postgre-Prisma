@@ -14,12 +14,19 @@ import { groupCampaigns } from "@/shared/functions/group-campaigns";
 const CampaignPage = () => {
   const user = useCurrentUser();
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
-  const [groupedCampaigns, setGroupedCampaigns] = useState<
-    Record<string, Campaign[]>
-  >({});
+
+  const groupedCampaigns: Record<string, Campaign[]> = useMemo(() => {
+    return groupCampaigns(campaigns);
+  }, [campaigns]);
 
   useEffect(() => {
+    let ignore = false;
+
     getAllCampaignsByEmail(user?.email as string).then((items) => {
+      if (ignore) {
+        return;
+      }
+
       if (items) {
         const _items = items.map((_item) => {
           const item = _item as unknown as Campaign;
