@@ -1,4 +1,4 @@
-import db from "@/lib/dynamo";
+import dynamoDB from "@/lib/dynamo";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
 import { generateVerificationToken } from "@/lib/tokens";
 
@@ -30,7 +30,7 @@ export const createUser = async (data: NewUser) => {
   });
 
   try {
-    await db.send(command);
+    await dynamoDB.send(command);
     return verificationToken;
   } catch (error) {
     return null;
