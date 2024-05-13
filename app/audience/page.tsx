@@ -24,18 +24,18 @@ const AudiencePage = () => {
   const [validatedNumber, setValidatedNumber] = useState<number>(0);
 
   useEffect(() => {
-    // getNumbersOfSubscribersByCondition().then((numbers) => {
-    //   setTotalNumber(numbers || 0);
-    // });
-    // getNumbersOf4WeeksAgo().then((numbers) => {
-    //   setLastNumber(numbers || 0);
-    // });
-    // getNumbersOfValidated().then((numbers) => {
-    //   setValidatedNumber(numbers || 0);
-    // });
+    getNumbersOfSubscribersByCondition().then((numbers) => {
+      setTotalNumber(numbers || 0);
+    });
+    getNumbersOf4WeeksAgo().then((numbers) => {
+      setLastNumber(numbers || 0);
+    });
+    getNumbersOfValidated().then((numbers) => {
+      setValidatedNumber(numbers || 0);
+    });
   }, []);
 
-  const getStatistics = async () => {
+  const getStatistics = () => {
     getAllCampaignsForStatistics(user?.email as string).then((campaigns) => {
       console.log(campaigns);
     });
