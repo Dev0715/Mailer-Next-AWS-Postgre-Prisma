@@ -1,14 +1,12 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import AreaChartPlot from "@/components/utils/areachart-plot";
 import { StatisticsCard } from "@/components/utils/statistics-card";
 import { getNumbersOfSubscribersByCondition } from "@/data/audience/count-subscribers-condition";
 import { getAllCampaignsForStatistics } from "@/data/campaign/campaigns-for-statistics";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { useEffect, useMemo, useState } from "react";
-import { FaArrowUp } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 const Blue = ({ children }: { children: React.ReactNode }) => {
   return <span className="text-blue-700">{children}</span>;
@@ -69,24 +67,25 @@ const AudiencePage = () => {
   };
 
   return (
-    <main className="w-5/6 flex flex-col py-6">
-      <p className="text-5xl text-green-700 font-semibold pb-6">
-        Audience Dashboard
-      </p>
-      <p className="text-2xl font-semibold pb-2">Hi, Malachi Uy!</p>
-      <p className="text-xl pb-6">
-        Your audience has{" "}
-        <Blue>
-          <Strong>{totalNumber}</Strong>{" "}
-        </Blue>{" "}
-        contacts.{" "}
-        <Blue>
-          <Strong>{validatedNumber}</Strong>
-        </Blue>{" "}
-        of these are validated.
-      </p>
+    <main className="w-5/6 flex flex-col gap-y-6 py-6">
+      <div className="flex flex-col gap-y-2">
+        <p className="text-3xl text-green-700 font-semibold">
+          Audience Dashboard
+        </p>
+        <p className="text-xl">
+          Your audience has{" "}
+          <Blue>
+            <Strong>{totalNumber}</Strong>{" "}
+          </Blue>{" "}
+          contacts.{" "}
+          <Blue>
+            <Strong>{validatedNumber}</Strong>
+          </Blue>{" "}
+          of these are validated.
+        </p>
+      </div>
 
-      <div className="w-full flex gap-x-6 pb-6">
+      <div className="w-full flex gap-x-6">
         <StatisticsCard
           title="Subscribers"
           newValue={totalNumber}
