@@ -88,13 +88,25 @@ const AudiencePage = () => {
         _rate_new.opened += campaign.openedNumber || 0;
         _rate_new.unsubscribed += campaign.unsubedNumber || 0;
 
-        if ((campaign.lastUpdated as Date) > date4WeeksAgo) {
+        if ((campaign.lastUpdated as Date) < date4WeeksAgo) {
           _rate_last.sent +=
             (campaign.to as { totalNumber?: number }).totalNumber || 0;
           _rate_last.opened += campaign.openedNumber || 0;
           _rate_last.unsubscribed += campaign.unsubedNumber || 0;
         }
       });
+
+      if (_rate_new.sent > 0) {
+        setOpenedRate((_rate_new.opened * 100) / _rate_new.sent);
+        setUnsubscribedRate((_rate_new.unsubscribed * 100) / _rate_new.sent);
+      }
+
+      if (_rate_last.sent > 0) {
+        setLastOpenedRate((_rate_last.opened * 100) / _rate_last.sent);
+        setLastUnsubscribedRate(
+          (_rate_last.unsubscribed * 100) / _rate_last.sent
+        );
+      }
 
       setChartData(_chartData);
     });
