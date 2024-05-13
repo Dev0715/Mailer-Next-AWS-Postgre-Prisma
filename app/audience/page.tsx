@@ -37,6 +37,26 @@ const AudiencePage = () => {
     // });
   }, []);
 
+  const getStatistics = async () => {
+    getAllCampaignsForStatistics(user?.email as string).then((campaigns) => {
+      console.log(campaigns);
+    });
+  };
+
+  const getNumbersOf4WeeksAgo = async () => {
+    const conditionDate = new Date();
+    conditionDate.setDate(conditionDate.getDate() - 7 * 4);
+
+    const condition = {
+      where: {
+        created: { lt: conditionDate }
+      }
+    };
+
+    const lastNumber = await getNumbersOfSubscribersByCondition(condition);
+    return lastNumber || 0;
+  };
+
   return (
     <main className="w-5/6 flex flex-col py-6">
       <p className="text-5xl text-green-700 font-semibold pb-6">
