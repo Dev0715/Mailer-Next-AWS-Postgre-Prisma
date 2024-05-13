@@ -53,12 +53,28 @@ const AudiencePage = () => {
         Opened: 0
       });
     });
-    setChartData(_chartData);
 
     getAllCampaignsForStatistics(user?.email as string).then((campaigns) => {
       if (!campaigns) {
         return;
       }
+
+      campaigns.map((campaign) => {
+        const _date = new Date(campaign.lastUpdated as Date);
+        const _month = _date.toLocaleDateString("default", {
+          month: "long"
+        });
+        const _year = _date.getFullYear();
+        const _monthYear = `${_month}, ${_year}`;
+
+        const index = _chartData.findIndex((item) => item.month === _monthYear);
+        if (index !== -1) {
+          _chartData[index].Sent += campaign.to?.totalNumber || 0;
+          _chartData[index].Opened += campaign.openedNumber || 0;
+        }
+      });
+
+      setChartData(_chartData);
     });
   };
 
