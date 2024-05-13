@@ -4,7 +4,8 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  ResponsiveContainer
+  ResponsiveContainer,
+  CartesianGrid
 } from "recharts";
 
 const AreaChartPlot = () => {
@@ -12,27 +13,27 @@ const AreaChartPlot = () => {
     {
       month: "03",
       Sent: 400,
-      Received: 250
+      Opened: 250
     },
     {
       month: "04",
-      Sent: 350,
-      Received: 120
+      Sent: 0,
+      Opened: 0
     },
     {
       month: "05",
       Sent: 400,
-      Received: 370
+      Opened: 370
     },
     {
       month: "06",
       Sent: 200,
-      Received: 100
+      Opened: 100
     },
     {
       month: "07",
       Sent: 350,
-      Received: 250
+      Opened: 250
     }
   ];
 
@@ -45,32 +46,21 @@ const AreaChartPlot = () => {
           data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
-          <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-            </linearGradient>
-            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
-            </linearGradient>
-          </defs>
+          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <YAxis />
           <Tooltip />
           <Area
             type="monotone"
             dataKey="Sent"
-            stroke="#8884d8"
-            fillOpacity={1}
-            fill="url(#colorUv)"
+            stroke="#ffc658"
+            fill="#ffc658"
           />
           <Area
             type="monotone"
-            dataKey="Received"
+            dataKey="Opened"
             stroke="#82ca9d"
-            fillOpacity={1}
-            fill="url(#colorPv)"
+            fill="#82ca9d"
           />
         </AreaChart>
       </ResponsiveContainer>
