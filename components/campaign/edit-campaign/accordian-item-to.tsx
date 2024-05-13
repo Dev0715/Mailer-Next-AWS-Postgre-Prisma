@@ -19,7 +19,7 @@ import { useEffect, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { FcCancel } from "react-icons/fc";
 import { getConditionFromFilters } from "@/shared/functions/condition-from-filters";
-import { getNubmersOfSubscribersByCondition } from "@/data/audience/count-subscribers-condition";
+import { getNumbersOfSubscribersByCondition } from "@/data/audience/count-subscribers-condition";
 
 type Props = {
   campaign: Campaign;
@@ -56,7 +56,7 @@ export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
   const onSave = () => {
     startTransition(() => {
       const condition = getConditionFromFilters(segments[selectedInex].filters);
-      getNubmersOfSubscribersByCondition(condition).then((_count) => {
+      getNumbersOfSubscribersByCondition(condition).then((_count) => {
         const totalNumber = _count || 0;
         if (totalNumber === 0) {
           setError("No subscribers found in this segment");
