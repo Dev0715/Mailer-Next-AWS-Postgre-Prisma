@@ -24,6 +24,10 @@ const AudiencePage = () => {
   const [validatedNumber, setValidatedNumber] = useState<number>(0);
   const [totalNumber, setTotalNumber] = useState<number>(0);
   const [lastNumber, setLastNumber] = useState<number>(0);
+  const [openedRate, setOpenedRate] = useState<number>(0);
+  const [lastOpenedRate, setLastOpenedRate] = useState<number>(0);
+  const [unsubscribedRate, setUnsubscribedRate] = useState<number>(0);
+  const [lastUnsubscribedRate, setLastUnsubscribedRate] = useState<number>(0);
   const [chartData, setChartData] = useState<ChartItem[]>([]);
 
   useEffect(() => {
@@ -147,13 +151,13 @@ const AudiencePage = () => {
         />
         <StatisticsCard
           title="Open Rate"
-          newValue={totalNumber}
-          lastValue={lastNumber}
+          newValue={openedRate}
+          lastValue={lastOpenedRate}
         />
         <StatisticsCard
           title="Unsubscribe Rate"
-          newValue={totalNumber}
-          lastValue={lastNumber}
+          newValue={unsubscribedRate}
+          lastValue={lastUnsubscribedRate}
         />
       </div>
 
