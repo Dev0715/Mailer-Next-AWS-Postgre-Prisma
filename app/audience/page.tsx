@@ -10,14 +10,6 @@ import { getFirstDateOfMonthsAgo } from "@/shared/functions/get-date-months-ago"
 import { getMonthYearStr } from "@/shared/functions/get-month-year-str";
 import { useEffect, useState } from "react";
 
-const Blue = ({ children }: { children: React.ReactNode }) => {
-  return <span className="text-blue-700">{children}</span>;
-};
-
-const Strong = ({ children }: { children: React.ReactNode }) => {
-  return <span className="font-semibold">{children}</span>;
-};
-
 const AudiencePage = () => {
   const user = useCurrentUser();
 
@@ -185,6 +177,14 @@ const AudiencePage = () => {
       </Card>
     </main>
   );
+};
+
+const Blue = ({ children }: { children: React.ReactNode }) => {
+  return <span className="text-blue-700">{children}</span>;
+};
+
+const Strong = ({ children }: { children: React.ReactNode }) => {
+  return <span className="font-semibold">{children}</span>;
 };
 
 export default AudiencePage;
