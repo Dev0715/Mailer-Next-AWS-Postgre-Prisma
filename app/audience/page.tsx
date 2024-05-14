@@ -156,7 +156,7 @@ const AudiencePage = () => {
         <p className="text-xl">
           Your audience has{" "}
           <Blue>
-            <Strong>{totalNumber}</Strong>{" "}
+            <Strong>{subscriberCnt.new}</Strong>{" "}
           </Blue>{" "}
           contacts.{" "}
           <Blue>
