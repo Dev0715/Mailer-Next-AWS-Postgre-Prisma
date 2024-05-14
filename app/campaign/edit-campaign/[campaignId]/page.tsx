@@ -10,9 +10,9 @@ import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
 import { Segment } from "@/shared/types/segment";
 import { AccordionItemTo } from "@/components/campaign/edit-campaign/accordian-item-to";
 import { AccordionItemFrom } from "@/components/campaign/edit-campaign/accordian-item-from";
-import { AccordianItemSubject } from "@/components/campaign/edit-campaign/accordian-item-subject";
-import { AccordianItemTime } from "@/components/campaign/edit-campaign/accordian-item-time";
-import { AccordianItemContent } from "@/components/campaign/edit-campaign/accordian-item-content";
+import { AccordionItemSubject } from "@/components/campaign/edit-campaign/accordian-item-subject";
+import { AccordionItemTime } from "@/components/campaign/edit-campaign/accordian-item-time";
+import { AccordionItemContent } from "@/components/campaign/edit-campaign/accordian-item-content";
 import { useAtom } from "jotai";
 import { savedEmailAtom } from "@/store/saved-email-atom";
 import { savedCampaignAtom } from "@/store/saved-campaign-atom";
@@ -219,19 +219,19 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
                 setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
               }
             />
-            <AccordianItemSubject
+            <AccordionItemSubject
               campaign={campaign as Campaign}
               setCampaign={
                 setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
               }
             />
-            <AccordianItemTime
+            <AccordionItemTime
               campaign={campaign as Campaign}
               setCampaign={
                 setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
               }
             />
-            <AccordianItemContent
+            <AccordionItemContent
               campaign={campaign as Campaign}
               setCampaign={
                 setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
