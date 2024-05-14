@@ -2,7 +2,7 @@
 
 import { getAllIdentities } from "@/data/email/all-identities";
 
-export const checkIdentity = async (email: string) => {
+export const checkIdentityStatus = async (email: string) => {
   const res = await getAllIdentities();
   if (res.error) {
     return { error: "Failed to get identities" };
