@@ -36,7 +36,7 @@ type Props = {
   setCampaign: React.Dispatch<React.SetStateAction<Campaign>>;
 };
 
-export const AccordianItemTime = ({ campaign, setCampaign }: Props) => {
+export const AccordionItemTime = ({ campaign, setCampaign }: Props) => {
   const [isChanged, setChanged] = useState<boolean>(false);
   const [instant, setInstant] = useState<boolean>(false);
 
