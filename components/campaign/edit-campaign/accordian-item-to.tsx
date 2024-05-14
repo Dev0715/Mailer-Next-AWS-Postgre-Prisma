@@ -27,7 +27,7 @@ type Props = {
   segments: Segment[];
 };
 
-export const AccordianItemTo = ({ campaign, setCampaign, segments }: Props) => {
+export const AccordionItemTo = ({ campaign, setCampaign, segments }: Props) => {
   const [isPending, startTransition] = useTransition();
 
   const [isChanged, setChanged] = useState<boolean>(false);
