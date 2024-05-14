@@ -169,18 +169,18 @@ const AudiencePage = () => {
       <div className="w-full flex gap-x-6">
         <StatisticsCard
           title="Subscribers"
-          newValue={totalNumber}
-          lastValue={lastNumber}
+          newValue={subscriberCnt.new}
+          lastValue={subscriberCnt.last}
         />
         <StatisticsCard
           title="Open Rate"
-          newValue={openedRate}
-          lastValue={lastOpenedRate}
+          newValue={openedRate.new}
+          lastValue={openedRate.last}
         />
         <StatisticsCard
           title="Unsubscribe Rate"
-          newValue={unsubscribedRate}
-          lastValue={lastUnsubscribedRate}
+          newValue={unsubscribedRate.new}
+          lastValue={unsubscribedRate.last}
         />
       </div>
 
