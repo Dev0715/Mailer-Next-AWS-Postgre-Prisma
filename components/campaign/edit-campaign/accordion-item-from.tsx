@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { CampaignFromSchema } from "@/schemas/campaign";
 import { Campaign } from "@/shared/types/campaign";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { FaCheck, FaSave } from "react-icons/fa";
 import { FcCancel } from "react-icons/fc";
@@ -28,7 +28,10 @@ type Props = {
 };
 
 export const AccordionItemFrom = ({ campaign, setCampaign }: Props) => {
+  const [isPending, startTransition] = useTransition();
+
   const [isChanged, setChanged] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const fromForm = useForm<z.infer<typeof CampaignFromSchema>>({
     resolver: zodResolver(CampaignFromSchema),
