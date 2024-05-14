@@ -1,6 +1,6 @@
 "use server";
 
-import db from "@/lib/dynamo";
+import dynamoDB from "@/lib/dynamo";
 import { Segment } from "@/shared/types/segment";
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
@@ -21,7 +21,7 @@ export const updateSegment = async (segment: Segment) => {
   });
 
   try {
-    await db.send(command);
+    await dynamoDB.send(command);
     return {
       success: true
     };
