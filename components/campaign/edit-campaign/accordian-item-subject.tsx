@@ -27,7 +27,7 @@ type Props = {
   setCampaign: React.Dispatch<React.SetStateAction<Campaign>>;
 };
 
-export const AccordianItemSubject = ({ campaign, setCampaign }: Props) => {
+export const AccordionItemSubject = ({ campaign, setCampaign }: Props) => {
   const [isChanged, setChanged] = useState<boolean>(false);
 
   const subjectForm = useForm<z.infer<typeof CampaignSubjectSchema>>({
