@@ -8,8 +8,8 @@ import { useEffect, useState, useTransition } from "react";
 import { Accordion } from "@/components/ui/accordion";
 import { getAllSegmentsByEmail } from "@/data/segment/all-segments";
 import { Segment } from "@/shared/types/segment";
-import { AccordianItemTo } from "@/components/campaign/edit-campaign/accordian-item-to";
-import { AccordianItemFrom } from "@/components/campaign/edit-campaign/accordian-item-from";
+import { AccordionItemTo } from "@/components/campaign/edit-campaign/accordian-item-to";
+import { AccordionItemFrom } from "@/components/campaign/edit-campaign/accordian-item-from";
 import { AccordianItemSubject } from "@/components/campaign/edit-campaign/accordian-item-subject";
 import { AccordianItemTime } from "@/components/campaign/edit-campaign/accordian-item-time";
 import { AccordianItemContent } from "@/components/campaign/edit-campaign/accordian-item-content";
@@ -206,14 +206,14 @@ const EditCampaignPage = ({ params: { campaignId } }: Props) => {
       <div className="w-full flex gap-x-6">
         <div className="w-2/3 flex flex-col gap-y-6">
           <Accordion type={"multiple"} className="w-full">
-            <AccordianItemTo
+            <AccordionItemTo
               campaign={campaign as Campaign}
               setCampaign={
                 setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
               }
               segments={segments}
             />
-            <AccordianItemFrom
+            <AccordionItemFrom
               campaign={campaign as Campaign}
               setCampaign={
                 setCampaign as React.Dispatch<React.SetStateAction<Campaign>>
