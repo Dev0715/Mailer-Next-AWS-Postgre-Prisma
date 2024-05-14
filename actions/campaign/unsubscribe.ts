@@ -22,7 +22,8 @@ export const unsubscribe = async (params: Params) => {
   }
 
   const unsubEmails = [..._unsubEmails, subscriberEmail];
-  const res = await updateCampaignUnsub(campaignId, unsubEmails);
+  const unsubedNumber = unsubEmails.length;
+  const res = await updateCampaignUnsub(campaignId, unsubEmails, unsubedNumber);
 
   if (res.success) {
     return { success: true };
