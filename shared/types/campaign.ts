@@ -35,6 +35,11 @@ export type Campaign = {
   };
 
   openedEmails?: string[];
+  openedNumber?: number;
+
   unsubEmails?: string[];
+  unsubedNumber?: number;
+
   bouncedEmails?: string[];
+  bouncedNumber?: number;
 };
