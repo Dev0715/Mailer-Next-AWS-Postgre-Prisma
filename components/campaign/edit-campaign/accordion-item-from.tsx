@@ -139,7 +139,11 @@ export const AccordionItemFrom = ({ campaign, setCampaign }: Props) => {
                     <FormItem className="w-full">
                       <FormLabel>Email*</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="user@mail.com" />
+                        <Input
+                          {...field}
+                          placeholder="user@mail.com"
+                          disabled={isPending}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -150,7 +154,7 @@ export const AccordionItemFrom = ({ campaign, setCampaign }: Props) => {
             {error && <p className="text-xs text-red-600">{error}</p>}
             <div className="flex gap-x-4">
               <Button
-                disabled={!isChanged}
+                disabled={!isChanged || isPending}
                 type="submit"
                 variant="outline"
                 className="w-48 flex items-center gap-x-2 border-green-700"
@@ -159,7 +163,7 @@ export const AccordionItemFrom = ({ campaign, setCampaign }: Props) => {
                 Save
               </Button>
               <Button
-                disabled={!isChanged}
+                disabled={!isChanged || isPending}
                 type="button"
                 variant="outline"
                 className="w-48 flex items-center gap-x-2 border-red-700"
