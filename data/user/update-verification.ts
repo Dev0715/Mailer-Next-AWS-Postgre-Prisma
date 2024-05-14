@@ -15,7 +15,7 @@ export const updateUserVerification = async (userEmail: string) => {
   });
 
   try {
-    await db.send(command);
+    await dynamoDB.send(command);
     return {
       success: true
     };
