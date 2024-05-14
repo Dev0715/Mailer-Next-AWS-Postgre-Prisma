@@ -1,10 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { SignupButton } from "@/components/auth/signup-button";
 import { WrappedButton } from "@/components/utils/wrapped-button";
+import { getAllIdentities } from "@/data/email/all-identities";
 
 const Home = () => {
+  useEffect(() => {
+    getAllIdentities().then((response) => {
+      console.log(response);
+    });
+  }, []);
+
   return (
     <main className="w-full flex flex-col items-center pt-24 pb-6">
       <p className="text-5xl font-semibold pb-6">Turn Emails into Revenue!</p>
