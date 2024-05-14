@@ -62,13 +62,15 @@ export const AccordionItemFrom = ({ campaign, setCampaign }: Props) => {
   };
 
   const onFormChanged = () => {
+    setError("");
+
     const formName = fromForm.getValues("name");
     const formEmail = fromForm.getValues("email");
 
-    const campaignName = campaign?.from?.name || "";
-    const campaignEmail = campaign?.from?.email || "";
+    const nameFrom = campaign?.from?.name || "";
+    const emailFrom = campaign?.from?.email || "";
 
-    if (formName !== campaignName || formEmail !== campaignEmail) {
+    if (formName !== nameFrom || formEmail !== emailFrom) {
       return setChanged(true);
     }
 
