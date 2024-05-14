@@ -129,44 +129,22 @@ const AudiencePage = () => {
         }
       });
 
-      if (_rate_new.sent > 0) {
-        setOpenedRate((_rate_new.opened * 100) / _rate_new.sent);
-        setUnsubscribedRate((_rate_new.unsubscribed * 100) / _rate_new.sent);
-      }
+      setOpenedRate({
+        new: _rate_new.sent ? (_rate_new.opened * 100) / _rate_new.sent : 0,
+        last: _rate_last.sent ? (_rate_last.opened * 100) / _rate_last.sent : 0
+      });
 
-      if (_rate_last.sent > 0) {
-        setLastOpenedRate((_rate_last.opened * 100) / _rate_last.sent);
-        setLastUnsubscribedRate(
-          (_rate_last.unsubscribed * 100) / _rate_last.sent
-        );
-      }
+      setUnsubscribedRate({
+        new: _rate_new.sent
+          ? (_rate_new.unsubscribed * 100) / _rate_new.sent
+          : 0,
+        last: _rate_last.sent
+          ? (_rate_last.unsubscribed * 100) / _rate_last.sent
+          : 0
+      });
 
       setChartData(_chartData);
     });
-  };
-
-  const getNumbersOf4WeeksAgo = async () => {
-    const conditionDate = new Date();
-    conditionDate.setDate(conditionDate.getDate() - 7 * 4);
-
-    const condition = {
-      where: {
-        created: { lt: conditionDate }
-      }
-    };
-
-    const lastNumber = await getNumbersOfSubscribersByCondition(condition);
-    return lastNumber || 0;
-  };
-
-  const getNumbersOfValidated = async () => {
-    const condition = {
-      where: {
-        validated: true
-      }
-    };
-    const validatedNumber = await getNumbersOfSubscribersByCondition(condition);
-    return validatedNumber || 0;
   };
 
   return (
