@@ -28,7 +28,12 @@ export const POST = async (request: NextRequest, { params }: Params) => {
   }
 
   const bouncedEmails = [..._bouncedEmails, subscriberEmail];
-  const res = await updateCampaignBounced(campaignId, bouncedEmails);
+  const bouncedNumber = bouncedEmails.length;
+  const res = await updateCampaignBounced(
+    campaignId,
+    bouncedEmails,
+    bouncedNumber
+  );
 
   if (res.success) {
     return NextResponse.json({ success: true });
