@@ -144,6 +144,7 @@ export const AccordionItemFrom = ({ campaign, setCampaign }: Props) => {
                 />
               </div>
             </div>
+            {error && <p className="text-xs text-red-600">{error}</p>}
             <div className="flex gap-x-4">
               <Button
                 disabled={!isChanged}
