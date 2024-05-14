@@ -111,7 +111,11 @@ export const AccordionItemTo = ({ campaign, setCampaign, segments }: Props) => {
             >
               Select a segment*
             </p>
-            <Select value={selectedInex.toString()} onValueChange={onToChange}>
+            <Select
+              value={selectedInex.toString()}
+              onValueChange={onToChange}
+              disabled={isPending}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Segment you want to send" />
               </SelectTrigger>
