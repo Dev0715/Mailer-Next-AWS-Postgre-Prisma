@@ -10,17 +10,29 @@ import { getFirstDateOfMonthsAgo } from "@/shared/functions/get-date-months-ago"
 import { getMonthYearStr } from "@/shared/functions/get-month-year-str";
 import { useEffect, useState } from "react";
 
+type Count = {
+  new: number;
+  last: number;
+};
+
 const AudiencePage = () => {
   const user = useCurrentUser();
 
   const [validatedNumber, setValidatedNumber] = useState<number>(0);
-  const [totalNumber, setTotalNumber] = useState<number>(0);
-  const [lastNumber, setLastNumber] = useState<number>(0);
-  const [openedRate, setOpenedRate] = useState<number>(0);
-  const [lastOpenedRate, setLastOpenedRate] = useState<number>(0);
-  const [unsubscribedRate, setUnsubscribedRate] = useState<number>(0);
-  const [lastUnsubscribedRate, setLastUnsubscribedRate] = useState<number>(0);
   const [chartData, setChartData] = useState<ChartItem[]>([]);
+
+  const [subscriberCnt, setSubscriberCnt] = useState<Count>({
+    new: 0,
+    last: 0
+  });
+  const [openedRate, setOpenedRate] = useState<Count>({
+    new: 0,
+    last: 0
+  });
+  const [unsubscribedRate, setUnsubscribedRate] = useState<Count>({
+    new: 0,
+    last: 0
+  });
 
   useEffect(() => {
     getNumbersOfSubscribersByCondition().then((numbers) => {
