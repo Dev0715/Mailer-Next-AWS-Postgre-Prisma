@@ -94,8 +94,7 @@ export const AccordionItemFrom = ({ campaign, setCampaign }: Props) => {
         <div className="flex items-start gap-x-4">
           <div
             className={`w-10 h-10 flex items-center justify-center rounded-full 
-          ${campaign?.from ? "bg-green-600" : "bg-gray-600"}
-        `}
+                        ${campaign?.from ? "bg-green-600" : "bg-gray-600"}`}
           >
             <FaCheck className="text-white" />
           </div>
@@ -121,7 +120,11 @@ export const AccordionItemFrom = ({ campaign, setCampaign }: Props) => {
                     <FormItem className="w-full">
                       <FormLabel>Name*</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder="John Doe" />
+                        <Input
+                          {...field}
+                          placeholder="John Doe"
+                          disabled={isPending}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
