@@ -35,17 +35,46 @@ const AudiencePage = () => {
   });
 
   useEffect(() => {
-    getNumbersOfSubscribersByCondition().then((numbers) => {
-      setTotalNumber(numbers || 0);
-    });
-    getNumbersOf4WeeksAgo().then((numbers) => {
-      setLastNumber(numbers || 0);
-    });
+    getSubscriberCnt();
     getNumbersOfValidated().then((numbers) => {
       setValidatedNumber(numbers || 0);
     });
     getStatisticsForCampaigns();
   }, []);
+
+  const getSubscriberCnt = async () => {
+    const numbers_now = (await getNumbersOfSubscribersByCondition()) || 0;
+    const numbers_last = await getNumbersOf4WeeksAgo();
+
+    setSubscriberCnt({
+      new: numbers_now,
+      last: numbers_last
+    });
+  };
+
+  const getNumbersOf4WeeksAgo = async () => {
+    const conditionDate = new Date();
+    conditionDate.setDate(conditionDate.getDate() - 7 * 4);
+
+    const condition = {
+      where: {
+        created: { lt: conditionDate }
+      }
+    };
+
+    const lastNumber = await getNumbersOfSubscribersByCondition(condition);
+    return lastNumber || 0;
+  };
+
+  const getNumbersOfValidated = async () => {
+    const condition = {
+      where: {
+        validated: true
+      }
+    };
+    const validatedNumber = await getNumbersOfSubscribersByCondition(condition);
+    return validatedNumber || 0;
+  };
 
   const getStatisticsForCampaigns = () => {
     const _chartData: ChartItem[] = [];
