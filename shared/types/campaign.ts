@@ -38,7 +38,7 @@ export type Campaign = {
   openedCount?: number;
 
   unsubEmails?: string[];
-  unsubedNumber?: number;
+  unsubscribedCount?: number;
 
   bouncedEmails?: string[];
   bouncedCount?: number;

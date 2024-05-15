@@ -28,8 +28,12 @@ export const POST = async (request: NextRequest, { params }: Params) => {
   }
 
   const unSubEmails = [..._unSubEmails, subscriberEmail];
-  const unsubedNumber = unSubEmails.length;
-  const res = await updateCampaignUnsub(campaignId, unSubEmails, unsubedNumber);
+  const unsubscribedCount = unSubEmails.length;
+  const res = await updateCampaignUnsub(
+    campaignId,
+    unSubEmails,
+    unsubscribedCount
+  );
 
   if (res.success) {
     return NextResponse.json({ success: true });

@@ -119,13 +119,13 @@ const AudiencePage = () => {
         _rate_new.sent +=
           (campaign.to as { totalNumber?: number }).totalNumber || 0;
         _rate_new.opened += campaign.openedCount || 0;
-        _rate_new.unsubscribed += campaign.unsubedNumber || 0;
+        _rate_new.unsubscribed += campaign.unsubscribedCount || 0;
 
         if ((campaign.lastUpdated as Date) < date4WeeksAgo) {
           _rate_last.sent +=
             (campaign.to as { totalNumber?: number }).totalNumber || 0;
           _rate_last.opened += campaign.openedCount || 0;
-          _rate_last.unsubscribed += campaign.unsubedNumber || 0;
+          _rate_last.unsubscribed += campaign.unsubscribedCount || 0;
         }
       });
 

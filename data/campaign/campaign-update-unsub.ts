@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 export const updateCampaignUnsub = async (
   campaignId: string,
   unsubEmails: string[],
-  unsubedNumber: number
+  unsubscribedCount: number
 ) => {
   try {
     await prisma.campaigns.update({
@@ -14,7 +14,7 @@ export const updateCampaignUnsub = async (
       },
       data: {
         unsubEmails,
-        unsubedNumber
+        unsubscribedCount
       }
     });
 
