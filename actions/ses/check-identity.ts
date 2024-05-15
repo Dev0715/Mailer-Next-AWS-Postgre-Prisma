@@ -1,9 +1,15 @@
 "use server";
 
 import { getAllIdentities } from "@/data/email/all-identities";
+import { checkValidationOfEmail } from "@/data/email/check-validation";
 
 export const checkIdentityStatus = async (email: string) => {
   if (!isEmailValid(email)) {
+    return false;
+  }
+
+  const validation = checkValidationOfEmail(email);
+  if (!validation) {
     return false;
   }
 
