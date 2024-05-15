@@ -32,13 +32,13 @@ export const AccordionItemTo = ({ campaign, setCampaign, segments }: Props) => {
 
   const [isChanged, setChanged] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [selectedInex, setSelectedIndex] = useState<number>(-1);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 
   useEffect(() => {
-    setCampainInex();
+    setCampaignIndex();
   }, [campaign]);
 
-  const setCampainInex = () => {
+  const setCampaignIndex = () => {
     if (campaign?.to) {
       const index = segments.findIndex(
         (segment) => segment.segmentId === campaign.to?.segmentId
@@ -81,7 +81,7 @@ export const AccordionItemTo = ({ campaign, setCampaign, segments }: Props) => {
   };
 
   const onCancel = () => {
-    setCampainInex();
+    setCampaignIndex();
     setChanged(false);
     setError("");
   };
@@ -112,7 +112,7 @@ export const AccordionItemTo = ({ campaign, setCampaign, segments }: Props) => {
               Select a segment*
             </p>
             <Select
-              value={selectedInex.toString()}
+              value={selectedIndex.toString()}
               onValueChange={onToChange}
               disabled={isPending}
             >
