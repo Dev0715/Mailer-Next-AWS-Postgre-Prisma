@@ -87,7 +87,7 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
         />
         <DetailShowItem
           title="Unsubscribed"
-          content={campaign.unsubEmails?.length}
+          content={campaign.unsubscribedEmails?.length}
         />
       </div>
       <div className="w-1/6 flex flex-col items-center gap-y-4">
