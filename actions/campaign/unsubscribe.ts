@@ -14,8 +14,8 @@ export const unsubscribe = async (params: Params) => {
   }
 
   const _unSubEmails = campaign.unsubEmails || [];
-  const isAlreadyUnsubed = _unSubEmails.includes(subscriberEmail);
-  if (isAlreadyUnsubed) {
+  const isAlreadyUnSub = _unSubEmails.includes(subscriberEmail);
+  if (isAlreadyUnSub) {
     return {
       error: "You have already unsubscribed from this campaign"
     };
