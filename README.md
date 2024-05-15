@@ -2,6 +2,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Install PostgreSQL:
+
+Set up 2 tables named `campaigns`, `mailinglist` from the schema in `/prisma/schema.prisma`
+
+```bash
+npx prisma db pull
+npx prisma generate
+```
+
 First, run the development server:
 
 ```bash
