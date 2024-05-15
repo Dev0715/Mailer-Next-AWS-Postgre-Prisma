@@ -3,14 +3,18 @@
 import { getAllIdentities } from "@/data/email/all-identities";
 
 export const checkIdentityStatus = async (email: string) => {
+  if (!isEmailValid(email)) {
+    return false;
+  }
+
   const res = await getAllIdentities();
   if (res.error) {
-    return { error: "Failed to get identities" };
+    return false;
   }
 
   const identities = res.identities as string[];
   for (const identity of identities) {
-    if (isEmailValid(identity) && identity === email) {
+    if (identity === email || getDomainFromEmail(email) === identity) {
       return true;
     }
   }
@@ -21,4 +25,9 @@ export const checkIdentityStatus = async (email: string) => {
 const isEmailValid = (email: string) => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailPattern.test(email);
+};
+
+const getDomainFromEmail = (email: string) => {
+  const parts = email.split("@");
+  return parts[1];
 };
