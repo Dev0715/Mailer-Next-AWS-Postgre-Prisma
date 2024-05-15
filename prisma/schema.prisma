@@ -37,11 +37,11 @@ model campaigns {
   time          Json?     @db.Json
   email         Json?     @db.Json
   openedEmails  String[]  @db.VarChar
-  unsubEmails   String[]  @db.VarChar
+  unsubscribedEmails   String[]  @db.VarChar
   bouncedEmails String[]  @db.VarChar
   state         String?   @db.VarChar
   lastUpdated   DateTime? @db.Timestamptz(6)
-  openedNumber  Int?
-  unsubedNumber Int?
-  bouncedNumber Int?
+  openedCount  Int?
+  unsubscribedCount Int?
+  bouncedCount Int?
 }
