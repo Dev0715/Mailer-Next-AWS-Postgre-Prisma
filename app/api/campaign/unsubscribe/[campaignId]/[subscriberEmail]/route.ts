@@ -1,5 +1,5 @@
 import { getCampaignById } from "@/data/campaign/campaign-by-id";
-import { updateCampaignUnsub } from "@/data/campaign/campaign-update-unsub";
+import { updateCampaignUnsubscribed } from "@/data/campaign/campaign-update-unsubscribed";
 import { NextRequest, NextResponse } from "next/server";
 
 type Params = {
@@ -19,17 +19,17 @@ export const POST = async (request: NextRequest, { params }: Params) => {
   }
 
   const _unsubscribedEmails = campaign.unsubscribedEmails || [];
-  const isAlreadyUnSubed = _unsubscribedEmails.includes(subscriberEmail);
-  if (isAlreadyUnSubed) {
+  const isAlreadyUnsubscribed = _unsubscribedEmails.includes(subscriberEmail);
+  if (isAlreadyUnsubscribed) {
     return NextResponse.json(
-      { error: "Email was already regitered as unsubscribed" },
+      { error: "Email was already registered as unsubscribed" },
       { status: 404 }
     );
   }
 
   const unsubscribedEmails = [..._unsubscribedEmails, subscriberEmail];
   const unsubscribedCount = unsubscribedEmails.length;
-  const res = await updateCampaignUnsub(
+  const res = await updateCampaignUnsubscribed(
     campaignId,
     unsubscribedEmails,
     unsubscribedCount

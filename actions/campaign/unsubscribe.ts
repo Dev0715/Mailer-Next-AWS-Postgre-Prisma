@@ -1,5 +1,5 @@
 import { getCampaignById } from "@/data/campaign/campaign-by-id";
-import { updateCampaignUnsub } from "@/data/campaign/campaign-update-unsub";
+import { updateCampaignUnsubscribed } from "@/data/campaign/campaign-update-unsubscribed";
 
 type Params = {
   campaignId: string;
@@ -23,7 +23,7 @@ export const unsubscribe = async (params: Params) => {
 
   const unsubscribedEmails = [..._unsubscribedEmails, subscriberEmail];
   const unSubNumber = unsubscribedEmails.length;
-  const res = await updateCampaignUnsub(
+  const res = await updateCampaignUnsubscribed(
     campaignId,
     unsubscribedEmails,
     unSubNumber

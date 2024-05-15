@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 
-export const updateCampaignUnsub = async (
+export const updateCampaignUnsubscribed = async (
   campaignId: string,
   unsubscribedEmails: string[],
   unsubscribedCount: number
