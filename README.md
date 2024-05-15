@@ -4,7 +4,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Install PostgreSQL:
 
-Set up 2 tables named `campaigns`, `mailinglist` from the schema in `/prisma/schema.prisma`
+Create new project and set up 2 tables named `campaigns`, `mailinglist` inside the project on your `supabase` from the schema in `/prisma/schema.prisma`.
+
+Copy the url of the project on your supabase and set `POSTGRE_DATABASE_URL` in your env file.
+
+To set up prisma client on the project:
 
 ```bash
 npx prisma db pull
