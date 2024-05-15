@@ -1,3 +1,4 @@
+import { checkIdentityStatus } from "@/actions/ses/check-identity";
 import {
   AccordionContent,
   AccordionItem,
@@ -49,16 +50,24 @@ export const AccordionItemFrom = ({ campaign, setCampaign }: Props) => {
   }, [campaign]);
 
   const onFromSubmit = (values: z.infer<typeof CampaignFromSchema>) => {
-    if (campaign) {
-      setCampaign(
-        (prev) =>
-          ({
-            ...prev,
-            from: values
-          }) as Campaign
-      );
-    }
-    setChanged(false);
+    startTransition(() => {
+      const _email = values.email;
+      const validation = checkIdentityStatus(_email);
+      if (!validation) {
+        setError("Email is not verified in SES");
+      } else {
+        if (campaign) {
+          setCampaign(
+            (prev) =>
+              ({
+                ...prev,
+                from: values
+              }) as Campaign
+          );
+        }
+        setChanged(false);
+      }
+    });
   };
 
   const onFormChanged = () => {
