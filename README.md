@@ -6,7 +6,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Create new project and set up 2 tables named `campaigns`, `mailinglist` inside the project on your `supabase` from the schema in `/prisma/schema.prisma`.
 
-Copy the url of the project on your supabase and set `POSTGRE_DATABASE_URL` in your env file.
+Copy the url of the project on your supabase and set `POSTGRE_DATABASE_URL` in your env file with this url.
 
 To set up prisma client on the project:
 
@@ -27,6 +27,22 @@ Partition key : email (String)
 
 Partition key : userEmail (String)
 Sort key : segmentId (String)
+
+#### SES:
+
+Add some emails and set them identified to test campaigns
+
+#### Lambda Function:
+
+Set up lambda function named `runCampaign` from `/lambda/lambda.zip`
+Set permissions to access SES
+
+Copy ARN for lambda function and set `AWS_LAMBDA_RUN_CAMPAIGN_FUNC_ARN` of your env file with this ARN
+
+#### Scheduler
+
+Set up scheduler on Event Bridge and set permission to access Lambda Function.
+Copy Role ARN of this scheduler and set `AWS_IAM_ROLE_OF_SCHEDULER_ARN` of your env file with this value
 
 ### Next, run the development server:
 
