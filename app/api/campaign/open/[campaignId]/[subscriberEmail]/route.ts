@@ -28,12 +28,8 @@ export const GET = async (request: NextRequest, { params }: Params) => {
   }
 
   const openedEmails = [..._openedEmails, subscriberEmail];
-  const openedNumber = openedEmails.length;
-  const res = await updateCampaignOpened(
-    campaignId,
-    openedEmails,
-    openedNumber
-  );
+  const openedCount = openedEmails.length;
+  const res = await updateCampaignOpened(campaignId, openedEmails, openedCount);
 
   if (res.success) {
     return NextResponse.json({ success: true });

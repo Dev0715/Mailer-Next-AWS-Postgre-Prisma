@@ -113,18 +113,18 @@ const AudiencePage = () => {
         if (index !== -1) {
           _chartData[index].Sent +=
             (campaign.to as { totalNumber?: number }).totalNumber || 0;
-          _chartData[index].Opened += campaign.openedNumber || 0;
+          _chartData[index].Opened += campaign.openedCount || 0;
         }
 
         _rate_new.sent +=
           (campaign.to as { totalNumber?: number }).totalNumber || 0;
-        _rate_new.opened += campaign.openedNumber || 0;
+        _rate_new.opened += campaign.openedCount || 0;
         _rate_new.unsubscribed += campaign.unsubedNumber || 0;
 
         if ((campaign.lastUpdated as Date) < date4WeeksAgo) {
           _rate_last.sent +=
             (campaign.to as { totalNumber?: number }).totalNumber || 0;
-          _rate_last.opened += campaign.openedNumber || 0;
+          _rate_last.opened += campaign.openedCount || 0;
           _rate_last.unsubscribed += campaign.unsubedNumber || 0;
         }
       });

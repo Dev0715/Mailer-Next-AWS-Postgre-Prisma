@@ -22,7 +22,7 @@ export const getAllCampaignsForStatistics = async (userEmail: string) => {
       },
       select: {
         to: true,
-        openedNumber: true,
+        openedCount: true,
         unsubedNumber: true,
         bouncedCount: true,
         lastUpdated: true
