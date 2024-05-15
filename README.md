@@ -19,14 +19,12 @@ Install AWS:
 
 Tables in DynamoDB:
 
-```bash
-mailmanjs-users
+`mailmanjs-users`
 Partition key : email (String)
 
-mailmanjs-segments
+`mailmanjs-segments`
 Partition key : userEmail (String)
 Sort key : segmentId (String)
-```
 
 Next, run the development server:
 
