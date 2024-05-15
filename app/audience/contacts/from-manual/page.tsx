@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-const FromMannual = () => {
+const FromManual = () => {
   const user = useCurrentUser();
   const history = useRouter();
 
@@ -111,4 +111,4 @@ const FromMannual = () => {
   );
 };
 
-export default FromMannual;
+export default FromManual;
