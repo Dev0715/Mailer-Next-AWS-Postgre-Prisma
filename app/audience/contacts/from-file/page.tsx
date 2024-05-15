@@ -33,14 +33,11 @@ const FromFile = () => {
         return res;
       })
     ).then((res) => {
-      const successedCnt = res.reduce(
-        (accumulator, cur) => accumulator + cur,
-        0
-      );
+      const successCnt = res.reduce((accumulator, cur) => accumulator + cur, 0);
       setLoading(false);
       setConfirming(true);
       setConfirmText(
-        `${successedCnt} contacts out of ${lines.length} were added successfully.`
+        `${successCnt} contacts out of ${lines.length} were added successfully.`
       );
     });
   };
