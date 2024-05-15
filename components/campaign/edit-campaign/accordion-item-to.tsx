@@ -55,7 +55,9 @@ export const AccordionItemTo = ({ campaign, setCampaign, segments }: Props) => {
 
   const onSave = () => {
     startTransition(() => {
-      const condition = getConditionFromFilters(segments[selectedInex].filters);
+      const condition = getConditionFromFilters(
+        segments[selectedIndex].filters
+      );
       getNumbersOfSubscribersByCondition(condition).then((_count) => {
         const totalNumber = _count || 0;
         if (totalNumber === 0) {
@@ -69,8 +71,8 @@ export const AccordionItemTo = ({ campaign, setCampaign, segments }: Props) => {
               ({
                 ...prev,
                 to: {
-                  segmentId: segments[selectedInex].segmentId,
-                  segmentTitle: segments[selectedInex].title,
+                  segmentId: segments[selectedIndex].segmentId,
+                  segmentTitle: segments[selectedIndex].title,
                   totalNumber
                 }
               }) as Campaign
