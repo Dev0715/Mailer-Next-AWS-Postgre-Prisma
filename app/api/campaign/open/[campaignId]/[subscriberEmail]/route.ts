@@ -22,7 +22,7 @@ export const GET = async (request: NextRequest, { params }: Params) => {
   const isAlreadyOpened = _openedEmails.includes(subscriberEmail);
   if (isAlreadyOpened) {
     return NextResponse.json(
-      { error: "Email was already regitered as opened" },
+      { error: "Email was already registered as opened" },
       { status: 404 }
     );
   }

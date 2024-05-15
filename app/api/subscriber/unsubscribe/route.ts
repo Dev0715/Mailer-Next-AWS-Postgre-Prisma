@@ -1,4 +1,4 @@
-import { sendOtpUnSubEmail } from "@/actions/mail/send-otp-unsub";
+import { sendOtpUnSubEmail } from "@/actions/mail/send-otp-unsubscribed";
 import { getSubscriberByEmail } from "@/data/audience/subscriber-by-email";
 import { updateSubscriber } from "@/data/audience/subscriber-update";
 import { generateOtp } from "@/shared/functions/generate-otp";

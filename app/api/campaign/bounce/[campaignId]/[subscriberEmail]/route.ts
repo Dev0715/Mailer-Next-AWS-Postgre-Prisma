@@ -22,7 +22,7 @@ export const POST = async (request: NextRequest, { params }: Params) => {
   const isAlreadyOpened = _bouncedEmails.includes(subscriberEmail);
   if (isAlreadyOpened) {
     return NextResponse.json(
-      { error: "Email was already regitered as bounced" },
+      { error: "Email was already registered as bounced" },
       { status: 404 }
     );
   }
