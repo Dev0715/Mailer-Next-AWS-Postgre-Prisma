@@ -8,6 +8,17 @@ export const checkIdentityStatus = async (email: string) => {
     return { error: "Failed to get identities" };
   }
 
-  const identities = res.identities;
-  console.log(identities);
+  const identities = res.identities as string[];
+  for (const identity of identities) {
+    if (isEmailValid(identity) && identity === email) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+const isEmailValid = (email: string) => {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(email);
 };
