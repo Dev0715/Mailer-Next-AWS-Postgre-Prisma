@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-Install PostgreSQL:
+# Install PostgreSQL:
 
 Create new project and set up 2 tables named `campaigns`, `mailinglist` inside the project on your `supabase` from the schema in `/prisma/schema.prisma`.
 
@@ -15,7 +15,7 @@ npx prisma db pull
 npx prisma generate
 ```
 
-Install AWS:
+# Install AWS:
 
 Tables in DynamoDB:
 
@@ -26,7 +26,7 @@ Partition key : email (String)
 Partition key : userEmail (String)
 Sort key : segmentId (String)
 
-Next, run the development server:
+# Next, run the development server:
 
 ```bash
 npm run dev
