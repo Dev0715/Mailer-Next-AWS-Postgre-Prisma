@@ -52,7 +52,7 @@ const OptionCard = ({
 const ContactAdd = () => {
   const SERVICE = "service";
   const FILE = "file";
-  const MANNUAL = "mannual";
+  const MANUAL = "manual";
 
   const options = [
     {
@@ -71,12 +71,12 @@ const ContactAdd = () => {
       title: "Copy and paste",
       description:
         "Directly paste in new contacts from a spreadsheet or similar list.",
-      optionValue: MANNUAL,
+      optionValue: MANUAL,
       children: <FaCopy className="w-6 h-6 text-blue-700" />
     }
   ];
 
-  const [inputMode, setInputMode] = useState<string>(MANNUAL);
+  const [inputMode, setInputMode] = useState<string>(MANUAL);
 
   return (
     <main className="w-5/6 flex flex-col py-6">
