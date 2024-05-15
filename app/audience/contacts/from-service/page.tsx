@@ -11,7 +11,7 @@ const FromService = () => {
         Import existing or future contacts, automatically.
       </p>
       <p className="text-xl mb-8">
-        See something familiar? Connect it to your Mailchimp account to keep all
+        See something familiar? Connect it to your MailManJs account to keep all
         your contacts in sync.
       </p>
       <Button asChild className="w-64 flex gap-x-2">
