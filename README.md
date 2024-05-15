@@ -15,7 +15,20 @@ npx prisma db pull
 npx prisma generate
 ```
 
-First, run the development server:
+Install AWS:
+
+Tables in DynamoDB:
+
+```bash
+mailmanjs-users
+Partition key : email (String)
+
+mailmanjs-segments
+Partition key : userEmail (String)
+Sort key : segmentId (String)
+```
+
+Next, run the development server:
 
 ```bash
 npm run dev
