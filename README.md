@@ -26,6 +26,7 @@ Partition key : email (String)
 `mailmanjs-segments`
 
 Partition key : userEmail (String)
+
 Sort key : segmentId (String)
 
 #### SES:
@@ -35,6 +36,7 @@ Add some emails and set them identified to test campaigns
 #### Lambda Function:
 
 Set up lambda function named `runCampaign` from `/lambda/lambda.zip`
+
 Set permissions to access SES
 
 Copy ARN for lambda function and set `AWS_LAMBDA_RUN_CAMPAIGN_FUNC_ARN` of your env file with this ARN
@@ -42,6 +44,7 @@ Copy ARN for lambda function and set `AWS_LAMBDA_RUN_CAMPAIGN_FUNC_ARN` of your 
 #### Scheduler
 
 Set up scheduler on Event Bridge and set permission to access Lambda Function.
+
 Copy Role ARN of this scheduler and set `AWS_IAM_ROLE_OF_SCHEDULER_ARN` of your env file with this value
 
 ### Next, run the development server:
