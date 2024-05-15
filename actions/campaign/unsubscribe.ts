@@ -13,17 +13,17 @@ export const unsubscribe = async (params: Params) => {
     return { error: "Campaign not found" };
   }
 
-  const _unsubEmails = campaign.unsubEmails || [];
-  const isAlreadyUnsubed = _unsubEmails.includes(subscriberEmail);
+  const _unSubEmails = campaign.unsubEmails || [];
+  const isAlreadyUnsubed = _unSubEmails.includes(subscriberEmail);
   if (isAlreadyUnsubed) {
     return {
       error: "You have already unsubscribed from this campaign"
     };
   }
 
-  const unsubEmails = [..._unsubEmails, subscriberEmail];
-  const unsubedNumber = unsubEmails.length;
-  const res = await updateCampaignUnsub(campaignId, unsubEmails, unsubedNumber);
+  const unSubEmails = [..._unSubEmails, subscriberEmail];
+  const unSubNumber = unSubEmails.length;
+  const res = await updateCampaignUnsub(campaignId, unSubEmails, unSubNumber);
 
   if (res.success) {
     return { success: true };
