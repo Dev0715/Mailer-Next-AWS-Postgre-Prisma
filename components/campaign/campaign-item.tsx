@@ -23,7 +23,7 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
     return campaign.state === "draft" || campaign.state === "failed";
   }, [campaign.state]);
 
-  const isDeleteable = useMemo(() => {
+  const isDeletable = useMemo(() => {
     return (
       campaign.state === "draft" ||
       campaign.state === "failed" ||
@@ -104,7 +104,7 @@ const CampaignItem = ({ campaign, onRemove }: Props) => {
           </Link>
         </Button>
         <Button
-          disabled={isPending || !isDeleteable}
+          disabled={isPending || !isDeletable}
           variant={"destructive"}
           className="w-fit flex gap-x-2 rounded-none"
           onClick={() => setConfirmAlert(true)}

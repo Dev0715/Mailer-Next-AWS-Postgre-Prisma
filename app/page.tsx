@@ -9,7 +9,7 @@ const Home = () => {
     <main className="w-full flex flex-col items-center pt-24 pb-6">
       <p className="text-5xl font-semibold pb-6">Turn Emails into Revenue!</p>
       <p className="w-1/2 text-xl text-center">
-        Win new customers with the #1 email marketing and automations platform*
+        Win new customers with the #1 email marketing and automation platform*
       </p>
       <p className="text-xl pb-12">
         that recommends ways to get more opens, clicks, and sales.

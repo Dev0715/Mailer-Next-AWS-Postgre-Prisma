@@ -84,7 +84,7 @@ const ContactAdd = () => {
         How would you like to add contacts?
       </p>
       <p className="text-xl mb-4">
-        Build your Mailchimp audience by adding or importing contacts you
+        Build your MailManJS audience by adding or importing contacts you
         already have permission to market to.
       </p>
       <Link

@@ -19,16 +19,16 @@ export const NewEmail = () => {
   const emailEditorRef = useRef<EditorRef>(null);
 
   const onReady: EmailEditorProps["onReady"] = () => {
-    const unlayer = emailEditorRef.current?.editor;
-    unlayer?.loadDesign(
+    const editor = emailEditorRef.current?.editor;
+    editor?.loadDesign(
       savedEmail.isSaved ? savedEmail.email.design : DEFAULT_EMAIL_DESIGN
     );
     setLoading(false);
   };
 
   const onSaveExist = () => {
-    const unlayer = emailEditorRef.current?.editor;
-    unlayer?.exportHtml(async (data) => {
+    const editor = emailEditorRef.current?.editor;
+    editor?.exportHtml(async (data) => {
       const { design, html } = data;
       setSavedEmail({
         isSaved: true,

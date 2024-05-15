@@ -36,7 +36,7 @@ const CampaignDetails = ({ params: { campaignId } }: Props) => {
     setIsEmailsListOpen(true);
   };
 
-  const onUnsubEmailList = () => {
+  const onUnsubscribedEmailList = () => {
     setEmailListTitle("Unsubscribed Emails");
     setEmailList(campaign?.unsubscribedEmails || []);
     setIsEmailsListOpen(true);
@@ -130,7 +130,7 @@ const CampaignDetails = ({ params: { campaignId } }: Props) => {
             <Button
               variant={"link"}
               className="px-0"
-              onClick={onUnsubEmailList}
+              onClick={onUnsubscribedEmailList}
             >
               <p className="text-lg font-semibold">
                 {campaign?.unsubscribedEmails
