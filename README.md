@@ -26,7 +26,7 @@ Partition key : email (String)
 Partition key : userEmail (String)
 Sort key : segmentId (String)
 
-# Next, run the development server:
+### Next, run the development server:
 
 ```bash
 npm run dev
