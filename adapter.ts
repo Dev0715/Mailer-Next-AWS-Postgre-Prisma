@@ -96,7 +96,7 @@ export default {
   //   return { identifier, expires, token };
   // },
   // async useVerificationToken({ identifier, token }): Promise<any> {
-  //   console.log("USE_VERFICATION_TOKEN");
+  //   console.log("USE_VERIFICATION_TOKEN");
   //   return { identifier, token };
   // }
 } satisfies Adapter;

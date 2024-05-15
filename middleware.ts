@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
   // const isAllowedOrigin = allowedOrigins.includes(origin);
   const isAllowedOrigin = true;
 
-  // Handle preflighted requests
+  // Handle preflight requests
   const isPreflight = request.method === "OPTIONS";
 
   if (isPreflight) {
