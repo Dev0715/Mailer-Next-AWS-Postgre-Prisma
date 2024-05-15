@@ -18,18 +18,18 @@ export const POST = async (request: NextRequest, { params }: Params) => {
     return NextResponse.json({ error: "Campaign not found" }, { status: 404 });
   }
 
-  const _unsubEmails = campaign.unsubEmails || [];
-  const isAlreadyUnsubed = _unsubEmails.includes(subscriberEmail);
-  if (isAlreadyUnsubed) {
+  const _unSubEmails = campaign.unsubEmails || [];
+  const isAlreadyUnSubed = _unSubEmails.includes(subscriberEmail);
+  if (isAlreadyUnSubed) {
     return NextResponse.json(
       { error: "Email was already regitered as unsubscribed" },
       { status: 404 }
     );
   }
 
-  const unsubEmails = [..._unsubEmails, subscriberEmail];
-  const unsubedNumber = unsubEmails.length;
-  const res = await updateCampaignUnsub(campaignId, unsubEmails, unsubedNumber);
+  const unSubEmails = [..._unSubEmails, subscriberEmail];
+  const unsubedNumber = unSubEmails.length;
+  const res = await updateCampaignUnsub(campaignId, unSubEmails, unsubedNumber);
 
   if (res.success) {
     return NextResponse.json({ success: true });
