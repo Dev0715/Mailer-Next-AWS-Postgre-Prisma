@@ -31,7 +31,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import AddSement from "@/components/audience/add-segment";
+import AddSegment from "@/components/audience/add-segment";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { createSegment } from "@/data/segment/create-segment";
 import { v4 as uuidv4 } from "uuid";
@@ -64,7 +64,7 @@ const Segments = () => {
   const [isEditing, setEditing] = useState<boolean>(false);
   const [editingSegment, setEditingSegment] = useState<Segment>();
 
-  const [isMornitoring, setMonitoring] = useState<boolean>(false);
+  const [isMonitoring, setMonitoring] = useState<boolean>(false);
   const [monitoringSegment, setMonitoringSegment] = useState<Segment>();
 
   const [isConfirming, setConfirming] = useState<boolean>(false);
@@ -126,7 +126,7 @@ const Segments = () => {
       setConfirmDescription("1 segment was deleted successfully");
     } else {
       setConfirmTitle("Failure");
-      setConfirmDescription("An error occured while deleting segment");
+      setConfirmDescription("An error occurred while deleting segment");
     }
   };
 
@@ -231,7 +231,7 @@ const Segments = () => {
     setEditingSegment(segment);
   };
 
-  const onSgemendEdited = ({
+  const onSegmentEdited = ({
     title,
     description,
     filters
@@ -328,7 +328,7 @@ const Segments = () => {
       >
         <DialogContent className="max-w-full w-3/4">
           <EditSegment
-            onSegmentEdited={onSgemendEdited}
+            onSegmentEdited={onSegmentEdited}
             editingSegment={editingSegment as Segment}
           />
         </DialogContent>
@@ -336,7 +336,7 @@ const Segments = () => {
 
       {/** Monitor Segment */}
       <Dialog
-        open={isMornitoring}
+        open={isMonitoring}
         onOpenChange={(newStatus) => setMonitoring(newStatus)}
       >
         <DialogContent className="max-w-full w-[960px]">
@@ -365,7 +365,7 @@ const Segments = () => {
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-full w-3/4">
-            <AddSement onNewSegmentAdded={onNewSegmentAdded} />
+            <AddSegment onNewSegmentAdded={onNewSegmentAdded} />
           </DialogContent>
         </Dialog>
       </div>
