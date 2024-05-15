@@ -17,7 +17,7 @@ type PropsType = {
   onNewSegmentAdded: ({ title, description, filters }: SegmentAddition) => void;
 };
 
-const AddSement = ({ onNewSegmentAdded }: PropsType) => {
+const AddSegment = ({ onNewSegmentAdded }: PropsType) => {
   const user = useCurrentUser();
 
   const [error, setError] = useState("");
@@ -134,4 +134,4 @@ const AddSement = ({ onNewSegmentAdded }: PropsType) => {
   );
 };
 
-export default AddSement;
+export default AddSegment;
