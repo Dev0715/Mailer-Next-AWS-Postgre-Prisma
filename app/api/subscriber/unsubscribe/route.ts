@@ -1,10 +1,10 @@
-import { sendOtpUnsubEmail } from "@/actions/mail/send-otp-unsub";
+import { sendOtpUnSubEmail } from "@/actions/mail/send-otp-unsub";
 import { getSubscriberByEmail } from "@/data/audience/subscriber-by-email";
 import { updateSubscriber } from "@/data/audience/subscriber-update";
 import { generateOtp } from "@/shared/functions/generate-otp";
 import { NextRequest, NextResponse } from "next/server";
 
-// ## Unsubscribe Email: Send UNSUB OTP to [subscriberEmail]
+// ## Unsubscribe Email: Send UNSUBSCRIBE OTP to [subscriberEmail]
 
 export const POST = async (request: NextRequest) => {
   const data = await request.json();
@@ -29,6 +29,6 @@ export const POST = async (request: NextRequest) => {
     return NextResponse.json({}, { status: 404 });
   }
 
-  await sendOtpUnsubEmail(subscriberEmail, otp);
+  await sendOtpUnSubEmail(subscriberEmail, otp);
   return NextResponse.json({ success: true });
 };
