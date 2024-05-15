@@ -39,13 +39,13 @@ export const newPassword = async (
 
   const { password } = validatedFields.data;
   const hashedPassword = await hash(password, 10);
-  const respone = await updateUserPassword({
+  const response = await updateUserPassword({
     email: userEmail,
     password: hashedPassword,
     emailVerified: new Date()
   });
 
-  if (respone.error) {
+  if (response.error) {
     return { error: "Server error!" };
   }
 
